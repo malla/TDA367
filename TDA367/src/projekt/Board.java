@@ -3,13 +3,17 @@ package projekt;
 import java.util.Random;
 
 public class Board {
-	String [] tiletypes ={ "WordMagic", "BodyToBody","SpeakBackwards", "SameClass"};
-
+	String [] tileTypes ={ "WordMagic", "BodyToBody","SpeakBackwards", "SameClass"};
+	Tile [] boardArray = new Tile[48];	
+	
 	public Board(){
 		Random randomTiles = new Random();
 		
-		Tile t1 = new Tile(tiletypes[randomTiles.nextInt(tiletypes.length)]);
-		System.out.println(t1);
+		for(int i=0; i<48; i++){
+			Tile t1 = new Tile(tileTypes[randomTiles.nextInt(tileTypes.length)]);
+			boardArray[i] = t1;
+			System.out.println(t1);
+		}
 	}
 	
 }
