@@ -10,9 +10,8 @@ public class Board {
 		Random randomTiles = new Random();
 		
 		for(int i=0; i<48; i++){
-			Tile t1 = new Tile(tileTypes[randomTiles.nextInt(tileTypes.length)]);
-			boardArray[i] = t1;
-			System.out.println(t1);
+			boardArray[i] = new Tile(tileTypes[randomTiles.nextInt(tileTypes.length)]);
+			System.out.println(boardArray[i]);
 		}
 	}
 	
