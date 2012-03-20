@@ -13,6 +13,7 @@ public class Timer extends Thread{
 	public int getTime(){
 		return 30;
 	}
+	
 	private String timeString = Integer.toString(time);
 	private JLabel seconds;
 	private JPanel timerPanel;
@@ -24,7 +25,7 @@ public class Timer extends Thread{
 	}
 	
 	public Timer(){
-		JFrame frame = new JFrame("Malla testar");
+		JFrame frame = new JFrame("Malla testar Timer");
 		frame.setSize(400, 400);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
