@@ -6,6 +6,10 @@ import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+/**
+ * A class which creates a timer.
+ * @author Malla
+ */
 
 public class Timer extends Thread{
 
