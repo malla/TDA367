@@ -7,8 +7,11 @@ public class Tile {
 		this.type = type;
 	}
 	
+//	public String getType(){
+//		return type;
+//	}
 	
-	public String getType(){
+	public String toString(){
 		return type;
 	}
 }
