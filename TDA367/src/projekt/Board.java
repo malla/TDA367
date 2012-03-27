@@ -3,6 +3,7 @@ package projekt;
 import java.util.Random;
 
 public class Board {
+	
 	/**
 	 * @uml.property  name="tileTypes" multiplicity="(0 -1)" dimension="1"
 	 */
@@ -18,8 +19,18 @@ public class Board {
 		
 		for(int i=0; i<48; i++){
 			boardArray[i] = new Tile(tileTypes[randomTiles.nextInt(tileTypes.length)]);
-			System.out.println(boardArray[i]);
+			
 		}
+	}
+	
+	public Tile getTile(int place){
+		if(place < 0 || place > 48){
+			throw new IllegalArgumentException();
+		}
+		
+		else {
+			return boardArray[place];
+		}		
 	}
 	
 }
