@@ -1,12 +1,14 @@
 package projekt;
 
+import java.awt.Color;
+
 public class Tile {
 	
 	/**
 	 * @uml.property  name="type"
 	 */
-	String type;
-	public Tile(String type){
+	Color type;
+	public Tile(Color type){
 		this.type = type;
 	}
 	
@@ -14,7 +16,8 @@ public class Tile {
 //		return type;
 //	}
 	
-	public String toString(){
+	public Color getColor(){
 		return type;
 	}
+	
 }
