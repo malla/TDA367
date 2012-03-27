@@ -2,16 +2,32 @@ package projekt;
 
 public class Mission {
 	
-//	private Team missionTeam;
 	private Card card;
 	private Bet bet;
+	private Timer timer;
 	
-	public Mission(){
-		bet = new Bet(4);
-		card = new Card();
+	public Mission(int betSize){
+		bet = new Bet(betSize);
+		timer = new Timer();
 	}
 	
-	public void startMission(){
+	public void startMission(String cathegory){
+		// card = deque.getCard(cathegory);
+		// card.show();
+		// timer.start();
+	}
+	
+	public void timeOver(){
+		//TODO
+	}
+	
+	public int missionDone(boolean completed){
 		
+		if(completed){
+			return bet.getBetValue();
+		}
+		else{
+			return -2;
+		}
 	}
 }
