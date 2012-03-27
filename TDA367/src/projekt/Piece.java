@@ -3,6 +3,7 @@ package projekt;
 import java.awt.Color;
 
 public class Piece {
+<<<<<<< HEAD
 	private int position;
 	private int piece;
 	private Color color1;
@@ -31,4 +32,13 @@ public class Piece {
 	public int getPiece() {
 		return piece;
 	}
+=======
+/**
+ * @uml.property  name="position"
+ */
+private int position;
+public void movePiece(int i){
+position=position+i;
+}
+>>>>>>> 5c90a0746afa7916df4cda89a07bae563be2ceb1
 }
