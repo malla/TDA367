@@ -12,11 +12,11 @@ import javax.swing.JOptionPane;
 public class ChallengeAccepted implements KeyListener{
 
 	private MainFrame mainFrame;
+	private Board newBoard;
 	
 	public ChallengeAccepted(){
-		new Board();
+		this.newBoard = new Board();
 		this.mainFrame = new MainFrame(this);
-		
 	}
 	
 
@@ -24,9 +24,12 @@ public class ChallengeAccepted implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 	
 		int key = e.getKeyCode();
-		if (key == KeyEvent.VK_S){
-			JOptionPane.showInputDialog("Hur många lag vill ni vara?");
+		if (key-30 >= 0 && key-30 < 10){
+			newBoard.getActivePiece().bet(key-30);
 			
+		}
+		if (key == KeyEvent.VK_S){
+			newBoard.startMission();
 		}
 		
 	}
