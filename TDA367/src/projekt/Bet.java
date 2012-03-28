@@ -11,4 +11,5 @@ public class Bet {
 	public int getBetValue(){
 		return steps;
 	}
+	
 }

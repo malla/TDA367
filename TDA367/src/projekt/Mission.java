@@ -15,7 +15,7 @@ public class Mission {
 		this.team = team;
 	}
 	
-	public void startMission(Cathegory cathegory){
+	public static void startMission(Tile tile){
 		// card = deque.getCard(cathegory);
 		// card.show();
 		// timer.start();
