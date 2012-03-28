@@ -1,14 +1,15 @@
 
 package projekt;
 import java.awt.Color;
+
 import java.util.Random;
 
-public class Board {
+public class Board{
 	
 	/**
 	 * @uml.property  name="tileTypes" multiplicity="(0 -1)" dimension="1"
 	 */
-	Color[] tileTypes ={ Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED};
+	Color[] tileTypes ={Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED};
 	/**
 	 * @uml.property  name="boardArray"
 	 * @uml.associationEnd  multiplicity="(0 -1)"
@@ -20,7 +21,7 @@ public class Board {
 		
 		for(int i=0; i<48; i++){
 			boardArray[i] = new Tile(tileTypes[randomTiles.nextInt(tileTypes.length)]);
-			System.out.println(boardArray[i]);
+		
 		}
 	}
 	
