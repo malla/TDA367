@@ -14,7 +14,6 @@ public class Card {
 	private String s2;
 
 	public Card(Category c){
-		
 		if (c==Category.BODYTOBODY);
 		bodyToBody();
 		if (c==Category.BACKWARDS);
