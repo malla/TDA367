@@ -8,5 +8,4 @@ public class Cathegories {
 		InSameClass,
 		WordMagic
 	}
-
 }
