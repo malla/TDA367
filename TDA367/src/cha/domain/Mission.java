@@ -1,6 +1,6 @@
 package cha.domain;
 
-import cha.domain.Cathegories.Cathegory;
+import cha.domain.Categories.Cathegory;
 
 public class Mission {
 	

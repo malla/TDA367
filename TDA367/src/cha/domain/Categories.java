@@ -1,8 +1,8 @@
 package cha.domain;
 
-public class Cathegories {
+public class Categories {
 	
-	public enum Cathegory{
+	public enum Category{
 		BodyParts,
 		SpeakBackward,
 		InSameClass,
