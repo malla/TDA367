@@ -1,8 +1,5 @@
 
 package cha.domain;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
 import cha.domain.Categories.Category;
 
 public class Deque {
