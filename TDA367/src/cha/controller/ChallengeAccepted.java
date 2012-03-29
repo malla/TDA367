@@ -1,4 +1,4 @@
-package cha.domain;
+package cha.controller;
 
 
 import java.awt.event.ActionEvent;
@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JOptionPane;
 
+import cha.domain.Board;
 import cha.gui.MainFrame;
 
 public class ChallengeAccepted implements KeyListener{

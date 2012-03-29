@@ -19,15 +19,14 @@ public class Board{
 	 * @uml.associationEnd  multiplicity="(0 -1)"
 	 */
 	Tile [] boardArray = new Tile[48];	
-	Piece[][] piecePositions = new Piece[2][boardArray.length];
 	
 	public Board(){
 		this.pieceOne = new Piece();
-		this.piecePositions[0][0] = pieceOne;
-		pieceOne.setPlayer(1);
+		this.pieceOne.setPosition(0);
+		this.pieceOne.setPlayer(1);
 		this.pieceTwo = new Piece();
-		pieceTwo.setPlayer(2);
-		this.piecePositions[1][0] = pieceTwo;
+		this.pieceTwo.setPlayer(2);
+		this.pieceTwo.setPosition(0);
 		this.activePiece = pieceOne;
 		Random randomTiles = new Random();
 		
@@ -53,11 +52,7 @@ public class Board{
 	
 	public void startMission(){
 		Piece p = getActivePiece();
-		for(int i=0; i<(piecePositions[p.getPlayer()-1].length); i++){
-			if(piecePositions[p.getPlayer()-1][i] == p){
-				Mission.startMission(getTile(i));
-			}
-		}
+		Mission.startMission(getTile(p.getPosition()));
 	}
 	
 }

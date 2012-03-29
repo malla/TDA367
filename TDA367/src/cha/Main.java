@@ -13,14 +13,9 @@ package cha;
 import java.util.Scanner;
 
 import cha.domain.Board;
+import cha.domain.Piece;
 
-/**
- * This is the "manual" integration test. Used to test
- * how the classes fit together (it a stand alone program).
- * 
- * @author hajo
- *
- */
+
 public class Main {
 
     public void run() {
@@ -40,6 +35,7 @@ public class Main {
             	
             } else if (line.equals("s")) {  // buy  
             	newBoard.startMission();
+            	System.out.println(newBoard.getActivePiece());
                 
             } else {
 
