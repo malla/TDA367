@@ -1,18 +1,21 @@
-package projekt;
+package cha.domain;
 
-import projekt.Cathegories.Cathegory;
+import cha.domain.Cathegories.Cathegory;
 
 public class Mission {
 	
 	private Card card;
 	private Bet bet;
 	private Timer timer;
-	private Team team;
+//	private Team team;
+	
+	
+	
 	
 	public Mission(int betNumber, Team team){
 		bet = new Bet(betNumber);
 		timer = new Timer();
-		this.team = team;
+	//	this.team = team;
 	}
 	
 	public static void startMission(Tile tile){

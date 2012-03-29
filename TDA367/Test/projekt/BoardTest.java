@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import cha.domain.Board;
+import cha.domain.Tile;
+
 public class BoardTest {
 
 	@Test

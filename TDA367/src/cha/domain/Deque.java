@@ -1,3 +1,9 @@
+<<<<<<< HEAD:TDA367/src/cha/domain/Deque.java
+package cha.domain;
+import java.util.Random;
+/*
+import org.apache.commons.lang.ArrayUtils;
+=======
 package projekt;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,6 +14,7 @@ import java.util.Random;
  *
  * @param <C>
  */
+>>>>>>> b7c5e292811c723789ed3d5c375bffedfa779f2f:TDA367/src/projekt/Deque.java
 
 
 
@@ -72,3 +79,4 @@ public class Deque {
 		}
 
 }
+*/
