@@ -1,4 +1,4 @@
-package projekt;
+jpackage projekt;
 
 public class TestMission {
 

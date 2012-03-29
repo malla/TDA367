@@ -1,17 +1,22 @@
 package projekt;
 
-public class Team {
-	/**
-	 * @uml.property  name="piece"
-	 */
+import java.awt.event.ActionListener;
+
+public class Team extends Piece implements ActionListener{
 	private int piece;
-	/**
-	 * @uml.property  name="board"
-	 */
-	private int board;
+	private Object board;
 	
-	public void getPiece(String pieceColor){
-		
+	public void setPiecePos(int piece) {
+		this.piece = piece;
 	}
-	
+	public int getPiecePos() {
+		return piece;
+	}
+	public void setBoard(String board) {
+		this.board = board;
+	}
+	public Object getBoard() {
+		return board;
+
+	}
 }
