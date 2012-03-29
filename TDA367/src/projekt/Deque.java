@@ -1,39 +1,74 @@
 package projekt;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
-import org.apache.commons.lang.ArrayUtils;
+/**
+ * 
+ * @author Malla
+ *
+ * @param <C>
+ */
 
-public class Deque<C> {
+
+
+public class Deque {
 	public String s;
 	public String s1;
 	public String s2;
+	String [] words = {"fotboll", };
+	String[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","å","ä","ö"};
 	String[] bodyParts = {"Panna", "Axel", "Knä", "Hand", "Rumpa", "Armbåge", "Fot", "Mage", "Haka", "Vad", "Lår"};
-
-	public Deque<String>{
-
+	String[][] categories = {{"Vilka är sporter utan boll?", "segling", "judo", "fotboll", "längdhopp", "hästpolo", "brännboll", "rodd", "basket", "golf", "höjdhopp", "tennis", "badminton", "rally", "speedway"},
+					{"Vilka är aktiva sexIT medlemmar?", "rawa", "fridén", "bella", "brook", "malla", "sasse", "anno", "e", "krobbe", "henkit", "wiiw", "kara", "bosch","jocke",}};
+	
+	public static void cardMixed(){
+		s= words[randomNumber(words.length)];
+		s2=s; // The 
+		while (s.length()<12){
+			s= s+alphabet[randomNumber(alphabet.length)];
+		}
+		StringBuilder jumbled = new StringBuilder();
+		ArrayList<Character> oldChars = new ArrayList<Character>();
+		for (int i=0; i<s.length(); i++)
+			oldChars.add(new Character(s.charAt(i)));
+		while(!oldChars.isEmpty())
+		{
+				int index = randomNumber(oldChars.size());
+				jumbled.append(oldChars.get(index));
+				oldChars.remove(index);
+		}
+		s1=jumbled.toString();
 	}
 
-	Deque usedCards <String> = new Deque<String>;
-
-	public String cardMixed(int i){
-		if (i==1) return s="otlolbf";
-		if (i==2) return s="bnutkbatl";
-		if (i==3) return s="lecsharm";
+	public void cardBackwards(){
+		s= words[randomNumber(words.length)];
+		s2=s; // The answer of the word.
+		StringBuilder backwards = new StringBuilder();
+		ArrayList<Character> oldChars = new ArrayList<Character>();
+		for (int i=0; i<s.length(); i++)
+			oldChars.add(new Character(s.charAt(i)));
+		Collections.reverse(oldChars);
+		for (Character c : oldChars){
+			backwards.append(c);
+		}
+		s1 = backwards.toString();
+	}
+	public void cardBody(){
+		s= bodyParts[randomNumber(bodyParts.length)];
+		s1= bodyParts[randomNumber(bodyParts.length)];
+		s2= s + " mot " + s1;
+	}
+	
+	public void cardSameCategory() {
+		int i = randomNumber(categories.length);
+		s=categories[i][2]+"\n"+categories[i][3]+"\n"+categories[i][4]+"\n"+categories[i][5]+"\n"+categories[i][6]+"\n"+categories[i][7]
+		  +"\n"+categories[i][8]+"\n"+categories[i][9]+"\n"+categories[i][10]+"\n"+categories[i][11]+"\n"+categories[i][12]+"\n"+categories[i][13]+"\n"+categories[i][14]+"\n"+categories[i][15];
+		s1 =categories[i][1];
 	}
 
-	public String cardBackwards(int i){
-		if (i==1){ return s="llobtof"; s1 = "fotboll";}
-		if (i==2){ return s="bbulkttan"; s1 = "nattklubb";}
-		if (i==3){ return s="sremlahc"; s1 = "chalmers";}
-	}
-	public String cardBody(){
-		int i=2;
-		s= bodyParts.get(i);
-		return s2= s + " mot " + s1;
-	}
-
-	public int randomNumber(){
+	public int randomNumber(int i){
 		Random randomGenerator = new Random();
-		return randomGenerator.nextInt(bodyParts.length);
+		return randomGenerator.nextInt(i);
 		}
 
 }
