@@ -1,39 +1,70 @@
 package cha.domain;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import cha.domain.Categories.Category;
 
 
 public class Card {
-	public static void main(String[] args){	
-		Card card = new Card();	
-		}
-		
-		public Card(){
-			JFrame frame = new JFrame("Malla testar kort");
-			frame.setSize(400, 400);
-			frame.setVisible(true);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			//JButton button = new JButton("Tryck!");
-			//button.setSize(40, 50);
-			//frame.add(button);
-		//}
-			//public void skapa(){
-			JPanel greenPanel = new JPanel();
-			greenPanel.setBackground(Color.green);
-			greenPanel.setPreferredSize(new Dimension(300, 300));
-			frame.add(greenPanel);
 
-			JPanel cardPanel = new JPanel();
-			cardPanel.setPreferredSize(new Dimension(200, 100));
+	public String s;
+	public String s1;
+	public String s2;
 
-			cardPanel.setBackground(Color.white);
-			greenPanel.add(cardPanel);
-			
+	public Card(Category c){
+
+
+
+	}
+	public void cardMixed(){
+		s= Deque.words[randomNumber(Deque.words.length)];
+		s2=s; // The 
+		while (s.length()<12){
+			s= s+Deque.alphabet[randomNumber(Deque.alphabet.length)];
 		}
+		StringBuilder jumbled = new StringBuilder();
+		ArrayList<Character> oldChars = new ArrayList<Character>();
+		for (int i=0; i<s.length(); i++)
+			oldChars.add(new Character(s.charAt(i)));
+		while(!oldChars.isEmpty())
+		{
+			int index = randomNumber(oldChars.size());
+			jumbled.append(oldChars.get(index));
+			oldChars.remove(index);
+		}
+		s1=jumbled.toString();
+	}
+
+	public void cardBackwards(){
+		s= words[randomNumber(words.length)];
+		s2=s; // The answer of the word.
+		StringBuilder backwards = new StringBuilder();
+		ArrayList<Character> oldChars = new ArrayList<Character>();
+		for (int i=0; i<s.length(); i++)
+			oldChars.add(new Character(s.charAt(i)));
+		Collections.reverse(oldChars);
+		for (Character c : oldChars){
+			backwards.append(c);
+		}
+		s1 = backwards.toString();
+	}
+	public void cardBody(){
+		s= Deque.bodyParts[randomNumber(Deque.bodyParts.length)];
+		s1= Deque.bodyParts[randomNumber(Deque.bodyParts.length)];
+		s2= s + " mot " + s1;
+	}
+
+	public void cardSameCategory() {
+		int i = randomNumber(Deque.categories.length);
+		s=Deque.categories[i][2]+"\n"+Deque.categories[i][3]+"\n"+Deque.categories[i][4]+"\n"+Deque.categories[i][5]+"\n"+Deque.categories[i][6]+"\n"+Deque.categories[i][7]
+		                                                                                                                                                                  +"\n"+Deque.categories[i][8]+"\n"+Deque.categories[i][9]+"\n"+Deque.categories[i][10]+"\n"+Deque.categories[i][11]+"\n"+Deque.categories[i][12]+"\n"+Deque.categories[i][13]+"\n"+Deque.categories[i][14]+"\n"+Deque.categories[i][15];
+		s1 =Deque.categories[i][1];
+	}
+
+	public int randomNumber(int i){
+		Random randomGenerator = new Random();
+		return randomGenerator.nextInt(i);
+	}
 }

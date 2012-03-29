@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
-import cha.domain.ChallengeAccepted;
+import cha.controller.ChallengeAccepted;
 
 
 import java.awt.FlowLayout;

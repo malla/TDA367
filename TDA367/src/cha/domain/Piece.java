@@ -10,8 +10,8 @@ public class Piece {
 	private int bet;
 	private int player;
 	
-	public void movePieceForward(int steps){
-		position = position + steps;
+	public void movePieceForward(int bet){
+		position = position + bet;
 	}
 	public void movePieceBackward(){
 		position = position - 2;
@@ -42,6 +42,14 @@ public class Piece {
 	
 	public int getBetAmount(){
 		return bet;
+	}
+	
+	public void setPosition(int position){
+		this.position = position;
+	}
+	
+	public int getPosition(){
+		return this.position;
 	}
 	
 	public void setPlayer(int player){
