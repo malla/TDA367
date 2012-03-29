@@ -1,5 +1,5 @@
 
-package projekt;
+package cha.domain;
 import java.awt.Color;
 
 import java.util.Random;

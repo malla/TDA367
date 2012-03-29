@@ -1,4 +1,4 @@
-package projekt;
+package cha.domain;
 
 public class Challenge {
 	

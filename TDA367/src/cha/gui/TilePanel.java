@@ -1,4 +1,4 @@
-package gui;
+package cha.gui;
 
 import javax.swing.JPanel;
 import java.awt.Color;

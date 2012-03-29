@@ -1,4 +1,4 @@
-package gui;
+package cha.gui;
 
 import java.awt.EventQueue;
 
@@ -6,7 +6,8 @@ import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
-import projekt.ChallengeAccepted;
+import cha.domain.ChallengeAccepted;
+
 
 import java.awt.FlowLayout;
 import java.awt.Dimension;

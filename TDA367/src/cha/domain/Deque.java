@@ -1,5 +1,6 @@
-package projekt;
+package cha.domain;
 import java.util.Random;
+/*
 import org.apache.commons.lang.ArrayUtils;
 
 public class Deque<C> {
@@ -37,3 +38,4 @@ public class Deque<C> {
 		}
 
 }
+*/

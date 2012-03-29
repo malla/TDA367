@@ -1,4 +1,4 @@
-package projekt;
+package cha.domain;
 
 import java.awt.Color;
 
@@ -7,7 +7,7 @@ public class Piece {
 	private int position;
 	private int piece;
 	private Color color1;
-	private int steps;
+	private int bet;
 	private int player;
 	
 	public void movePieceForward(int steps){
@@ -31,8 +31,9 @@ public class Piece {
 		this.piece = piece;
 	}
 	
-	public void bet(int key){
-		this.steps = key;
+	public void bet(int value){
+		
+		this.bet = value;
 	}
 	
 	public int getPiece() {
@@ -40,7 +41,7 @@ public class Piece {
 	}
 	
 	public int getBetAmount(){
-		return steps;
+		return bet;
 	}
 	
 	public void setPlayer(int player){
@@ -50,6 +51,12 @@ public class Piece {
 	public int getPlayer(){
 		return player;
 	}
+	@Override
+	public String toString() {
+		return "Piece [position=" + position + ", piece=" + piece + ", color1="
+				+ color1 + ", bet=" + bet + ", player=" + player + "]";
+	}
 
+	
 
 }
