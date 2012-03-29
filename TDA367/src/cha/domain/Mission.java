@@ -13,8 +13,8 @@ public class Mission {
 		this.team = team;
 	}
 	
-	public static void startMission(Category c){
-		// card = deque.getCard(c);
+	public void startMission(Category c){
+		 card = Deque.getCard(c);
 		// card.show();
 		// timer.start();
 	}
