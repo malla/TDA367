@@ -57,7 +57,7 @@ public class Board{
 	
 	public void startMission(){
 		mission = new Mission(new Team("Team 1"));
-		mission.startMission(Categories.Category.SAMECLASS);
+		mission.startMission(Categories.Category.BODYTOBODY);
 	}
 	
 }

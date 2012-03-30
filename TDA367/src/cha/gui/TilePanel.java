@@ -6,9 +6,9 @@ import java.awt.Dimension;
 import javax.swing.border.LineBorder;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
+//import com.jgoodies.forms.layout.FormLayout;
+//import com.jgoodies.forms.layout.ColumnSpec;
+//import com.jgoodies.forms.layout.RowSpec;
 import java.awt.FlowLayout;
 
 public class TilePanel extends JPanel {
