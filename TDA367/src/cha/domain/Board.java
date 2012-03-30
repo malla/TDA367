@@ -8,6 +8,7 @@ public class Board{
 	private Piece pieceOne;
 	private Piece pieceTwo;
 	private Piece activePiece;
+	private Mission mission;
 	
 	/**
 	 * @uml.property  name="tileTypes" multiplicity="(0 -1)" dimension="1"
@@ -50,9 +51,13 @@ public class Board{
 		}		
 	}
 	
+	public Mission getMission(){
+		return mission;
+	}
+	
 	public void startMission(){
-		Piece p = getActivePiece();
-		Mission.startMission(getTile(p.getPosition()));
+		mission = new Mission(new Team("Team 1"));
+		mission.startMission(Categories.Category.SAMECLASS);
 	}
 	
 }

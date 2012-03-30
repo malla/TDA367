@@ -3,7 +3,13 @@ package cha.domain;
 import java.awt.event.ActionListener;
 
 public class Team extends Piece/* implements ActionListener*/{
-/*
+
+	private String name;
+	
+	public Team(String name){
+		this.name = name;
+	}
+	/*
 	private int piece;
 	private Object board;
 	
@@ -20,5 +26,10 @@ public class Team extends Piece/* implements ActionListener*/{
 		return board;
 
 	}
-*/	
+*/
+
+	@Override
+	public String toString() {
+		return "Team [name=" + name + "]";
+	}	
 }

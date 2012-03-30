@@ -27,15 +27,15 @@ public class Main {
             System.out.print(">");
             String line = in.nextLine();
             if (line.equals("b")) {  // Bet
-            	System.out.println("zzz");
+            	System.out.println("Make bet: ");
             	String value = in.nextLine();
             	
             	newBoard.getActivePiece().bet(Integer.parseInt(value));
             	System.out.println(newBoard.getActivePiece());
             	
-            } else if (line.equals("s")) {  // buy  
+            } else if (line.equals("s")) {  // Start Mission  
             	newBoard.startMission();
-            	System.out.println(newBoard.getActivePiece());
+            	System.out.println(newBoard.getMission().toString());
                 
             } else {
 
