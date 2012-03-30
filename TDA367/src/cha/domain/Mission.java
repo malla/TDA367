@@ -1,12 +1,12 @@
 package cha.domain;
 
-import cha.domain.Categories.Cathegory;
+import cha.domain.Categories.Category;
 
 public class Mission {
 	
-	private Card card;
+	private static Card card;
 	private Bet bet;
-	private Timer timer;
+	private CountDown timer;
 //	private Team team;
 	
 	
@@ -14,13 +14,13 @@ public class Mission {
 	
 	public Mission(int betNumber, Team team){
 		bet = new Bet(betNumber);
-		timer = new Timer();
+		timer = new CountDown();
 	//	this.team = team;
 	}
 	
 	public static void startMission(Tile tile){
-		// card = deque.getCard(cathegory);
-		// card.show();
+		card = Deque.getCard(Category.BODYTOBODY); //ar satt in som exempel
+		System.out.println(""+ card.getAssignment());// card.show();
 		// timer.start();
 	}
 	

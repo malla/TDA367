@@ -10,8 +10,9 @@ public class Deque {
 	static String[][] categories = {{"Vilka är sporter utan boll?", "segling", "judo", "fotboll", "längdhopp", "hästpolo", "brännboll", "rodd", "basket", "golf", "höjdhopp", "tennis", "badminton", "rally", "speedway"},
 		{"Vilka är aktiva sexIT medlemmar?", "rawa", "fridén", "bella", "brook", "malla", "sasse", "anno", "e", "krobbe", "henkit", "wiiw", "kara", "bosch","jocke",}};
 
-	public void getCard(Category c){
+	static Card getCard(Category c){
 		Card card1 = new Card(c);
+		return card1;
 	}
 }
 
