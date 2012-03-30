@@ -66,5 +66,15 @@ public class TileContainerPanel extends JPanel {
 	    	this.add(p2, BorderLayout.EAST);
 	    	this.add(p3, BorderLayout.SOUTH);
 	    	this.add(p4, BorderLayout.WEST);
+	    	
+	    	tilePanels[0].draw(new Piece(Color.BLUE));
+	    	tilePanels[2].draw(new Piece(Color.GREEN));
+	    	tilePanels[2].draw(new Piece(Color.YELLOW));
+	    	tilePanels[2].draw(new Piece(Color.BLUE));
+	    	tilePanels[2].draw(new Piece(Color.MAGENTA));
+	    	tilePanels[2].draw(new Piece(Color.BLACK));
+	    	tilePanels[2].draw(new Piece(Color.WHITE));
+	    	tilePanels[2].draw(new Piece(Color.PINK));
+	    	tilePanels[2].draw(new Piece(Color.ORANGE));
 	    }
 }
