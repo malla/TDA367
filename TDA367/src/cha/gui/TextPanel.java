@@ -16,7 +16,6 @@ public class TextPanel extends JPanel {
 	
 	public TextPanel() {
 		initialize();
-
 	}
 	
 	public void initialize(){

@@ -1,25 +1,20 @@
 package cha.domain;
 
-import cha.domain.Categories.Cathegory;
+import cha.domain.Categories.Category;
 
 public class Mission {
 	
 	private Card card;
-	private Bet bet;
-	private Timer timer;
-//	private Team team;
+	private final CountDown timer;
+	private final Team team;
 	
-	
-	
-	
-	public Mission(int betNumber, Team team){
-		bet = new Bet(betNumber);
-		timer = new Timer();
-	//	this.team = team;
+	public Mission(Team team){
+		timer = new CountDown();
+		this.team = team;
 	}
 	
-	public static void startMission(Tile tile){
-		// card = deque.getCard(cathegory);
+	public void startMission(Category c){
+		 card = Deque.getCard(c);
 		// card.show();
 		// timer.start();
 	}
@@ -28,13 +23,14 @@ public class Mission {
 		//TODO
 	}
 	
-	public int missionDone(boolean completed){
-		
-		if(completed){
-			return bet.getBetValue();
-		}
-		else{
-			return -2;
-		}
+	public void missionDone(boolean completed){
+		//TODO
 	}
+
+	@Override
+	public String toString() {
+		return "Mission [card=" + card + ", team=" + team + "]";
+	}
+	
+	
 }
