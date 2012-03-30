@@ -1,9 +1,8 @@
 package cha.domain;
 
-import java.awt.event.ActionListener;
-
-public class Team extends Piece/* implements ActionListener*/{
-/*
+public class Team extends Piece{
+	
+	/*
 	private int piece;
 	private Object board;
 	
