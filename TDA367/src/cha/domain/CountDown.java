@@ -1,9 +1,7 @@
 package cha.domain;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
 /**
  * A class which creates a timer.
@@ -19,12 +17,13 @@ public class CountDown implements ActionListener{
 		timer = new Timer(1000, this);
 		timer.start();
 	}
-	public static void main(String[] args){
+	/*	public static void main(String[] args){
 		CountDown tt= new CountDown();
 		while(true){
 			;
 		}
 	}
+	 */
 	private void ticktock(){
 		if (count==0){
 			timer.stop();
@@ -33,8 +32,6 @@ public class CountDown implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		ticktock();
 	}
-
 }
