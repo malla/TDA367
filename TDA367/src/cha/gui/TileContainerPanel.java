@@ -41,23 +41,33 @@ public class TileContainerPanel extends JPanel {
 	    	flowLayout.setAlignment(FlowLayout.LEFT);
 	    	flowLayout.setVgap(0);
 	    	flowLayout.setHgap(0);
-	    	for(int i = 0; i<14; i++){
-	    		TilePanel p = new TilePanel();
+	    	
+	    	TilePanel start = new StartTilePanel();
+    		tilePanels[0] = start;
+    		p1.add(start);
+    		
+	    	for(int i = 1; i<14; i++){
+	    		TilePanel p = new NormalTilePanel(Color.RED, i);
 	    		tilePanels[i] = p;
 	    		p1.add(p);
 	    	}
 	    	for(int i = 14; i<22; i++){
-	    		TilePanel p = new TilePanel();
+	    		TilePanel p = new NormalTilePanel(Color.GREEN, i);
 	    		tilePanels[i] = p;
 	    		p2.add(p);
 	    	}
-	    	for(int i = 22; i<36; i++){
-	    		TilePanel p = new TilePanel();
+	    	for(int i = 35; i>21; i--){
+	    		TilePanel p = new NormalTilePanel(Color.YELLOW, i);
 	    		tilePanels[i] = p;
 	    		p3.add(p);
 	    	}
-	    	for(int i = 36; i<44; i++){
-	    		TilePanel p = new TilePanel();
+	    	
+	    	TilePanel goal = new GoalTilePanel();
+    		tilePanels[43] = start;
+    		p4.add(goal);
+    		
+	    	for(int i = 42; i>35; i--){
+	    		TilePanel p = new NormalTilePanel(Color.BLUE, i);
 	    		tilePanels[i] = p;
 	    		p4.add(p);
 	    	}
@@ -67,14 +77,12 @@ public class TileContainerPanel extends JPanel {
 	    	this.add(p3, BorderLayout.SOUTH);
 	    	this.add(p4, BorderLayout.WEST);
 	    	
-	    	tilePanels[0].draw(new Piece(Color.BLUE));
-	    	tilePanels[2].draw(new Piece(Color.GREEN));
-	    	tilePanels[2].draw(new Piece(Color.YELLOW));
-	    	tilePanels[2].draw(new Piece(Color.BLUE));
-	    	tilePanels[2].draw(new Piece(Color.MAGENTA));
-	    	tilePanels[2].draw(new Piece(Color.BLACK));
-	    	tilePanels[2].draw(new Piece(Color.WHITE));
-	    	tilePanels[2].draw(new Piece(Color.PINK));
-	    	tilePanels[2].draw(new Piece(Color.ORANGE));
+	    	tilePanels[0].addPiece(new PiecePanel(Color.BLUE));
+	    	tilePanels[2].addPiece(new PiecePanel(Color.GREEN));
+	    	tilePanels[2].addPiece(new PiecePanel(Color.YELLOW));
+	    	
+	    	for(int i = 1; i< 7; i++){
+	    		tilePanels[i].showbet();
+	    	}
 	    }
 }
