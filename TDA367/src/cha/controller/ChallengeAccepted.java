@@ -14,10 +14,10 @@ import cha.gui.MainFrame;
 public class ChallengeAccepted implements KeyListener{
 
 	private MainFrame mainFrame;
-	private Board newBoard;
+	
 	
 	public ChallengeAccepted(){
-		this.newBoard = new Board();
+	
 		this.mainFrame = new MainFrame(this);
 	}
 	
@@ -27,11 +27,11 @@ public class ChallengeAccepted implements KeyListener{
 	
 		int key = e.getKeyCode();
 		if (key-30 >= 0 && key-30 < 10){
-			newBoard.getActivePiece().bet(key-30);
+			Board.getInstance().getActivePiece().bet(key-30);
 			
 		}
 		if (key == KeyEvent.VK_S){
-			newBoard.startMission();
+			Board.getInstance().startMission();
 		}
 		
 	}

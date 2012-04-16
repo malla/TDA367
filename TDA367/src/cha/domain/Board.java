@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.util.Random;
 
 public class Board{
+	
+	
 	private Piece pieceOne;
 	private Piece pieceTwo;
 	private Piece activePiece;
@@ -21,7 +23,17 @@ public class Board{
 	 */
 	Tile [] boardArray = new Tile[48];	
 	
-	public Board(){
+	private static Board instance;
+
+	public static Board getInstance() {
+		if (instance == null) {
+			instance = new Board();
+		}
+		return instance;
+	}
+	
+	private Board(){
+		
 		this.pieceOne = new Piece();
 		this.pieceOne.setPosition(0);
 		this.pieceOne.setPlayer(1);
@@ -36,6 +48,8 @@ public class Board{
 		
 		}
 	}
+	
+
 	
 	public Piece getActivePiece(){
 		return activePiece;

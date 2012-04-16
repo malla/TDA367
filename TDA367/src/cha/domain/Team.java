@@ -8,6 +8,7 @@ public class Team extends Piece/* implements ActionListener*/{
 	
 	public Team(String name){
 		this.name = name;
+		getPlayer();
 	}
 
 	/*
