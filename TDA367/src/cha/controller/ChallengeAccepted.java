@@ -11,41 +11,25 @@ import javax.swing.JOptionPane;
 import cha.domain.Board;
 import cha.gui.MainFrame;
 
-public class ChallengeAccepted implements KeyListener{
+public class ChallengeAccepted{
 
+	private static ChallengeAccepted instance = null;
 	private MainFrame mainFrame;
-	private Board newBoard;
+	private Board board;
 	
-	public ChallengeAccepted(){
-		this.newBoard = new Board();
+	private ChallengeAccepted(){
+		this.board = new Board();
 		this.mainFrame = new MainFrame(this);
 	}
 	
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-	
-		int key = e.getKeyCode();
-		if (key-30 >= 0 && key-30 < 10){
-			newBoard.getActivePiece().bet(key-30);
-			
+	public static ChallengeAccepted getInstance(){
+		if(instance == null){
+			instance = new ChallengeAccepted();
 		}
-		if (key == KeyEvent.VK_S){
-			newBoard.startMission();
-		}
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		return instance;
 	}
 	
+	public Board getBoard(){
+		return board;
+	}
 }
