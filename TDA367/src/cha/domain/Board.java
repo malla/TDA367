@@ -65,7 +65,7 @@ public class Board{
 	}
 	
 	public void startMission(){
-		mission = new Mission(new Piece(new Team("Team", Color.red)));
+	//	mission = new Mission(new Piece(new Team("Team", Color.red)));
 		mission.startMission(Categories.Category.BODYTOBODY);
 	}
 	

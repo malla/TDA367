@@ -23,14 +23,10 @@ public class StartTilePanel extends TilePanel {
 		p1.setBackground(Color.WHITE);
 		add(p1,BorderLayout.NORTH);
 		p1.add(new JLabel("Start"));
-		this.addMouseListener(new MouseAdapter(){
-			public void mousePressed(MouseEvent e){
-				click();
-			}
-		});
 	}
 	
-	private void click() {
+	@Override
+	public void bet() {
 		System.out.println("Start Clicked");
 		
 	}

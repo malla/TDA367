@@ -23,15 +23,10 @@ public class NormalTilePanel extends TilePanel {
 		p1.setBackground(color);
 		this.add(p1,BorderLayout.NORTH);
 		p1.add(new JLabel(Integer.toString(position)));
-		
-		this.addMouseListener(new MouseAdapter(){
-			public void mousePressed(MouseEvent e){
-				click();
-			}
-		});
 	}
 	
-	private void click() {
+	@Override
+	public void bet() {
 		// TODO Auto-generated method stub
 		System.out.println("Normal Clicked");
 	}
