@@ -6,11 +6,11 @@ public class Mission {
 	
 	private Card card;
 	private final CountDown timer;
-	private final Team team;
+	private final Piece piece;
 	
-	public Mission(Team team){
+	public Mission(Piece piece){
 		timer = new CountDown();
-		this.team = team;
+		this.piece = piece;
 	}
 	
 	public void startMission(Category c){
@@ -29,7 +29,7 @@ public class Mission {
 
 	@Override
 	public String toString() {
-		return "Mission [card=" + card + ", team=" + team + "]";
+		return "Mission [card=" + card + ", team=" + piece.getTeam() + "]";
 	}
 	
 	

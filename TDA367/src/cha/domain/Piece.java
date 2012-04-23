@@ -1,14 +1,29 @@
 package cha.domain;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Piece {
-
+	
+	private final static Color[] availableColors = new Color[]{
+		Color.red, Color.blue, Color.green, Color.magenta, 
+		Color.pink, Color.yellow, Color.orange, Color.cyan 
+	};
+	private static ArrayList<Color> availableColorsNextRound;
+	
+	
 	private int position;
 	private int piece;
-	private Color color1;
+	private Color color;
 	private int bet;
 	private int player;
+	private Team team;
+	
+	public Piece(Team team){
+		this.team = team;
+		
+	}
 	
 	public void movePieceForward(int bet){
 		position = position + bet;
@@ -16,17 +31,18 @@ public class Piece {
 	public void movePieceBackward(){
 		position = position - 2;
 	}
-	public Color color(Color i){
+	// TODO: 
+	/*public Color color(Color i){
 		Color color = new Color(piece);
 		for(int n = 0; n <= 8; n++){
-			Color color1 = new Color(n);
+			Color color = new Color(n);
 		}
 		return color;
-	}
+	}*/
 	
-	public void setColor(Color col){
+	/*public void setColor(Color col){
 		
-	}
+	}*/
 	public void setPiece(int piece) {
 		this.piece = piece;
 	}
@@ -61,8 +77,12 @@ public class Piece {
 	}
 	@Override
 	public String toString() {
-		return "Piece [position=" + position + ", piece=" + piece + ", color1="
-				+ color1 + ", bet=" + bet + ", player=" + player + "]";
+		return "Piece [position=" + position + ", piece=" + piece + ", color="
+				+ color + ", bet=" + bet + ", player=" + player + "]";
+	}
+
+	public Team getTeam() {
+		return this.team;
 	}
 
 	

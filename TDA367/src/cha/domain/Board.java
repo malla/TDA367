@@ -5,8 +5,9 @@ import java.awt.Color;
 import java.util.Random;
 
 public class Board{
-	private Piece pieceOne;
-	private Piece pieceTwo;
+//	private Piece pieceOne;
+//	private Piece pieceTwo;
+	private Piece[] pieces;
 	private Piece activePiece;
 	private Mission mission;
 	
@@ -21,14 +22,15 @@ public class Board{
 	 */
 	Tile [] boardArray = new Tile[48];	
 	
-	public Board(){
-		this.pieceOne = new Piece();
-		this.pieceOne.setPosition(0);
-		this.pieceOne.setPlayer(1);
-		this.pieceTwo = new Piece();
-		this.pieceTwo.setPlayer(2);
-		this.pieceTwo.setPosition(0);
-		this.activePiece = pieceOne;
+	public Board(int numPiece){
+		pieces = new Piece[8];
+//		this.pieceOne = new Piece();
+//		this.pieceOne.setPosition(0);
+//		this.pieceOne.setPlayer(1);
+//		this.pieceTwo = new Piece();
+//		this.pieceTwo.setPlayer(2);
+//		this.pieceTwo.setPosition(0);
+//		this.activePiece = pieceOne;
 		Random randomTiles = new Random();
 		
 		for(int i=0; i<48; i++){
@@ -56,7 +58,7 @@ public class Board{
 	}
 	
 	public void startMission(){
-		mission = new Mission(new Team("Team 1"));
+		mission = new Mission(new Piece(new Team("Team", Color.red)));
 		mission.startMission(Categories.Category.SAMECLASS);
 	}
 	
