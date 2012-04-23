@@ -32,7 +32,7 @@ public class Board{
 		return instance;
 	}
 	
-	private Board(){
+	public Board(){
 		
 		this.pieceOne = new Piece();
 		this.pieceOne.setPosition(0);
