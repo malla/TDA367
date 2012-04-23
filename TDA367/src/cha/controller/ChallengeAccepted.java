@@ -3,8 +3,7 @@ package cha.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+
 
 import javax.swing.JOptionPane;
 
@@ -16,36 +15,19 @@ public class ChallengeAccepted{
 	private static ChallengeAccepted instance = null;
 	private MainFrame mainFrame;
 
-	
-	
+		
 	public ChallengeAccepted(){
 	
 		this.mainFrame = new MainFrame(this);
 	}
 	
-
-	public void keyPressed(KeyEvent e) {
 	
-		int key = e.getKeyCode();
-		if (key-30 >= 0 && key-30 < 10){
-			Board.getInstance().getActivePiece().bet(key-30);
-			
-		}
-		if (key == KeyEvent.VK_S){
-			Board.getInstance().startMission();
-		}
+	private void ActionListener(){
 		
 	}
 
-	
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
+	private void ActionEvent(){
 		
-	}
-
-	
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 	}
 
 	private Board board;
