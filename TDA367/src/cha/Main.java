@@ -13,7 +13,7 @@ package cha;
 import java.util.Scanner;
 
 import cha.domain.Board;
-import cha.domain.Piece;
+
 
 
 public class Main {

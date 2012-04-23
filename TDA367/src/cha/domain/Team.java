@@ -6,14 +6,10 @@ public class Team {
 
 	private String name;
 	private Color color;
-	
-	public Team(String name, Color color){
+
+	public Team(String name, Color color) {
 		this.name = name;
 		this.color = color;
 	}
-	
-	@Override
-	public String toString() {
-		return "Team [name=" + name + "]";
-	}	
+
 }

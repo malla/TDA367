@@ -11,6 +11,7 @@ import cha.controller.ChallengeAccepted;
 
 import java.awt.FlowLayout;
 import java.awt.Dimension;
+import java.awt.event.KeyListener;
 
 public class MainFrame {
 
@@ -36,7 +37,7 @@ public class MainFrame {
 	
 	public MainFrame(ChallengeAccepted controller) {
 		initialize();
-		frmChallengeAccepted.addKeyListener(controller);
+		frmChallengeAccepted.addKeyListener((KeyListener) controller);
 	}
 
 	/**
