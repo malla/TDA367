@@ -24,10 +24,4 @@ public class StartTilePanel extends TilePanel {
 		add(p1,BorderLayout.NORTH);
 		p1.add(new JLabel("Start"));
 	}
-	
-	@Override
-	public void bet() {
-		System.out.println("Start Clicked");
-		
-	}
 }

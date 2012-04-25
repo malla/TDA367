@@ -10,6 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
+import cha.controller.ChallengeAccepted;
+import cha.controller.Event;
+
 
 @SuppressWarnings("serial")
 public class TilePanel extends JPanel {
@@ -51,17 +54,25 @@ public class TilePanel extends JPanel {
 		panel.remove(piece);
 	}
 	
-	public void showbet(){
+	public void betable(){
 		this.setBorder(new LineBorder(Color.BLACK, 2));
+	}
+	public void notBetable(){
+		this.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 	}
 	
 	private void click(){
 		//TODO Pos
 		int piecePos = 0;
-		if(position > piecePos && position < piecePos+8){
-			bet();
+		if(position > piecePos && position < piecePos+8)
+		{
+			bet(piecePos);
 		}
 	}
 
-	public void bet() {	}
+	public void bet(int piecePos) {
+		int bet = this.position - piecePos;
+		ChallengeAccepted.getInstance().getBoard().getActivePiece().bet(bet);
+		ChallengeAccepted.getInstance().publish(Event.MakeBet, bet);
+	}
 }

@@ -38,9 +38,9 @@ public class ChallengeAccepted{
 		handlers.add(handler);
 	}
 	
-	public void publish(Event e){
+	public void publish(Event e, Object o){
 		for(IEventHandler h : handlers){
-			h.action(e);
+			h.action(e, o);
 		}
 	}
 	

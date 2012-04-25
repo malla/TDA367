@@ -95,14 +95,19 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	    	}
 	    }
 	    
-	    public void action(Event e){
+	    public void action(Event e, Object o){
 	    	if(e == Event.ShowBet){
 	    	//	int pos = ChallengeAccepted.getInstance().getBoard().getActivePiece().getPosition();
 	    		int pos = 0;
 	    		for(int i = pos+1; i<pos+8; i++){
 	    			if(i > 43)
 	    				return;
-	    			tilePanels[i].showbet();
+	    			tilePanels[i].betable();
+	    		}
+	    	}
+	    	else if(e == Event.MakeBet){
+	    		for(TilePanel panel : tilePanels){
+	    			panel.notBetable();
 	    		}
 	    	}
 	    }

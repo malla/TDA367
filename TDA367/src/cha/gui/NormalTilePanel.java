@@ -24,10 +24,4 @@ public class NormalTilePanel extends TilePanel {
 		this.add(p1,BorderLayout.NORTH);
 		p1.add(new JLabel(Integer.toString(position)));
 	}
-	
-	@Override
-	public void bet() {
-		// TODO Auto-generated method stub
-		System.out.println("Normal Clicked");
-	}
 }

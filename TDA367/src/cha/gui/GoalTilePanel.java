@@ -24,10 +24,4 @@ public class GoalTilePanel extends TilePanel {
 		add(p1,BorderLayout.NORTH);
 		p1.add(new JLabel("Goal"));
 	}
-	
-	@Override
-	public void bet() {
-		System.out.println("Goal Clicked");
-		
-	}
 }
