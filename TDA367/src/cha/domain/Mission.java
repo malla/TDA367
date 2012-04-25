@@ -1,5 +1,7 @@
 package cha.domain;
 
+import java.awt.List;
+
 import cha.domain.Categories.Category;
 
 public class Mission {
@@ -19,6 +21,13 @@ public class Mission {
 		// timer.start();
 	}
 	
+	/* Malla
+	*public void startMission(Category c){
+	*	 List<Card> cards = new List;
+	*Lägga till kort i en hög och representera från högen
+	*	
+	*}
+	*/
 	public void timeOver(){
 		//TODO
 	}
