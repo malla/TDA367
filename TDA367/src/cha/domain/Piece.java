@@ -17,7 +17,6 @@ public class Piece {
 	private int bet;
 	private int player;
 	private Team team;
-	private Color color;
 	
 	public Piece(Team team){
 		this.team = team;
@@ -25,6 +24,7 @@ public class Piece {
 			for (Color color : availableColors)
 				availableColorsNextRound.add(color);
 		}
+		
 	}
 	
 	public void movePieceForward(int bet){
@@ -68,8 +68,7 @@ public class Piece {
 	}
 	@Override
 	public String toString() {
-		return "Piece [position=" + position + ", piece=" + piece + ", color="
-				+ color + ", bet=" + bet + ", player=" + player + "]";
+		return "Piece [position=" + position + ", piece=" + piece + ", bet=" + bet + ", player=" + player + "]";
 	}
 
 	public Team getTeam() {
