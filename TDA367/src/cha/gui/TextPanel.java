@@ -4,17 +4,24 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
+
+import cha.controller.ChallengeAccepted;
+import cha.controller.Event;
+import cha.controller.IEventHandler;
+
 import java.awt.FlowLayout;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Font;
 
-public class TextPanel extends JPanel {
+@SuppressWarnings("serial")
+public class TextPanel extends JPanel implements IEventHandler {
 
 	JTextArea cardText;
 	JLabel lblTime;
 	
 	public TextPanel() {
+		ChallengeAccepted.getInstance().register(this);
 		initialize();
 	}
 	
@@ -45,6 +52,14 @@ public class TextPanel extends JPanel {
 		p2.setMinimumSize(new Dimension(10, 75));
 		p2.add(new JLabel("PlayerArea, not done"));
 		add(p2, BorderLayout.NORTH);
+	}
+
+	@Override
+	public void action(Event e, Object o) {
+		if(e == Event.StartMission){
+			//cardText = ChallengeAccepted.getInstance().getBoard().getMission()
+		}
+		
 	}
 
 }

@@ -2,7 +2,6 @@ package cha.domain;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Piece {
 	
@@ -15,14 +14,19 @@ public class Piece {
 	
 	private int position;
 	private int piece;
-	private Color color;
 	private int bet;
 	private int player;
 	private Team team;
+	private Color color;
 	
 	public Piece(Team team){
 		this.team = team;
 		
+		//TODO Test
+		/*if (availableColorsNextRound.isEmpty()){
+			for (Color color : availableColors)
+				availableColorsNextRound.add(color);
+		}*/
 	}
 	
 	public void movePieceForward(int bet){
@@ -31,18 +35,7 @@ public class Piece {
 	public void movePieceBackward(){
 		position = position - 2;
 	}
-	// TODO: 
-	/*public Color color(Color i){
-		Color color = new Color(piece);
-		for(int n = 0; n <= 8; n++){
-			Color color = new Color(n);
-		}
-		return color;
-	}*/
-	
-	/*public void setColor(Color col){
-		
-	}*/
+
 	public void setPiece(int piece) {
 		this.piece = piece;
 	}

@@ -1,13 +1,14 @@
 package cha.domain;
 
 import java.util.List;
+
 import java.util.ArrayList;
 
 import cha.domain.Categories.Category;
 
 public class Mission {
 	
-	private Card card;
+	private ArrayList<Card> cards = new ArrayList<Card>();
 	private final CountDown timer;
 	private final Piece piece;
 	
@@ -17,12 +18,12 @@ public class Mission {
 	}
 	
 	public void startMission(Category c){
-		 card = Deque.getCard(c);
-		// card.show();
+		Card card = Deque.getCard(c);
 		// timer.start();
 	}
 	
 	/* Malla
+<<<<<<< HEAD
 
 	}*/
 	public void mallastartMission(Category c, int bet){
@@ -35,18 +36,18 @@ public class Mission {
 		
 	
 	
+
 	public void timeOver(){
 		//TODO
 	}
-	
+
 	public void missionDone(boolean completed){
 		//TODO
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Mission [card=" + card + ", team=" + piece.getTeam() + "]";
+		return "Mission [cards=" + cards + ", timer=" + timer + ", piece="
+				+ piece + "]";
 	}
-	
-	
 }

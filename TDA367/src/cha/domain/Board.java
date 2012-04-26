@@ -38,10 +38,16 @@ public class Board{
 			boardArray[i] = new Tile(tileTypes[randomTiles.nextInt(tileTypes.length)]);
 		
 		}
+		//TODO Johan Testar
+		activePiece = new Piece(new Team("Team 1",Color.BLUE));
+		
 	}
 	
 	public Board(int numPiece){
 		pieces = new Piece[8];
+
+		//TODO Johan Testar
+		activePiece = new Piece(new Team("Team 1",Color.BLUE));
 	}
 	
 	// Methods

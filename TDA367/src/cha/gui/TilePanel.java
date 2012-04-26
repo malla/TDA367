@@ -3,10 +3,15 @@ package cha.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
+
+import cha.controller.ChallengeAccepted;
+import cha.controller.Event;
 
 
 @SuppressWarnings("serial")
@@ -21,6 +26,12 @@ public class TilePanel extends JPanel {
 		this.setMinimumSize(new Dimension(50, 50));
 		this.setSize(50, 50);
 		this.setLayout(new BorderLayout(0, 0));
+		
+		this.addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent e){
+				click();
+			}
+		});
 		
 	/*	JPanel p2 = new JPanel();
 		JPanel p3 = new JPanel();
@@ -43,7 +54,25 @@ public class TilePanel extends JPanel {
 		panel.remove(piece);
 	}
 	
-	public void showbet(){
+	public void betable(){
 		this.setBorder(new LineBorder(Color.BLACK, 2));
+	}
+	public void notBetable(){
+		this.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+	}
+	
+	private void click(){
+		//TODO Pos
+		int piecePos = 0;
+		if(position > piecePos && position < piecePos+8)
+		{
+			bet(piecePos);
+		}
+	}
+
+	public void bet(int piecePos) {
+		int bet = this.position - piecePos;
+		ChallengeAccepted.getInstance().getBoard().getActivePiece().bet(bet);
+		ChallengeAccepted.getInstance().publish(Event.MakeBet, bet);
 	}
 }
