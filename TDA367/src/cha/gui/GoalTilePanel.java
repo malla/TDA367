@@ -23,15 +23,5 @@ public class GoalTilePanel extends TilePanel {
 		p1.setBackground(Color.WHITE);
 		add(p1,BorderLayout.NORTH);
 		p1.add(new JLabel("Goal"));
-		this.addMouseListener(new MouseAdapter(){
-			public void mousePressed(MouseEvent e){
-				click();
-			}
-		});
-	}
-	
-	private void click() {
-		System.out.println("Goal Clicked");
-		
 	}
 }

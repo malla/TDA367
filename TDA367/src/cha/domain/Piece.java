@@ -20,11 +20,12 @@ public class Piece {
 	
 	public Piece(Team team){
 		this.team = team;
-		if (availableColorsNextRound.isEmpty()){
+		
+		//TODO Test
+		/*if (availableColorsNextRound.isEmpty()){
 			for (Color color : availableColors)
 				availableColorsNextRound.add(color);
-		}
-		
+		}*/
 	}
 	
 	public void movePieceForward(int bet){

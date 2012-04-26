@@ -6,10 +6,16 @@ import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+
+import cha.controller.ChallengeAccepted;
+import cha.controller.Event;
+import cha.controller.IEventHandler;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
-public class TileContainerPanel extends JPanel {
+@SuppressWarnings("serial")
+public class TileContainerPanel extends JPanel implements IEventHandler {
 		
 		private TilePanel[] tilePanels = new TilePanel[44];
 		
@@ -20,7 +26,8 @@ public class TileContainerPanel extends JPanel {
 	
 	    public TileContainerPanel(){
 	    	setLayout(new BorderLayout(0, 0));
-	        init();    
+	        init();
+	        ChallengeAccepted.getInstance().register(this);
 	    }
 
 	    private void init() {
@@ -54,10 +61,6 @@ public class TileContainerPanel extends JPanel {
 	    	tilePanels[0].addPiece(new PiecePanel(Color.BLUE));
 	    	tilePanels[2].addPiece(new PiecePanel(Color.GREEN));
 	    	tilePanels[2].addPiece(new PiecePanel(Color.YELLOW));
-	    	
-	    	for(int i = 1; i< 7; i++){
-	    		tilePanels[i].showbet();
-	    	}
 	    }
 	    
 	    private void setTiles(){
@@ -82,13 +85,30 @@ public class TileContainerPanel extends JPanel {
 	    	}
 	    	
 	    	TilePanel goal = new GoalTilePanel();
-    		tilePanels[43] = start;
+    		tilePanels[43] = goal;
     		westPanel.add(goal);
     		
 	    	for(int i = 42; i>35; i--){
 	    		TilePanel p = new NormalTilePanel(Color.BLUE, i);
 	    		tilePanels[i] = p;
 	    		westPanel.add(p);
+	    	}
+	    }
+	    
+	    public void action(Event e, Object o){
+	    	if(e == Event.ShowBet){
+	    	//	int pos = ChallengeAccepted.getInstance().getBoard().getActivePiece().getPosition();
+	    		int pos = 0;
+	    		for(int i = pos+1; i<pos+8; i++){
+	    			if(i > 43)
+	    				return;
+	    			tilePanels[i].betable();
+	    		}
+	    	}
+	    	else if(e == Event.MakeBet){
+	    		for(TilePanel panel : tilePanels){
+	    			panel.notBetable();
+	    		}
 	    	}
 	    }
 }
