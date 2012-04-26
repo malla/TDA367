@@ -1,6 +1,7 @@
 package cha.domain;
 
-import java.awt.List;
+import java.util.List;
+
 import java.util.ArrayList;
 
 import cha.domain.Categories.Category;
@@ -17,17 +18,25 @@ public class Mission {
 	}
 	
 	public void startMission(Category c){
-		// card = Deque.getCard(c);
+		Card card = Deque.getCard(c);
 		// timer.start();
 	}
 	
 	/* Malla
-	*public void startMission(Category c){
-	*	 List<Card> cards = new List;
-	*Lï¿½gga till kort i en hï¿½g och representera frï¿½n hï¿½gen
-	*	
-	*}
-	*/
+<<<<<<< HEAD
+
+	}*/
+	public void mallastartMission(Category c, int bet){
+		List<Card> cards = new ArrayList<Card>();
+		//Deque.getCard(c, bet);
+		Card card1 = new Card(c);
+		cards.add(Deque.getCard(c));
+	}
+	//Lägga till kort i en hög och representera från högen
+		
+	
+	
+
 	public void timeOver(){
 		//TODO
 	}
