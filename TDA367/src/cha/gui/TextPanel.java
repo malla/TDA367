@@ -59,6 +59,13 @@ public class TextPanel extends JPanel implements IEventHandler {
 		if(e == Event.StartMission){
 			//cardText = ChallengeAccepted.getInstance().getBoard().getMission()
 		}
+		else if(e == Event.MakeBet){
+			int bet = (Integer)o;
+			cardText.setText("Bet: " + bet);
+		}
+		else if(e == Event.ShowBet){
+			cardText.setText("");
+		}
 		
 	}
 

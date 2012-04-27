@@ -64,9 +64,12 @@ public class TilePanel extends JPanel {
 	private void click(){
 		//TODO Pos
 		int piecePos = 0;
-		if(position > piecePos && position < piecePos+8)
+		if(ChallengeAccepted.getInstance().getBoard().getActivePiece().getBetAmount() == 0)
 		{
-			bet(piecePos);
+			if(position > piecePos && position < piecePos+8)
+			{
+				bet(piecePos);
+			}
 		}
 	}
 

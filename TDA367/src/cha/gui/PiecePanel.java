@@ -6,9 +6,8 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import javax.swing.border.LineBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
 
+@SuppressWarnings("serial")
 public class PiecePanel extends JPanel {
 	
 	public final Color color;

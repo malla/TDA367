@@ -1,6 +1,5 @@
 package cha.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -64,6 +63,7 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 					ChallengeAccepted.getInstance().getBoard().getMission());
 		}
 		else if(e.getSource() == cancelButton){
+			ChallengeAccepted.getInstance().getBoard().getActivePiece().bet(0);
 			ChallengeAccepted.getInstance().publish(Event.ShowBet, null);
 		}
 		

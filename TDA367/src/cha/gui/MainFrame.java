@@ -1,18 +1,9 @@
 package cha.gui;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
-
 import cha.controller.ChallengeAccepted;
 import cha.controller.Event;
-
-
-import java.awt.FlowLayout;
-import java.awt.Dimension;
-import java.awt.event.KeyListener;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame{
