@@ -17,7 +17,7 @@ import java.awt.Font;
 @SuppressWarnings("serial")
 public class TextPanel extends JPanel implements IEventHandler {
 
-	JTextArea cardText;
+	JTextArea textArea;
 	JLabel lblTime;
 	
 	public TextPanel() {
@@ -29,13 +29,13 @@ public class TextPanel extends JPanel implements IEventHandler {
 		setLayout(new BorderLayout(0, 0));
 		this.setSize(600,400);
 		
-		cardText = new JTextArea();
-		cardText.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-		cardText.setSize(500,300);
-		cardText.setEditable(false);
-		cardText.setForeground(Color.BLACK);
-		cardText.setText("Card with info");
-		add(cardText, BorderLayout.CENTER);
+		textArea = new JTextArea();
+		textArea.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		textArea.setSize(500,300);
+		textArea.setEditable(false);
+		textArea.setForeground(Color.BLACK);
+		textArea.setText("Card with info");
+		add(textArea, BorderLayout.CENTER);
 		
 		lblTime = new JLabel("Time");
 		JPanel p1 = new JPanel();
@@ -61,10 +61,13 @@ public class TextPanel extends JPanel implements IEventHandler {
 		}
 		else if(e == Event.MakeBet){
 			int bet = (Integer)o;
-			cardText.setText("Bet: " + bet);
+			textArea.setText("Bet: " + bet);
 		}
 		else if(e == Event.ShowBet){
-			cardText.setText("");
+			textArea.setText("");
+		}
+		else if(e == Event.MissionDone){
+			textArea.setText("Was the mission completed successfully?");
 		}
 		
 	}
