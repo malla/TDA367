@@ -1,6 +1,8 @@
 package cha.gui;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
 import cha.controller.ChallengeAccepted;
 import cha.controller.Event;
@@ -20,7 +22,7 @@ public class MainFrame extends JFrame{
 	
 	private TileContainerPanel tileContainerPanel;
 	private TextPanel textPanel;
-	private ButtonPanel buttonPanel;
+	private JPanel buttonPanel;
 	
 	public MainFrame() {
 		initialize();
@@ -32,7 +34,7 @@ public class MainFrame extends JFrame{
 	private void initialize() {
 		tileContainerPanel = new TileContainerPanel();
 		textPanel = new TextPanel();
-		buttonPanel = new ButtonPanel();
+		buttonPanel = new JPanel();
 		
 		textPanel.add(buttonPanel, BorderLayout.SOUTH);
 		tileContainerPanel.add(textPanel, BorderLayout.CENTER);
