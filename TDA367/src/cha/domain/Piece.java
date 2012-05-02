@@ -20,6 +20,7 @@ public class Piece {
 	
 	public Piece(Team team){
 		this.team = team;
+		bet = 0;
 		
 		//TODO Test
 		/*if (availableColorsNextRound.isEmpty()){

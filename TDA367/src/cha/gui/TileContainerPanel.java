@@ -2,9 +2,6 @@ package cha.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
-
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import cha.controller.ChallengeAccepted;

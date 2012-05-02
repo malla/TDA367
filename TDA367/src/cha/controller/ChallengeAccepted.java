@@ -31,7 +31,10 @@ public class ChallengeAccepted{
 			instance = new ChallengeAccepted();
 		}
 		return instance;
-
+	}
+	
+	public Board getBoard(){
+		return board;
 	}
 	
 	public void register(IEventHandler handler){
@@ -42,9 +45,5 @@ public class ChallengeAccepted{
 		for(IEventHandler h : handlers){
 			h.action(e, o);
 		}
-	}
-	
-	public Board getBoard(){
-		return board;
 	}
 }
