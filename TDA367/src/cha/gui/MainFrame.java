@@ -22,7 +22,7 @@ public class MainFrame extends JFrame{
 	
 	private TileContainerPanel tileContainerPanel;
 	private TextPanel textPanel;
-	private JPanel buttonPanel;
+	private ButtonPanel buttonPanel;
 	
 	public MainFrame() {
 		initialize();
@@ -34,7 +34,7 @@ public class MainFrame extends JFrame{
 	private void initialize() {
 		tileContainerPanel = new TileContainerPanel();
 		textPanel = new TextPanel();
-		buttonPanel = new JPanel();
+		buttonPanel = new ButtonPanel();
 		
 		textPanel.add(buttonPanel, BorderLayout.SOUTH);
 		tileContainerPanel.add(textPanel, BorderLayout.CENTER);
