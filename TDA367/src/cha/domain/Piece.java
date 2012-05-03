@@ -14,13 +14,13 @@ public class Piece {
 	
 	private int position;
 	private int piece;
-	private int bet;
+	private Bet bet;
 	private int player;
 	private Team team;
 	
 	public Piece(Team team){
 		this.team = team;
-		bet = 0;
+		bet = null;
 		
 		//TODO Test
 		/*if (availableColorsNextRound.isEmpty()){
@@ -42,14 +42,14 @@ public class Piece {
 	
 	public void bet(int value){
 		
-		this.bet = value;
+		this.bet = new Bet(value);
 	}
 	
 	public int getPiece() {
 		return piece;
 	}
 	
-	public int getBetAmount(){
+	public Bet getBetAmount(){
 		return bet;
 	}
 	

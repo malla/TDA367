@@ -30,11 +30,11 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 
 	public TileContainerPanel() {
 		setLayout(new BorderLayout(0, 0));
-		init();
+//		init();
 		ChallengeAccepted.getInstance().register(this);
 	}
 
-	private void init() {
+	private void init(ArrayList<Category> c) {
 		colorList = new ArrayList<Color>();
 		colorList.add(Color.BLUE);
 		colorList.add(Color.GREEN);
@@ -65,7 +65,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		this.add(southPanel, BorderLayout.SOUTH);
 		this.add(westPanel, BorderLayout.WEST);
 
-		setTiles();
+		setTiles(c);
 		
 		pieces = new ArrayList();
 		pieces.add(new PiecePanel(Color.BLUE));
@@ -88,26 +88,44 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		westPanel.add(goal);
 		
 		for (int i = 1; i < 14; i++) {
-			TilePanel p = new NormalTilePanel(Color.RED, i);
+			TilePanel p = createTile(categories.get(i), i);
 			tilePanels[i] = p;
 			northPanel.add(p);
 		}
 		for (int i = 14; i < 22; i++) {
-			TilePanel p = new NormalTilePanel(Color.GREEN, i);
+			TilePanel p = createTile(categories.get(i), i);
 			tilePanels[i] = p;
 			eastPanel.add(p);
 		}
 		for (int i = 21; i < 35; i++) {
-			TilePanel p = new NormalTilePanel(Color.YELLOW, i);
+			TilePanel p = createTile(categories.get(i), i);
 			tilePanels[i] = p;
 			southPanel.add(p);
 		}		
 
 		for (int i = 42; i > 35; i--) {
-			TilePanel p = new NormalTilePanel(Color.BLUE, i);
+			TilePanel p = createTile(categories.get(i), i);
 			tilePanels[i] = p;
 			westPanel.add(p);
 		}
+	}
+	
+	private TilePanel createTile(Category c, int i){
+		TilePanel tile;
+		if(c == Category.BACKWARDS){
+			tile = new NormalTilePanel(Color.RED, i);
+		}
+		else if(c == Category.BODYTOBODY){
+			tile = new NormalTilePanel(Color.YELLOW, i);
+		}
+		else if(c == Category.SAMECLASS){
+			tile = new NormalTilePanel(Color.BLUE, i);
+		}
+		else {
+			tile = new NormalTilePanel(Color.GREEN, i);
+		}
+		
+		return tile;
 	}
 	
 	private void nextPlayer(){
@@ -120,7 +138,11 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	}
 
 	public void action(Event e, Object o) {
-		if (e == Event.ShowBet) {
+		if(e == Event.CreateBoard){
+			ArrayList<Category> c = (ArrayList<Category>)o;
+			init(c);
+		}
+		else if (e == Event.ShowBet) {
 			// int pos =
 			// ChallengeAccepted.getInstance().getBoard().getActivePiece().getPosition();
 			int pos = 0;
