@@ -1,9 +1,10 @@
-
-package cha.domain;
+ package cha.domain;
 import java.awt.Color;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import cha.domain.Categories.Category;
 
 public class Board{
 	private Piece[] pieces;
@@ -13,17 +14,17 @@ public class Board{
 	/**
 	 * @uml.property  name="tileTypes" multiplicity="(0 -1)" dimension="1"
 	 */
-	Color[] tileTypes ={Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED};
+	Enum[] tileTypes ={Category.SAMECLASS, Category.BACKWARDS, Category.BODYTOBODY, Category.WORDJUMBLE};
 	//TODO Check if this is a proper solution
-//	private ArrayList<Color> colorList;
+	private ArrayList<Enum> categoryList;
 	
 	/**
 	 * @uml.property  name="boardArray"
 	 * @uml.associationEnd  multiplicity="(0 -1)"
 	 */
-	Tile [] boardArray = new Tile[48];
+//	Tile [] boardArray = new Tile[48];
 	
-//	private ArrayList<Tile> tileList;
+	private ArrayList<Tile> tileList;
 	
 
 	private static Board instance;
@@ -36,7 +37,7 @@ public class Board{
 	}
 	
 	// Constructors
-	
+
 	//private Board(){
 		
 
@@ -50,11 +51,15 @@ public class Board{
 //		this.colorList.add(Color.RED);
 //		this.colorList.add(Color.YELLOW);
 //		this.colorList.add(Color.GREEN);
+
+	public Board(){
+
+		this.tileList = new ArrayList<Tile>();
+
 		
 		Random rand = new Random();
 		for(int i=0; i<48; i++){
-			boardArray[i] = new Tile(tileTypes[rand.nextInt(tileTypes.length)]);
-//			tileList.add(new Tile(colorList.get(rand.nextInt(colorList.size()))));
+			tileList.add(new Tile(categoryList.get(rand.nextInt(categoryList.size()))));
 		
 		}
 		//TODO Johan Testar
@@ -80,7 +85,7 @@ public class Board{
 		}
 		
 		else {   
-			return boardArray[place];
+			return tileList.get(place);
 		}		
 	}
 	
