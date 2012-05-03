@@ -1,12 +1,16 @@
 package cha.domain;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import cha.domain.Categories.Category;
 
 public class Mission {
 	
-
+	private List<Card> cards;
 	private final CountDown timer;
 	private final Piece piece;
+	private final Deque deque = new Deque();
 	
 	public Mission(Piece piece){
 		timer = new CountDown();
@@ -15,7 +19,7 @@ public class Mission {
 	
 
 	public void startMission(Category c, int bet){
-		Deque.getCard(c, bet);
+		cards = deque.getCard(c, bet);
 		// timer.start();
 	}
 	//Lägga till kort i en hög och representera från högen
@@ -33,7 +37,7 @@ public class Mission {
 	
 	@Override
 	public String toString() {
-		return "Mission [cards=" + Deque.cards + ", timer=" + timer + ", piece="
+		return "Mission [cards=" + cards + ", timer=" + timer + ", piece="
 				+ piece + "]";
 	}
 }
