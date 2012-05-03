@@ -14,15 +14,14 @@ public class Board{
 	/**
 	 * @uml.property  name="tileTypes" multiplicity="(0 -1)" dimension="1"
 	 */
-	Enum[] tileTypes ={Category.SAMECLASS, Category.BACKWARDS, Category.BODYTOBODY, Category.WORDJUMBLE};
 	//TODO Check if this is a proper solution
-	private ArrayList<Enum> categoryList;
+	private ArrayList<Category> categoryList = new ArrayList<Category>();
+
 	
 	/**
 	 * @uml.property  name="boardArray"
 	 * @uml.associationEnd  multiplicity="(0 -1)"
 	 */
-//	Tile [] boardArray = new Tile[48];
 	
 	private ArrayList<Tile> tileList;
 	
@@ -55,7 +54,10 @@ public class Board{
 	public Board(){
 
 		this.tileList = new ArrayList<Tile>();
-
+		this.categoryList.add(Category.SAMECLASS);
+		this.categoryList.add(Category.BODYTOBODY);
+		this.categoryList.add(Category.WORDJUMBLE);
+		this.categoryList.add(Category.BACKWARDS);
 		
 		Random rand = new Random();
 		for(int i=0; i<48; i++){
@@ -93,9 +95,9 @@ public class Board{
 		return mission;
 	}
 	
-	public void startMission(){
-		mission = new Mission(new Piece(new Team("Team", Color.red)));
-		mission.startMission(Categories.Category.BODYTOBODY);
+	public void startMission(Bet b){
+		mission = new Mission(getActivePiece(), b);
+		mission.startMission((getTile(getActivePiece().getPosition())).getCategory());
 	}
 	
 }

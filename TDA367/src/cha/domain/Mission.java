@@ -7,15 +7,17 @@ public class Mission {
 
 	private final CountDown timer;
 	private final Piece piece;
+	private Bet actualBet;
 	
-	public Mission(Piece piece){
+	public Mission(Piece piece, Bet b){
 		timer = new CountDown();
 		this.piece = piece;
+		actualBet = b;
 	}
 	
 
-	public void startMission(Category bodytobody, Bet b){
-		Deque.getCard(bodytobody, b);
+	public void startMission(Category c){
+		Deque.getCard(c, actualBet);
 		// timer.start();
 	}
 	//L�gga till kort i en h�g och representera fr�n h�gen

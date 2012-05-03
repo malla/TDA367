@@ -9,5 +9,8 @@ public enum Event {
 	TimeOver,
 	MissionSuccess,
 	MissionFail,
-	NextPlayer
+	NextPlayer,
+	OldPosition,
+	NewPosition,
+	CreateBoard
 }
