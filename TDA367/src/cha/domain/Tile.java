@@ -2,21 +2,23 @@ package cha.domain;
 
 import java.awt.Color;
 
+import cha.domain.Categories.Category;
+
 public class Tile {
 	
 	/**
 	 * @uml.property  name="type"
 	 */
-	Color type;
-	public Tile(Color type){
-		this.type = type;
+	Category type;
+	public Tile(Category c){
+		this.type = c;
 	}
 	
 //	public String getType(){
 //		return type;
 //	}
 	
-	public Color getColor(){
+	public Category getCategory(){
 		return type;
 	}
 	

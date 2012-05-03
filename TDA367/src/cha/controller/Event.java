@@ -11,5 +11,6 @@ public enum Event {
 	MissionFail,
 	NextPlayer,
 	OldPosition,
-	NewPosition
+	NewPosition,
+	CreateBoard
 }
