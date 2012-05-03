@@ -14,8 +14,8 @@ public class Mission {
 	}
 	
 
-	public void startMission(Category c, int bet){
-		Deque.getCard(c, bet);
+	public void startMission(Category bodytobody, Bet b){
+		Deque.getCard(bodytobody, b);
 		// timer.start();
 	}
 	//L�gga till kort i en h�g och representera fr�n h�gen

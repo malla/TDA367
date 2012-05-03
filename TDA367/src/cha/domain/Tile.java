@@ -7,16 +7,16 @@ public class Tile {
 	/**
 	 * @uml.property  name="type"
 	 */
-	Color type;
-	public Tile(Color type){
-		this.type = type;
+	Enum type;
+	public Tile(Enum enum1){
+		this.type = enum1;
 	}
 	
 //	public String getType(){
 //		return type;
 //	}
 	
-	public Color getColor(){
+	public Enum getCategory(){
 		return type;
 	}
 	
