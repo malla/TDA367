@@ -83,8 +83,9 @@ public class Board{
 		return mission;
 	}
 	
-	public void startMission(){
-		mission = new Mission(new Piece(new Team("Team", Color.red)));
-		mission.startMission(Categories.Category.BODYTOBODY, activePiece.getBetAmount());
+	public void startMission(Bet b){
+		mission = new Mission(getActivePiece(), b);
+		mission.startMission((getTile(getActivePiece().getPosition())).getCategory());
 	}
+	
 }
