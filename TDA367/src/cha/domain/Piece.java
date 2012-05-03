@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 public class Piece {
 	
-	private final static Color[] availableColors = new Color[]{
-		Color.red, Color.blue, Color.green, Color.magenta, 
-		Color.pink, Color.yellow, Color.orange, Color.cyan 
-	};
-	private static ArrayList<Color> availableColorsNextRound;
-	
+//	private final static Color[] availableColors = new Color[]{
+//		Color.red, Color.blue, Color.green, Color.magenta, 
+//		Color.pink, Color.yellow, Color.orange, Color.cyan 
+//	};
+//	private static ArrayList<Color> availableColorsNextRound;
+//	
 	
 	private int position;
 	private int piece;
@@ -20,7 +20,7 @@ public class Piece {
 	
 	public Piece(Team team){
 		this.team = team;
-		bet = 0;
+		
 		
 		//TODO Test
 		/*if (availableColorsNextRound.isEmpty()){

@@ -32,7 +32,7 @@ public class Board{
 	
 	// Constructors
 	
-	public Board(){
+	private Board(){
 		Random randomTiles = new Random();
 		for(int i=0; i<48; i++){
 			boardArray[i] = new Tile(tileTypes[randomTiles.nextInt(tileTypes.length)]);
@@ -40,7 +40,6 @@ public class Board{
 		}
 		//TODO Johan Testar
 		activePiece = new Piece(new Team("Team 1",Color.BLUE));
-		
 	}
 	
 	public Board(int numPiece){

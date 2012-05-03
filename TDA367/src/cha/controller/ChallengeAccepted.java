@@ -22,7 +22,7 @@ public class ChallengeAccepted{
 		
 	private ChallengeAccepted(){
 	
-		board = new Board();
+		board = Board.getInstance();
 	//	mainFrame = new MainFrame();
 	}
 	
