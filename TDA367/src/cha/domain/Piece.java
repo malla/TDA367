@@ -15,7 +15,6 @@ public class Piece {
 	private int position;
 	private int piece;
 	private int bet;
-	private int player;
 	private Team team;
 	
 	public Piece(Team team){
@@ -61,16 +60,9 @@ public class Piece {
 		return this.position;
 	}
 	
-	public void setPlayer(int player){
-		this.player = player;
-	}
-	
-	public int getPlayer(){
-		return player;
-	}
 	@Override
 	public String toString() {
-		return "Piece [position=" + position + ", piece=" + piece + ", bet=" + bet + ", player=" + player + "]";
+		return "Piece [position=" + position + ", piece=" + piece + ", bet=" + bet + "]";
 	}
 
 	public Team getTeam() {

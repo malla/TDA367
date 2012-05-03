@@ -18,6 +18,10 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 	
 	private JButton startMissionButton;
 	private JButton cancelButton;
+	private JButton yesButton;
+	private JButton noButton;
+	private JButton nextButton;
+	private JButton doneButton;
 	private JLabel timer;
 	
 	public ButtonPanel(){
@@ -27,12 +31,32 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 		timer.setFont(new Font("Dialog", Font.BOLD, 20));
 		startMissionButton = new JButton("Start Mission");
 		cancelButton = new JButton("Cancel");
+		yesButton = new JButton("Yes");
+		noButton = new JButton("No");
+		nextButton = new JButton("Next Card");
+		doneButton = new JButton("Done");
 		startMissionButton.addActionListener(this);
 		cancelButton.addActionListener(this);
+		yesButton.addActionListener(this);
+		noButton.addActionListener(this);
+		nextButton.addActionListener(this);
+		doneButton.addActionListener(this);
 		
 		this.add(startMissionButton);
 		this.add(cancelButton);
+		this.add(nextButton);
+		this.add(doneButton);
+		this.add(yesButton);
+		this.add(noButton);
 		this.add(timer);
+		
+		startMissionButton.setVisible(false);
+		cancelButton.setVisible(false);
+		nextButton.setVisible(false);
+		doneButton.setVisible(false);
+		yesButton.setVisible(false);
+		noButton.setVisible(false);
+		timer.setVisible(false);
 		
 		this.setBackground(Color.WHITE);
 	}
@@ -49,6 +73,16 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 		else if(e == Event.StartMission){
 			startMissionButton.setVisible(false);
 			cancelButton.setVisible(false);
+			nextButton.setVisible(true);
+			doneButton.setVisible(true);
+			timer.setVisible(true);
+		}
+		else if(e == Event.TimeOver){
+			nextButton.setVisible(false);
+			doneButton.setVisible(false);
+			yesButton.setVisible(true);
+			noButton.setVisible(true);
+			timer.setVisible(false);
 		}
 		else if(e == Event.TimeTick){
 			String time = (String)o;
@@ -66,6 +100,14 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 			ChallengeAccepted.getInstance().getBoard().getActivePiece().bet(0);
 			ChallengeAccepted.getInstance().publish(Event.ShowBet, null);
 		}
-		
+		else if(e.getSource() == doneButton){
+			//TODO
+			ChallengeAccepted.getInstance().getBoard().getMission().timeOver();
+			ChallengeAccepted.getInstance().publish(Event.TimeOver, null);
+		}
+		else if(e.getSource() == yesButton){
+			ChallengeAccepted.getInstance().getBoard().getMission().missionDone(true);
+			ChallengeAccepted.getInstance().publish(Event.MissionSuccess, null);
+		}
 	}
 }

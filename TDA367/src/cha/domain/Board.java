@@ -2,6 +2,7 @@
 package cha.domain;
 import java.awt.Color;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Board{
@@ -13,12 +14,16 @@ public class Board{
 	 * @uml.property  name="tileTypes" multiplicity="(0 -1)" dimension="1"
 	 */
 	Color[] tileTypes ={Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED};
+	//TODO Check if this is a proper solution
+//	private ArrayList<Color> colorList;
 	
 	/**
 	 * @uml.property  name="boardArray"
 	 * @uml.associationEnd  multiplicity="(0 -1)"
 	 */
-	Tile [] boardArray = new Tile[48];	
+	Tile [] boardArray = new Tile[48];
+	
+//	private ArrayList<Tile> tileList;
 	
 
 	private static Board instance;
@@ -32,10 +37,24 @@ public class Board{
 	
 	// Constructors
 	
+	//private Board(){
+		
+
 	private Board(){
 		Random randomTiles = new Random();
+	//}
+//		this.colorList = new ArrayList<Color>();
+//		this.tileList = new ArrayList<Tile>();
+//		
+//		this.colorList.add(Color.BLUE);
+//		this.colorList.add(Color.RED);
+//		this.colorList.add(Color.YELLOW);
+//		this.colorList.add(Color.GREEN);
+		
+		Random rand = new Random();
 		for(int i=0; i<48; i++){
-			boardArray[i] = new Tile(tileTypes[randomTiles.nextInt(tileTypes.length)]);
+			boardArray[i] = new Tile(tileTypes[rand.nextInt(tileTypes.length)]);
+//			tileList.add(new Tile(colorList.get(rand.nextInt(colorList.size()))));
 		
 		}
 		//TODO Johan Testar

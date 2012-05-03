@@ -4,5 +4,10 @@ public enum Event {
 	MakeBet,
 	ShowBet,
 	StartMission,
-	TimeTick
+	TimeTick,
+	MissionDone,
+	TimeOver,
+	MissionSuccess,
+	MissionFail,
+	NextPlayer
 }
