@@ -146,10 +146,19 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 					return;
 				tilePanels[i].betable();
 			}
-		} else if (e == Event.MakeBet) {
+		} 
+		else if (e == Event.MakeBet) {
 			for (TilePanel panel : tilePanels) {
 				panel.notBetable();
 			}
+		}
+		else if(e == Event.OldPosition){
+			int pos = (Integer)o;
+			tilePanels[pos].removePiece(pieces.get(currentPiece));
+		}
+		else if(e == Event.NewPosition){
+			int pos = (Integer)o;
+			tilePanels[pos].addPiece(pieces.get(currentPiece));
 		}
 	}
 }

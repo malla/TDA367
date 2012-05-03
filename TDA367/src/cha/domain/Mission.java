@@ -1,5 +1,7 @@
 package cha.domain;
 
+import cha.controller.ChallengeAccepted;
+import cha.controller.Event;
 import cha.domain.Categories.Category;
 
 public class Mission {
@@ -7,15 +9,17 @@ public class Mission {
 
 	private final CountDown timer;
 	private final Piece piece;
+	private Bet bet;
 	
-	public Mission(Piece piece){
+	public Mission(Piece piece, Bet bet){
 		timer = new CountDown();
+		this.bet = bet;
 		this.piece = piece;
 	}
 	
 
-	public void startMission(Category c, int bet){
-		Deque.getCard(c, bet);
+	public void startMission(Category c){
+		Deque.getCard(c, bet.getBetValue());
 		// timer.start();
 	}
 	//L�gga till kort i en h�g och representera fr�n h�gen
@@ -28,7 +32,14 @@ public class Mission {
 	}
 
 	public void missionDone(boolean completed){
-		//TODO
+		ChallengeAccepted.getInstance().publish(Event.OldPosition, piece.getPosition());
+		if(completed){
+			piece.movePieceForward(bet.getBetValue());
+		}
+		else{
+			piece.movePieceBackward();
+		}
+		ChallengeAccepted.getInstance().publish(Event.NewPosition, piece.getPosition());
 	}
 	
 	@Override
