@@ -59,7 +59,7 @@ public class Card {
 		}
 
 	public Card(String s){
-		String a1=s;
+		a1=s;
 	}
 
 /*		public Card(Category c, Bet i){ //En konstruktor som returerar en lista med kort??
@@ -175,6 +175,6 @@ public class Card {
 
 	@Override
 	public String toString() {
-		return "Card [assignment=" + assignment + "]";
+		return "Card [a1=" + a1 + "]";
 	}
 }

@@ -1,8 +1,5 @@
 package cha.domain;
 
-import java.awt.Color;
-import java.util.ArrayList;
-
 public class Piece {
 	
 //	private final static Color[] availableColors = new Color[]{
@@ -14,12 +11,12 @@ public class Piece {
 	
 	private int position;
 	private int piece;
-	private int bet;
+	private Bet bet;
 	private Team team;
 	
 	public Piece(Team team){
 		this.team = team;
-		
+		bet = null;
 		
 		//TODO Test
 		/*if (availableColorsNextRound.isEmpty()){
@@ -39,16 +36,18 @@ public class Piece {
 		this.piece = piece;
 	}
 	
-	public void bet(int value){
-		
-		this.bet = value;
-	}
+//	public void bet(int value){
+//		this.bet = new Bet(value);
+//	} 
+	
+	//  WHAT??
+	
 	
 	public int getPiece() {
 		return piece;
 	}
 	
-	public int getBetAmount(){
+	public Bet getBetAmount(){
 		return bet;
 	}
 	
