@@ -24,6 +24,8 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	private JPanel westPanel = new JPanel();
 
 	private ArrayList<Color> colorList;
+	private ArrayList<PiecePanel> pieces;
+	private int currentPiece;
 
 	public TileContainerPanel() {
 		setLayout(new BorderLayout(0, 0));
@@ -63,10 +65,16 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		this.add(westPanel, BorderLayout.WEST);
 
 		setTiles();
-
-		tilePanels[0].addPiece(new PiecePanel(Color.BLUE));
-		tilePanels[2].addPiece(new PiecePanel(Color.GREEN));
-		tilePanels[2].addPiece(new PiecePanel(Color.YELLOW));
+		
+		pieces = new ArrayList();
+		pieces.add(new PiecePanel(Color.BLUE));
+		pieces.add(new PiecePanel(Color.GREEN));
+		pieces.add(new PiecePanel(Color.YELLOW));
+		
+		for(PiecePanel piece : pieces){
+			tilePanels[0].addPiece(piece);
+		}
+		currentPiece = 0;
 	}
 
 	private void setTiles() {
@@ -79,7 +87,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		tilePanels[43] = goal;
 		westPanel.add(goal);
 
-		for (int i = 0; i < 44; i++) {
+		for (int i = 1; i < 44; i++) {
 			TilePanel p = new NormalTilePanel(this.colorList.get(rand
 					.nextInt(colorList.size())), i);
 			tilePanels[i] = p;
@@ -87,11 +95,9 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 				northPanel.add(p);
 			} else if (i < 22) {
 				eastPanel.add(p);
-			} else if (i < 35) {
+			} else if (i < 36) {
 				southPanel.add(p);
 			} else {
-				
-				
 				westPanel.add(p);
 			}
 		}
@@ -119,6 +125,15 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 //			tilePanels[i] = p;
 //			westPanel.add(p);
 //		}
+	}
+	
+	private void nextPlayer(){
+		if(currentPiece == pieces.size()-1){
+			currentPiece = 0;
+		}
+		else{
+			currentPiece++;
+		}
 	}
 
 	public void action(Event e, Object o) {

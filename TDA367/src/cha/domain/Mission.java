@@ -18,7 +18,7 @@ public class Mission {
 		Deque.getCard(c, bet);
 		// timer.start();
 	}
-	//Lägga till kort i en hög och representera från högen
+	//Lï¿½gga till kort i en hï¿½g och representera frï¿½n hï¿½gen
 		
 	
 	
