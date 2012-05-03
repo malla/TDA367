@@ -12,6 +12,7 @@ import javax.swing.border.LineBorder;
 
 import cha.controller.ChallengeAccepted;
 import cha.controller.Event;
+import cha.domain.Bet;
 
 
 @SuppressWarnings("serial")
@@ -64,7 +65,7 @@ public class TilePanel extends JPanel {
 	private void click(){
 		//TODO Pos
 		int piecePos = 0;
-		if(ChallengeAccepted.getInstance().getBoard().getActivePiece().getBetAmount() == 0)
+		if(ChallengeAccepted.getInstance().getBoard().getActivePiece().getBetAmount() == null)
 		{
 			if(position > piecePos && position < piecePos+8)
 			{

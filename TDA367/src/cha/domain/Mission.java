@@ -10,19 +10,29 @@ public class Mission {
 	private List<Card> cards;
 	private final CountDown timer;
 	private final Piece piece;
+<<<<<<< HEAD
 	private final Deque deque = new Deque();
+=======
+	private Bet actualBet;
+>>>>>>> 13d03e9ee16d02b537a4b73144546b904c0ee886
 	
-	public Mission(Piece piece){
+	public Mission(Piece piece, Bet b){
 		timer = new CountDown();
 		this.piece = piece;
+		actualBet = b;
 	}
 	
 
+<<<<<<< HEAD
 	public void startMission(Category c, int bet){
 		cards = deque.getCard(c, bet);
+=======
+	public void startMission(Category c){
+		Deque.getCard(c, actualBet);
+>>>>>>> 13d03e9ee16d02b537a4b73144546b904c0ee886
 		// timer.start();
 	}
-	//Lägga till kort i en hög och representera från högen
+	//Lï¿½gga till kort i en hï¿½g och representera frï¿½n hï¿½gen
 		
 	
 	

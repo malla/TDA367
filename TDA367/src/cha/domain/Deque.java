@@ -16,6 +16,7 @@ public class Deque{
 	static String[][] categories = {{"Vilka är sporter utan boll?", "segling", "judo", "fotboll", "längdhopp", "hästpolo", "brännboll", "rodd", "basket", "golf", "höjdhopp", "tennis", "badminton", "rally", "speedway"},
 		{"Vilka är aktiva sexIT medlemmar?", "rawa", "fridén", "bella", "brook", "malla", "sasse", "anno", "e", "krobbe", "henkit", "wiiw", "kara", "bosch","jocke",}};
 
+<<<<<<< HEAD
 	public List<Card> getCards(Category c, int bet){
 		if (c==Category.BODYTOBODY){
 			return getBodyToBody(bet);
@@ -24,6 +25,12 @@ public class Deque{
 		}
 		//Card.bodyToBody();
 		/*else if (c==Category.BACKWARDS)
+=======
+	static List<Card> getCard(Category c, Bet actualBet){
+		if (c==Category.BODYTOBODY)
+			Card.bodyToBody();
+		else if (c==Category.BACKWARDS)
+>>>>>>> 13d03e9ee16d02b537a4b73144546b904c0ee886
 			backwards();
 		else if (c==Category.SAMECLASS)
 			sameClass();
@@ -32,7 +39,7 @@ public class Deque{
 
 		List<Card> cards = new ArrayList<Card>();
 		for (int j=1; j==i; j++){
-			Card card1 = new Card(c, bet);
+			Card card1 = new Card(c, actualBet);
 			cards.add(card1);
 		}
 		return cards;*/

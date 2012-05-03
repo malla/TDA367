@@ -77,7 +77,7 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 			doneButton.setVisible(true);
 			timer.setVisible(true);
 		}
-		else if(e == Event.MissionDone){
+		else if(e == Event.TimeOver){
 			nextButton.setVisible(false);
 			doneButton.setVisible(false);
 			yesButton.setVisible(true);
@@ -103,7 +103,11 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 		else if(e.getSource() == doneButton){
 			//TODO
 			ChallengeAccepted.getInstance().getBoard().getMission().timeOver();
-			ChallengeAccepted.getInstance().publish(Event.MissionDone, null);
+			ChallengeAccepted.getInstance().publish(Event.TimeOver, null);
+		}
+		else if(e.getSource() == yesButton){
+			ChallengeAccepted.getInstance().getBoard().getMission().missionDone(true);
+			ChallengeAccepted.getInstance().publish(Event.MissionSuccess, null);
 		}
 	}
 }
