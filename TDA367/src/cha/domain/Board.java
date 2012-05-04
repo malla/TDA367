@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
+import cha.controller.ChallengeAccepted;
+import cha.controller.Event;
 import cha.domain.Categories.Category;
 
 public class Board{
@@ -38,7 +40,9 @@ public class Board{
 	
 	// Constructors
 
-	public Board(){
+	private Board(){
+
+		this.tileList = new ArrayList<Tile>();
 		this.categoryList.add(Category.SAMECLASS);
 		this.categoryList.add(Category.BODYTOBODY);
 		this.categoryList.add(Category.WORDJUMBLE);
@@ -48,6 +52,7 @@ public class Board{
 		for(int i=0; i<48; i++){
 			tileList.add(new Tile(categoryList.get(rand.nextInt(categoryList.size()))));
 		}
+		ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);
 		//TODO Johan Testar
 		activePiece = new Piece(new Team("Team 1",Color.blue));
 	}
