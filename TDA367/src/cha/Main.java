@@ -20,7 +20,7 @@ public class Main {
 
     public void run() {
         // Monopoly mply = Monopoly.getInstance();
-    	Board newBoard = new Board();
+    	Board newBoard = Board.getInstance();
     	
         Scanner in = new Scanner(System.in);
         while (true) {

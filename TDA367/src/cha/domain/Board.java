@@ -1,5 +1,4 @@
-
-package cha.domain;
+ package cha.domain;
 import java.awt.Color;
 
 import java.util.ArrayList;
@@ -39,7 +38,21 @@ public class Board{
 	}
 	
 	// Constructors
-	
+
+	//private Board(){
+		
+
+	private Board(){
+		Random randomTiles = new Random();
+	//}
+//		this.colorList = new ArrayList<Color>();
+//		this.tileList = new ArrayList<Tile>();
+//		
+//		this.colorList.add(Color.BLUE);
+//		this.colorList.add(Color.RED);
+//		this.colorList.add(Color.YELLOW);
+//		this.colorList.add(Color.GREEN);
+
 	public Board(){
 
 		this.tileList = new ArrayList<Tile>();
@@ -56,7 +69,6 @@ public class Board{
 		ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);
 		//TODO Johan Testar
 		activePiece = new Piece(new Team("Team 1",Color.BLUE));
-		
 	}
 	
 	public Board(int numPiece){

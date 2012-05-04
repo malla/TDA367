@@ -1,13 +1,13 @@
 package cha.domain;
 
 public class Bet {
-	private int steps;
+	private Bet steps;
 	
-	public Bet(int steps){
+	public Bet(Bet steps){
 		this.steps = steps;
 	}
 	
-	public int getBetValue(){
+	public Bet getBetValue(){
 		return steps;
 	}
 	
