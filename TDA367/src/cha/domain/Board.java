@@ -39,21 +39,10 @@ public class Board{
 	
 	// Constructors
 
-	//private Board(){
+	
 		
 
 	private Board(){
-		Random randomTiles = new Random();
-	//}
-//		this.colorList = new ArrayList<Color>();
-//		this.tileList = new ArrayList<Tile>();
-//		
-//		this.colorList.add(Color.BLUE);
-//		this.colorList.add(Color.RED);
-//		this.colorList.add(Color.YELLOW);
-//		this.colorList.add(Color.GREEN);
-
-	public Board(){
 
 		this.tileList = new ArrayList<Tile>();
 		this.categoryList.add(Category.SAMECLASS);
