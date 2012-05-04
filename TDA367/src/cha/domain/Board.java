@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
+import cha.controller.ChallengeAccepted;
+import cha.controller.Event;
 import cha.domain.Categories.Category;
 
 public class Board{
@@ -51,6 +53,7 @@ public class Board{
 			tileList.add(new Tile(categoryList.get(rand.nextInt(categoryList.size()))));
 		
 		}
+		ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);
 		//TODO Johan Testar
 		activePiece = new Piece(new Team("Team 1",Color.BLUE));
 		
