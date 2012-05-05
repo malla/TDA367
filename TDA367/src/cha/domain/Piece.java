@@ -57,7 +57,7 @@ public class Piece {
 		return this.team;
 	}
 
-	public void bet(int newBet) {
+	public void setBet(int newBet) {
 		this.bet = newBet;
 	}
 

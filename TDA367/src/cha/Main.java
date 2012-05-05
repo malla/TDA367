@@ -31,11 +31,11 @@ public class Main {
             	System.out.println("Make bet: ");
             	String value = in.nextLine();
             	
-            	newBoard.getActivePiece().bet(Integer.parseInt(value));
+            	newBoard.getActivePiece().setBet(Integer.parseInt(value));
             	System.out.println(newBoard.getActivePiece());
             	
             } else if (line.equals("s")) {  // Start Mission  
-            	newBoard.startMission(null);
+            	newBoard.beginMission(null);
             	System.out.println(newBoard.getMission().toString());
                 
             } else {

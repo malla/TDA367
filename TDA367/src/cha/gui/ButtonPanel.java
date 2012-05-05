@@ -17,6 +17,7 @@ import cha.domain.Bet;
 @SuppressWarnings("serial")
 public class ButtonPanel extends JPanel implements IEventHandler, ActionListener {
 	
+	private static final String Bet = null;
 	private JButton startMissionButton;
 	private JButton cancelButton;
 	private JButton yesButton;
@@ -93,12 +94,12 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == startMissionButton){
-			ChallengeAccepted.getInstance().getBoard().startMission(Bet.getBetValue());
+			//ChallengeAccepted.getInstance().getBoard().startMission(Bet.getBetValue());
 			ChallengeAccepted.getInstance().publish(Event.StartMission, 
 					ChallengeAccepted.getInstance().getBoard().getMission());
 		}
 		else if(e.getSource() == cancelButton){
-			ChallengeAccepted.getInstance().getBoard().getActivePiece().bet(0);
+			ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(0);
 			ChallengeAccepted.getInstance().publish(Event.ShowBet, null);
 		}
 		else if(e.getSource() == doneButton){

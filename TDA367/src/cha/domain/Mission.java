@@ -24,7 +24,7 @@ public class Mission {
 	
 
 	public void startMission(Category c){
-		Deque.getCard(c, actualBet);
+		//Deque.getCards(c, actualBet);
 
 		// timer.start();
 	}
