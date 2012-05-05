@@ -149,8 +149,9 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			// ChallengeAccepted.getInstance().getBoard().getActivePiece().getPosition();
 			int pos = 0;
 			for (int i = pos + 1; i < pos + 8; i++) {
-				if (i > 43)
+				if (i > 43){
 					return;
+				}
 				tilePanels[i].betable();
 			}
 		} 

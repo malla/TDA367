@@ -7,6 +7,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import cha.controller.ChallengeAccepted;
@@ -62,6 +66,8 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 		
 		this.setBackground(Color.WHITE);
 	}
+    
+
 	@Override
 	public void action(Event e, Object o) {
 		if(e == Event.ShowBet){
@@ -70,7 +76,7 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 		}
 		else if(e == Event.MakeBet){
 			startMissionButton.setVisible(true);
-			cancelButton.setVisible(true);
+			//cancelButton.setVisible(true);
 		}
 		else if(e == Event.StartMission){
 			startMissionButton.setVisible(false);
@@ -90,6 +96,7 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 			String time = (String)o;
 			timer.setText(time);
 		}
+		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -103,9 +110,10 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 					ChallengeAccepted.getInstance().getBoard().getMission());
 		}
 		else if(e.getSource() == cancelButton){
-			ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(0);
+	 		ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(0);
 			ChallengeAccepted.getInstance().publish(Event.ShowBet, null);
 		}
+		
 		else if(e.getSource() == doneButton){
 			//TODO
 			ChallengeAccepted.getInstance().getBoard().getMission().timeOver();

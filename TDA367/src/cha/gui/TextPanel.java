@@ -64,7 +64,7 @@ public class TextPanel extends JPanel implements IEventHandler {
 			textArea.setText("Bet: " + bet);
 		}
 		else if(e == Event.ShowBet){
-			textArea.setText("");
+			textArea.setText("Make bet!");
 		}
 		else if(e == Event.MissionDone){
 			textArea.setText("Was the mission completed successfully?");
