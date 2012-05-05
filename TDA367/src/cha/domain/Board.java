@@ -18,6 +18,7 @@ public class Board{
 	 */
 	//TODO Check if this is a proper solution, 
 	// (use integer-constants with the enum names, and use Random to randomize a Category?)
+	// Är det inte det vi gör?
 	private ArrayList<Category> categoryList = new ArrayList<Category>();
 
 	
@@ -29,7 +30,7 @@ public class Board{
 	private ArrayList<Tile> tileList = new ArrayList<Tile>();
 	
 
-	private static Board instance;
+	private static Board instance = null;
 
 	public static Board getInstance() {
 		if (instance == null) {
@@ -84,9 +85,14 @@ public class Board{
 		return mission;
 	}
 	
+<<<<<<< HEAD
 	public void startMission(){
 		//TODO Fix Bet
 		mission = new Mission(getActivePiece(), new Bet(activePiece.getBetAmount()));
+=======
+	public void beginMission(Bet bet){
+		mission = new Mission(getActivePiece(), bet);
+>>>>>>> 9f2bd1c45dd452ddb4e981dda256868b22d4a68a
 		mission.startMission((getTile(getActivePiece().getPosition())).getCategory());
 	}
 	

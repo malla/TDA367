@@ -63,11 +63,19 @@ public class TilePanel extends JPanel {
 	}
 	
 	private void click(){
+<<<<<<< HEAD
 		int piecePos = ChallengeAccepted.getInstance().getBoard().getActivePiece().getPosition();
 		if(ChallengeAccepted.getInstance().getBoard().getActivePiece().getBetAmount() == 0)
 		{
+=======
+		//TODO Pos
+		int piecePos = 0;
+		if(ChallengeAccepted.getInstance().getBoard().getActivePiece().getBetAmount() == 0)
+		{	
+>>>>>>> 9f2bd1c45dd452ddb4e981dda256868b22d4a68a
 			if(position > piecePos && position < piecePos+8)
 			{
+				
 				bet(piecePos);
 			}
 		}
@@ -75,7 +83,7 @@ public class TilePanel extends JPanel {
 
 	public void bet(int piecePos) {
 		int bet = this.position - piecePos;
-		ChallengeAccepted.getInstance().getBoard().getActivePiece().bet(bet);
+		ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(bet);
 		ChallengeAccepted.getInstance().publish(Event.MakeBet, bet);
 	}
 }

@@ -14,7 +14,7 @@ import cha.gui.MainFrame;
 
 public class ChallengeAccepted{
 
-	private static ChallengeAccepted instance;
+	private static ChallengeAccepted CHinstance = null;
 //	private MainFrame mainFrame;
 	private static Board board;
 	private List<IEventHandler> handlers = new LinkedList<IEventHandler>();
@@ -25,10 +25,10 @@ public class ChallengeAccepted{
 	}
 	
 	public static ChallengeAccepted getInstance(){
-		if(instance == null){
-			instance = new ChallengeAccepted();
+		if(CHinstance == null){
+			CHinstance = new ChallengeAccepted();
 		}
-		return instance;
+		return CHinstance;
 	}
 	
 	public void createBoard(){
