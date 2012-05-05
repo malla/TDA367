@@ -3,7 +3,7 @@ package cha.domain;
 public class Bet {
 	private Bet steps;
 	
-	public Bet(int i){
+	public Bet(Bet i){
 		this.steps = i;
 	}
 	

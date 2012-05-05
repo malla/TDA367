@@ -6,12 +6,12 @@ import java.util.ArrayList;
 public class Piece {
 	private int position;
 	private int piece;
-	private Bet bet;
+	private int bet;
 	private Team team;
 	
 	public Piece(Team team){
 		this.team = team;
-		bet = null;
+		bet = 0;
 	}
 	
 	public void movePieceForward(int bet){
@@ -36,7 +36,7 @@ public class Piece {
 		return piece;
 	}
 	
-	public Bet getBetAmount(){
+	public int getBetAmount(){
 		return bet;
 	}
 	
@@ -55,6 +55,10 @@ public class Piece {
 
 	public Team getTeam() {
 		return this.team;
+	}
+
+	public void bet(int newBet) {
+		this.bet = newBet;
 	}
 
 	
