@@ -84,15 +84,10 @@ public class Board{
 	public Mission getMission(){
 		return mission;
 	}
-	
-<<<<<<< HEAD
+
 	public void startMission(){
 		//TODO Fix Bet
-		mission = new Mission(getActivePiece(), new Bet(activePiece.getBetAmount()));
-=======
-	public void beginMission(Bet bet){
-		mission = new Mission(getActivePiece(), bet);
->>>>>>> 9f2bd1c45dd452ddb4e981dda256868b22d4a68a
+		//mission = new Mission(getActivePiece(), new Bet(activePiece.getBetAmount()));
 		mission.startMission((getTile(getActivePiece().getPosition())).getCategory());
 	}
 	

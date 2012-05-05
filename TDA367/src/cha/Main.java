@@ -35,7 +35,7 @@ public class Main {
             	System.out.println(newBoard.getActivePiece());
             	
             } else if (line.equals("s")) {  // Start Mission  
-            	newBoard.beginMission(null);
+            	newBoard.startMission();
             	System.out.println(newBoard.getMission().toString());
                 
             } else {
