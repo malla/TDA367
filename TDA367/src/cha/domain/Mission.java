@@ -3,6 +3,8 @@ package cha.domain;
 import java.util.List;
 import java.util.ArrayList;
 
+import cha.controller.ChallengeAccepted;
+import cha.controller.Event;
 import cha.domain.Categories.Category;
 
 public class Mission {
@@ -24,7 +26,7 @@ public class Mission {
 	
 
 	public void startMission(Category c){
-		Deque.getCard(c, actualBet);
+		deque.getCards(c, actualBet.getBetValue());
 
 		// timer.start();
 	}
@@ -38,7 +40,14 @@ public class Mission {
 	}
 
 	public void missionDone(boolean completed){
-		//TODO
+		ChallengeAccepted.getInstance().publish(Event.OldPosition, piece.getPosition());
+		if(completed){
+			piece.movePieceForward(actualBet.getBetValue());
+		}
+		else{
+			piece.movePieceBackward();
+		}
+		ChallengeAccepted.getInstance().publish(Event.NewPosition, piece.getPosition());
 	}
 	
 	@Override

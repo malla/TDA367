@@ -80,7 +80,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	}
 
 	private void setTiles(ArrayList<Tile> tiles) {
-		TilePanel start = new StartTilePanel();
+		TilePanel start = new StartTilePanel(tiles.get(0).getCategory());
 		tilePanels[0] = start;
 		northPanel.add(start);
 		
@@ -98,7 +98,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			tilePanels[i] = p;
 			eastPanel.add(p);
 		}
-		for (int i = 21; i < 35; i++) {
+		for (int i = 35; i > 21; i--) {
 			TilePanel p = createTile(tiles.get(i), i);
 			tilePanels[i] = p;
 			southPanel.add(p);

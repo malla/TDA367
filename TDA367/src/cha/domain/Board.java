@@ -49,7 +49,7 @@ public class Board{
 		this.categoryList.add(Category.BACKWARDS);
 		
 		Random rand = new Random();
-		for(int i=0; i<48; i++){
+		for(int i=0; i<43; i++){
 			tileList.add(new Tile(categoryList.get(rand.nextInt(categoryList.size()))));
 		}
 		ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);
@@ -84,8 +84,9 @@ public class Board{
 		return mission;
 	}
 	
-	public void startMission(Bet bet){
-		mission = new Mission(getActivePiece(), bet);
+	public void startMission(){
+		//TODO Fix Bet
+		mission = new Mission(getActivePiece(), new Bet(activePiece.getBetAmount()));
 		mission.startMission((getTile(getActivePiece().getPosition())).getCategory());
 	}
 	

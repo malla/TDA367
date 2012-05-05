@@ -16,6 +16,7 @@ public class MainFrame extends JFrame{
 	public static void main(String[] args) {
 			ChallengeAccepted.getInstance();
 			new MainFrame();
+			ChallengeAccepted.getInstance().createBoard();
 			ChallengeAccepted.getInstance().publish(Event.ShowBet, 
 					ChallengeAccepted.getInstance().getBoard().getActivePiece());
 	}

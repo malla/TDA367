@@ -16,13 +16,11 @@ public class ChallengeAccepted{
 
 	private static ChallengeAccepted instance;
 //	private MainFrame mainFrame;
-	private Board board;
+	private static Board board;
 	private List<IEventHandler> handlers = new LinkedList<IEventHandler>();
 
 		
 	private ChallengeAccepted(){
-	
-		board = Board.getInstance();
 	//	mainFrame = new MainFrame();
 	}
 	
@@ -31,6 +29,10 @@ public class ChallengeAccepted{
 			instance = new ChallengeAccepted();
 		}
 		return instance;
+	}
+	
+	public void createBoard(){
+		board = Board.getInstance();
 	}
 	
 	public Board getBoard(){
