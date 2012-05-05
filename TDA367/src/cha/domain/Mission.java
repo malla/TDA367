@@ -26,11 +26,11 @@ public class Mission {
 	
 
 	public void startMission(Category c){
-<<<<<<< HEAD
-		deque.getCards(c, actualBet.getBetValue());
-=======
+		
+		//TODO
+		//deque.getCards(c, actualBet.getBetValue());
+
 		//Deque.getCards(c, actualBet);
->>>>>>> 9f2bd1c45dd452ddb4e981dda256868b22d4a68a
 
 		// timer.start();
 	}
