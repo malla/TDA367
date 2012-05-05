@@ -4,29 +4,14 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 public class Piece {
-	
-	private final static Color[] availableColors = new Color[]{
-		Color.red, Color.blue, Color.green, Color.magenta, 
-		Color.pink, Color.yellow, Color.orange, Color.cyan 
-	};
-	private static ArrayList<Color> availableColorsNextRound;
-	
-	
 	private int position;
 	private int piece;
-	private Bet bet;
-	private int player;
+	private int bet;
 	private Team team;
 	
 	public Piece(Team team){
 		this.team = team;
-		bet = null;
-		
-		//TODO Test
-		/*if (availableColorsNextRound.isEmpty()){
-			for (Color color : availableColors)
-				availableColorsNextRound.add(color);
-		}*/
+		bet = 0;
 	}
 	
 	public void movePieceForward(int bet){
@@ -40,16 +25,18 @@ public class Piece {
 		this.piece = piece;
 	}
 	
-	public void bet(int value){
-		
-		this.bet = new Bet(value);
-	}
+//	public void bet(int value){
+//		this.bet = new Bet(value);
+//	} 
+	
+	//  WHAT??
+	
 	
 	public int getPiece() {
 		return piece;
 	}
 	
-	public Bet getBetAmount(){
+	public int getBetAmount(){
 		return bet;
 	}
 	
@@ -61,20 +48,17 @@ public class Piece {
 		return this.position;
 	}
 	
-	public void setPlayer(int player){
-		this.player = player;
-	}
-	
-	public int getPlayer(){
-		return player;
-	}
 	@Override
 	public String toString() {
-		return "Piece [position=" + position + ", piece=" + piece + ", bet=" + bet + ", player=" + player + "]";
+		return "Piece [position=" + position + ", piece=" + piece + ", bet=" + bet + "]";
 	}
 
 	public Team getTeam() {
 		return this.team;
+	}
+
+	public void bet(int newBet) {
+		this.bet = newBet;
 	}
 
 	

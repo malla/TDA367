@@ -13,6 +13,7 @@ import cha.domain.Team;
 
 
 public class TestMission {
+
 	private static final Team Team = null;
 
 	@Test
@@ -23,5 +24,6 @@ public class TestMission {
 		Mission m = new Mission(p);
 		m.startMission( Category.BODYTOBODY, b);
 	}
+
 	
 }

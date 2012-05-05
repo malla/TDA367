@@ -12,6 +12,7 @@ package cha;
 
 import java.util.Scanner;
 
+import cha.domain.Bet;
 import cha.domain.Board;
 
 
@@ -20,7 +21,7 @@ public class Main {
 
     public void run() {
         // Monopoly mply = Monopoly.getInstance();
-    	Board newBoard = new Board();
+    	Board newBoard = Board.getInstance();
     	
         Scanner in = new Scanner(System.in);
         while (true) {
@@ -34,7 +35,7 @@ public class Main {
             	System.out.println(newBoard.getActivePiece());
             	
             } else if (line.equals("s")) {  // Start Mission  
-            	newBoard.startMission();
+            	newBoard.startMission(null);
             	System.out.println(newBoard.getMission().toString());
                 
             } else {

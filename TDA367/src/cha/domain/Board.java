@@ -1,10 +1,11 @@
-
-package cha.domain;
+ package cha.domain;
 import java.awt.Color;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+import cha.controller.ChallengeAccepted;
+import cha.controller.Event;
 import cha.domain.Categories.Category;
 
 public class Board{
@@ -15,7 +16,8 @@ public class Board{
 	/**
 	 * @uml.property  name="tileTypes" multiplicity="(0 -1)" dimension="1"
 	 */
-	//TODO Check if this is a proper solution
+	//TODO Check if this is a proper solution, 
+	// (use integer-constants with the enum names, and use Random to randomize a Category?)
 	private ArrayList<Category> categoryList = new ArrayList<Category>();
 
 	
@@ -24,7 +26,7 @@ public class Board{
 	 * @uml.associationEnd  multiplicity="(0 -1)"
 	 */
 	
-	private ArrayList<Tile> tileList;
+	private ArrayList<Tile> tileList = new ArrayList<Tile>();
 	
 
 	private static Board instance;
@@ -37,8 +39,8 @@ public class Board{
 	}
 	
 	// Constructors
-	
-	public Board(){
+
+	private Board(){
 
 		this.tileList = new ArrayList<Tile>();
 		this.categoryList.add(Category.SAMECLASS);
@@ -49,18 +51,18 @@ public class Board{
 		Random rand = new Random();
 		for(int i=0; i<48; i++){
 			tileList.add(new Tile(categoryList.get(rand.nextInt(categoryList.size()))));
-		
 		}
+		ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);
 		//TODO Johan Testar
-		activePiece = new Piece(new Team("Team 1",Color.BLUE));
-		
+		activePiece = new Piece(new Team("Team 1",Color.blue));
 	}
 	
 	public Board(int numPiece){
 		pieces = new Piece[8];
 
 		//TODO Johan Testar
-		activePiece = new Piece(new Team("Team 1",Color.BLUE));
+		activePiece = new Piece(new Team("Team 1",
+				Team.getAvailableColors().get(0)));
 	}
 	
 	// Methods
@@ -73,7 +75,6 @@ public class Board{
 		if(place < 0 || place > 48){
 			throw new IllegalArgumentException();
 		}
-		
 		else {   
 			return tileList.get(place);
 		}		
@@ -83,8 +84,8 @@ public class Board{
 		return mission;
 	}
 	
-	public void startMission(Bet b){
-		mission = new Mission(getActivePiece(), b);
+	public void startMission(Bet bet){
+		mission = new Mission(getActivePiece(), bet);
 		mission.startMission((getTile(getActivePiece().getPosition())).getCategory());
 	}
 	
