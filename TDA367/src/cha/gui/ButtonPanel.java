@@ -94,11 +94,11 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == startMissionButton){
-<<<<<<< HEAD
+
 			ChallengeAccepted.getInstance().getBoard().startMission();
-=======
+
 			//ChallengeAccepted.getInstance().getBoard().startMission(Bet.getBetValue());
->>>>>>> 9f2bd1c45dd452ddb4e981dda256868b22d4a68a
+
 			ChallengeAccepted.getInstance().publish(Event.StartMission, 
 					ChallengeAccepted.getInstance().getBoard().getMission());
 		}
