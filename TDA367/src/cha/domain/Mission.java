@@ -42,16 +42,32 @@ public class Mission {
 	public void timeOver(){
 		//TODO
 	}
+	
+	public void stopTimer(){
+		timer.stopTimer();
+		timeOver();
+	}
 
 	public void missionDone(boolean completed){
 		ChallengeAccepted.getInstance().publish(Event.OldPosition, piece.getPosition());
 		if(completed){
-			piece.movePieceForward(actualBet.getBetValue());
+			if(piece.getPosition() + actualBet.getBetValue() > 43){
+				piece.movePieceForward(43 - piece.getPosition());
+			}
+			else{
+				piece.movePieceForward(actualBet.getBetValue());
+			}
 		}
 		else{
-			piece.movePieceBackward();
+			if(piece.getPosition() < 2){
+				piece.setPosition(0);
+			}
+			else{
+				piece.movePieceBackward();
+			}
 		}
 		ChallengeAccepted.getInstance().publish(Event.NewPosition, piece.getPosition());
+		piece.setBet(0);
 	}
 	
 	@Override

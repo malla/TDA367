@@ -40,4 +40,8 @@ public class CountDown implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		ticktock();
 	}
+	
+	public void stopTimer(){
+		timer.stop();
+	}
 }

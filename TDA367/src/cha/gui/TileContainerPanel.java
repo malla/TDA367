@@ -145,9 +145,9 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			init(t);
 		}
 		else if (e == Event.ShowBet) {
-			// int pos =
-			// ChallengeAccepted.getInstance().getBoard().getActivePiece().getPosition();
-			int pos = 0;
+			int pos =
+					ChallengeAccepted.getInstance().getBoard().getActivePiece().getPosition();
+		//	int pos = 0;
 			for (int i = pos + 1; i < pos + 8; i++) {
 				if (i > 43){
 					return;
@@ -167,6 +167,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		else if(e == Event.NewPosition){
 			int pos = (Integer)o;
 			tilePanels[pos].addPiece(pieces.get(currentPiece));
+			tilePanels[pos].repaint();
 		}
 	}
 }

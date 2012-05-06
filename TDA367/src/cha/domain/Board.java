@@ -18,7 +18,7 @@ public class Board{
 	 */
 	//TODO Check if this is a proper solution, 
 	// (use integer-constants with the enum names, and use Random to randomize a Category?)
-	// Är det inte det vi gör?
+	// ï¿½r det inte det vi gï¿½r?
 	private ArrayList<Category> categoryList = new ArrayList<Category>();
 
 	
@@ -87,7 +87,7 @@ public class Board{
 
 	public void startMission(){
 		//TODO Fix Bet
-		//mission = new Mission(getActivePiece(), new Bet(activePiece.getBetAmount()));
+		mission = new Mission(getActivePiece(), new Bet(activePiece.getBetAmount()));
 		mission.startMission((getTile(getActivePiece().getPosition())).getCategory());
 	}
 	

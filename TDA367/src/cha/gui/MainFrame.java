@@ -27,11 +27,9 @@ public class MainFrame extends JFrame implements ActionListener{
 	 * 
 	 */
 	public static void main(String[] args) {
-			ChallengeAccepted.getInstance();
+
 			new MainFrame();
-			ChallengeAccepted.getInstance().createBoard();
-			ChallengeAccepted.getInstance().publish(Event.ShowBet, 
-					ChallengeAccepted.getInstance().getBoard().getActivePiece());
+			
 	}
 	
 	private TileContainerPanel tileContainerPanel;
@@ -39,7 +37,25 @@ public class MainFrame extends JFrame implements ActionListener{
 	private ButtonPanel buttonPanel;
 	
 	public MainFrame() {
-		initialize();
+	
+		JMenuBar menuBar = new JMenuBar();
+		JMenu menu = new JMenu("Meny");
+		newGame = new JMenuItem("Nytt spel");
+		endGame = new JMenuItem("Avsluta spel");
+		newGame.addActionListener(this);
+		endGame.addActionListener(this);
+		menu.add(newGame);
+		menu.add(endGame);
+		setJMenuBar(menuBar);
+		menuBar.add(menu);
+		
+		//this.getContentPane();
+		this.setTitle("Challange Accepted");
+		this.setResizable(false);
+		this.setBounds(100, 100, 710, 550);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+		this.setVisible(true);
+
 	}
 
 	/**
@@ -54,33 +70,27 @@ public class MainFrame extends JFrame implements ActionListener{
 		tileContainerPanel.add(textPanel, BorderLayout.CENTER);
 		this.add(tileContainerPanel, BorderLayout.CENTER);
 		
-		this.setTitle("Challange Accepted");
-		this.setResizable(false);
-		this.setBounds(100, 100, 710, 530);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
-		this.setVisible(true);
 		
-		JMenuBar menuBar = new JMenuBar();
-		JMenu menu = new JMenu("Meny");
-		newGame = new JMenuItem("Nytt spel");
-		endGame = new JMenuItem("Avsluta spel");
-		newGame.addActionListener(this);
-		endGame.addActionListener(this);
-		menu.add(newGame);
-		menu.add(endGame);
-		menuBar.add(menu);
-		setJMenuBar(menuBar);
-
+		
+		
+	}
+	
+	public void startGame(){
+		ChallengeAccepted.getInstance();
+		initialize();
+		ChallengeAccepted.getInstance().createBoard();
+		ChallengeAccepted.getInstance().publish(Event.ShowBet, 
+				ChallengeAccepted.getInstance().getBoard().getActivePiece());
 	}
     
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == newGame){
-			Main.run();
+			startGame();
 		}
 		else if(e.getSource() == endGame){
-			int reply = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill avsluta?", null, JOptionPane.YES_NO_OPTION);
+			int reply = JOptionPane.showConfirmDialog(null, "ï¿½r du sï¿½ker pï¿½ att du vill avsluta?", null, JOptionPane.YES_NO_OPTION);
 			if (reply == JOptionPane.YES_OPTION)
 		    {
 		      System.exit(0);
