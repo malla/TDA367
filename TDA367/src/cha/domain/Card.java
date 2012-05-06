@@ -12,10 +12,9 @@ import java.util.ArrayList;
 
 public class Card {
 
+	static String [] assignment;
 	private String temp;
 	private String temp1;
-	private String assignment;
-	private String solution;
 	private String a1;
 	private String a2;
 	private String a3;
@@ -59,7 +58,7 @@ public class Card {
 		}
 
 	public Card(String s){
-		a1=s;
+		assignment= new String[]{s};
 	}
 
 /*		public Card(Category c, Bet i){ //En konstruktor som returerar en lista med kort??
@@ -175,6 +174,6 @@ public class Card {
 
 	@Override
 	public String toString() {
-		return "Card [a1=" + a1 + "]";
+		return "Card [a1=" + assignment.toString() + "]";
 	}
 }

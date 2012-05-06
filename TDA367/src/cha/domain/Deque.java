@@ -16,7 +16,7 @@ public class Deque{
 	static String[][] categories = {{"Vilka är sporter utan boll?", "segling", "judo", "fotboll", "längdhopp", "hästpolo", "brännboll", "rodd", "basket", "golf", "höjdhopp", "tennis", "badminton", "rally", "speedway"},
 		{"Vilka är aktiva sexIT medlemmar?", "rawa", "fridén", "bella", "brook", "malla", "sasse", "anno", "e", "krobbe", "henkit", "wiiw", "kara", "bosch","jocke",}};
 
-<<<<<<< HEAD
+
 	public List<Card> getCards(Category c, int bet){
 		if (c==Category.BODYTOBODY){
 			return getBodyToBody(bet);
