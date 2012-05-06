@@ -31,8 +31,8 @@ public class ChallengeAccepted{
 		return CHinstance;
 	}
 	
-	public void createBoard(){
-		board = Board.getInstance();
+	public void createBoard(int numPiece){
+		board = Board.getInstance(numPiece);
 	}
 	
 	public Board getBoard(){
