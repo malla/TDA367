@@ -17,35 +17,47 @@ public class Deque{
 		{"Vilka är aktiva sexIT medlemmar?", "rawa", "fridén", "bella", "brook", "malla", "sasse", "anno", "e", "krobbe", "henkit", "wiiw", "kara", "bosch","jocke",}};
 
 
+	public Deque() {
+
+	}
+
 	public List<Card> getCards(Category c, int bet){
-		if (c==Category.BODYTOBODY){
+		if (c == Category.BODYTOBODY){
 			return getBodyToBody(bet);
-		}else{
+		}
+		else if (c == Category.BACKWARDS){
+			return getBackwards(bet);
+		}
+		else if (c==Category.SAMECLASS){
+			return getSameClass(bet);
+		}
+		else if (c==Category.WORDJUMBLE){
+			return getWordJumble(bet);
+		}
+		else{
 			throw new IllegalArgumentException("unknown category");
 		}
-		//Card.bodyToBody();
-		/*else if (c==Category.BACKWARDS)
-=======
-	static List<Card> getCard(Category c, Bet actualBet){
-		if (c==Category.BODYTOBODY)
-			Card.bodyToBody();
-		else if (c==Category.BACKWARDS)
->>>>>>> 13d03e9ee16d02b537a4b73144546b904c0ee886
-			backwards();
-		else if (c==Category.SAMECLASS)
-			sameClass();
-		else if (c==Category.WORDJUMBLE)
-			wordJumble();
-
-		List<Card> cards = new ArrayList<Card>();
-		for (int j=1; j==i; j++){
-			Card card1 = new Card(c, actualBet);
-			cards.add(card1);
-		}
-		return cards;*/
 	}
 
 	
+	private List<Card> getWordJumble(int bet) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	private List<Card> getSameClass(int bet) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	private List<Card> getBackwards(int bet) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	private List<Card> getBodyToBody(int bet) {
 		List<Card> allCards = new ArrayList<Card>();
 		for (int j = 0; j < bet; j++){
@@ -54,21 +66,16 @@ public class Deque{
 		return allCards;
 	}
 	
-		private Card getBodyCard() {
+	private Card getBodyCard() {
 			String temp= bodyParts[randomNumber(bodyParts.length)];
 			String temp1= bodyParts[randomNumber(bodyParts.length)];
 			String a1= temp + " mot " + temp1;
 			//Create and add the current body parts as a card
 			return new Card(a1);
 	}
-		private int randomNumber(int i){
-			Random randomGenerator = new Random();
-			return randomGenerator.nextInt(i);
-		}
-		public Deque(){
 
-		}
-
-
+	private int randomNumber(int i) {
+		Random randomGenerator = new Random();
+		return randomGenerator.nextInt(i);
 	}
-
+}

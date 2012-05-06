@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 public class GoalTilePanel extends TilePanel {
 	
 	public GoalTilePanel(){
-		this.position = 0;		
+		this.position = 43;		
 		setBackground(Color.WHITE);
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
