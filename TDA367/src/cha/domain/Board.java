@@ -10,7 +10,7 @@ import cha.domain.Categories.Category;
 
 public class Board{
 	private Piece[] pieces;
-	private Piece activePiece;
+	private int activePiece;
 	private Mission mission;
 	
 	/**
@@ -55,21 +55,35 @@ public class Board{
 		}
 		ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);
 		//TODO Johan Testar
-		activePiece = new Piece(new Team("Team 1",Color.blue));
+		//activePiece = new Piece(new Team("Team 1",Color.blue));
 	}
 	
 	public Board(int numPiece){
 		pieces = new Piece[8];
 
 		//TODO Johan Testar
-		activePiece = new Piece(new Team("Team 1",
-				Team.getAvailableColors().get(0)));
+		//activePiece = new Piece(new Team("Team 1",
+		//		Team.getAvailableColors().get(0)));
 	}
 	
 	// Methods
 	
 	public Piece getActivePiece(){
-		return activePiece;
+		return getPiece(activePiece);
+	}
+	
+	public void changeActivePiece(){
+		if(activePiece > (pieces.length-1)){
+			activePiece = 0;
+		}
+		else{
+			activePiece = activePiece+1;
+		}
+		
+	}
+	
+	public Piece getPiece(int place){
+		return pieces[place];
 	}
 	
 	public Tile getTile(int place){
@@ -87,8 +101,8 @@ public class Board{
 
 	public void startMission(){
 		//TODO Fix Bet
-		mission = new Mission(getActivePiece(), new Bet(activePiece.getBetAmount()));
-		mission.startMission((getTile(getActivePiece().getPosition())).getCategory());
+		mission = new Mission(getActivePiece(), new Bet(getPiece(activePiece).getBetAmount()));
+		mission.startMission((getTile(getActivePiece().getPosition())).getCategory(), Piece.getBetAmount());
 	}
 	
 }
