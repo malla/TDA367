@@ -79,10 +79,33 @@ public class MainFrame extends JFrame implements ActionListener{
 	public void startGame(){
 		ChallengeAccepted.getInstance();
 		initialize();
+		
 		String reply = JOptionPane.showInputDialog("Hur många lag vill ni vara?");
-				ChallengeAccepted.getInstance().createBoard(Integer.parseInt(reply));
+				
+				Boolean wrongNumber = true;
+				while(wrongNumber == true){
+						try {
+								int numPiece = Integer.parseInt(reply);
+								if(numPiece < 2 || numPiece > 8){
+									reply = JOptionPane.showInputDialog("Ange hur många lag ni vill vara som ett tal mellan 2-8:");
+								}
+								
+								else {
+								wrongNumber = false;
+								}
+								
+							}
+							catch (NumberFormatException nfe){
+								reply = JOptionPane.showInputDialog("Ange hur många lag ni vill vara som ett tal mellan 2-8:");
+						}
+				}
+			
+								
+		ChallengeAccepted.getInstance().createBoard(Integer.parseInt(reply));
+				
 		ChallengeAccepted.getInstance().publish(Event.ShowBet, 
 				ChallengeAccepted.getInstance().getBoard().getActivePiece());
+
 		
 	}
     
