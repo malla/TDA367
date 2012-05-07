@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import cha.Main;
 import cha.controller.ChallengeAccepted;
 import cha.controller.Event;
+import cha.domain.Board;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener{
@@ -78,9 +79,11 @@ public class MainFrame extends JFrame implements ActionListener{
 	public void startGame(){
 		ChallengeAccepted.getInstance();
 		initialize();
-		ChallengeAccepted.getInstance().createBoard();
+		String reply = JOptionPane.showInputDialog("Hur många lag vill ni vara?");
+				ChallengeAccepted.getInstance().createBoard(Integer.parseInt(reply));
 		ChallengeAccepted.getInstance().publish(Event.ShowBet, 
 				ChallengeAccepted.getInstance().getBoard().getActivePiece());
+		
 	}
     
 
@@ -90,7 +93,7 @@ public class MainFrame extends JFrame implements ActionListener{
 			startGame();
 		}
 		else if(e.getSource() == endGame){
-			int reply = JOptionPane.showConfirmDialog(null, "ï¿½r du sï¿½ker pï¿½ att du vill avsluta?", null, JOptionPane.YES_NO_OPTION);
+			int reply = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill avsluta?", null, JOptionPane.YES_NO_OPTION);
 			if (reply == JOptionPane.YES_OPTION)
 		    {
 		      System.exit(0);

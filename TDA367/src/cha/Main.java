@@ -21,7 +21,7 @@ public class Main {
 
     public static void run() {
       
-    	Board newBoard = Board.getInstance();
+    	Board newBoard = Board.getInstance(5);
     	
     }
 

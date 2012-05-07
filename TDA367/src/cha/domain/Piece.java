@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Piece {
 	private int position;
 	private int piece;
-	private int bet;
+	private static int bet;
 	private Team team;
 	
 	public Piece(Team team){
