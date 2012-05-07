@@ -31,10 +31,12 @@ public class Board{
 	
 
 	private static Board instance = null;
+	public static int numberOfPieces = 0;
 
 	public static Board getInstance(int numPiece) {
 		if (instance == null) {
 			instance = new Board(numPiece);
+			numberOfPieces = numPiece;
 		}
 		return instance;
 	}
@@ -100,7 +102,11 @@ public class Board{
 		//		Team.getAvailableColors().get(0)));
 	}
 	
-	// Methods
+	// Methods 
+	
+	public static int getNumberOfPieces(){
+		return numberOfPieces;
+	}
 	
 	public Piece getActivePiece(){
 		return getPiece(activePiece);

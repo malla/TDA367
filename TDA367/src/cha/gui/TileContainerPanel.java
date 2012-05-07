@@ -12,13 +12,16 @@ import javax.swing.JPanel;
 import cha.controller.ChallengeAccepted;
 import cha.controller.Event;
 import cha.controller.IEventHandler;
+import cha.domain.Board;
 import cha.domain.Categories.Category;
+import cha.domain.Piece;
 import cha.domain.Tile;
 
 @SuppressWarnings("serial")
 public class TileContainerPanel extends JPanel implements IEventHandler {
 
 	private TilePanel[] tilePanels = new TilePanel[44];
+	private int numberOfPieces;
 
 	private JPanel northPanel = new JPanel();
 	private JPanel eastPanel = new JPanel();
@@ -35,12 +38,12 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		ChallengeAccepted.getInstance().register(this);
 	}
 
-	private void init(ArrayList<Tile> t) {
-		colorList = new ArrayList<Color>();
-		colorList.add(Color.BLUE);
-		colorList.add(Color.GREEN);
-		colorList.add(Color.YELLOW);
-		colorList.add(Color.RED);
+	public void init(ArrayList<Tile> t) {
+//		colorList = new ArrayList<Color>();
+//		colorList.add(Color.BLUE);
+//		colorList.add(Color.GREEN);
+//		colorList.add(Color.YELLOW);
+//		colorList.add(Color.RED);
 
 		eastPanel.setPreferredSize(new Dimension(50, 0));
 		FlowLayout flowLayout_1 = (FlowLayout) eastPanel.getLayout();
@@ -68,14 +71,21 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 
 		setTiles(t);
 		
-		pieces = new ArrayList();
-		pieces.add(new PiecePanel(Color.BLUE));
-		pieces.add(new PiecePanel(Color.GREEN));
-		pieces.add(new PiecePanel(Color.YELLOW));
+		pieces = new ArrayList<PiecePanel>();
+	 
+		numberOfPieces = Board.getNumberOfPieces();
+
+		for(int i = 0 ; i < numberOfPieces; i++){
+			pieces.add(new PiecePanel(ChallengeAccepted.getInstance().getBoard().getPiece(i).getTeam().getColor()));
+			
+		}
+		
 		
 		for(PiecePanel piece : pieces){
 			tilePanels[0].addPiece(piece);
 		}
+		
+
 		currentPiece = 0;
 	}
 

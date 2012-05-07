@@ -10,11 +10,13 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import cha.Main;
 import cha.controller.ChallengeAccepted;
 import cha.controller.Event;
 import cha.domain.Board;
+import cha.domain.Tile;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener{
@@ -36,6 +38,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	private TileContainerPanel tileContainerPanel;
 	private TextPanel textPanel;
 	private ButtonPanel buttonPanel;
+	private int numPiece;
 	
 	public MainFrame() {
 	
@@ -72,10 +75,9 @@ public class MainFrame extends JFrame implements ActionListener{
 		this.add(tileContainerPanel, BorderLayout.CENTER);
 		
 		
-		
-		
 	}
 	
+		
 	public void startGame(){
 		ChallengeAccepted.getInstance();
 		initialize();
@@ -85,7 +87,7 @@ public class MainFrame extends JFrame implements ActionListener{
 				Boolean wrongNumber = true;
 				while(wrongNumber == true){
 						try {
-								int numPiece = Integer.parseInt(reply);
+								numPiece = Integer.parseInt(reply);
 								if(numPiece < 2 || numPiece > 8){
 									reply = JOptionPane.showInputDialog("Ange hur många lag ni vill vara som ett tal mellan 2-8:");
 								}
@@ -105,7 +107,7 @@ public class MainFrame extends JFrame implements ActionListener{
 				
 		ChallengeAccepted.getInstance().publish(Event.ShowBet, 
 				ChallengeAccepted.getInstance().getBoard().getActivePiece());
-
+		
 		
 	}
     

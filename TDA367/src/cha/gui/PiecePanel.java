@@ -29,5 +29,6 @@ public class PiecePanel extends JPanel {
 		this.setMinimumSize(size);
 		this.setPreferredSize(size);
 		this.setMaximumSize(size);
+		this.setVisible(true);
 	}
 }
