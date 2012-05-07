@@ -73,7 +73,11 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		
 		pieces = new ArrayList<PiecePanel>();
 	 
+		System.out.print(Board.getNumberOfPieces()); 
 		numberOfPieces = Board.getNumberOfPieces();
+				//Board.getNumberOfPieces();
+		System.out.print(numberOfPieces);
+		
 
 		for(int i = 0 ; i < numberOfPieces; i++){
 			pieces.add(new PiecePanel(ChallengeAccepted.getInstance().getBoard().getPiece(i).getTeam().getColor()));

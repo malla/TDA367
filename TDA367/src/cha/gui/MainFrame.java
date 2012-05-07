@@ -20,7 +20,7 @@ import cha.domain.Tile;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener{
-	
+	private ArrayList<Tile> tileList = new ArrayList<Tile>();
 	private JMenuItem newGame;
 	private JMenuItem endGame;
 	
@@ -104,9 +104,14 @@ public class MainFrame extends JFrame implements ActionListener{
 			
 								
 		ChallengeAccepted.getInstance().createBoard(Integer.parseInt(reply));
+		
+		tileList = Board.getTileList();
+
+		ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);
 				
 		ChallengeAccepted.getInstance().publish(Event.ShowBet, 
 				ChallengeAccepted.getInstance().getBoard().getActivePiece());
+		
 		
 		
 	}
