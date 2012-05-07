@@ -1,7 +1,9 @@
 //Måste jag göra om mina arrayer till listor för tt kunna ta bort objekt på specifika index?
 package cha.domain;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
@@ -9,6 +11,7 @@ import cha.domain.Categories.Category;
 import java.util.List;
 
 import java.util.ArrayList;
+
 
 public class Card {
 
@@ -30,7 +33,7 @@ public class Card {
 	private String a13;
 	private String a14;
 	private String b;
-
+	/*
 	public Card(){
 		String a1=this.a1;
 		String a2=this.a2;
@@ -56,9 +59,12 @@ public class Card {
 		String a6=s6;
 		String a7=s7;
 		}
-
-	public Card(String s){
-		assignment= new String[]{s};
+*/
+	
+	
+	
+	public Card(String[] s){
+		assignment= s;
 	}
 
 /*		public Card(Category c, Bet i){ //En konstruktor som returerar en lista med kort??
@@ -72,6 +78,7 @@ public class Card {
 			wordJumble();	
 	}*/
 
+	/*
 	public void wordJumble(){
 		List<Card> allCards = new ArrayList<Card>();
 		int i=randomNumber(Deque.words.length);
@@ -97,7 +104,10 @@ public class Card {
 		Card card2 = new Card(a2);
 		allCards.add(card2);
 	}
-	//Hur sätter jag 14 ord på smidigt sätt?
+	
+	*/
+	
+/*
 	public void backwards(){ 
 		List<Card> allCards = new ArrayList<Card>();
 		spellBackwards(a1, a8);
@@ -127,7 +137,9 @@ public class Card {
 		}
 		s= backwards.toString();
 	}
+*/	
 	
+	/*	
 	public void bodyToBody(int i){
 		List<Card> allCards = new ArrayList<Card>();
 		for (int j=1; j==i; j++){
@@ -139,7 +151,8 @@ public class Card {
 			allCards.add(card1);
 		}
 	}
-
+*/
+/*	
 	public void sameClass() {//Vore bra att lägga till ett tredje kort med enbart alla rätt svar.
 		List<Card> allCards = new ArrayList<Card>();
 		int i = randomNumber(Deque.categories.length);
@@ -166,7 +179,8 @@ public class Card {
 		//Add 1st card again so players can see.
 		allCards.add(card1);
 	}
-
+*/
+	
 	public int randomNumber(int i){
 		Random randomGenerator = new Random();
 		return randomGenerator.nextInt(i);
@@ -174,6 +188,7 @@ public class Card {
 
 	@Override
 	public String toString() {
-		return "Card [a1=" + assignment.toString() + "]";
+		String asString = Arrays.toString(assignment); 
+		return "Card [a1=" + asString + "]";
 	}
 }
