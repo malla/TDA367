@@ -103,7 +103,9 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == startMissionButton){
-
+			for (TilePanel panel : TileContainerPanel.getTilePanels()) {
+				panel.notBetable();
+			}
 			ChallengeAccepted.getInstance().getBoard().startMission();
 
 			//ChallengeAccepted.getInstance().getBoard().startMission(Bet.getBetValue());
@@ -112,8 +114,8 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 					ChallengeAccepted.getInstance().getBoard().getMission());
 		}
 		else if(e.getSource() == cancelButton){
-	 		ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(0);
-			ChallengeAccepted.getInstance().publish(Event.ShowBet, null);
+//	 		ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(0);
+//			ChallengeAccepted.getInstance().publish(Event.ShowBet, null);
 		}
 		
 		else if(e.getSource() == doneButton){

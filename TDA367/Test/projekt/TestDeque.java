@@ -1,12 +1,8 @@
 package projekt;
 
 import static org.junit.Assert.*;
-
 import java.util.List;
-
 import org.junit.Test;
-
-import cha.domain.Bet;
 import cha.domain.Card;
 import cha.domain.Categories.Category;
 import cha.domain.Deque;
@@ -28,7 +24,7 @@ public class TestDeque {
 		if (testedCategory==Category.BACKWARDS)
 			assertTrue(cardAmount==8);
 		for(int j=0;j<cardAmount;j++){
-		System.out.println(cards.get(j));
+			System.out.println(cards.get(j));
 		}
 	}
 
