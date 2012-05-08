@@ -27,15 +27,21 @@ public class Board{
 	 * @uml.associationEnd  multiplicity="(0 -1)"
 	 */
 	
-	private ArrayList<Tile> tileList = new ArrayList<Tile>();
+	private static ArrayList<Tile> tileList = new ArrayList<Tile>();
 	
 
 	private static Board instance = null;
+	public static int numberOfPieces = 0;
 
 	public static Board getInstance(int numPiece) {
 		if (instance == null) {
 			instance = new Board(numPiece);
+			numberOfPieces = numPiece;
+			
 		}
+		System.out.print(numberOfPieces);
+		System.out.print(numPiece);
+
 		return instance;
 	}
 	
@@ -92,15 +98,18 @@ public class Board{
 		for(int i=0; i<43; i++){
 			tileList.add(new Tile(categoryList.get(rand.nextInt(categoryList.size()))));
 		}
-		ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);
-		
+		//ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);		
 		
 		//TODO Johan Testar
 		//activePiece = new Piece(new Team("Team 1",
 		//		Team.getAvailableColors().get(0)));
 	}
 	
-	// Methods
+	// Methods 
+	
+	public static int getNumberOfPieces(){
+		return numberOfPieces;
+	}
 	
 	public Piece getActivePiece(){
 		return getPiece(activePiece);
@@ -142,4 +151,8 @@ public class Board{
 		mission.startMission((getTile(getActivePiece().getPosition())).getCategory(), getPiece(activePiece).getBetAmount());
 	}
 	
+	public static ArrayList<Tile> getTileList(){
+		return tileList;
+		
+	}
 }

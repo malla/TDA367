@@ -57,7 +57,6 @@ public class Piece {
 	public void setBet(int newBet) {
 		this.bet = newBet;
 	}
-
 	
 
 }
