@@ -9,65 +9,57 @@ import cha.controller.Event;
 import cha.domain.Categories.Category;
 
 public class Board{
+	
+	/**
+	 * Array with all pieces.
+	 */
 	private static Piece[] pieces;
+	public int numberOfPieces = 0;
+	
+	/**
+	 * Index of the active piece.
+	 */
 	private static int activePiece;
-	private Mission mission;
+	
+	/**
+	 * The current mission
+	 */
+	private Mission currentMission;
+
 	
 	/**
 	 * @uml.property  name="tileTypes" multiplicity="(0 -1)" dimension="1"
 	 */
+	// What is this?
+	
 	//TODO Check if this is a proper solution, 
 	// (use integer-constants with the enum names, and use Random to randomize a Category?)
 	// �r det inte det vi g�r?
 	private ArrayList<Category> categoryList = new ArrayList<Category>();
 	private ArrayList<Color> colorList = new ArrayList<Color>();
-	
-	/**
-	 * @uml.property  name="boardArray"
-	 * @uml.associationEnd  multiplicity="(0 -1)"
-	 */
-	
-	private static ArrayList<Tile> tileList = new ArrayList<Tile>();
-	
+	private ArrayList<Tile> tileList = new ArrayList<Tile>();
 
+	private Random random = new Random();
+	
 	private static Board instance = null;
-	public static int numberOfPieces = 0;
 
-	public static Board getInstance(int numPiece) {
+	public static Board getInstance() {
 		if (instance == null) {
-			instance = new Board(numPiece);
-			numberOfPieces = numPiece;
-			
+			instance = new Board();
 		}
-		System.out.print(numberOfPieces);
-		System.out.print(numPiece);
-
 		return instance;
 	}
 	
-	// Constructors
-
+	// Constructor
+	
 	private Board(){
-
-		this.tileList = new ArrayList<Tile>();
+		
+		//TODO Check if proper method and if we should place it somewhere else
 		this.categoryList.add(Category.SAMECLASS);
 		this.categoryList.add(Category.BODYTOBODY);
 		this.categoryList.add(Category.WORDJUMBLE);
 		this.categoryList.add(Category.BACKWARDS);
 		
-		Random rand = new Random();
-		for(int i=0; i<43; i++){
-			tileList.add(new Tile(categoryList.get(rand.nextInt(categoryList.size()))));
-		}
-		ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);
-		//TODO Johan Testar
-		//activePiece = new Piece(new Team("Team 1",Color.blue));
-	}
-	
-	private Board(int numPiece){
-		pieces = new Piece[numPiece];
-		Random rand = new Random();
-		this.colorList = new ArrayList<Color>();
 		this.colorList.add(Color.WHITE);
 		this.colorList.add(Color.GREEN);
 		this.colorList.add(Color.YELLOW);
@@ -76,57 +68,64 @@ public class Board{
 		this.colorList.add(Color.BLUE);
 		this.colorList.add(Color.ORANGE);
 		this.colorList.add(Color.CYAN);
+		
+		
+		// Add all tiles
+		for(int i=0; i<43; i++){
+			tileList.add(new Tile(categoryList.get(random.nextInt(categoryList.size()))));
+		}
+//		ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);
+	}
+	
+	public void init(int numPiece){
+		numberOfPieces = numPiece;
+		System.out.print(numberOfPieces);
+
+		// Generate teams
+		pieces = new Piece[numPiece];
 		for(int i = 0; i < numPiece; i++){
-			String teamName = "Team " + i+1 ;
-			int randIndex = rand.nextInt(colorList.size());
-			while(colorList.get(randIndex) == null){
-				randIndex = rand.nextInt(colorList.size());
-			}
-			Color c = colorList.get(randIndex);
-			colorList.remove(randIndex);
-			Team team = new Team(teamName, c);
+			String teamName = "Team " + i+1;
+			Color teamColor = colorList.remove(
+					random.nextInt(colorList.size()));
+			Team team = new Team(teamName, teamColor);
 			pieces[i] = new Piece(team);
 		}
-		//TODO Check if proper method and if we should place it somewhere else
-		this.tileList = new ArrayList<Tile>();
-		this.categoryList.add(Category.SAMECLASS);
-		this.categoryList.add(Category.BODYTOBODY);
-		this.categoryList.add(Category.WORDJUMBLE);
-		this.categoryList.add(Category.BACKWARDS);
-		
-		
-		for(int i=0; i<43; i++){
-			tileList.add(new Tile(categoryList.get(rand.nextInt(categoryList.size()))));
-		}
-		//ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);		
-		
-		//TODO Johan Testar
-		//activePiece = new Piece(new Team("Team 1",
-		//		Team.getAvailableColors().get(0)));
+		activePiece = 0;
 	}
 	
 	// Methods 
 	
-	public static int getNumberOfPieces(){
+	public int getNumberOfPieces(){
+		if (pieces == null){
+			throw new BoardNotInitializedException();
+		}
 		return numberOfPieces;
 	}
 	
 	public Piece getActivePiece(){
+		if (pieces == null){
+			throw new BoardNotInitializedException();
+		}
 		return getPiece(activePiece);
+	}
+
+	public Piece getPiece(int place){
+		if (pieces == null){
+			throw new BoardNotInitializedException();
+		}
+		return pieces[place];
 	}
 	
 	public static void changeActivePiece(){
+		if (pieces == null){
+			throw new BoardNotInitializedException();
+		}
 		if(activePiece > (pieces.length-1)){
 			activePiece = 0;
 		}
 		else{
 			activePiece = activePiece+1;
 		}
-		
-	}
-	
-	public Piece getPiece(int place){
-		return pieces[place];
 	}
 	
 	public Tile getTile(int place){
@@ -139,19 +138,20 @@ public class Board{
 	}
 	
 	public Mission getMission(){
-		
-		return mission;
+		return currentMission;
 	}
 
 	public void startMission(){
+		if (pieces == null){
+			throw new BoardNotInitializedException();
+		}
 		//TODO Fix Bet
+		currentMission = new Mission(getActivePiece(), new Bet(getPiece(activePiece).getBetAmount()));
 		
-		mission = new Mission(getActivePiece(), new Bet(getPiece(activePiece).getBetAmount()));
-		
-		mission.startMission((getTile(getActivePiece().getPosition())).getCategory(), getPiece(activePiece).getBetAmount());
+		currentMission.startMission((getTile(getActivePiece().getPosition())).getCategory(), getPiece(activePiece).getBetAmount());
 	}
 	
-	public static ArrayList<Tile> getTileList(){
+	public ArrayList<Tile> getTileList(){
 		return tileList;
 		
 	}

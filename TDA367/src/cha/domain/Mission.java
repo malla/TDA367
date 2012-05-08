@@ -67,7 +67,8 @@ public class Mission {
 			ChallengeAccepted.getInstance().publish(Event.OldPosition, piece.getPosition());
 			if(completed){
 				if(piece.getPosition() + actualBet.getBetValue() > 43){
-					piece.movePieceForward(43 - piece.getPosition());
+					piece.setPosition(43);
+					ChallengeAccepted.getInstance().publish(Event.GameOver, piece.getTeam());
 				}
 				else{
 					piece.movePieceForward(actualBet.getBetValue());
