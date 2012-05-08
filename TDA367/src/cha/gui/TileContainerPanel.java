@@ -13,6 +13,7 @@ import cha.controller.ChallengeAccepted;
 import cha.controller.Event;
 import cha.controller.IEventHandler;
 import cha.domain.Categories.Category;
+import cha.domain.Tile;
 
 @SuppressWarnings("serial")
 public class TileContainerPanel extends JPanel implements IEventHandler {
@@ -34,7 +35,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		ChallengeAccepted.getInstance().register(this);
 	}
 
-	private void init(ArrayList<Category> c) {
+	private void init(ArrayList<Tile> t) {
 		colorList = new ArrayList<Color>();
 		colorList.add(Color.BLUE);
 		colorList.add(Color.GREEN);
@@ -65,7 +66,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		this.add(southPanel, BorderLayout.SOUTH);
 		this.add(westPanel, BorderLayout.WEST);
 
-		setTiles(c);
+		setTiles(t);
 		
 		pieces = new ArrayList();
 		pieces.add(new PiecePanel(Color.BLUE));
@@ -78,8 +79,8 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		currentPiece = 0;
 	}
 
-	private void setTiles(ArrayList<Category> categories) {
-		TilePanel start = new StartTilePanel();
+	private void setTiles(ArrayList<Tile> tiles) {
+		TilePanel start = new StartTilePanel(tiles.get(0).getCategory());
 		tilePanels[0] = start;
 		northPanel.add(start);
 		
@@ -88,30 +89,31 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		westPanel.add(goal);
 		
 		for (int i = 1; i < 14; i++) {
-			TilePanel p = createTile(categories.get(i), i);
+			TilePanel p = createTile(tiles.get(i), i);
 			tilePanels[i] = p;
 			northPanel.add(p);
 		}
 		for (int i = 14; i < 22; i++) {
-			TilePanel p = createTile(categories.get(i), i);
+			TilePanel p = createTile(tiles.get(i), i);
 			tilePanels[i] = p;
 			eastPanel.add(p);
 		}
-		for (int i = 21; i < 35; i++) {
-			TilePanel p = createTile(categories.get(i), i);
+		for (int i = 35; i > 21; i--) {
+			TilePanel p = createTile(tiles.get(i), i);
 			tilePanels[i] = p;
 			southPanel.add(p);
 		}		
 
 		for (int i = 42; i > 35; i--) {
-			TilePanel p = createTile(categories.get(i), i);
+			TilePanel p = createTile(tiles.get(i), i);
 			tilePanels[i] = p;
 			westPanel.add(p);
 		}
 	}
 	
-	private TilePanel createTile(Category c, int i){
+	private TilePanel createTile(Tile t, int i){
 		TilePanel tile;
+		Category c = t.getCategory();
 		if(c == Category.BACKWARDS){
 			tile = new NormalTilePanel(Color.RED, i);
 		}
@@ -139,16 +141,17 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 
 	public void action(Event e, Object o) {
 		if(e == Event.CreateBoard){
-			ArrayList<Category> c = (ArrayList<Category>)o;
-			init(c);
+			ArrayList<Tile> t = (ArrayList<Tile>)o;
+			init(t);
 		}
 		else if (e == Event.ShowBet) {
-			// int pos =
-			// ChallengeAccepted.getInstance().getBoard().getActivePiece().getPosition();
-			int pos = 0;
+			int pos =
+					ChallengeAccepted.getInstance().getBoard().getActivePiece().getPosition();
+		//	int pos = 0;
 			for (int i = pos + 1; i < pos + 8; i++) {
-				if (i > 43)
+				if (i > 43){
 					return;
+				}
 				tilePanels[i].betable();
 			}
 		} 
@@ -164,6 +167,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		else if(e == Event.NewPosition){
 			int pos = (Integer)o;
 			tilePanels[pos].addPiece(pieces.get(currentPiece));
+			tilePanels[pos].repaint();
 		}
 	}
 }

@@ -14,23 +14,25 @@ import cha.gui.MainFrame;
 
 public class ChallengeAccepted{
 
-	private static ChallengeAccepted instance;
+	private static ChallengeAccepted CHinstance = null;
 //	private MainFrame mainFrame;
-	private Board board;
+	private static Board board;
 	private List<IEventHandler> handlers = new LinkedList<IEventHandler>();
 
 		
 	private ChallengeAccepted(){
-	
-		board = Board.getInstance();
 	//	mainFrame = new MainFrame();
 	}
 	
 	public static ChallengeAccepted getInstance(){
-		if(instance == null){
-			instance = new ChallengeAccepted();
+		if(CHinstance == null){
+			CHinstance = new ChallengeAccepted();
 		}
-		return instance;
+		return CHinstance;
+	}
+	
+	public void createBoard(int numPiece){
+		board = Board.getInstance(numPiece);
 	}
 	
 	public Board getBoard(){

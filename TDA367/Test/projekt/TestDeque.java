@@ -16,12 +16,20 @@ public class TestDeque {
 	@Test
 	public void testGetCards() {
 		Deque deque = new Deque();
-		    List<Card> cards = deque.getCards(Category.BODYTOBODY, 4);
-            assertTrue(cards.size()==4);
-		    Card card1=cards.get(0);
-		    System.out.println(card1);
-		    
-		
+		Category testedCategory = Category.SAMECLASS;
+		List<Card> cards = deque.getCards(testedCategory, 4);
+		int cardAmount = cards.size();
+		if (testedCategory==Category.BACKWARDS)
+			assertTrue(cardAmount==8);
+		if (testedCategory==Category.BODYTOBODY)
+			assertTrue(cardAmount==4);
+		if (testedCategory==Category.BACKWARDS)
+			assertTrue(cardAmount==8);
+		if (testedCategory==Category.BACKWARDS)
+			assertTrue(cardAmount==8);
+		for(int j=0;j<cardAmount;j++){
+		System.out.println(cards.get(j));
+		}
 	}
 
 }

@@ -19,13 +19,13 @@ public class Team {
 	
 	public Team(String name, Color color) {
 		this.name = name;
-		if (availableColors.isEmpty()){
-			for (Color localColor : colors)
-				availableColors.add(localColor);
-		}
-		if (!availableColors.contains(color)){
-			throw new IllegalArgumentException();
-		}
+//		if (availableColors.isEmpty()){
+//			for (Color localColor : colors)
+//				availableColors.add(localColor);
+//		}
+//		if (!availableColors.contains(color)){
+//			throw new IllegalArgumentException();
+//		}
 		this.color = color;
 	}
 	

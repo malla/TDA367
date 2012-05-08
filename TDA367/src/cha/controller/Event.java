@@ -12,5 +12,7 @@ public enum Event {
 	NextPlayer,
 	OldPosition,
 	NewPosition,
-	CreateBoard
+	CreateBoard,
+	NewGame,
+	EndGame
 }
