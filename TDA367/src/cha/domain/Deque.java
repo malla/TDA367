@@ -1,4 +1,8 @@
 //fnns det et lättare/snabbare sätt att få in alla ord i en array el dyl?
+//i konstruktorn, kommer jag att behöva lägga in en String[]???
+//Kan fixa start gerjejen och kolla-är någon vunnit.
+//fixa currentCard och get NextCard i startmission. GJORT. Om korten är slut - ....?
+//i textpanel 
 package cha.domain;
 import cha.domain.Categories.Category;
 

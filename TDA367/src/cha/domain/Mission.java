@@ -14,6 +14,7 @@ public class Mission {
 	private final Piece piece;
 	private final Deque deque = new Deque();
 	private Bet actualBet;
+	private Card currentCard;
 
 
 	public Mission(Piece piece, Bet b){
@@ -25,10 +26,15 @@ public class Mission {
 
 	public void startMission(Category c, int bet){
 		cards = deque.getCards(c, bet);
-
+		nextCurrentCard();
 		//	public void startMission(Category c){
 		//		Deque.getCard(c, actualBet);
 
+	}
+	
+	public void nextCurrentCard(){
+		currentCard=cards.get(0);
+		cards.remove(0);
 	}
 		/*=======
 	public void startMission(Category c){
