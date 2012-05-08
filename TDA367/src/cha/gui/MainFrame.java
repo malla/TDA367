@@ -82,7 +82,8 @@ public class MainFrame extends JFrame implements ActionListener{
 		ChallengeAccepted.getInstance();
 		initialize();
 		
-		String reply = JOptionPane.showInputDialog("Hur många lag vill ni vara?");
+		//TODO Exit the dialog
+		String reply = JOptionPane.showInputDialog("Hur många lag vill ni vara?", EXIT_ON_CLOSE);
 				
 				Boolean wrongNumber = true;
 				while(wrongNumber == true){
@@ -114,7 +115,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		
 		
 		
-	}
+	} 
     
 
 	@Override

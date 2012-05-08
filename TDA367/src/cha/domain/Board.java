@@ -9,8 +9,8 @@ import cha.controller.Event;
 import cha.domain.Categories.Category;
 
 public class Board{
-	private Piece[] pieces;
-	private int activePiece;
+	private static Piece[] pieces;
+	private static int activePiece;
 	private Mission mission;
 	
 	/**
@@ -115,7 +115,7 @@ public class Board{
 		return getPiece(activePiece);
 	}
 	
-	public void changeActivePiece(){
+	public static void changeActivePiece(){
 		if(activePiece > (pieces.length-1)){
 			activePiece = 0;
 		}
