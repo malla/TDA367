@@ -54,7 +54,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		menuBar.add(menu);
 		
 		//this.getContentPane();
-		this.setTitle("Challange Accepted");
+		this.setTitle("Challenge Accepted");
 		this.setResizable(false);
 		this.setBounds(100, 100, 710, 550);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		

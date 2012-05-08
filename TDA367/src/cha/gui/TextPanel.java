@@ -58,6 +58,49 @@ public class TextPanel extends JPanel implements IEventHandler {
 	public void action(Event e, Object o) {
 		if(e == Event.StartMission){
 			//cardText = ChallengeAccepted.getInstance().getBoard().getMission()
+		
+			/*import java.awt.BorderLayout;
+			import java.awt.Color;
+			import java.awt.Dimension;
+
+			import javax.swing.BorderFactory;
+			import javax.swing.JFrame;
+			import javax.swing.JPanel;
+
+
+			public class Try1 extends JFrame{
+				public static void main(String[] args) {
+
+					new Try1();
+				}
+
+				public Try1(){
+					JPanel panel0 = new JPanel();
+					this.add(panel0);
+					JPanel cardPanel = new JPanel();
+					cardPanel.setPreferredSize(new Dimension(400, 240));
+					cardPanel.setBackground(Color.CYAN);
+					cardPanel.setForeground(Color.CYAN);
+					cardPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+					panel0.add(cardPanel);
+					
+					JPanel header = new JPanel();
+					header.setPreferredSize(new Dimension(80, 240));
+					header.setBackground(Color.WHITE);
+					header.setForeground(Color.WHITE);
+					//header.setLayout(BorderLayout.CENTER);
+					cardPanel.add(header, BorderLayout.CENTER); //no work
+					header.setAlignmentX(LEFT_ALIGNMENT); //now work
+
+					this.setTitle("Im trying");
+					this.setResizable(false);
+					this.setBounds(100, 100, 710, 550);
+					this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+					this.setVisible(true);
+				}
+			}
+			*/
+		
 		}
 		else if(e == Event.MakeBet){
 			int bet = (Integer)o;
