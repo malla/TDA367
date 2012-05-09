@@ -14,5 +14,7 @@ public enum Event {
 	NewPosition,
 	CreateBoard,
 	NewGame,
-	GameOver
+	GameOver,
+	ShowGameRules,
+	ShowStartPanel
 }

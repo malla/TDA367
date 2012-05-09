@@ -50,6 +50,11 @@ public class Board{
 		return instance;
 	}
 	
+	public static void createBoard(int numPiece){
+		Board board = Board.getInstance();
+		board.init(numPiece);
+	}
+	
 	// Constructor
 	
 	private Board(){
@@ -103,17 +108,27 @@ public class Board{
 	}
 	
 	public Piece getActivePiece(){
-		if (pieces == null){
-			throw new BoardNotInitializedException();
-		}
 		return getPiece(activePiece);
 	}
 
-	public Piece getPiece(int place){
+	public void setActivePiece(int activePiece) {
+		if (activePiece < 0 || activePiece >= pieces.length)
+			throw new IllegalArgumentException("activePiece must be in the legal range");
+		this.activePiece = activePiece;
+	}
+
+	public int getActivePieceIndex() {
+		return activePiece;
+	}
+
+	public Piece getPiece(int index){
 		if (pieces == null){
 			throw new BoardNotInitializedException();
 		}
-		return pieces[place];
+		else if (index < 0 || index >= pieces.length){
+			throw new IllegalArgumentException("activePiece must be in the legal range");
+		}
+		return pieces[index];
 	}
 	
 	public static void changeActivePiece(){
@@ -145,10 +160,8 @@ public class Board{
 		if (pieces == null){
 			throw new BoardNotInitializedException();
 		}
-		//TODO Fix Bet
-		currentMission = new Mission(getActivePiece(), new Bet(getPiece(activePiece).getBetAmount()));
-		
-		currentMission.startMission((getTile(getActivePiece().getPosition())).getCategory(), getPiece(activePiece).getBetAmount());
+		(currentMission = new Mission(getActivePiece(),
+				getTile(getActivePiece().getPosition()).getCategory())).startMission();
 	}
 	
 	public ArrayList<Tile> getTileList(){

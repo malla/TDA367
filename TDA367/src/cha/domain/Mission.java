@@ -1,7 +1,6 @@
 package cha.domain;
 
 import java.util.List;
-import java.util.ArrayList;
 
 import cha.controller.ChallengeAccepted;
 import cha.controller.Event;
@@ -9,27 +8,26 @@ import cha.domain.Categories.Category;
 
 public class Mission {
 
-	private List<Card> cards;
 	private final CountDown timer;
 	private final Piece piece;
+	private Bet bet;
+	private Category category;
+	
 	private final Deque deque = new Deque();
-	private Bet actualBet;
+	private List<Card> cards;
 	private Card currentCard;
 
-
-	public Mission(Piece piece, Bet b){
-		timer = new CountDown();
+	public Mission(Piece piece, Category category){
+		this.timer = new CountDown();
 		this.piece = piece;
-		actualBet = b;
+		this.bet = piece.getBet();
+		this.category = category;
 	}
 
 
-	public void startMission(Category c, int bet){
-		cards = deque.getCards(c, bet);
+	public void startMission(){
+		cards = deque.getCards(category, bet.getBetValue());
 		nextCurrentCard();
-		//	public void startMission(Category c){
-		//		Deque.getCard(c, actualBet);
-
 	}
 	
 	public void nextCurrentCard(){
@@ -66,12 +64,12 @@ public class Mission {
 		public void missionDone(boolean completed){
 			ChallengeAccepted.getInstance().publish(Event.OldPosition, piece.getPosition());
 			if(completed){
-				if(piece.getPosition() + actualBet.getBetValue() > 43){
+				if(piece.getPosition() + bet.getBetValue() > 43){
 					piece.setPosition(43);
 					ChallengeAccepted.getInstance().publish(Event.GameOver, piece.getTeam());
 				}
 				else{
-					piece.movePieceForward(actualBet.getBetValue());
+					piece.movePieceForward(bet.getBetValue());
 				}
 			}
 			else{
@@ -83,12 +81,13 @@ public class Mission {
 				}
 			}
 			ChallengeAccepted.getInstance().publish(Event.NewPosition, piece.getPosition());
-			piece.setBet(0);
+			piece.setBet(new Bet(0));
 		}
 
 		@Override
 		public String toString() {
-			return "Mission [cards=" + cards + ", timer=" + timer + ", piece="
-			+ piece + "]";
+			return "Mission [cards=" + cards + 
+				", timer=" + timer + 
+				", piece=" + piece + "]";
 		}
 	}

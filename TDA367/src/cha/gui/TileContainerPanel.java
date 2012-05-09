@@ -5,15 +5,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
-import java.util.Random;
 
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
 
 import cha.controller.ChallengeAccepted;
 import cha.controller.Event;
 import cha.controller.IEventHandler;
+import cha.domain.Bet;
 import cha.domain.Board;
 import cha.domain.Categories.Category;
 import cha.domain.Piece;
@@ -23,17 +22,15 @@ import cha.domain.Tile;
 public class TileContainerPanel extends JPanel implements IEventHandler {
 
 	private static TilePanel[] tilePanels = new TilePanel[44];
-	private int numberOfPieces;
 
 	private JPanel northPanel = new JPanel();
 	private JPanel eastPanel = new JPanel();
 	private JPanel southPanel = new JPanel();
 	private JPanel westPanel = new JPanel();
 
-	private ArrayList<Color> colorList;
-	private ArrayList<PiecePanel> pieces;
-	private int currentPiece;
-	private static int currentBet;
+	private ArrayList<Color> colorList = new ArrayList<Color>();
+	
+	private ArrayList<PiecePanel> piecePanels = new ArrayList<PiecePanel>();
 
 	public TileContainerPanel() {
 		setLayout(new BorderLayout(0, 0));
@@ -74,26 +71,18 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 
 		setTiles(t);
 		
-		pieces = new ArrayList<PiecePanel>();
-	 
-		System.out.print(Board.getInstance().getNumberOfPieces()); 
-		numberOfPieces = Board.getInstance().getNumberOfPieces();
-				//Board.getNumberOfPieces();
-		System.out.print(numberOfPieces);
-		
-
+		int numberOfPieces = Board.getInstance().getNumberOfPieces();
 		for(int i = 0 ; i < numberOfPieces; i++){
-			pieces.add(new PiecePanel(ChallengeAccepted.getInstance().getBoard().getPiece(i).getTeam().getColor()));
-			
+			Piece piece = Board.getInstance().getPiece(i); 
+			piecePanels.add(new PiecePanel(piece,
+					piece.getTeam().getColor()));
 		}
 		
-		
-		for(PiecePanel piece : pieces){
-			tilePanels[0].addPiece(piece);
+		for(PiecePanel piece : piecePanels){
+			tilePanels[0].addPiecePanel(piece);
 		}
-		
 
-		currentPiece = 0;
+		Board.getInstance().setActivePiece(0);
 	}
 
 	private void setTiles(ArrayList<Tile> tiles) {
@@ -164,7 +153,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		}
 		else if (e == Event.ShowBet) {
 			int pos =
-					ChallengeAccepted.getInstance().getBoard().getActivePiece().getPosition();
+					Board.getInstance().getActivePiece().getPosition();
 		//	int pos = 0;
 			for (int i = pos + 1; i < pos + 8; i++) {
 				if (i > 43){
@@ -176,10 +165,10 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		} 
 		else if (e == Event.MakeBet) {
 			
-			ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(0);
+			Board.getInstance().getActivePiece().setBet(new Bet(0));
 			//Ska vi verkligen sätta bet till 0 när vi satt bet redan i click i TilePanel?
 			int pos =
-					ChallengeAccepted.getInstance().getBoard().getActivePiece().getPosition();
+					Board.getInstance().getActivePiece().getPosition();
 		//	int pos = 0;
 			for (int i = pos + 1; i < pos + 8; i++) {
 				if (i > 43
@@ -191,10 +180,10 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 				repaint();
 			}
 			
-			currentBet = (Integer)o;
+			Board.getInstance().getActivePiece().setBet(new Bet((Integer) o));
 			
 			TileContainerPanel.getTilePanels()[(Integer)o +
-		                 				           ChallengeAccepted.getInstance().getBoard().getActivePiece().getPosition()].
+		                 				           Board.getInstance().getActivePiece().getPosition()].
 		                				           setBorder(new BevelBorder(BevelBorder.LOWERED));
 			
 			ChallengeAccepted.getInstance().publish(Event.ShowBet, null);
@@ -207,18 +196,19 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		}
 		else if(e == Event.OldPosition){
 			int pos = (Integer)o;
-			tilePanels[pos].removePiece(pieces.get(currentPiece));
+			tilePanels[pos].removePiece(
+					piecePanels.get(Board.getInstance().getActivePieceIndex()));
 		}
 		else if(e == Event.NewPosition){
 			int pos = (Integer)o;
-			tilePanels[pos].addPiece(pieces.get(currentPiece));
+			tilePanels[pos].addPiecePanel(piecePanels.get(Board.getInstance().getActivePieceIndex()));
 			tilePanels[pos].repaint();
 			nextPlayer();
 		}
 	}
 	
-	public static int getCurrentBet(){
-		return currentBet;
-	}
+//	public static int getCurrentBet(){
+//		return currentBet;
+//	}
 	
 }
