@@ -32,7 +32,8 @@ public class ChallengeAccepted{
 	}
 	
 	public void createBoard(int numPiece){
-		board = Board.getInstance(numPiece);
+		board = Board.getInstance();
+		board.init(numPiece);
 	}
 	
 	public Board getBoard(){

@@ -29,9 +29,6 @@ public class Piece {
 //		this.bet = new Bet(value);
 //	} 
 	
-	//  WHAT??
-	
-	
 	public int getPiece() {
 		return piece;
 	}

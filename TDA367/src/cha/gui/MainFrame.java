@@ -73,8 +73,6 @@ public class MainFrame extends JFrame implements ActionListener{
 		textPanel.add(buttonPanel, BorderLayout.SOUTH);
 		tileContainerPanel.add(textPanel, BorderLayout.CENTER);
 		this.add(tileContainerPanel, BorderLayout.CENTER);
-		
-		
 	}
 	
 		
@@ -82,31 +80,20 @@ public class MainFrame extends JFrame implements ActionListener{
 		ChallengeAccepted.getInstance();
 		initialize();
 		
-		//TODO Exit the dialog
-		String reply = JOptionPane.showInputDialog("Hur många lag vill ni vara?", EXIT_ON_CLOSE);
-				
-				Boolean wrongNumber = true;
-				while(wrongNumber == true){
-						try {
-								numPiece = Integer.parseInt(reply);
-								if(numPiece < 2 || numPiece > 8){
-									reply = JOptionPane.showInputDialog("Ange hur många lag ni vill vara som ett tal mellan 2-8:");
-								}
-								
-								else {
-								wrongNumber = false;
-								}
-								
-							}
-							catch (NumberFormatException nfe){
-								reply = JOptionPane.showInputDialog("Ange hur många lag ni vill vara som ett tal mellan 2-8:");
-						}
+		String reply = null;
+		while (true) {
+			try {
+				reply = JOptionPane.showInputDialog("Hur många lag vill ni vara?", EXIT_ON_CLOSE);
+				numPiece = Integer.parseInt(reply);
+				if (numPiece >= 2 || numPiece <= 8) {
+					System.out.println("Players accepted: " + numPiece);
+					break;
 				}
-			
-								
-		ChallengeAccepted.getInstance().createBoard(Integer.parseInt(reply));
+			} catch (NumberFormatException e) { }
+		}
 		
-		tileList = Board.getTileList();
+		ChallengeAccepted.getInstance().createBoard(numPiece);		
+		tileList = Board.getInstance().getTileList();
 
 		ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);
 				

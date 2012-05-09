@@ -77,8 +77,8 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		
 		pieces = new ArrayList<PiecePanel>();
 	 
-		System.out.print(Board.getNumberOfPieces()); 
-		numberOfPieces = Board.getNumberOfPieces();
+		System.out.print(Board.getInstance().getNumberOfPieces()); 
+		numberOfPieces = Board.getInstance().getNumberOfPieces();
 				//Board.getNumberOfPieces();
 		System.out.print(numberOfPieces);
 		
