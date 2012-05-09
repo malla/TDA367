@@ -34,6 +34,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	private ArrayList<PiecePanel> pieces;
 	private int currentPiece;
 	private static int currentBet;
+	private static int betable = 0;
 
 	public TileContainerPanel() {
 		setLayout(new BorderLayout(0, 0));
@@ -149,7 +150,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	
 	private void nextPlayer(){
 		Board.changeActivePiece();
-		
+		currentPiece = ChallengeAccepted.getInstance().getBoard().getActivePieceNumber();
 	}
 
 	public static TilePanel[] getTilePanels() {
@@ -163,41 +164,23 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			init(t);
 		}
 		else if (e == Event.ShowBet) {
-			int pos =
-					ChallengeAccepted.getInstance().getBoard().getActivePiece().getPosition();
-		//	int pos = 0;
-			for (int i = pos + 1; i < pos + 8; i++) {
-				if (i > 43){
-					return;
-				}
-				tilePanels[i].betable();
-				repaint();
-			}
+			showBet();
+			setBetable(0);
 		} 
 		else if (e == Event.MakeBet) {
 			
-			ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(0);
+			//ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(0);
 			//Ska vi verkligen sätta bet till 0 när vi satt bet redan i click i TilePanel?
-			int pos =
-					ChallengeAccepted.getInstance().getBoard().getActivePiece().getPosition();
-		//	int pos = 0;
-			for (int i = pos + 1; i < pos + 8; i++) {
-				if (i > 43
-						){
-					return;
-				}
-				tilePanels[i].betable();
-				
-				repaint();
-			}
+			showBet();
 			
 			currentBet = (Integer)o;
+			setBetable(0);
 			
-			TileContainerPanel.getTilePanels()[(Integer)o +
+			TileContainerPanel.getTilePanels()[currentBet +
 		                 				           ChallengeAccepted.getInstance().getBoard().getActivePiece().getPosition()].
 		                				           setBorder(new BevelBorder(BevelBorder.LOWERED));
 			
-			ChallengeAccepted.getInstance().publish(Event.ShowBet, null);
+			//ChallengeAccepted.getInstance().publish(Event.ShowBet, null);
 						
 			repaint();
 			
@@ -221,4 +204,24 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		return currentBet;
 	}
 	
+	public static int getBetable(){
+		return betable;
+	}
+	public static void setBetable(int i){
+		betable = i;
+	}
+	
+	private void showBet(){
+		int pos = ChallengeAccepted.getInstance().getBoard().getActivePiece().getPosition();
+		
+		
+		//ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(0);
+		for (int i = pos + 1; i < pos + 8; i++) {
+			if (i > 43){
+				return;
+			}
+			tilePanels[i].betable();
+			repaint();
+		}
+	}
 }

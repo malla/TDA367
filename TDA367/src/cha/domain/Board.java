@@ -115,8 +115,12 @@ public class Board{
 		return getPiece(activePiece);
 	}
 	
+	public int getActivePieceNumber(){
+		return activePiece;
+	}
+	
 	public static void changeActivePiece(){
-		if(activePiece > (pieces.length-1)){
+		if(activePiece == numberOfPieces -1){
 			activePiece = 0;
 		}
 		else{
