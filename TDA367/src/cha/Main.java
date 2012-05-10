@@ -10,9 +10,6 @@
 //}
 package cha;
 
-import java.util.Scanner;
-
-import cha.domain.Bet;
 import cha.domain.Board;
 
 
