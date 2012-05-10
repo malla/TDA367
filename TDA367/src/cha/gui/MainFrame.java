@@ -14,6 +14,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import cha.domain.Board;
 import cha.domain.Tile;
@@ -41,6 +42,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	private JMenuItem newGame;
 	private JMenuItem endGame;
 	private JMenuItem gameRules;
+	private JPanel startPanel;
 	
 	private JButton startButton;
 	private JButton rulesButton;
@@ -81,22 +83,23 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		menuBar.add(menu);
 		menuBar.add(rules);
 		
-		this.setLayout(new FlowLayout());
+		this.setLayout(new BorderLayout());
 		
 		startButton = new JButton("New Game");
 		rulesButton = new JButton("Rules");
 		
 		startButton.addActionListener(this);
 		rulesButton.addActionListener(this);
-		
-		this.add(startButton);
-		this.add(rulesButton);
+		startPanel = new JPanel();
+		startPanel.add(startButton);
+		startPanel.add(rulesButton);
+		this.add(startPanel, BorderLayout.NORTH);
 		
 		//startPanel = new StartPanel();
 		rulesPanel = new RulesPanel();
 		rulesPanel.setVisible(false);
 		//this.add(startPanel);
-		this.add(rulesPanel);
+		//this.add(rulesPanel);
 		
 		this.setTitle("Challenge Accepted");
 		this.setResizable(false);
@@ -111,6 +114,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	private void initGameGUI() {
 		this.remove(startButton);
 		this.remove(rulesButton);
+		startPanel.setVisible(false);
 		
 		tileContainerPanel = new TileContainerPanel();
 		textPanel = new TextPanel();
@@ -140,6 +144,8 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 			JOptionPane.showMessageDialog(this, "message", "title", 
 					JOptionPane.ERROR_MESSAGE, null);
 		}
+		
+		rulesPanel.setVisible(false);
 		
 		initGameGUI();
 		
