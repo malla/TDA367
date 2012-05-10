@@ -5,9 +5,9 @@ import java.awt.BorderLayout;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 
-import cha.controller.ChallengeAccepted;
-import cha.controller.Event;
-import cha.controller.IEventHandler;
+import cha.event.EventBus;
+import cha.event.Event;
+import cha.event.IEventHandler;
 
 import java.awt.FlowLayout;
 import java.awt.Dimension;
@@ -21,7 +21,7 @@ public class TextPanel extends JPanel implements IEventHandler {
 	JLabel lblTime;
 	
 	public TextPanel() {
-		ChallengeAccepted.getInstance().register(this);
+		EventBus.getInstance().register(this);
 		initialize();
 	}
 	

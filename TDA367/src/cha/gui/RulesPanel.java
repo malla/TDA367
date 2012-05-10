@@ -8,9 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import cha.controller.ChallengeAccepted;
-import cha.controller.Event;
-import cha.controller.IEventHandler;
+import cha.event.EventBus;
+import cha.event.Event;
+import cha.event.IEventHandler;
 
 public class RulesPanel extends JPanel implements IEventHandler, ActionListener {
 
@@ -35,7 +35,7 @@ public class RulesPanel extends JPanel implements IEventHandler, ActionListener 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == backButton){
-			ChallengeAccepted.getInstance().publish(Event.ShowStartPanel, null);
+			EventBus.getInstance().publish(Event.ShowStartPanel, null);
 		}
 	}
 

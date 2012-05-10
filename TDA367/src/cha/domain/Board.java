@@ -18,7 +18,7 @@ public class Board{
 	/**
 	 * Index of the active piece.
 	 */
-	private static int activePiece;
+	private int activePiece;
 	
 	/**
 	 * The current mission
@@ -134,7 +134,7 @@ public class Board{
 		return activePiece;
 	}
 	
-	public static void changeActivePiece(){
+	public void changeActivePiece(){
 
 		if (pieces == null){
 			throw new BoardNotInitializedException();

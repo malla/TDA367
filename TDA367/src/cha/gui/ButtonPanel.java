@@ -9,10 +9,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import cha.controller.ChallengeAccepted;
-import cha.controller.Event;
-import cha.controller.IEventHandler;
 import cha.domain.Board;
+import cha.event.EventBus;
+import cha.event.Event;
+import cha.event.IEventHandler;
 
 @SuppressWarnings("serial")
 public class ButtonPanel extends JPanel implements IEventHandler, ActionListener {
@@ -27,7 +27,7 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 	private JLabel timer;
 	
 	public ButtonPanel(){
-		ChallengeAccepted.getInstance().register(this);
+		EventBus.getInstance().register(this);
 		
 		timer = new JLabel();
 		timer.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -108,7 +108,7 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 
 			//Board.getInstance().startMission(Bet.getBetValue());
 
-			ChallengeAccepted.getInstance().publish(Event.StartMission, 
+			EventBus.getInstance().publish(Event.StartMission, 
 					Board.getInstance().getMission());
 		}
 		else if(e.getSource() == cancelButton){
@@ -119,19 +119,19 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 		else if(e.getSource() == doneButton){
 			//TODO
 			Board.getInstance().getMission().stopTimer();
-			ChallengeAccepted.getInstance().publish(Event.TimeOver, null);
+			EventBus.getInstance().publish(Event.TimeOver, null);
 		}
 		else if(e.getSource() == yesButton){
 			Board.getInstance().getMission().missionDone(true);
-			ChallengeAccepted.getInstance().publish(Event.MissionSuccess, null);
+			EventBus.getInstance().publish(Event.MissionSuccess, null);
 			//TODO Next Player
-			ChallengeAccepted.getInstance().publish(Event.ShowBet, null);
+			EventBus.getInstance().publish(Event.ShowBet, null);
 		}
 		else if (e.getSource() == noButton){
 			Board.getInstance().getMission().missionDone(false);
-			ChallengeAccepted.getInstance().publish(Event.MissionFail, null);
+			EventBus.getInstance().publish(Event.MissionFail, null);
 			//TODO Next Player
-			ChallengeAccepted.getInstance().publish(Event.ShowBet, null);
+			EventBus.getInstance().publish(Event.ShowBet, null);
 		}
 	}
 }
