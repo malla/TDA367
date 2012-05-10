@@ -12,7 +12,7 @@ public class BoardTest {
 
 	@Test
 	public void testGetTile() {
-		Board b = Board.getInstance(3);
+		Board b = Board.getInstance();
 		Tile t = b.getTile(1);
 		Tile f = b.getTile(1);
 		assertTrue(t == f);
@@ -20,7 +20,7 @@ public class BoardTest {
 	
 	@Test
 	public void testBoard() {
-		Board b = Board.getInstance(3);
+		Board b = Board.getInstance();
 		Category c = b.getTile(1).getCategory();
 		assertTrue(c != null);
 	}

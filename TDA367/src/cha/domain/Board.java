@@ -4,8 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
-import cha.controller.ChallengeAccepted;
-import cha.controller.Event;
+
 import cha.domain.Categories.Category;
 
 public class Board{
@@ -131,11 +130,18 @@ public class Board{
 		return pieces[index];
 	}
 	
+	public int getActivePieceNumber(){
+		return activePiece;
+	}
+	
 	public static void changeActivePiece(){
+
 		if (pieces == null){
 			throw new BoardNotInitializedException();
 		}
+		
 		if(activePiece > (pieces.length-1)){
+
 			activePiece = 0;
 		}
 		else{
