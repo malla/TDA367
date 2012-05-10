@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 public class Piece {
+	private static final int FAILED_MISSION_PENALTY = 2;
 	private int position;
 //	private int piece;
 	private Bet bet;
@@ -18,7 +19,7 @@ public class Piece {
 		position = position + bet;
 	}
 	public void movePieceBackward(){
-		position = position - 2;
+		position = position - FAILED_MISSION_PENALTY;
 	}
 
 	public Team getTeam() {
@@ -37,8 +38,8 @@ public class Piece {
 		return bet;
 	}
 
-	public void setBet(Bet newBet) {
-		this.bet = newBet;
+	public void setBet(int newBet) {
+		bet = new Bet(newBet);
 	}
 	
 	public int getPosition(){

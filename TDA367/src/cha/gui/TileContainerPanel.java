@@ -32,7 +32,10 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	
 	private ArrayList<PiecePanel> piecePanels = new ArrayList<PiecePanel>();
 
-	private ArrayList<Color> colorList;
+
+
+	//private ArrayList<Color> colorList;
+
 	private ArrayList<PiecePanel> pieces;
 	private int currentPiece;
 	private static int currentBet;
@@ -159,6 +162,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			init(t);
 		}
 		else if (e == Event.ShowBet) {
+
 			int pos =
 					Board.getInstance().getActivePiece().getPosition();
 		//	int pos = 0;
@@ -172,7 +176,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		} 
 		else if (e == Event.MakeBet) {
 			
-			Board.getInstance().getActivePiece().setBet(new Bet(0));
+			Board.getInstance().getActivePiece().setBet(0);
 			//Ska vi verkligen sätta bet till 0 när vi satt bet redan i click i TilePanel?
 			int pos =
 					Board.getInstance().getActivePiece().getPosition();
@@ -187,10 +191,15 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 				repaint();
 			}
 			
-			Board.getInstance().getActivePiece().setBet(new Bet((Integer) o));
+			Board.getInstance().getActivePiece().setBet((Integer) o);
 			
-			TileContainerPanel.getTilePanels()[(Integer)o +
-		                 				           Board.getInstance().getActivePiece().getPosition()].showBet();
+
+//			TileContainerPanel.getTilePanels()[(Integer)o +
+//		                 				           Board.getInstance().getActivePiece().getPosition()].showBet();
+
+			//TileContainerPanel.getTilePanels()[(Integer)o +
+		                 				        //   Board.getInstance().getActivePiece().getPosition()].
+			showBet();
 			setBetable(0);
 		} 
 		else if (e == Event.MakeBet) {
@@ -228,9 +237,9 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		}
 	}
 	
-//	public static int getCurrentBet(){
-//		return currentBet;
-//	}
+	public static int getCurrentBet(){
+		return currentBet;
+	}
 	
 	public static int getBetable(){
 		return betable;

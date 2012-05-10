@@ -27,6 +27,7 @@ public class StartPanel extends JPanel implements ActionListener {
 		this.add(startButton);
 		this.add(rulesButton);
 		
+		
 	}
 
 	@Override

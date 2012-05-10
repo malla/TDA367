@@ -9,6 +9,8 @@ import cha.domain.Categories.Category;
 
 public class Board{
 	
+	private static final int MIN_TILES = 0;
+	private static final int MAX_TILES = 48;
 	/**
 	 * Array with all pieces.
 	 */
@@ -150,7 +152,7 @@ public class Board{
 	}
 	
 	public Tile getTile(int place){
-		if(place < 0 || place > 48){
+		if(place < MIN_TILES || place > MAX_TILES){
 			throw new IllegalArgumentException();
 		}
 		else {   

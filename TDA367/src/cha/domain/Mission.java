@@ -8,6 +8,7 @@ import cha.domain.Categories.Category;
 
 public class Mission {
 
+	private static final int GOAL_TILE = 43;
 	private final CountDown timer;
 	private final Piece piece;
 	private Bet bet;
@@ -64,8 +65,8 @@ public class Mission {
 		public void missionDone(boolean completed){
 			ChallengeAccepted.getInstance().publish(Event.OldPosition, piece.getPosition());
 			if(completed){
-				if(piece.getPosition() + bet.getBetValue() > 43){
-					piece.setPosition(43);
+				if(piece.getPosition() + bet.getBetValue() > GOAL_TILE){
+					piece.setPosition(GOAL_TILE);
 					ChallengeAccepted.getInstance().publish(Event.GameOver, piece.getTeam());
 				}
 				else{
@@ -81,7 +82,7 @@ public class Mission {
 				}
 			}
 			ChallengeAccepted.getInstance().publish(Event.NewPosition, piece.getPosition());
-			piece.setBet(new Bet(0));
+			piece.setBet(0);
 		}
 
 		@Override

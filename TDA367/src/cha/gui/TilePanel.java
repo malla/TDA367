@@ -65,17 +65,25 @@ public class TilePanel extends JPanel {
 			this.setBorder(new BevelBorder(BevelBorder.RAISED));
 		}
 
-
-	/*	if(this.position == ChallengeAccepted.getInstance()
-				.getBoard().getActivePiece().getBetAmount()
-				+ ChallengeAccepted.getInstance().getBoard().getActivePiece()
-						.getPosition()) {
-			this.setBorder(new BevelBorder(BevelBorder.LOWERED));
-		} else {*/
-		this.setBorder(new BevelBorder(BevelBorder.RAISED));
-	//	}
-		
+		/*
+		 * if(this.position == ChallengeAccepted.getInstance()
+		 * .getBoard().getActivePiece().getBetAmount() +
+		 * ChallengeAccepted.getInstance().getBoard().getActivePiece()
+		 * .getPosition()) { this.setBorder(new
+		 * BevelBorder(BevelBorder.LOWERED)); } else {
+		 */
+		// this.setBorder(new BevelBorder(BevelBorder.RAISED));
 	}
+
+	/*
+	 * if(this.position == ChallengeAccepted.getInstance()
+	 * .getBoard().getActivePiece().getBetAmount() +
+	 * ChallengeAccepted.getInstance().getBoard().getActivePiece()
+	 * .getPosition()) { this.setBorder(new BevelBorder(BevelBorder.LOWERED)); }
+	 * else {
+	 */
+	// this.setBorder(new BevelBorder(BevelBorder.RAISED));
+	// }
 
 	public void notBetable() {
 		this.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null,
@@ -84,11 +92,14 @@ public class TilePanel extends JPanel {
 
 	private void click() {
 
-		int piecePos = Board.getInstance()
-				.getActivePiece().getPosition();
-		
 		//TODO: Change this.
 //		int currentBet = TileContainerPanel.getCurrentBet();
+
+		int piecePos = Board.getInstance().getActivePiece().getPosition();
+
+		// TODO: Change this.
+		// int currentBet = TileContainerPanel.getCurrentBet();
+
 
 		TileContainerPanel.getTilePanels()[Board.getInstance().getActivePiece()
 				.getBet().getBetValue()
@@ -99,11 +110,12 @@ public class TilePanel extends JPanel {
 		// == 0)
 		// {
 
+
 		if (Board.getInstance().getActivePiece()
 				.getBet().getBetValue() == 0) {
 
 		int currentBet = TileContainerPanel.getCurrentBet();
-		
+		}
 		/*
 		TileContainerPanel.getTilePanels()[currentBet
 				+ ChallengeAccepted.getInstance().getBoard().getActivePiece()
@@ -114,20 +126,37 @@ public class TilePanel extends JPanel {
 		
 	
 		if (TileContainerPanel.getBetable() == 0) {
+			int currentBet = TileContainerPanel.getCurrentBet();
 
+			/*
+			 * TileContainerPanel.getTilePanels()[currentBet +
+			 * ChallengeAccepted.getInstance().getBoard().getActivePiece()
+			 * .getPosition()].setBorder(new BevelBorder( BevelBorder.LOWERED));
+			 */
+			this.setBorder(new BevelBorder(BevelBorder.LOWERED));
+			this.repaint();
 
-			if (position > piecePos && position < piecePos + 8) {
+			if (TileContainerPanel.getBetable() == 0) {
 
-				bet(piecePos);
+				if (position > piecePos && position < piecePos + 8) {
 
+					bet(piecePos);
+
+				}
 			}
 		}
 	}
 
 	public void bet(int piecePos) {
 		int bet = this.position - piecePos;
-		Board.getInstance().getActivePiece().setBet(new Bet(bet));
-		//ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(bet);
+
+		Board.getInstance().getActivePiece().setBet(bet);
+		// ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(bet);
+
+		Board.getInstance().getActivePiece().setBet(bet);
+
+		// ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(bet);
+
 		ChallengeAccepted.getInstance().publish(Event.MakeBet, bet);
 	}
 }
