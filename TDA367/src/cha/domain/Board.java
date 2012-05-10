@@ -140,7 +140,7 @@ public class Board{
 			throw new BoardNotInitializedException();
 		}
 		
-		if(activePiece > (pieces.length-1)){
+		if(activePiece == (pieces.length-1)){
 
 			activePiece = 0;
 		}
