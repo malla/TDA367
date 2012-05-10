@@ -4,8 +4,6 @@ package cha.controller;
 import java.util.LinkedList;
 import java.util.List;
 
-import cha.domain.Board;
-
 public class ChallengeAccepted{
 
 	private static ChallengeAccepted CHinstance = null;

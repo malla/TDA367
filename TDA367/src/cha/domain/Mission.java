@@ -2,6 +2,7 @@ package cha.domain;
 
 import java.util.List;
 
+import cha.controller.ChallengeAccepted;
 import cha.domain.Categories.Category;
 import cha.event.EventBus;
 import cha.event.Event;
