@@ -8,20 +8,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-import cha.controller.ChallengeAccepted;
-import cha.controller.Event;
-import cha.controller.IEventHandler;
 import cha.domain.Board;
 import cha.domain.Tile;
+import cha.event.EventBus;
+import cha.event.Event;
+import cha.event.IEventHandler;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener, IEventHandler{
+
+	private static final int MIN_PLAYERS = 2;
+
+	private static final int MAX_PLAYERS = 8;
 
 	/**
 	 * Launch the application.
@@ -37,7 +42,11 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	private JMenuItem endGame;
 	private JMenuItem gameRules;
 	
-	private StartPanel startPanel;
+	private JButton startButton;
+	private JButton rulesButton;
+
+	
+	//private StartPanel startPanel;
 	private RulesPanel rulesPanel;
 	private TileContainerPanel tileContainerPanel;
 	
@@ -45,7 +54,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	private ButtonPanel buttonPanel;
 
 	public MainFrame() {
-		ChallengeAccepted.getInstance().register(this);
+		EventBus.getInstance().register(this);
 		JMenuBar menuBar = new JMenuBar();
 		
 		JMenu menu = new JMenu("Meny");
@@ -73,11 +82,20 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		menuBar.add(rules);
 		
 		this.setLayout(new FlowLayout());
-
-		startPanel = new StartPanel();
+		
+		startButton = new JButton("New Game");
+		rulesButton = new JButton("Rules");
+		
+		startButton.addActionListener(this);
+		rulesButton.addActionListener(this);
+		
+		this.add(startButton);
+		this.add(rulesButton);
+		
+		//startPanel = new StartPanel();
 		rulesPanel = new RulesPanel();
 		rulesPanel.setVisible(false);
-		this.add(startPanel);
+		//this.add(startPanel);
 		this.add(rulesPanel);
 		
 		this.setTitle("Challenge Accepted");
@@ -91,13 +109,15 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	 * Initialize the contents of the frame.
 	 */
 	private void initGameGUI() {
+		this.remove(startButton);
+		this.remove(rulesButton);
+		
 		tileContainerPanel = new TileContainerPanel();
 		textPanel = new TextPanel();
 		buttonPanel = new ButtonPanel();
 		
 		textPanel.add(buttonPanel, BorderLayout.SOUTH);
 		tileContainerPanel.add(textPanel, BorderLayout.CENTER);
-		this.removeAll();
 		this.add(tileContainerPanel, BorderLayout.CENTER);
 	}
 	
@@ -111,7 +131,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 				if (reply == null)
 					return;
 				numPiece = Integer.parseInt(reply);
-				if (numPiece >= 2 && numPiece <= 8) {
+				if (numPiece >= MIN_PLAYERS && numPiece <= MAX_PLAYERS) {
 					System.out.println("Players accepted: " + numPiece);
 					break;
 				}
@@ -126,8 +146,8 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		Board.createBoard(numPiece);		
 		tileList = Board.getInstance().getTileList();
 
-		ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);
-		ChallengeAccepted.getInstance().publish(Event.ShowBet, 
+		EventBus.getInstance().publish(Event.CreateBoard, tileList);
+		EventBus.getInstance().publish(Event.ShowBet, 
 				Board.getInstance().getActivePiece());
 	} 
     
@@ -142,6 +162,12 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 			if (reply == JOptionPane.YES_OPTION){
 		      System.exit(0);
 		    }
+		}
+		else if(e.getSource() == startButton){
+			startGame();
+		}
+		else if(e.getSource() == rulesButton){
+			showRules();
 		}
 	}
 
@@ -159,12 +185,12 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 
 	private void showStartPanel() {
 		rulesPanel.setVisible(false);
-		startPanel.setVisible(true);
+	//	startPanel.setVisible(true);
 		
 	}
 
 	private void showRules() {
-		startPanel.setVisible(false);
+	//	startPanel.setVisible(false);
 		rulesPanel.setVisible(true);
 		
 	}

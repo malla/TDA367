@@ -2,9 +2,9 @@ package cha.domain;
 
 import java.util.List;
 
-import cha.controller.ChallengeAccepted;
-import cha.controller.Event;
 import cha.domain.Categories.Category;
+import cha.event.EventBus;
+import cha.event.Event;
 
 public class Mission {
 
@@ -63,11 +63,13 @@ public class Mission {
 		}
 
 		public void missionDone(boolean completed){
-			ChallengeAccepted.getInstance().publish(Event.OldPosition, piece.getPosition());
+			EventBus.getInstance().publish(Event.OldPosition, piece.getPosition());
 			if(completed){
+
 				if(piece.getPosition() + bet.getBetValue() > GOAL_TILE){
 					piece.setPosition(GOAL_TILE);
 					ChallengeAccepted.getInstance().publish(Event.GameOver, piece.getTeam());
+
 				}
 				else{
 					piece.movePieceForward(bet.getBetValue());
@@ -81,7 +83,7 @@ public class Mission {
 					piece.movePieceBackward();
 				}
 			}
-			ChallengeAccepted.getInstance().publish(Event.NewPosition, piece.getPosition());
+			EventBus.getInstance().publish(Event.NewPosition, piece.getPosition());
 			piece.setBet(0);
 		}
 

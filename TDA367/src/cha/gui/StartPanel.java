@@ -7,8 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import cha.controller.ChallengeAccepted;
-import cha.controller.Event;
+import cha.event.EventBus;
+import cha.event.Event;
 
 public class StartPanel extends JPanel implements ActionListener {
 	
@@ -33,9 +33,9 @@ public class StartPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == startButton){
-			ChallengeAccepted.getInstance().publish(Event.NewGame, null);
+			EventBus.getInstance().publish(Event.NewGame, null);
 		}else if(e.getSource() == rulesButton){
-			ChallengeAccepted.getInstance().publish(Event.ShowGameRules, null);
+			EventBus.getInstance().publish(Event.ShowGameRules, null);
 		}
 		
 	}

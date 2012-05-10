@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-import cha.controller.ChallengeAccepted;
-import cha.controller.Event;
+import cha.event.EventBus;
+import cha.event.Event;
 /**
  * A class which creates a timer.
  * @author Malla
@@ -34,7 +34,7 @@ public class CountDown implements ActionListener{
 		System.out.println(count--);
 		
 		//TODO Johan
-		ChallengeAccepted.getInstance().publish(Event.TimeTick, Integer.toString(count));
+		EventBus.getInstance().publish(Event.TimeTick, Integer.toString(count));
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
