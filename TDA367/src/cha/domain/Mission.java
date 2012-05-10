@@ -81,7 +81,7 @@ public class Mission {
 				}
 			}
 			ChallengeAccepted.getInstance().publish(Event.NewPosition, piece.getPosition());
-			piece.setBet(new Bet(0));
+			piece.setBet(0);
 		}
 
 		@Override

@@ -37,8 +37,8 @@ public class Piece {
 		return bet;
 	}
 
-	public void setBet(Bet newBet) {
-		this.bet = newBet;
+	public void setBet(int newBet) {
+		bet = new Bet(newBet);
 	}
 	
 	public int getPosition(){
