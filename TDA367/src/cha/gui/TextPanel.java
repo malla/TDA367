@@ -48,9 +48,9 @@ public class TextPanel extends JPanel implements IEventHandler {
 		
 		
 		JPanel p2 = new JPanel();
+		p2.setBackground(Color.WHITE);
 		p2.setPreferredSize(new Dimension(10, 75));
 		p2.setMinimumSize(new Dimension(10, 75));
-		p2.add(new JLabel("PlayerArea, not done"));
 		add(p2, BorderLayout.NORTH);
 	}
 

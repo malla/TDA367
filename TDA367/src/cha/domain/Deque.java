@@ -1,7 +1,7 @@
-//fnns det et lättare/snabbare sätt att få in alla ord i en array el dyl?
-//i konstruktorn, kommer jag att behöva lägga in en String[]???
-//Kan fixa start gerjejen och kolla-är någon vunnit.
-//fixa currentCard och get NextCard i startmission. GJORT. Om korten är slut - ....?
+//fnns det et lï¿½ttare/snabbare sï¿½tt att fï¿½ in alla ord i en array el dyl?
+//i konstruktorn, kommer jag att behï¿½va lï¿½gga in en String[]???
+//Kan fixa start gerjejen och kolla-ï¿½r nï¿½gon vunnit.
+//fixa currentCard och get NextCard i startmission. GJORT. Om korten ï¿½r slut - ....?
 //i textpanel 
 package cha.domain;
 import cha.domain.Categories.Category;
@@ -17,13 +17,13 @@ public class Deque{
 
 	public ArrayList<Card> cards = new ArrayList<Card>();
 
-	static String [] wordsss = {"fotboll", "gorilla", "paraply", "balkong", "garderob", "isbjörn", "professor", "toalett", "armband", "prinsessa"};
+	static String [] wordsss = {"fotboll", "gorilla", "paraply", "balkong", "garderob", "isbjï¿½rn", "professor", "toalett", "armband", "prinsessa"};
 	static ArrayList<String> words = new ArrayList<String>(Arrays.asList(wordsss));
-	static String[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","å","ä","ö"};
-	static String[] bodyParts =  {"Panna", "Axel", "Knä", "Hand", "Rumpa", "Armbåge", "Fot", "Mage", "Haka", "Vad", "Lår"};
-	static String[][] sameClasses = {{"Vilka är sporter utan boll?", "segling", "judo", "fotboll", "längdhopp", "hästpolo", "brännboll", "rodd", "basket", "golf", "höjdhopp", "tennis", "badminton", "rally", "speedway"},
-		{"Vilka är aktiva sexIT medlemmar?", "rawa", "fridén", "bella", "brook", "malla", "sasse", "anno", "e", "krobbe", "henkit", "wiiw", "kara", "bosch","jocke"},
-		{"Vilka namn börjar på L?","Lisa","Lennart","Love","Linnea","Linus","Loke","Liv","Ludvig","Josef","Jonna","Jens","Johan","Julius","Jimmy"}};
+	static String[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","ï¿½","ï¿½","ï¿½"};
+	static String[] bodyParts =  {"Panna", "Axel", "Knï¿½", "Hand", "Rumpa", "Armbï¿½ge", "Fot", "Mage", "Haka", "Vad", "Lï¿½r"};
+	static String[][] sameClasses = {{"Vilka ï¿½r sporter utan boll?", "segling", "judo", "fotboll", "lï¿½ngdhopp", "hï¿½stpolo", "brï¿½nnboll", "rodd", "basket", "golf", "hï¿½jdhopp", "tennis", "badminton", "rally", "speedway"},
+		{"Vilka ï¿½r aktiva sexIT medlemmar?", "rawa", "fridï¿½n", "bella", "brook", "malla", "sasse", "anno", "e", "krobbe", "henkit", "wiiw", "kara", "bosch","jocke"},
+		{"Vilka namn bï¿½rjar pï¿½ L?","Lisa","Lennart","Love","Linnea","Linus","Loke","Liv","Ludvig","Josef","Jonna","Jens","Johan","Julius","Jimmy"}};
 	static ArrayList<String[]> categories= new ArrayList<String[]>(Arrays.asList(sameClasses));
 
 	public Deque() {
@@ -70,7 +70,7 @@ public class Deque{
 			jumbled.append(oldChars.get(index));
 			oldChars.remove(index);
 		}
-		//Deque.words.remove(i); ta bort ordet som använts så att det inte kommer igen.
+		//Deque.words.remove(i); ta bort ordet som anvï¿½nts sï¿½ att det inte kommer igen.
 		String[] info =new String[]{jumbled.toString()};
 		return new Card(info);
 		
