@@ -19,11 +19,14 @@ public class Deque{
 
 	static String [] wordsss = {"fotboll", "gorilla", "paraply", "balkong", "garderob", "isbj�rn", "professor", "toalett", "armband", "prinsessa"};
 	static ArrayList<String> words = new ArrayList<String>(Arrays.asList(wordsss));
+
 	static String[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","�","�","�"};
 	static String[] bodyParts =  {"Panna", "Axel", "Kn�", "Hand", "Rumpa", "Armb�ge", "Fot", "Mage", "Haka", "Vad", "L�r"};
-	static String[][] sameClasses = {{"Vilka �r sporter utan boll?", "segling", "judo", "fotboll", "l�ngdhopp", "h�stpolo", "br�nnboll", "rodd", "basket", "golf", "h�jdhopp", "tennis", "badminton", "rally", "speedway"},
-		{"Vilka �r aktiva sexIT medlemmar?", "rawa", "frid�n", "bella", "brook", "malla", "sasse", "anno", "e", "krobbe", "henkit", "wiiw", "kara", "bosch","jocke"},
+	static String[][] sameClasses = {
+		{"Vilka �r sporter utan boll?","segling", "rally", "speedway", "h�jdhopp", "judo", "l�ngdhopp", "rodd", "h�stpolo", "br�nnboll", "basket", "golf", "tennis", "badminton", "fotboll"},
+		{"Vilka �r aktiva sexIT medlemmar?", "rawa", "bella", "malla", "sasse", "anno", "krobbe", "henkit", "wiiw", "brook", "e", "kara", "bosch","jocke", "frid�n"},
 		{"Vilka namn b�rjar p� L?","Lisa","Lennart","Love","Linnea","Linus","Loke","Liv","Ludvig","Josef","Jonna","Jens","Johan","Julius","Jimmy"}};
+
 	static ArrayList<String[]> categories= new ArrayList<String[]>(Arrays.asList(sameClasses));
 
 	public Deque() {

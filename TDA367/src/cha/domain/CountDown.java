@@ -28,13 +28,14 @@ public class CountDown implements ActionListener{
 	}
 	 */
 	private void ticktock(){
+		EventBus.getInstance().publish(Event.TimeTick, Integer.toString(count));
 		if (count==0){
 			timer.stop();
+			EventBus.getInstance().publish(Event.TimeOver, null);
 		}
 		System.out.println(count--);
 		
-		//TODO Johan
-		EventBus.getInstance().publish(Event.TimeTick, Integer.toString(count));
+
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

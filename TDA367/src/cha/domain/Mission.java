@@ -27,12 +27,18 @@ public class Mission {
 
 	public void startMission(){
 		cards = deque.getCards(category, bet.getBetValue());
-		nextCurrentCard();
+		//nextCurrentCard();
 	}
 	
-	public void nextCurrentCard(){
+	public Card nextCurrentCard(){
+		if (! cards.isEmpty()){
 		currentCard=cards.get(0);
 		cards.remove(0);
+		return currentCard;
+		}
+		else timeOver();
+		String[] text =new String[]{"There are no more cards in the deque! How did it go?"};
+		return new Card(text);
 	}
 		/*=======
 	public void startMission(Category c){

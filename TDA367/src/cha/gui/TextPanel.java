@@ -2,9 +2,13 @@ package cha.gui;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+
+import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 
+import cha.domain.Board;
+import cha.domain.Mission;
 import cha.event.EventBus;
 import cha.event.Event;
 import cha.event.IEventHandler;
@@ -19,6 +23,8 @@ public class TextPanel extends JPanel implements IEventHandler {
 
 	JTextArea textArea;
 	JLabel lblTime;
+
+	JPanel cardPanel = new JPanel();
 	
 	public TextPanel() {
 		EventBus.getInstance().register(this);
@@ -57,51 +63,24 @@ public class TextPanel extends JPanel implements IEventHandler {
 	@Override
 	public void action(Event e, Object o) {
 		if(e == Event.StartMission){
-			//cardText = ChallengeAccepted.getInstance().getBoard().getMission()
-		
-			/*import java.awt.BorderLayout;
-			import java.awt.Color;
-			import java.awt.Dimension;
-
-			import javax.swing.BorderFactory;
-			import javax.swing.JFrame;
-			import javax.swing.JPanel;
-
-
-			public class Try1 extends JFrame{
-				public static void main(String[] args) {
-
-					new Try1();
-				}
-
-				public Try1(){
-					JPanel panel0 = new JPanel();
-					this.add(panel0);
-					JPanel cardPanel = new JPanel();
-					cardPanel.setPreferredSize(new Dimension(400, 240));
-					cardPanel.setBackground(Color.CYAN);
-					cardPanel.setForeground(Color.CYAN);
-					cardPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-					panel0.add(cardPanel);
-					
-					JPanel header = new JPanel();
-					header.setPreferredSize(new Dimension(80, 240));
-					header.setBackground(Color.WHITE);
-					header.setForeground(Color.WHITE);
-					//header.setLayout(BorderLayout.CENTER);
-					cardPanel.add(header, BorderLayout.CENTER); //no work
-					header.setAlignmentX(LEFT_ALIGNMENT); //now work
-
-					this.setTitle("Im trying");
-					this.setResizable(false);
-					this.setBounds(100, 100, 710, 550);
-					this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
-					this.setVisible(true);
-				}
-			}
-			*/
+			Mission mission = (Mission)o;			
+			
+			cardPanel.setPreferredSize(new Dimension(400, 240));
+			cardPanel.setBackground(Color.CYAN);
+			cardPanel.setForeground(Color.CYAN);
+			cardPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+			this.remove(textArea);
+			repaint();
+			add(cardPanel);
+			cardPanel.add(textArea);
+			paintCard(mission);			
 		
 		}
+		else if(e == Event.NextCard){
+			Mission mission = (Mission)o;
+			paintCard(mission);
+		}
+		
 		else if(e == Event.MakeBet){
 			int bet = (Integer)o;
 			textArea.setText("Bet: " + bet);
@@ -109,10 +88,25 @@ public class TextPanel extends JPanel implements IEventHandler {
 		else if(e == Event.ShowBet){
 			textArea.setText("Make bet!");
 		}
-		else if(e == Event.MissionDone){
+		else if(e == Event.TimeOver){
+			this.remove(cardPanel);
+			this.add(textArea);
+			this.repaint();
 			textArea.setText("Was the mission completed successfully?");
 		}
 		
+	}
+	private void paintCard( Mission mission){
+		String[] cardtext = mission.nextCurrentCard().getString();
+		int words = cardtext.length;
+		String text = "";
+		for (int i=0;i<words ;i++){
+			text = text+ "\n" + cardtext[i];
+		}
+		textArea.setText(text);
+		validate();
+		textArea.repaint();
+	
 	}
 
 }

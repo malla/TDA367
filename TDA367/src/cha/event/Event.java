@@ -16,5 +16,6 @@ public enum Event {
 	NewGame,
 	GameOver,
 	ShowGameRules,
-	ShowStartPanel
+	ShowStartPanel,
+	NextCard
 }

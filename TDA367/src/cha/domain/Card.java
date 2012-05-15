@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Card {
 	
-	static String [] assignment;
+	private String [] assignment;
 	
 	public Card(String[] s){
 		assignment= s;
@@ -19,5 +19,9 @@ public class Card {
 	public String toString() {
 		String asString = Arrays.toString(assignment); 
 		return "Card [a1=" + asString + "]";
+	}
+	
+	public String[] getString(){
+		return assignment;
 	}
 }
