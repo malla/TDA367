@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 public class Piece {
 	private int position;
-	private int piece;
-	private static int bet;
+//	private int piece;
+	private Bet bet;
 	private Team team;
 	
 	public Piece(Team team){
 		this.team = team;
-		bet = 0;
+		bet = new Bet(0);
 	}
 	
 	public void movePieceForward(int bet){
@@ -21,42 +21,38 @@ public class Piece {
 		position = position - 2;
 	}
 
-	public void setPiece(int piece) {
-		this.piece = piece;
+	public Team getTeam() {
+		return this.team;
 	}
 	
-//	public void bet(int value){
-//		this.bet = new Bet(value);
-//	} 
+//	public int getPiece() {
+//		return piece;
+//	}
+//
+//	public void setPiece(int piece) {
+//		this.piece = piece;
+//	}
 	
-	public int getPiece() {
-		return piece;
-	}
-	
-	public int getBetAmount(){
+	public Bet getBet(){
 		return bet;
 	}
-	
-	public void setPosition(int position){
-		this.position = position;
+
+	public void setBet(int newBet) {
+		bet = new Bet(newBet);
 	}
 	
 	public int getPosition(){
 		return this.position;
 	}
 	
-	@Override
-	public String toString() {
-		return "Piece [position=" + position + ", piece=" + piece + ", bet=" + bet + "]";
-	}
-
-	public Team getTeam() {
-		return this.team;
-	}
-
-	public void setBet(int newBet) {
-		this.bet = newBet;
+	public void setPosition(int position){
+		this.position = position;
 	}
 	
-
+	@Override
+	public String toString() {
+		return "Piece [position=" + position + 
+//		", piece=" + piece + 
+		", bet=" + bet + "]";
+	}
 }

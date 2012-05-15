@@ -7,16 +7,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import cha.controller.ChallengeAccepted;
-import cha.controller.Event;
-import cha.controller.IEventHandler;
-import cha.domain.Bet;
+import cha.domain.Board;
+import cha.event.EventBus;
+import cha.event.Event;
+import cha.event.IEventHandler;
 
 @SuppressWarnings("serial")
 public class ButtonPanel extends JPanel implements IEventHandler, ActionListener {
@@ -31,7 +27,7 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 	private JLabel timer;
 	
 	public ButtonPanel(){
-		ChallengeAccepted.getInstance().register(this);
+		EventBus.getInstance().register(this);
 		
 		timer = new JLabel();
 		timer.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -103,37 +99,45 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == startMissionButton){
+			TileContainerPanel.setBetable(1);
+
+			Board.getInstance().getActivePiece().setBet(TileContainerPanel.getCurrentBet());
+
 			for (TilePanel panel : TileContainerPanel.getTilePanels()) {
 				panel.notBetable();
 			}
-			ChallengeAccepted.getInstance().getBoard().startMission();
+			Board.getInstance().startMission();
+			
+			//Board.getInstance().startMission(Bet.getBetValue());
 
-			//ChallengeAccepted.getInstance().getBoard().startMission(Bet.getBetValue());
-
-			ChallengeAccepted.getInstance().publish(Event.StartMission, 
-					ChallengeAccepted.getInstance().getBoard().getMission());
+			EventBus.getInstance().publish(Event.StartMission, 
+					Board.getInstance().getMission());
+		}
+		else if(e.getSource() == nextButton){
+			EventBus.getInstance().publish(Event.NextCard,
+					Board.getInstance().getMission());
 		}
 		else if(e.getSource() == cancelButton){
-//	 		ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(0);
+//	 		Board.getInstance().getActivePiece().setBet(0);
 //			ChallengeAccepted.getInstance().publish(Event.ShowBet, null);
 		}
 		
 		else if(e.getSource() == doneButton){
 			//TODO
-			ChallengeAccepted.getInstance().getBoard().getMission().stopTimer();
-			ChallengeAccepted.getInstance().publish(Event.TimeOver, null);
+			Board.getInstance().getMission().stopTimer();
+			EventBus.getInstance().publish(Event.TimeOver, null);
 		}
 		else if(e.getSource() == yesButton){
-			ChallengeAccepted.getInstance().getBoard().getMission().missionDone(true);
-			ChallengeAccepted.getInstance().publish(Event.MissionSuccess, null);
+			Board.getInstance().getMission().missionDone(true);
+			EventBus.getInstance().publish(Event.MissionSuccess, null);
 			//TODO Next Player
-			ChallengeAccepted.getInstance().publish(Event.ShowBet, null);
+			EventBus.getInstance().publish(Event.ShowBet, null);
 		}
 		else if (e.getSource() == noButton){
-			ChallengeAccepted.getInstance().getBoard().getMission().missionDone(false);
-			ChallengeAccepted.getInstance().publish(Event.MissionFail, null);
+			Board.getInstance().getMission().missionDone(false);
+			EventBus.getInstance().publish(Event.MissionFail, null);
 			//TODO Next Player
-			ChallengeAccepted.getInstance().publish(Event.ShowBet, null);
+			EventBus.getInstance().publish(Event.ShowBet, null);
 		}
 	}
 }

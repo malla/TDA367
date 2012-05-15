@@ -4,8 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
-import cha.controller.ChallengeAccepted;
-import cha.controller.Event;
+
 import cha.domain.Categories.Category;
 
 public class Board{
@@ -19,7 +18,7 @@ public class Board{
 	/**
 	 * Index of the active piece.
 	 */
-	private static int activePiece;
+	private int activePiece;
 	
 	/**
 	 * The current mission
@@ -48,6 +47,11 @@ public class Board{
 			instance = new Board();
 		}
 		return instance;
+	}
+	
+	public static void createBoard(int numPiece){
+		Board board = Board.getInstance();
+		board.init(numPiece);
 	}
 	
 	// Constructor
@@ -103,24 +107,41 @@ public class Board{
 	}
 	
 	public Piece getActivePiece(){
-		if (pieces == null){
-			throw new BoardNotInitializedException();
-		}
 		return getPiece(activePiece);
 	}
 
-	public Piece getPiece(int place){
+	public void setActivePiece(int activePiece) {
+		if (activePiece < 0 || activePiece >= pieces.length)
+			throw new IllegalArgumentException("activePiece must be in the legal range");
+		this.activePiece = activePiece;
+	}
+
+	public int getActivePieceIndex() {
+		return activePiece;
+	}
+
+	public Piece getPiece(int index){
 		if (pieces == null){
 			throw new BoardNotInitializedException();
 		}
-		return pieces[place];
+		else if (index < 0 || index >= pieces.length){
+			throw new IllegalArgumentException("activePiece must be in the legal range");
+		}
+		return pieces[index];
 	}
 	
-	public static void changeActivePiece(){
+	public int getActivePieceNumber(){
+		return activePiece;
+	}
+	
+	public void changeActivePiece(){
+
 		if (pieces == null){
 			throw new BoardNotInitializedException();
 		}
-		if(activePiece > (pieces.length-1)){
+		
+		if(activePiece == (pieces.length-1)){
+
 			activePiece = 0;
 		}
 		else{
@@ -145,10 +166,8 @@ public class Board{
 		if (pieces == null){
 			throw new BoardNotInitializedException();
 		}
-		//TODO Fix Bet
-		currentMission = new Mission(getActivePiece(), new Bet(getPiece(activePiece).getBetAmount()));
-		
-		currentMission.startMission((getTile(getActivePiece().getPosition())).getCategory(), getPiece(activePiece).getBetAmount());
+		(currentMission = new Mission(getActivePiece(),
+				getTile(getActivePiece().getPosition()).getCategory())).startMission();
 	}
 	
 	public ArrayList<Tile> getTileList(){

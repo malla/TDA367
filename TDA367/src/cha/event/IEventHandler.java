@@ -1,4 +1,4 @@
-package cha.controller;
+package cha.event;
 
 public interface IEventHandler {
 	

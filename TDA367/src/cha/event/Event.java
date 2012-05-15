@@ -1,4 +1,4 @@
-package cha.controller;
+package cha.event;
 
 public enum Event {
 	MakeBet,
@@ -14,5 +14,8 @@ public enum Event {
 	NewPosition,
 	CreateBoard,
 	NewGame,
-	GameOver
+	GameOver,
+	ShowGameRules,
+	ShowStartPanel,
+	NextCard
 }
