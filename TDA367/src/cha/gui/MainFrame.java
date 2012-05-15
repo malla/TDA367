@@ -93,7 +93,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		}
 		
 		ChallengeAccepted.getInstance().createBoard(numPiece);		
-		tileList = Board.getInstance().getTileList();
+		//tileList = Board.getInstance().getTileList();
 
 		ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);
 				

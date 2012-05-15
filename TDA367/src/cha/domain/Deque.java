@@ -21,8 +21,9 @@ public class Deque{
 	static ArrayList<String> words = new ArrayList<String>(Arrays.asList(wordsss));
 	static String[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","å","ä","ö"};
 	static String[] bodyParts =  {"Panna", "Axel", "Knä", "Hand", "Rumpa", "Armbåge", "Fot", "Mage", "Haka", "Vad", "Lår"};
-	static String[][] sameClasses = {{"Vilka är sporter utan boll?", "segling", "judo", "fotboll", "längdhopp", "hästpolo", "brännboll", "rodd", "basket", "golf", "höjdhopp", "tennis", "badminton", "rally", "speedway"},
-		{"Vilka är aktiva sexIT medlemmar?", "rawa", "fridén", "bella", "brook", "malla", "sasse", "anno", "e", "krobbe", "henkit", "wiiw", "kara", "bosch","jocke"},
+	static String[][] sameClasses = {
+		{"Vilka är sporter utan boll?","segling", "rally", "speedway", "höjdhopp", "judo", "längdhopp", "rodd", "hästpolo", "brännboll", "basket", "golf", "tennis", "badminton", "fotboll"},
+		{"Vilka är aktiva sexIT medlemmar?", "rawa", "bella", "malla", "sasse", "anno", "krobbe", "henkit", "wiiw", "brook", "e", "kara", "bosch","jocke", "fridén"},
 		{"Vilka namn börjar på L?","Lisa","Lennart","Love","Linnea","Linus","Loke","Liv","Ludvig","Josef","Jonna","Jens","Johan","Julius","Jimmy"}};
 	static ArrayList<String[]> categories= new ArrayList<String[]>(Arrays.asList(sameClasses));
 
