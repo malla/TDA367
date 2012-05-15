@@ -1,7 +1,7 @@
-//fnns det et lättare/snabbare sätt att få in alla ord i en array el dyl?
-//i konstruktorn, kommer jag att behöva lägga in en String[]???
-//Kan fixa start gerjejen och kolla-är någon vunnit.
-//fixa currentCard och get NextCard i startmission. GJORT. Om korten är slut - ....?
+//fnns det et lï¿½ttare/snabbare sï¿½tt att fï¿½ in alla ord i en array el dyl?
+//i konstruktorn, kommer jag att behï¿½va lï¿½gga in en String[]???
+//Kan fixa start gerjejen och kolla-ï¿½r nï¿½gon vunnit.
+//fixa currentCard och get NextCard i startmission. GJORT. Om korten ï¿½r slut - ....?
 //i textpanel 
 package cha.domain;
 import cha.domain.Categories.Category;
@@ -22,8 +22,10 @@ public class Deque{
 		"bokstav", "blandad", "borstar", "handlar", "maskiner", "drömmar", "skvätta", "plansch", "trollar", "kortlek",
 		"snorkel", "grannar", "springa", "rulator", "givmild", "mildare", "spackel", "prickig", "trummor", "strumpa",
 		"trumpet", "slumpen", "älskare", "skänker", "känslig", "domaren", "senaste", "fläskig", "bladlus", "knäcker"};
+
 	static ArrayList<String> words = new ArrayList<String>(Arrays.asList(wordsss));
-	static String[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","å","ä","ö"};
+
+	static String[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","ï¿½","ï¿½","ï¿½"};
 	static String[] bodyParts =  {"Panna", "Axel", "Knä", "Hand", "Rumpa", "Armbåge", "Fot", "Mage", "Haka", "Vad", "Lår"};
 	static String[][] sameClasses = {
 		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
@@ -42,6 +44,7 @@ public class Deque{
 		{"Vilka har en färg i sitt namn?", "blåmes", "vithaj", "blåsippa", "vitsippa", "gullviva", "murgröna", "brunbjörn", "brunkulla", "timotej", "laxöring", "fjällräv", "påsklilja","ormbunke", "ärla"},
 		{"Vilka är aktiva sexIT medlemmar?", "rawa", "bella", "malla", "sasse", "anno", "krobbe", "henkit", "wiiw", "brook", "e", "kara", "jocke","pewhl", "fridén"},
 		{"Vilka namn börjar på L?","Lisa","Lennart","Love","Linnea","Linus","Loke","Liv","Ludvig","Josef","Jonna","Jens","Johan","Julius","Jimmy"}};
+
 	static ArrayList<String[]> categories= new ArrayList<String[]>(Arrays.asList(sameClasses));
 
 	public Deque() {
@@ -88,10 +91,11 @@ public class Deque{
 			jumbled.append(oldChars.get(index));
 			oldChars.remove(index);
 		}
+
 		//Deque.words.remove(i); ta bort ordet som använts så att det inte kommer igen.
 		String[] info =new String[]{"Hitta ett ord på " + bet+ " bokstäver!\n" +jumbled.toString()};
 		return new Card(info);
-		
+
 	}
 	private Card getJumbleCorrectCard(String word) {
 		String[] info =new String[]{"Ett ord som fanns var: "+word};
