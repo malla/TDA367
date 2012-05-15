@@ -17,13 +17,30 @@ public class Deque{
 
 	public ArrayList<Card> cards = new ArrayList<Card>();
 
-	static String [] wordsss = {"fotboll", "gorilla", "paraply", "balkong", "garderob", "isbjörn", "professor", "toalett", "armband", "prinsessa"};
+	static String [] wordsss = {
+		"fotboll", "gorilla", "paraply", "balkong", "garderob", "isbjörn", "professor", "toalett", "armband", "prinsessa",
+		"bokstav", "blandad", "borstar", "handlar", "maskiner", "drömmar", "skvätta", "plansch", "trollar", "kortlek",
+		"snorkel", "grannar", "springa", "rulator", "givmild", "mildare", "spackel", "prickig", "trummor", "strumpa",
+		"trumpet", "slumpen", "älskare", "skänker", "känslig", "domaren", "senaste", "fläskig", "bladlus", "knäcker"};
 	static ArrayList<String> words = new ArrayList<String>(Arrays.asList(wordsss));
 	static String[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","å","ä","ö"};
 	static String[] bodyParts =  {"Panna", "Axel", "Knä", "Hand", "Rumpa", "Armbåge", "Fot", "Mage", "Haka", "Vad", "Lår"};
 	static String[][] sameClasses = {
+		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Vilka är typiskt svartvita?", "zebra", "skunk", "dalmatin", "panda", "myrornas krig", "streckkoder", "schackbräde", "oreos", "kaja", "panter", "kobra", "skorpion","lemurell", "elefant"},
 		{"Vilka är sporter utan boll?","segling", "rally", "speedway", "höjdhopp", "judo", "längdhopp", "rodd", "hästpolo", "brännboll", "basket", "golf", "tennis", "badminton", "fotboll"},
-		{"Vilka är aktiva sexIT medlemmar?", "rawa", "bella", "malla", "sasse", "anno", "krobbe", "henkit", "wiiw", "brook", "e", "kara", "bosch","jocke", "fridén"},
+		{"Vilka är däggdjur?", "delfin", "elefant", "blåval", "säl", "häst", "ko", "isbjörn", "noshörning", "pingvin", "Struts", "krokodil", "sköldpadda","blåmes", "lax"},
+		{"Vilka djur spederar en stor del av sin tid i vatten?", "delfin", "blåval", "säl", "isbjörn", "pingvin", "krokodil", "sköldpadda", "lax", "elefant", "häst", "ko", "noshörning","struts", "blåmes"},
+		{"Vilka har en färg i sitt namn?", "blåmes", "vithaj", "blåsippa", "vitsippa", "gullviva", "murgröna", "brunbjörn", "brunkulla", "timotej", "laxöring", "fjällräv", "påsklilja","ormbunke", "ärla"},
+		{"Vilka är aktiva sexIT medlemmar?", "rawa", "bella", "malla", "sasse", "anno", "krobbe", "henkit", "wiiw", "brook", "e", "kara", "jocke","pewhl", "fridén"},
 		{"Vilka namn börjar på L?","Lisa","Lennart","Love","Linnea","Linus","Loke","Liv","Ludvig","Josef","Jonna","Jens","Johan","Julius","Jimmy"}};
 	static ArrayList<String[]> categories= new ArrayList<String[]>(Arrays.asList(sameClasses));
 
@@ -42,7 +59,7 @@ public class Deque{
 			return getSameClass();
 		}
 		else if (c==Category.WORDJUMBLE){
-			return getWordJumble();
+			return getWordJumble(bet);
 		}
 		else{
 			throw new IllegalArgumentException("unknown category");
@@ -50,14 +67,14 @@ public class Deque{
 	}
 
 	//Returns a pile of cards from Word Jumble category.
-	private List<Card> getWordJumble() {
+	private List<Card> getWordJumble(int i) {
 		List<Card> allCards = new ArrayList<Card>();
 		String word = randomWord();
-		allCards.add(getJumbleCard(word));
+		allCards.add(getJumbleCard(word, i));
 		allCards.add(getJumbleCorrectCard(word));
 		return allCards;
 	}
-	private Card getJumbleCard(String word) {
+	private Card getJumbleCard(String word, int bet) {
 		while (word.length()<14){
 			word= word+Deque.alphabet[randomNumber(alphabet.length)];
 		}
@@ -72,12 +89,12 @@ public class Deque{
 			oldChars.remove(index);
 		}
 		//Deque.words.remove(i); ta bort ordet som använts så att det inte kommer igen.
-		String[] info =new String[]{jumbled.toString()};
+		String[] info =new String[]{"Hitta ett ord på " + bet+ " bokstäver!\n" +jumbled.toString()};
 		return new Card(info);
 		
 	}
 	private Card getJumbleCorrectCard(String word) {
-		String[] info =new String[]{word};
+		String[] info =new String[]{"Ett ord som fanns var: "+word};
 		return new Card(info);
 	}
 
@@ -127,7 +144,7 @@ public class Deque{
 		for (int j = 0; j < bet; j++){
 			String word = randomWord();
 			allCards.add(getBackwardsCard(word));
-			allCards.add(new Card(new String[] {"word"}));
+			allCards.add(new Card(new String[] {"Rätt svar är: "+word}));
 		}
 		return allCards;
 	}
@@ -140,7 +157,7 @@ public class Deque{
 		for (Character c : oldChars){
 			backwards.append(c);
 		}
-		String[] info =new String[]{backwards.toString()};
+		String[] info =new String[]{"Vad blir ordet baklänges?\n" +backwards.toString()};
 		return new Card(info);
 	}
 
