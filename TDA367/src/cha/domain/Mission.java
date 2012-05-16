@@ -2,7 +2,6 @@ package cha.domain;
 
 import java.util.List;
 
-import cha.controller.ChallengeAccepted;
 import cha.domain.Categories.Category;
 import cha.event.EventBus;
 import cha.event.Event;
@@ -69,7 +68,7 @@ public class Mission {
 
 				if(piece.getPosition() + bet.getBetValue() > GOAL_TILE){
 					piece.setPosition(GOAL_TILE);
-					ChallengeAccepted.getInstance().publish(Event.GameOver, piece.getTeam());
+					EventBus.getInstance().publish(Event.GameOver, piece.getTeam());
 
 				}
 				else{
