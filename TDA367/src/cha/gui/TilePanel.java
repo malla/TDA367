@@ -8,11 +8,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
-import cha.domain.Bet;
 import cha.domain.Board;
-import cha.domain.Piece;
-import cha.event.EventBus;
 import cha.event.Event;
+import cha.event.EventBus;
 
 @SuppressWarnings("serial")
 public class TilePanel extends JPanel {

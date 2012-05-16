@@ -145,7 +145,18 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 		
+
+//		ChallengeAccepted.getInstance().createBoard(numPiece);		
+		//tileList = Board.getInstance().getTileList();
+
+//		ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);
+				
+//		ChallengeAccepted.getInstance().publish(Event.ShowBet, 
+//				ChallengeAccepted.getInstance().getBoard().getActivePiece());
+		
+
 		rulesPanel.setVisible(false);
+
 		
 		initGameGUI();
 		

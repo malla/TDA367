@@ -1,29 +1,17 @@
 //package projekt;
 //
-//public class Main {
-//	public static void main (String [] args){
-//		
-//		
-//		
-//		new ChallengeAccepted();
-//	}
-//}
+
 package cha;
 
 import cha.domain.Board;
+import cha.gui.MainFrame;
 
 
 
 public class Main {
 
-    public static void run() {
-      
-    	Board newBoard = Board.getInstance();
-    	
-    }
-
-  
+    
     public static void main(String[] args) {
-        new Main().run();
-    }
+		new MainFrame();	
+	}
 }

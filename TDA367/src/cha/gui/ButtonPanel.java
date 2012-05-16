@@ -107,10 +107,14 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 				panel.notBetable();
 			}
 			Board.getInstance().startMission();
-
+			
 			//Board.getInstance().startMission(Bet.getBetValue());
 
 			EventBus.getInstance().publish(Event.StartMission, 
+					Board.getInstance().getMission());
+		}
+		else if(e.getSource() == nextButton){
+			EventBus.getInstance().publish(Event.NextCard,
 					Board.getInstance().getMission());
 		}
 		else if(e.getSource() == cancelButton){
