@@ -33,7 +33,9 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	 * Launch the application.
 	 * 
 	 */
-	
+	public static void main(String[] args) {
+		new MainFrame();	
+	}
 	
 	private ArrayList<Tile> tileList = new ArrayList<Tile>();
 	
