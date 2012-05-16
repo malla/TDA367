@@ -23,6 +23,11 @@ public class Mission {
 		this.bet = piece.getBet();
 		this.category = category;
 	}
+	
+	//This methods only use is in the TestMission class. 
+	public int dequeSize(){
+		return cards.size();
+	}
 
 
 	public void startMission(){
@@ -40,23 +45,6 @@ public class Mission {
 		String[] text =new String[]{"There are no more cards in the deque! How did it go?"};
 		return new Card(text);
 	}
-		/*=======
-	public void startMission(Category c){
-
-		//TODO
-		//deque.getCards(c, actualBet.getBetValue());
-
-		//Deque.getCards(c, actualBet);
-
->>>>>>> 6352ecb4b255031c0a73608a87a0847a69ce21f1
-		// timer.start();
-	}*/
-
-
-		//L�gga till kort i en h�g och representera fr�n h�gen
-
-
-
 
 		public void timeOver(){
 			//TODO

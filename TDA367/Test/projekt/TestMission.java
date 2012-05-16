@@ -21,8 +21,13 @@ public class TestMission {
 		Bet b = new Bet(4);
 		Mission m = new Mission(p, Category.SAMECLASS);
 		m.startMission();
+		int dequeSize = m.dequeSize();
+		assertTrue(dequeSize==3);
+		for(int j=0;j<dequeSize;j++){
 		System.out.println(m.nextCurrentCard());
-		//assertTrue(m.size()==3);
+		}
+		dequeSize = m.dequeSize();
+		assertTrue(dequeSize==0);
 	}
 	
 }
