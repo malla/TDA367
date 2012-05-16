@@ -130,13 +130,13 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 		else if(e.getSource() == yesButton){
 			Board.getInstance().getMission().missionDone(true);
 			EventBus.getInstance().publish(Event.MissionSuccess, null);
-			//TODO Next Player
+			EventBus.getInstance().publish(Event.NextPlayer, null);
 			EventBus.getInstance().publish(Event.ShowBet, null);
 		}
 		else if (e.getSource() == noButton){
 			Board.getInstance().getMission().missionDone(false);
 			EventBus.getInstance().publish(Event.MissionFail, null);
-			//TODO Next Player
+			EventBus.getInstance().publish(Event.NextPlayer, null);
 			EventBus.getInstance().publish(Event.ShowBet, null);
 		}
 	}

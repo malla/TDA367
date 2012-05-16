@@ -54,6 +54,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	
 	private TextPanel textPanel;
 	private ButtonPanel buttonPanel;
+	private PlayerPanel playerPanel;
 
 	public MainFrame() {
 		EventBus.getInstance().register(this);
@@ -119,8 +120,10 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		tileContainerPanel = new TileContainerPanel();
 		textPanel = new TextPanel();
 		buttonPanel = new ButtonPanel();
+		playerPanel = new PlayerPanel();
 		
 		textPanel.add(buttonPanel, BorderLayout.SOUTH);
+		textPanel.add(playerPanel, BorderLayout.NORTH);
 		tileContainerPanel.add(textPanel, BorderLayout.CENTER);
 		this.add(tileContainerPanel, BorderLayout.CENTER);
 	}
@@ -131,7 +134,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		int numPiece;
 		while (true) {
 			try {
-				reply = JOptionPane.showInputDialog("Hur många lag vill ni vara? (2-8 spelare)", 2);
+				reply = JOptionPane.showInputDialog("Hur mï¿½nga lag vill ni vara? (2-8 spelare)", 2);
 				if (reply == null)
 					return;
 				numPiece = Integer.parseInt(reply);
@@ -144,7 +147,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 			JOptionPane.showMessageDialog(this, "message", "title", 
 					JOptionPane.ERROR_MESSAGE, null);
 		}
-		
 
 //		ChallengeAccepted.getInstance().createBoard(numPiece);		
 		//tileList = Board.getInstance().getTileList();
@@ -166,6 +168,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		EventBus.getInstance().publish(Event.CreateBoard, tileList);
 		EventBus.getInstance().publish(Event.ShowBet, 
 				Board.getInstance().getActivePiece());
+		EventBus.getInstance().publish(Event.NextPlayer, null);
 	} 
     
 
@@ -175,7 +178,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 			startGame();
 		}
 		else if(e.getSource() == endGame){
-			int reply = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill avsluta?", null, JOptionPane.YES_NO_OPTION);
+			int reply = JOptionPane.showConfirmDialog(null, "ï¿½r du sï¿½ker pï¿½ att du vill avsluta?", null, JOptionPane.YES_NO_OPTION);
 			if (reply == JOptionPane.YES_OPTION){
 		      System.exit(0);
 		    }

@@ -88,7 +88,7 @@ public class Board{
 		// Generate teams
 		pieces = new Piece[numPiece];
 		for(int i = 0; i < numPiece; i++){
-			String teamName = "Team " + i+1;
+			String teamName = "Team " + (i+1);
 			Color teamColor = colorList.remove(
 					random.nextInt(colorList.size()));
 			Team team = new Team(teamName, teamColor);
