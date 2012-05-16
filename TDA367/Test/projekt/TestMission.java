@@ -19,18 +19,15 @@ public class TestMission {
 	public void testMission() {
 		Piece p = new Piece(Team);
 		Bet b = new Bet(4);
-		Board bd = new Board();
-		Mission m = new Mission(p);
-		m.startMission(Category.BODYTOBODY, b);
+		Mission m = new Mission(p, Category.SAMECLASS);
+		m.startMission();
+		int dequeSize = m.dequeSize();
+		assertTrue(dequeSize==3);
+		for(int j=0;j<dequeSize;j++){
+		System.out.println(m.nextCurrentCard());
+		}
+		dequeSize = m.dequeSize();
+		assertTrue(dequeSize==0);
 	}
-
-//	@Test
-//	public void testMission() {
-//		Piece p = new Piece(Team);
-//		Bet b = new Bet(4);
-//		Board bd = new Board();
-////		Mission m = new Mission(p);
-////		m.startMission( Category.BODYTOBODY, b);
-//	}
 	
 }

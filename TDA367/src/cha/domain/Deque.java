@@ -25,7 +25,7 @@ public class Deque{
 
 	static ArrayList<String> words = new ArrayList<String>(Arrays.asList(wordsss));
 
-	static String[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","ï¿½","ï¿½","ï¿½"};
+	static String[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","å","ä","ö"};
 	static String[] bodyParts =  {"Panna", "Axel", "Knä", "Hand", "Rumpa", "Armbåge", "Fot", "Mage", "Haka", "Vad", "Lår"};
 	static String[][] sameClasses = {
 		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
