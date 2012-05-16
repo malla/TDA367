@@ -77,7 +77,7 @@ public class TextPanel extends JPanel implements IEventHandler {
 			add(cardPanel);
 			cardPanel.add(textArea);
 			paintCard(mission);			
-			Category c = this.
+			Category c = this;
 				//getCategory(o);
 			header.setText("so cool");
 			p2.add(header);
