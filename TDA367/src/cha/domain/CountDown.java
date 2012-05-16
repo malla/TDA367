@@ -29,7 +29,7 @@ public class CountDown implements ActionListener{
 	 */
 	private void ticktock(){
 		EventBus.getInstance().publish(Event.TimeTick, Integer.toString(count));
-		if (count==0){
+		if (count==-1){
 			timer.stop();
 			EventBus.getInstance().publish(Event.TimeOver, null);
 		}
