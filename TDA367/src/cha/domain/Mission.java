@@ -89,6 +89,10 @@ public class Mission {
 			EventBus.getInstance().publish(Event.NewPosition, piece.getPosition());
 			piece.setBet(0);
 		}
+		public Category getCategory(Mission m){
+			return m.category;
+			
+		}
 
 		@Override
 		public String toString() {

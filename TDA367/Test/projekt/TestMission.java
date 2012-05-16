@@ -19,18 +19,10 @@ public class TestMission {
 	public void testMission() {
 		Piece p = new Piece(Team);
 		Bet b = new Bet(4);
-		Board bd = new Board();
-		Mission m = new Mission(p);
-		m.startMission(Category.BODYTOBODY, b);
+		Mission m = new Mission(p, Category.SAMECLASS);
+		m.startMission();
+		System.out.println(m.nextCurrentCard());
+		//assertTrue(m.size()==3);
 	}
-
-//	@Test
-//	public void testMission() {
-//		Piece p = new Piece(Team);
-//		Bet b = new Bet(4);
-//		Board bd = new Board();
-////		Mission m = new Mission(p);
-////		m.startMission( Category.BODYTOBODY, b);
-//	}
 	
 }
