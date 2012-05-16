@@ -21,11 +21,15 @@ import java.awt.Font;
 @SuppressWarnings("serial")
 public class TextPanel extends JPanel implements IEventHandler {
 
-	JTextArea textArea;
-	JLabel lblTime;
-	JPanel p2 = new JPanel();
-	JPanel cardPanel = new JPanel();
-	JLabel header=new JLabel();
+	private JTextArea textArea;
+	private JLabel lblTime;
+	private JPanel p2 = new JPanel();
+	private JPanel cardPanel = new JPanel();
+	private JLabel header=new JLabel();
+	private JPanel northPanel = new JPanel();
+	private JPanel southPanel = new JPanel();
+
+
 
 	public TextPanel() {
 		EventBus.getInstance().register(this);
@@ -60,34 +64,52 @@ public class TextPanel extends JPanel implements IEventHandler {
 
 
 		p2.setBackground(Color.WHITE);
-		p2.setPreferredSize(new Dimension(10, 75));
-		p2.setMinimumSize(new Dimension(10, 75));
+		p2.setPreferredSize(new Dimension(100, 75));
+		p2.setMinimumSize(new Dimension(100, 75));
 		p2.setBorder(BorderFactory.createLineBorder(Color.black));
 		add(p2, BorderLayout.NORTH);
+		
+		cardPanel.add(northPanel, BorderLayout.PAGE_START);
+		cardPanel.add(southPanel, BorderLayout.CENTER);
 	}
 
 	@Override
 	public void action(Event e, Object o) {
 		if(e == Event.StartMission){
-			Mission mission = (Mission)o;			
+			Mission mission = (Mission)o;	
 			cardPanel.setMaximumSize(new Dimension(50, 50));
 			cardPanel.setMinimumSize(new Dimension(50, 50));
 			cardPanel.setPreferredSize(new Dimension(50, 50));
 			Category c = mission.getCategory();
-			Color color=setCardColor(c);
+			Color colorBG=setCardBGColor(c);
+			Color colorFG=setCardFGColor(c);
 
-			cardPanel.setBackground(color);
-			cardPanel.setForeground(color);
+			cardPanel.setBackground(colorBG);
+			cardPanel.setForeground(colorBG);
 			cardPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 			this.remove(textArea);
 			repaint();
 			add(cardPanel);
-			cardPanel.add(textArea);
+			
+			northPanel.remove(header);
+			northPanel.setBackground(colorFG);
+			northPanel.setForeground(colorFG);
+			northPanel.setPreferredSize(new Dimension(550, 50));
+			northPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+
+			southPanel.remove(textArea);
+			southPanel.setBackground(colorFG);
+			southPanel.setForeground(colorFG);
+			southPanel.setPreferredSize(new Dimension(550, 250));
+			southPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+			
+			southPanel.add(textArea, BorderLayout.SOUTH);
 			paintCard(mission);			
 			String title = mission.getTitle();
 			header.setText("" + title);
 			header.setFont(new Font("DejaVu Sans", Font.BOLD, 30));
-			p2.add(header);
+			northPanel.add(header, BorderLayout.NORTH);
+			
 
 		}
 		else if(e == Event.NextCard){
@@ -109,6 +131,7 @@ public class TextPanel extends JPanel implements IEventHandler {
 			textArea.setText("Was the mission completed successfully?");
 		}
 		else if(e == Event.MissionSuccess||e == Event.MissionFail){
+			
 			p2.remove(header);
 		}
 	}
@@ -131,19 +154,36 @@ public class TextPanel extends JPanel implements IEventHandler {
 
 	}
 
-	private Color setCardColor(Category category){
+	private Color setCardFGColor(Category category){
 		Color color;
 		if (category== Category.BACKWARDS){
-			color= new Color(255, 150, 150);
+			color= new Color(255, 190, 190);
 		}
 		else if (category== Category.BODYTOBODY){
-			color= new Color(255, 255, 150);
+			color= new Color(255, 255, 190);
 		}
 		else if (category== Category.SAMECLASS){
-			color= new Color(150, 150, 255);
+			color= new Color(190, 190, 255);
 		}
 		else {
-			color= new Color(150, 255, 150);
+			color= new Color(190, 255, 190);
+		}
+		return color;
+	}
+	
+	private Color setCardBGColor(Category category){
+		Color color;
+		if (category== Category.BACKWARDS){
+			color= Color.red;
+		}
+		else if (category== Category.BODYTOBODY){
+			color= Color.yellow;
+		}
+		else if (category== Category.SAMECLASS){
+			color= Color.blue;
+		}
+		else {
+			color= Color.green;
 		}
 		return color;
 	}
