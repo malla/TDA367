@@ -7,6 +7,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 
+import cha.domain.Categories.Category;
 import cha.domain.Mission;
 import cha.event.EventBus;
 import cha.event.Event;
@@ -25,18 +26,18 @@ public class TextPanel extends JPanel implements IEventHandler {
 	JPanel p2 = new JPanel();
 	JPanel cardPanel = new JPanel();
 	JLabel header=new JLabel();
-	
+
 	public TextPanel() {
 		EventBus.getInstance().register(this);
 		initialize();
 	}
-	
+
 	public void initialize(){
 		setLayout(new BorderLayout(0, 0));
 		this.setSize(600,400);
-		
+
 		textArea = new JTextArea();
-		textArea.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		textArea.setFont(new Font("DejaVu Sans", Font.PLAIN, 18));
 		textArea.setSize(500,300);
 		textArea.setEditable(false);
 		textArea.setForeground(Color.BLACK);
@@ -44,7 +45,9 @@ public class TextPanel extends JPanel implements IEventHandler {
 		textArea.setText("Card with info");
 		add(textArea, BorderLayout.CENTER);
 		textArea.setColumns(2);
-		
+
+
+
 		lblTime = new JLabel("Time");
 		JPanel p1 = new JPanel();
 		p1.setBackground(Color.WHITE);
@@ -53,12 +56,13 @@ public class TextPanel extends JPanel implements IEventHandler {
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		p1.add(lblTime, BorderLayout.EAST);
 		add(p1, BorderLayout.SOUTH);
-		
-		
-		
+
+
+
 		p2.setBackground(Color.WHITE);
 		p2.setPreferredSize(new Dimension(10, 75));
 		p2.setMinimumSize(new Dimension(10, 75));
+		p2.setBorder(BorderFactory.createLineBorder(Color.black));
 		add(p2, BorderLayout.NORTH);
 	}
 
@@ -66,28 +70,31 @@ public class TextPanel extends JPanel implements IEventHandler {
 	public void action(Event e, Object o) {
 		if(e == Event.StartMission){
 			Mission mission = (Mission)o;			
-			cardPanel.setMaximumSize(new Dimension(240, 240));
-			cardPanel.setMinimumSize(new Dimension(240, 240));
-			cardPanel.setPreferredSize(new Dimension(240, 240));
-			cardPanel.setBackground(Color.CYAN);
-			cardPanel.setForeground(Color.CYAN);
+			cardPanel.setMaximumSize(new Dimension(50, 50));
+			cardPanel.setMinimumSize(new Dimension(50, 50));
+			cardPanel.setPreferredSize(new Dimension(50, 50));
+			Category c = mission.getCategory();
+			Color color=setCardColor(c);
+
+			cardPanel.setBackground(color);
+			cardPanel.setForeground(color);
 			cardPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 			this.remove(textArea);
 			repaint();
 			add(cardPanel);
 			cardPanel.add(textArea);
 			paintCard(mission);			
-			//Category c = this;
-				//getCategory(o);
-			header.setText("so cool");
+			String title = mission.getTitle();
+			header.setText("" + title);
+			header.setFont(new Font("DejaVu Sans", Font.BOLD, 30));
 			p2.add(header);
-		
+
 		}
 		else if(e == Event.NextCard){
 			Mission mission = (Mission)o;
 			paintCard(mission);
 		}
-		
+
 		else if(e == Event.MakeBet){
 			int bet = (Integer)o;
 			textArea.setText("Bet: " + bet);
@@ -109,34 +116,35 @@ public class TextPanel extends JPanel implements IEventHandler {
 		String[] cardtext = mission.nextCurrentCard().getString();
 		int words = cardtext.length;
 		String text = "";
-		if (words>5){ //Trying to make representation nicer.
-			paintCardSpecial(cardtext);
+		if (words>1){
+			for (int i=0;i<words ;i=i+2){
+				text = text + cardtext[i]+"		"+ cardtext[i+1]+"\n";
+			}
 		}
-		else {for (int i=0;i<words ;i++){
-			text = text+ "\n" + cardtext[i];
+		else {
+			text = cardtext[0];
 		}
-		}
+
 		textArea.setText(text);
 		validate();
 		textArea.repaint();
-		
-	}
-	
-	private void paintCardSpecial(String[] cardtext){
-		String text = "";
-		String text2= "";
-		
-		for (int i=0;i<7 ;i++){
-			text = text+ "\n" + cardtext[i];
-		}
-		for (int i=7;i<14 ;i++){
-			text2 = text2+ "\n" + cardtext[i];
-		}
-		//textArea.setColumns(2);
-		textArea.insert(text, 0);
-		textArea.insert(text2, 1);
-		validate();
-		textArea.repaint();
+
 	}
 
+	private Color setCardColor(Category category){
+		Color color;
+		if (category== Category.BACKWARDS){
+			color= new Color(255, 150, 150);
+		}
+		else if (category== Category.BODYTOBODY){
+			color= new Color(255, 255, 150);
+		}
+		else if (category== Category.SAMECLASS){
+			color= new Color(150, 150, 255);
+		}
+		else {
+			color= new Color(150, 255, 150);
+		}
+		return color;
+	}
 }

@@ -42,7 +42,8 @@ public class Mission {
 		return currentCard;
 		}
 		else timeOver();
-		String[] text =new String[]{"There are no more cards in the deque! How did it go?"};
+		String[] text =new String[]{"Det finns inga fler kort för ditt uppdrag! " +
+				"\nTryck på 'Done' eller vänta tills tiden tagit slut!"};
 		return new Card(text);
 	}
 
@@ -77,9 +78,25 @@ public class Mission {
 			EventBus.getInstance().publish(Event.NewPosition, piece.getPosition());
 			piece.setBet(0);
 		}
-		public Category getCategory(Mission m){
-			return m.category;
-			
+		public Category getCategory(){
+			return category;
+		}
+		
+		public String getTitle(){
+			String title;
+			if (category== Category.BACKWARDS){
+			title= "Baklänges!";
+			}
+			else if (category== Category.BODYTOBODY){
+			title= "Kropp mot kropp!";
+			}
+			else if (category== Category.SAMECLASS){
+			title= "Samma kategori!";
+			}
+			else {
+			title= "Hitta ord!";
+			}
+			return title;
 		}
 
 		@Override
