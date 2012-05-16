@@ -8,6 +8,7 @@ import cha.event.Event;
 import cha.event.EventBus;
 import cha.event.IEventHandler;
 
+@SuppressWarnings("serial")
 public class PlayerPanel extends JPanel implements IEventHandler {
 
 	private JLabel player;

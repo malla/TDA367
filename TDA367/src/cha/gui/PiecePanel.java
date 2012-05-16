@@ -1,13 +1,10 @@
 package cha.gui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import javax.swing.border.LineBorder;
-
 import cha.domain.Piece;
 
 @SuppressWarnings("serial")
@@ -27,7 +24,6 @@ public class PiecePanel extends JPanel {
 	
 	private void initialize(){
 		this.setBackground(color);
-		//this.setForeground(color);
 		this.setSize(size);
 		this.setMinimumSize(size);
 		this.setPreferredSize(size);

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import cha.event.EventBus;
 import cha.event.Event;
 
+@SuppressWarnings("serial")
 public class StartPanel extends JPanel implements ActionListener {
 	
 	JButton startButton;
@@ -35,8 +36,6 @@ public class StartPanel extends JPanel implements ActionListener {
 			EventBus.getInstance().publish(Event.NewGame, null);
 		}else if(e.getSource() == rulesButton){
 			EventBus.getInstance().publish(Event.ShowGameRules, null);
-		}
-		
+		}	
 	}
-	
 }

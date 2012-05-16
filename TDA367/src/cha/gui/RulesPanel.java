@@ -12,6 +12,7 @@ import cha.event.EventBus;
 import cha.event.Event;
 import cha.event.IEventHandler;
 
+@SuppressWarnings("serial")
 public class RulesPanel extends JPanel implements IEventHandler, ActionListener {
 
 	private JButton backButton;
