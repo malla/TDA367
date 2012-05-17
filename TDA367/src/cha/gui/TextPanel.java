@@ -39,6 +39,9 @@ public class TextPanel extends JPanel implements IEventHandler {
 		textArea.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		textArea.setSize(500,300);
 		textArea.setEditable(false);
+		
+		this.setBackground(Color.cyan);
+		
 		textArea.setForeground(Color.BLACK);
 		textArea.setOpaque(false);
 		textArea.setText("Card with info");

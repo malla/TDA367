@@ -51,7 +51,7 @@ public class Board{
 		return instance;
 	}
 	
-	public static void createBoard(int numPiece){
+	public static void createNewBoard(int numPiece){
 		Board board = Board.getInstance();
 		board.init(numPiece);
 	}
@@ -59,7 +59,6 @@ public class Board{
 	// Constructor
 	
 	private Board(){
-		
 		//TODO Check if proper method and if we should place it somewhere else
 		this.categoryList.add(Category.SAMECLASS);
 		this.categoryList.add(Category.BODYTOBODY);
@@ -74,18 +73,17 @@ public class Board{
 		this.colorList.add(Color.BLUE);
 		this.colorList.add(Color.ORANGE);
 		this.colorList.add(Color.CYAN);
-		
-		
-		// Add all tiles
-		for(int i=0; i<43; i++){
-			tileList.add(new Tile(categoryList.get(random.nextInt(categoryList.size()))));
-		}
-//		ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);
 	}
 	
 	public void init(int numPiece){
+		
+		// Add a new set of tiles
+		for(int i=0; i<43; i++){
+			tileList.add(new Tile(categoryList.get(random.nextInt(categoryList.size()))));
+		}
+		
+		// Init number of pieces
 		numberOfPieces = numPiece;
-		System.out.print(numberOfPieces);
 
 		// Generate teams
 		pieces = new Piece[numPiece];

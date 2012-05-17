@@ -62,9 +62,7 @@ public class Mission {
 
 				if(piece.getPosition() + bet.getBetValue() > GOAL_TILE){
 					piece.setPosition(GOAL_TILE);
-					EventBus.getInstance().publish(Event.GameOver, piece.getTeam());
-
-				}
+					EventBus.getInstance().publish(Event.GameOver, piece.getTeam());				}
 				else{
 					piece.movePieceForward(bet.getBetValue());
 				}

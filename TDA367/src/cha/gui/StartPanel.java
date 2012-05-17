@@ -1,9 +1,11 @@
 package cha.gui;
 
 import java.awt.FlowLayout;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -26,7 +28,7 @@ public class StartPanel extends JPanel implements ActionListener {
 		
 		this.add(startButton);
 		this.add(rulesButton);
-		
+	
 		
 	}
 

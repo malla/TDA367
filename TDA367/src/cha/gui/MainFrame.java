@@ -42,19 +42,21 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	private JMenuItem newGame;
 	private JMenuItem endGame;
 	private JMenuItem gameRules;
-	private JPanel startPanel;
 	
 	private JButton startButton;
 	private JButton rulesButton;
 
-	
 	//private StartPanel startPanel;
+	
+	private JPanel startPanel;
 	private RulesPanel rulesPanel;
 	private TileContainerPanel tileContainerPanel;
 	
 	private TextPanel textPanel;
 	private ButtonPanel buttonPanel;
 
+	// Constructor
+	
 	public MainFrame() {
 		EventBus.getInstance().register(this);
 		JMenuBar menuBar = new JMenuBar();
@@ -85,21 +87,36 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		
 		this.setLayout(new BorderLayout());
 		
+		// Init Start panel
+		
 		startButton = new JButton("New Game");
 		rulesButton = new JButton("Rules");
-		
 		startButton.addActionListener(this);
 		rulesButton.addActionListener(this);
+		
 		startPanel = new JPanel();
 		startPanel.add(startButton);
 		startPanel.add(rulesButton);
 		this.add(startPanel, BorderLayout.NORTH);
 		
-		//startPanel = new StartPanel();
+		// Init Rules panel
+		
 		rulesPanel = new RulesPanel();
 		rulesPanel.setVisible(false);
-		//this.add(startPanel);
-		//this.add(rulesPanel);
+		this.add(rulesPanel);
+
+		// Init Game panel
+		
+		tileContainerPanel = new TileContainerPanel();
+		textPanel = new TextPanel();
+		buttonPanel = new ButtonPanel();
+		
+		textPanel.add(buttonPanel, BorderLayout.SOUTH);
+		tileContainerPanel.add(textPanel, BorderLayout.CENTER);
+		
+		this.add(tileContainerPanel, BorderLayout.CENTER);
+		
+		// Some frame settings
 		
 		this.setTitle("Challenge Accepted");
 		this.setResizable(false);
@@ -108,67 +125,8 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		this.setVisible(true);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initGameGUI() {
-		this.remove(startButton);
-		this.remove(rulesButton);
-		startPanel.setVisible(false);
-		
-		tileContainerPanel = new TileContainerPanel();
-		textPanel = new TextPanel();
-		buttonPanel = new ButtonPanel();
-		
-		textPanel.add(buttonPanel, BorderLayout.SOUTH);
-		tileContainerPanel.add(textPanel, BorderLayout.CENTER);
-		this.add(tileContainerPanel, BorderLayout.CENTER);
-	}
-	
-		
-	public void startGame(){
-		String reply = null;
-		int numPiece;
-		while (true) {
-			try {
-				reply = JOptionPane.showInputDialog("Hur många lag vill ni vara? (2-8 spelare)", 2);
-				if (reply == null)
-					return;
-				numPiece = Integer.parseInt(reply);
-				if (numPiece >= MIN_PLAYERS && numPiece <= MAX_PLAYERS) {
-					System.out.println("Players accepted: " + numPiece);
-					break;
-				}
-			} catch (NumberFormatException e) { }
-			// TODO: Spec. message and title
-			JOptionPane.showMessageDialog(this, "message", "title", 
-					JOptionPane.ERROR_MESSAGE, null);
-		}
-		
-
-//		ChallengeAccepted.getInstance().createBoard(numPiece);		
-		//tileList = Board.getInstance().getTileList();
-
-//		ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);
-				
-//		ChallengeAccepted.getInstance().publish(Event.ShowBet, 
-//				ChallengeAccepted.getInstance().getBoard().getActivePiece());
-		
-
-		rulesPanel.setVisible(false);
-
-		
-		initGameGUI();
-		
-		Board.createBoard(numPiece);		
-		tileList = Board.getInstance().getTileList();
-
-		EventBus.getInstance().publish(Event.CreateBoard, tileList);
-		EventBus.getInstance().publish(Event.ShowBet, 
-				Board.getInstance().getActivePiece());
-	} 
+	// Methods
     
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == newGame){
@@ -196,20 +154,74 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 			showRules();
 		} else if(e == Event.ShowStartPanel){
 			showStartPanel();
+		} else if (e == Event.GameOver){
+			showGameOverPanel();
 		}
 		
 	}
 
-	private void showStartPanel() {
-		rulesPanel.setVisible(false);
-	//	startPanel.setVisible(true);
+	private void showGameOverPanel() {
+		buttonPanel.setVisible(false);
+		textPanel.textArea.setText("Game Over");
+	}
+
+	public void startGame(){
+		String reply = null;
+		int numPiece;
+		while (true) {
+			try {
+				reply = JOptionPane.showInputDialog("Hur många lag vill ni vara? (2-8 spelare)", 2);
+				if (reply == null)
+					return;
+				numPiece = Integer.parseInt(reply);
+				if (numPiece >= MIN_PLAYERS && numPiece <= MAX_PLAYERS) {
+					System.out.println("Players accepted: " + numPiece);
+					break;
+				}
+			} catch (NumberFormatException e) { }
+			// TODO: Spec. message and title
+			JOptionPane.showMessageDialog(this, "message", "title", 
+					JOptionPane.ERROR_MESSAGE, null);
+		}
 		
+		showGameGUI();
+		
+		Board.createNewBoard(numPiece);		
+		tileList = Board.getInstance().getTileList();
+
+		EventBus.getInstance().publish(Event.CreateBoard, tileList);
+		EventBus.getInstance().publish(Event.ShowBet, 
+				Board.getInstance().getActivePiece());
+	} 
+	
+	private void showStartPanel() {
+		startPanel.setVisible(true);
+		rulesPanel.setVisible(false);
+
+		// TODO:
+		if (tileContainerPanel.isVisible())
+			; // show warning about loosing game
+		
+		tileContainerPanel.setVisible(false);
 	}
 
 	private void showRules() {
-	//	startPanel.setVisible(false);
+		startPanel.setVisible(false);
 		rulesPanel.setVisible(true);
+
+		// TODO:
+		if (tileContainerPanel.isVisible())
+			; // show warning about loosing game
 		
+		tileContainerPanel.setVisible(false);
 	}
 
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void showGameGUI() {
+		startPanel.setVisible(false);
+		rulesPanel.setVisible(false);
+		tileContainerPanel.setVisible(true);
+	}
 }
