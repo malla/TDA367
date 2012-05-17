@@ -1,7 +1,7 @@
 package cha.domain;
 import java.util.Arrays;
-import java.util.Random;
 
+/** Takes te give information and returns it in a Card, which contains an array of strings**/
 public class Card {
 	
 	private String [] assignment;
@@ -10,17 +10,13 @@ public class Card {
 		assignment= s;
 	}
 
-	public int randomNumber(int i){
-		Random randomGenerator = new Random();
-		return randomGenerator.nextInt(i);
-	}
-
 	@Override
 	public String toString() {
 		String asString = Arrays.toString(assignment); 
 		return "Card [a1=" + asString + "]";
 	}
 	
+	/**Returns the array within the Card**/
 	public String[] getString(){
 		return assignment;
 	}

@@ -16,10 +16,8 @@ import cha.event.IEventHandler;
 
 @SuppressWarnings("serial")
 public class ButtonPanel extends JPanel implements IEventHandler, ActionListener {
-	
-	private static final String Bet = null;
+
 	private JButton startMissionButton;
-	private JButton cancelButton;
 	private JButton yesButton;
 	private JButton noButton;
 	private JButton nextButton;
@@ -31,21 +29,18 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 		
 		timer = new JLabel();
 		timer.setFont(new Font("Dialog", Font.BOLD, 20));
-		startMissionButton = new JButton("Start Mission");
-		cancelButton = new JButton("Cancel");
 		yesButton = new JButton("Yes");
 		noButton = new JButton("No");
 		nextButton = new JButton("Next Card");
 		doneButton = new JButton("Done");
+		startMissionButton = new JButton("Start Mission");
 		startMissionButton.addActionListener(this);
-		cancelButton.addActionListener(this);
 		yesButton.addActionListener(this);
 		noButton.addActionListener(this);
 		nextButton.addActionListener(this);
 		doneButton.addActionListener(this);
 		
 		this.add(startMissionButton);
-		this.add(cancelButton);
 		this.add(nextButton);
 		this.add(doneButton);
 		this.add(yesButton);
@@ -53,7 +48,6 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 		this.add(timer);
 		
 		startMissionButton.setVisible(false);
-		cancelButton.setVisible(false);
 		nextButton.setVisible(false);
 		doneButton.setVisible(false);
 		yesButton.setVisible(false);
@@ -68,17 +62,14 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 	public void action(Event e, Object o) {
 		if(e == Event.ShowBet){
 			startMissionButton.setVisible(false);
-			cancelButton.setVisible(false);
 			yesButton.setVisible(false);
 			noButton.setVisible(false);
 		}
 		else if(e == Event.MakeBet){
 			startMissionButton.setVisible(true);
-			//cancelButton.setVisible(true);
 		}
 		else if(e == Event.StartMission){
 			startMissionButton.setVisible(false);
-			cancelButton.setVisible(false);
 			nextButton.setVisible(true);
 			doneButton.setVisible(true);
 			timer.setVisible(true);
@@ -96,6 +87,7 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 		}
 		
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == startMissionButton){
@@ -107,8 +99,6 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 				panel.notBetable();
 			}
 			Board.getInstance().startMission();
-			
-			//Board.getInstance().startMission(Bet.getBetValue());
 
 			EventBus.getInstance().publish(Event.StartMission, 
 					Board.getInstance().getMission());
@@ -116,27 +106,21 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 		else if(e.getSource() == nextButton){
 			EventBus.getInstance().publish(Event.NextCard,
 					Board.getInstance().getMission());
-		}
-		else if(e.getSource() == cancelButton){
-//	 		Board.getInstance().getActivePiece().setBet(0);
-//			ChallengeAccepted.getInstance().publish(Event.ShowBet, null);
-		}
-		
+		}		
 		else if(e.getSource() == doneButton){
-			//TODO
 			Board.getInstance().getMission().stopTimer();
 			EventBus.getInstance().publish(Event.TimeOver, null);
 		}
 		else if(e.getSource() == yesButton){
 			Board.getInstance().getMission().missionDone(true);
 			EventBus.getInstance().publish(Event.MissionSuccess, null);
-			//TODO Next Player
+			EventBus.getInstance().publish(Event.NextPlayer, null);
 			EventBus.getInstance().publish(Event.ShowBet, null);
 		}
 		else if (e.getSource() == noButton){
 			Board.getInstance().getMission().missionDone(false);
 			EventBus.getInstance().publish(Event.MissionFail, null);
-			//TODO Next Player
+			EventBus.getInstance().publish(Event.NextPlayer, null);
 			EventBus.getInstance().publish(Event.ShowBet, null);
 		}
 	}

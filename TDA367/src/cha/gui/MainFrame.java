@@ -1,13 +1,9 @@
 package cha.gui;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -15,7 +11,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import cha.domain.Board;
 import cha.domain.Tile;
 import cha.event.EventBus;
@@ -28,15 +23,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	private static final int MIN_PLAYERS = 2;
 
 	private static final int MAX_PLAYERS = 8;
-
-	/**
-	 * Launch the application.
-	 * 
-	 */
-	public static void main(String[] args) {
-		new MainFrame();	
-	}
-	
 	private ArrayList<Tile> tileList = new ArrayList<Tile>();
 	
 	private JMenuItem newGame;
@@ -46,14 +32,13 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	private JButton startButton;
 	private JButton rulesButton;
 
-	//private StartPanel startPanel;
-	
 	private JPanel startPanel;
 	private RulesPanel rulesPanel;
 	private TileContainerPanel tileContainerPanel;
 	
 	private TextPanel textPanel;
 	private ButtonPanel buttonPanel;
+	private PlayerPanel playerPanel;
 
 	// Constructor
 	
@@ -99,6 +84,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		startPanel.add(rulesButton);
 		this.add(startPanel, BorderLayout.NORTH);
 		
+
 		// Init Rules panel
 		
 		rulesPanel = new RulesPanel();
@@ -106,14 +92,15 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		this.add(rulesPanel);
 
 		// Init Game panel
-		
+
 		tileContainerPanel = new TileContainerPanel();
 		textPanel = new TextPanel();
 		buttonPanel = new ButtonPanel();
-		
+		playerPanel = new PlayerPanel();
 		textPanel.add(buttonPanel, BorderLayout.SOUTH);
+		textPanel.add(playerPanel, BorderLayout.NORTH);
 		tileContainerPanel.add(textPanel, BorderLayout.CENTER);
-		
+
 		this.add(tileContainerPanel, BorderLayout.CENTER);
 		
 		// Some frame settings
@@ -126,14 +113,14 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	}
 
 	// Methods
-    
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == newGame){
 			startGame();
 		}
 		else if(e.getSource() == endGame){
-			int reply = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill avsluta?", null, JOptionPane.YES_NO_OPTION);
+			int reply = JOptionPane.showConfirmDialog(null, "ï¿½r du sï¿½ker pï¿½ att du vill avsluta?", null, JOptionPane.YES_NO_OPTION);
 			if (reply == JOptionPane.YES_OPTION){
 		      System.exit(0);
 		    }
@@ -154,15 +141,11 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 			showRules();
 		} else if(e == Event.ShowStartPanel){
 			showStartPanel();
+
 		} else if (e == Event.GameOver){
 			showGameOverPanel();
 		}
-		
-	}
 
-	private void showGameOverPanel() {
-		buttonPanel.setVisible(false);
-		textPanel.textArea.setText("Game Over");
 	}
 
 	public void startGame(){
@@ -192,6 +175,8 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		EventBus.getInstance().publish(Event.CreateBoard, tileList);
 		EventBus.getInstance().publish(Event.ShowBet, 
 				Board.getInstance().getActivePiece());
+		// TODO: needed??
+//		EventBus.getInstance().publish(Event.NextPlayer, null);
 	} 
 	
 	private void showStartPanel() {
@@ -224,4 +209,12 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		rulesPanel.setVisible(false);
 		tileContainerPanel.setVisible(true);
 	}
+	
+
+	private void showGameOverPanel() {
+		// TODO: Malla skriver denna nŠr alla paneler Šr lagade.
+		
+	}
+	
+	
 }

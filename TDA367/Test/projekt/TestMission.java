@@ -18,7 +18,6 @@ public class TestMission {
 	@Test
 	public void testMission() {
 		Piece p = new Piece(Team);
-		Bet b = new Bet(4);
 		Mission m = new Mission(p, Category.SAMECLASS);
 		m.startMission();
 		int dequeSize = m.dequeSize();

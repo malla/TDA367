@@ -5,11 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
-
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
-
-import cha.domain.Bet;
 import cha.domain.Board;
 import cha.domain.Categories.Category;
 import cha.domain.Piece;
@@ -29,6 +26,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	private JPanel eastPanel = new JPanel();
 	private JPanel southPanel = new JPanel();
 	private JPanel westPanel = new JPanel();
+<<<<<<< HEAD
 
 	private ArrayList<Color> colorList = new ArrayList<Color>();
 	
@@ -37,6 +35,11 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	//private ArrayList<Color> colorList;
 	private ArrayList<PiecePanel> pieces;
 
+=======
+	
+	private ArrayList<PiecePanel> piecePanels = new ArrayList<PiecePanel>();
+
+>>>>>>> 422d6c8207aaf4c2a9524fd75c4b0db115e347d0
 	private int currentPiece;
 	private static int currentBet;
 	private static int betable = 0;
@@ -44,17 +47,10 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 
 	public TileContainerPanel() {
 		setLayout(new BorderLayout(0, 0));
-//		init();
 		EventBus.getInstance().register(this);
 	}
 
 	public void init(ArrayList<Tile> t) {
-//		colorList = new ArrayList<Color>();
-//		colorList.add(Color.BLUE);
-//		colorList.add(Color.GREEN);
-//		colorList.add(Color.YELLOW);
-//		colorList.add(Color.RED);
-
 		eastPanel.setPreferredSize(new Dimension(50, 0));
 		FlowLayout flowLayout_1 = (FlowLayout) eastPanel.getLayout();
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
@@ -160,24 +156,16 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	
 	public void action(Event e, Object o) {
 		if(e == Event.CreateBoard){
+			@SuppressWarnings("unchecked")
 			ArrayList<Tile> t = (ArrayList<Tile>)o;
 			init(t);
 		}
 		else if (e == Event.ShowBet) {
 			showBet();
 			setBetable(0);
-//			int pos =
-//					Board.getInstance().getActivePiece().getPosition();
-//		//	int pos = 0;
-//			for (int i = pos + 1; i < pos + 8; i++) {
-//				if (i > 43){
-//					return;
-//				}
-//				tilePanels[i].betable();
-//				 repaint();
-//			}
 		} 
 		else if (e == Event.MakeBet) {
+<<<<<<< HEAD
 			
 			//Board.getInstance().getActivePiece().setBet(0);
 			//Ska vi verkligen sätta bet till 0 när vi satt bet redan i click i TilePanel?
@@ -204,6 +192,8 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			//TileContainerPanel.getTilePanels()[(Integer)o +
 		                 				        //   Board.getInstance().getActivePiece().getPosition()].
 
+=======
+>>>>>>> 422d6c8207aaf4c2a9524fd75c4b0db115e347d0
 			showBet();
 			setBetable(0);
 			currentBet = (Integer)o;
@@ -213,26 +203,14 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		    
 		} 
 		else if (e == Event.MakeBet) {
-			
-			//ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(0);
-			//Ska vi verkligen sätta bet till 0 när vi satt bet redan i click i TilePanel?
-			showBet();
-			
+			showBet();			
 			currentBet = (Integer)o;
 			setBetable(0);
 			
 			TileContainerPanel.getTilePanels()[currentBet +
-		                 				           Board.getInstance().getActivePiece().getPosition()].
-
-		                				           setBorder(new BevelBorder(BevelBorder.LOWERED));
-			
-			//ChallengeAccepted.getInstance().publish(Event.ShowBet, null);
-						
+			                                   Board.getInstance().getActivePiece().getPosition()].
+			                                   setBorder(new BevelBorder(BevelBorder.LOWERED));						
 			repaint();
-			
-//			for (TilePanel panel : tilePanels) {
-//				panel.notBetable();
-//			}
 		}
 		else if(e == Event.OldPosition){
 			int pos = (Integer)o;
@@ -259,9 +237,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	
 	private void showBet(){
 		int pos = Board.getInstance().getActivePiece().getPosition();
-		
-		
-		//ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(0);
+
 		for (int i = pos + 1; i < pos + 8; i++) {
 			if (i > 43){
 				return;
