@@ -26,20 +26,9 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	private JPanel eastPanel = new JPanel();
 	private JPanel southPanel = new JPanel();
 	private JPanel westPanel = new JPanel();
-<<<<<<< HEAD
-
-	private ArrayList<Color> colorList = new ArrayList<Color>();
 	
 	private ArrayList<PiecePanel> piecePanels = new ArrayList<PiecePanel>();
 
-	//private ArrayList<Color> colorList;
-	private ArrayList<PiecePanel> pieces;
-
-=======
-	
-	private ArrayList<PiecePanel> piecePanels = new ArrayList<PiecePanel>();
-
->>>>>>> 422d6c8207aaf4c2a9524fd75c4b0db115e347d0
 	private int currentPiece;
 	private static int currentBet;
 	private static int betable = 0;
@@ -165,7 +154,6 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			setBetable(0);
 		} 
 		else if (e == Event.MakeBet) {
-<<<<<<< HEAD
 			
 			//Board.getInstance().getActivePiece().setBet(0);
 			//Ska vi verkligen sätta bet till 0 när vi satt bet redan i click i TilePanel?
@@ -192,8 +180,6 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			//TileContainerPanel.getTilePanels()[(Integer)o +
 		                 				        //   Board.getInstance().getActivePiece().getPosition()].
 
-=======
->>>>>>> 422d6c8207aaf4c2a9524fd75c4b0db115e347d0
 			showBet();
 			setBetable(0);
 			currentBet = (Integer)o;
