@@ -1,6 +1,7 @@
 package cha.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	private JMenuItem newGame;
 	private JMenuItem endGame;
 	private JMenuItem gameRules;
+	private JMenuItem closeCA;
 	
 	private JButton startButton;
 	private JButton rulesButton;
@@ -51,18 +53,23 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		
 		newGame = new JMenuItem("Nytt spel");
 		endGame = new JMenuItem("Avsluta spel");
+		closeCA = new JMenuItem("Avsluta Challenge Accepted");
 		gameRules = new JMenuItem("Rules");
+		
 		
 		newGame.setMnemonic('N');
 		endGame.setMnemonic('Q');
+		closeCA.setMnemonic('W');
 		gameRules.setMnemonic('R');
 		
 		newGame.addActionListener(this);
 		endGame.addActionListener(this);
+		closeCA.addActionListener(this);
 		gameRules.addActionListener(this);
 		
 		menu.add(newGame);
 		menu.add(endGame);
+		menu.add(closeCA);
 		rules.add(gameRules);
 		
 		this.setJMenuBar(menuBar);
@@ -97,10 +104,15 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		textPanel = new TextPanel();
 		buttonPanel = new ButtonPanel();
 		playerPanel = new PlayerPanel();
+		
 		textPanel.add(buttonPanel, BorderLayout.SOUTH);
 		textPanel.add(playerPanel, BorderLayout.NORTH);
 		tileContainerPanel.add(textPanel, BorderLayout.CENTER);
+		
+		playerPanel.setBackground(Color.WHITE);
+		//tileContainerPanel.setBackground(Color.WHITE);
 
+		tileContainerPanel.setVisible(false);
 		this.add(tileContainerPanel, BorderLayout.CENTER);
 		
 		// Some frame settings
@@ -120,7 +132,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 			startGame();
 		}
 		else if(e.getSource() == endGame){
-			int reply = JOptionPane.showConfirmDialog(null, "ï¿½r du sï¿½ker pï¿½ att du vill avsluta?", null, JOptionPane.YES_NO_OPTION);
+			int reply = JOptionPane.showConfirmDialog(null, "€r du sŠker pŒ att du vill avsluta?", null, JOptionPane.YES_NO_OPTION);
 			if (reply == JOptionPane.YES_OPTION){
 		      System.exit(0);
 		    }
@@ -163,11 +175,9 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 				}
 			} catch (NumberFormatException e) { }
 			// TODO: Spec. message and title
-			JOptionPane.showMessageDialog(this, "message", "title", 
+			JOptionPane.showMessageDialog(this, "Must be a number between 2-8", "Error", 
 					JOptionPane.ERROR_MESSAGE, null);
 		}
-		
-		showGameGUI();
 		
 		Board.createNewBoard(numPiece);		
 		tileList = Board.getInstance().getTileList();
@@ -177,6 +187,9 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 				Board.getInstance().getActivePiece());
 		// TODO: needed??
 //		EventBus.getInstance().publish(Event.NextPlayer, null);
+		
+		showGameGUI();
+		
 	} 
 	
 	private void showStartPanel() {

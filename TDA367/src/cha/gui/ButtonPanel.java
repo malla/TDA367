@@ -54,7 +54,7 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 		noButton.setVisible(false);
 		timer.setVisible(false);
 		
-		this.setBackground(Color.red);
+		this.setBackground(Color.WHITE);
 	}
     
 

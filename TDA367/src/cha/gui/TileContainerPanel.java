@@ -37,6 +37,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	public TileContainerPanel() {
 		setLayout(new BorderLayout(0, 0));
 		EventBus.getInstance().register(this);
+		//setBackground(Color.WHITE);
 	}
 
 	public void init(ArrayList<Tile> t) {
