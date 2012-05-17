@@ -8,24 +8,11 @@ public class Team {
 
 	private String name;	
 	private Color color;
-
-	private final static Color[] colors = new Color[]{
-		Color.red, Color.blue, Color.green, Color.magenta, 
-		Color.pink, Color.yellow, Color.orange, Color.cyan 
-	};
-	private static List<Color> availableColors = new ArrayList<Color>();	
-
+	
 	// Constructor
 	
 	public Team(String name, Color color) {
 		this.name = name;
-//		if (availableColors.isEmpty()){
-//			for (Color localColor : colors)
-//				availableColors.add(localColor);
-//		}
-//		if (!availableColors.contains(color)){
-//			throw new IllegalArgumentException();
-//		}
 		this.color = color;
 	}
 	
@@ -47,10 +34,5 @@ public class Team {
 		this.color = color;
 	}
 	
-	// Static
-
-	public static List<Color> getAvailableColors() {
-		return availableColors;
-	}
 	
 }
