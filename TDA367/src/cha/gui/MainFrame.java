@@ -153,7 +153,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 			showRules();
 		} else if(e == Event.ShowStartPanel){
 			showStartPanel();
-
 		} else if (e == Event.GameOver){
 			showGameOverPanel();
 		}
@@ -165,7 +164,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		int numPiece;
 		while (true) {
 			try {
-				reply = JOptionPane.showInputDialog("Hur många lag vill ni vara? (2-8 spelare)", 2);
+				reply = JOptionPane.showInputDialog("Hur mŒnga lag vill ni vara? (2-8 spelare)", 2);
 				if (reply == null)
 					return;
 				numPiece = Integer.parseInt(reply);
@@ -174,14 +173,13 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 					break;
 				}
 			} catch (NumberFormatException e) { }
-			// TODO: Spec. message and title
 			JOptionPane.showMessageDialog(this, "Must be a number between 2-8", "Error", 
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 		
 		Board.createNewBoard(numPiece);		
 		tileList = Board.getInstance().getTileList();
-
+		
 		EventBus.getInstance().publish(Event.CreateBoard, tileList);
 		EventBus.getInstance().publish(Event.ShowBet, 
 				Board.getInstance().getActivePiece());
@@ -189,7 +187,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 //		EventBus.getInstance().publish(Event.NextPlayer, null);
 		
 		showGameGUI();
-		
 	} 
 	
 	private void showStartPanel() {
