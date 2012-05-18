@@ -166,7 +166,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		int numPiece;
 		while (true) {
 			try {
-				reply = JOptionPane.showInputDialog("Hur mŒnga lag vill ni vara? (2-8 spelare)", 2);
+				reply = JOptionPane.showInputDialog("Hur många lag vill ni vara? (2-8 spelare)", 2);
 				if (reply == null)
 					return;
 				numPiece = Integer.parseInt(reply);

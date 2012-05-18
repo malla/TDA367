@@ -11,7 +11,7 @@ import cha.domain.Categories;
 public class TestTile {
 	
 	@Test
-	public void testGetTile() {
+	public void testTile() {
 		Category c = Category.WORDJUMBLE;
 		Tile t = new Tile(c);
 		Tile f = new Tile(c);
