@@ -120,7 +120,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 			startGame();
 		}
 		else if(e.getSource() == endGame){
-			int reply = JOptionPane.showConfirmDialog(null, "ï¿½r du sï¿½ker pï¿½ att du vill avsluta?", null, JOptionPane.YES_NO_OPTION);
+			int reply = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill avsluta?", null, JOptionPane.YES_NO_OPTION);
 			if (reply == JOptionPane.YES_OPTION){
 		      System.exit(0);
 		    }
@@ -162,8 +162,8 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 					break;
 				}
 			} catch (NumberFormatException e) { }
-			// TODO: Spec. message and title
-			JOptionPane.showMessageDialog(this, "message", "title", 
+			String message = "Fel antal spelare";
+			JOptionPane.showMessageDialog(this, message, "Error", 
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 		

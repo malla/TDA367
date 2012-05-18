@@ -49,7 +49,7 @@ public class TextPanel extends JPanel implements IEventHandler {
 		
 		textArea.setForeground(Color.BLACK);
 		textArea.setOpaque(false);
-		textArea.setText("Card with info");
+		textArea.setText("");
 		add(textArea, BorderLayout.CENTER);
 		textArea.setColumns(2);
 
