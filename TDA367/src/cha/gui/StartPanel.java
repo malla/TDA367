@@ -1,5 +1,6 @@
 package cha.gui;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
@@ -20,6 +21,7 @@ public class StartPanel extends JPanel implements ActionListener {
 	
 	public StartPanel() {
 		this.setLayout(new FlowLayout());
+		setBackground(Color.BLUE);
 		
 		startButton = new JButton("New Game");
 		rulesButton = new JButton("Rules");

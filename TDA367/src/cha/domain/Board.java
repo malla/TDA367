@@ -37,7 +37,17 @@ public class Board{
 	// (use integer-constants with the enum names, and use Random to randomize a Category?)
 	// �r det inte det vi g�r?
 	private ArrayList<Category> categoryList = new ArrayList<Category>();
-	private ArrayList<Color> colorList = new ArrayList<Color>();
+	private final Color[] colorList = new Color[]{
+			Color.WHITE,
+			Color.GREEN,
+			Color.YELLOW,
+			Color.BLACK,
+			Color.RED,
+			Color.BLUE,
+			Color.ORANGE,
+			Color.CYAN
+	};
+	private ArrayList<Color> availableColorList = new ArrayList<Color>();
 	private ArrayList<Tile> tileList = new ArrayList<Tile>();
 
 	private Random random = new Random();
@@ -64,20 +74,12 @@ public class Board{
 		this.categoryList.add(Category.BODYTOBODY);
 		this.categoryList.add(Category.WORDJUMBLE);
 		this.categoryList.add(Category.BACKWARDS);
-		
-		this.colorList.add(Color.WHITE);
-		this.colorList.add(Color.GREEN);
-		this.colorList.add(Color.YELLOW);
-		this.colorList.add(Color.BLACK);
-		this.colorList.add(Color.RED);
-		this.colorList.add(Color.BLUE);
-		this.colorList.add(Color.ORANGE);
-		this.colorList.add(Color.CYAN);
 	}
 	
 	public void init(int numPiece){
 		
 		// Add a new set of tiles
+		tileList.clear();
 		for(int i=0; i<43; i++){
 			tileList.add(new Tile(categoryList.get(random.nextInt(categoryList.size()))));
 		}
@@ -85,16 +87,23 @@ public class Board{
 		// Init number of pieces
 		numberOfPieces = numPiece;
 
+		// Add new set of colors
+		availableColorList.clear();
+		for(Color color : colorList){
+			availableColorList.add(color);
+		}
+		
 		// Generate teams
 		pieces = new Piece[numPiece];
 		for(int i = 0; i < numPiece; i++){
 			String teamName = "Team " + (i+1);
-			Color teamColor = colorList.remove(
-					random.nextInt(colorList.size()));
+			Color teamColor = availableColorList.remove(
+					random.nextInt(availableColorList.size()));
 			Team team = new Team(teamName, teamColor);
 			pieces[i] = new Piece(team);
 		}
 		activePiece = 0;
+		currentMission = null;
 	}
 	
 	// Methods 
@@ -141,7 +150,6 @@ public class Board{
 		}
 		
 		if(activePiece == (pieces.length-1)){
-
 			activePiece = 0;
 		}
 		else{
