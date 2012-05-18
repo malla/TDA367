@@ -31,11 +31,8 @@ public class Board{
 	/**
 	 * @uml.property  name="tileTypes" multiplicity="(0 -1)" dimension="1"
 	 */
-	// What is this?
+
 	
-	//TODO Check if this is a proper solution, 
-	// (use integer-constants with the enum names, and use Random to randomize a Category?)
-	// �r det inte det vi g�r?
 	private ArrayList<Category> categoryList = new ArrayList<Category>();
 	private final Color[] colorList = new Color[]{
 			Color.WHITE,
@@ -54,6 +51,8 @@ public class Board{
 	
 	private static Board instance = null;
 
+	//Singleton-pattern
+	
 	public static Board getInstance() {
 		if (instance == null) {
 			instance = new Board();
@@ -69,7 +68,7 @@ public class Board{
 	// Constructor
 	
 	private Board(){
-		//TODO Check if proper method and if we should place it somewhere else
+		
 		this.categoryList.add(Category.SAMECLASS);
 		this.categoryList.add(Category.BODYTOBODY);
 		this.categoryList.add(Category.WORDJUMBLE);
