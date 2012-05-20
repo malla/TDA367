@@ -1,5 +1,6 @@
 package cha.gui;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +19,10 @@ public class RulesPanel extends JPanel implements IEventHandler, ActionListener 
 	private JButton backButton;
 
 	public RulesPanel() {
+		
 		this.setLayout(new GridLayout(2, 1));
+		
+		setBackground(Color.red);
 		
 		backButton = new JButton("Back");
 		backButton.addActionListener(this);
@@ -38,6 +42,16 @@ public class RulesPanel extends JPanel implements IEventHandler, ActionListener 
 		if(e.getSource() == backButton){
 			EventBus.getInstance().publish(Event.ShowStartPanel, null);
 		}
+	}
+
+	public void showContinueButton() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void hideContinuaeButton() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

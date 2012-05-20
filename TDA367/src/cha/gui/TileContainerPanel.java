@@ -186,7 +186,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		else if (e == Event.MakeBet) {
 			
 			//Board.getInstance().getActivePiece().setBet(0);
-			//Ska vi verkligen s‰tta bet till 0 n‰r vi satt bet redan i click i TilePanel?
+			//Ska vi verkligen sätta bet till 0 när vi satt bet redan i click i TilePanel?
 
 			int pos = Board.getInstance().getActivePiece().getPosition();
 			for (int i = pos + 1; i < pos + 8; i++) {

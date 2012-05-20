@@ -28,8 +28,8 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	
 	private JMenuItem newGame;
 	private JMenuItem endGame;
+	private JMenuItem exitApp;
 	private JMenuItem gameRules;
-	private JMenuItem closeCA;
 	
 	private JButton startButton;
 	private JButton rulesButton;
@@ -53,23 +53,23 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		
 		newGame = new JMenuItem("Nytt spel");
 		endGame = new JMenuItem("Avsluta spel");
-		closeCA = new JMenuItem("Avsluta Challenge Accepted");
+		exitApp = new JMenuItem("Avsluta Challenge Accepted");
 		gameRules = new JMenuItem("Rules");
 		
 		
 		newGame.setMnemonic('N');
 		endGame.setMnemonic('Q');
-		closeCA.setMnemonic('W');
+		exitApp.setMnemonic('W');
 		gameRules.setMnemonic('R');
 		
 		newGame.addActionListener(this);
 		endGame.addActionListener(this);
-		closeCA.addActionListener(this);
+		exitApp.addActionListener(this);
 		gameRules.addActionListener(this);
 		
 		menu.add(newGame);
 		menu.add(endGame);
-		menu.add(closeCA);
+		menu.add(exitApp);
 		rules.add(gameRules);
 		
 		this.setJMenuBar(menuBar);
@@ -96,7 +96,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		
 		rulesPanel = new RulesPanel();
 		rulesPanel.setVisible(false);
-		this.add(rulesPanel);
+		this.add(rulesPanel, BorderLayout.CENTER);
 
 		// Init Game panel
 
@@ -130,17 +130,18 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == newGame){
 			startGame();
-		}
-		else if(e.getSource() == endGame){
+		} else if(e.getSource() == endGame){
+			showStartPanel();
+		} else if(e.getSource() == exitApp){
 			int reply = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill avsluta?", null, JOptionPane.YES_NO_OPTION);
 			if (reply == JOptionPane.YES_OPTION){
 		      System.exit(0);
 		    }
-		}
-		else if(e.getSource() == startButton){
+		} else if(e.getSource() == gameRules){
+			showRules();
+		} else if(e.getSource() == startButton){
 			startGame();
-		}
-		else if(e.getSource() == rulesButton){
+		} else if(e.getSource() == rulesButton){
 			showRules();
 		}
 	}
@@ -190,25 +191,30 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	} 
 	
 	private void showStartPanel() {
-		startPanel.setVisible(true);
-		rulesPanel.setVisible(false);
-
-		// TODO:
-		if (tileContainerPanel.isVisible())
-			; // show warning about loosing game
-		
-		tileContainerPanel.setVisible(false);
+		if (tileContainerPanel.isVisible()){
+			int reply = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill avsluta?", null, JOptionPane.YES_NO_OPTION);
+			if (reply == JOptionPane.YES_OPTION){
+				startPanel.setVisible(true);
+				rulesPanel.setVisible(false);
+				tileContainerPanel.setVisible(false);
+		    }
+		}
 	}
 
 	private void showRules() {
+		
+		// TODO: implementera knapp i RulesPanel (hidden from start) och implementera de två metoderna i RulesPanel.
+		if (tileContainerPanel.isVisible()){
+			rulesPanel.showContinueButton();
+		}
+		else{
+			rulesPanel.hideContinuaeButton();
+		}
+		
 		startPanel.setVisible(false);
 		rulesPanel.setVisible(true);
-
-		// TODO:
-		if (tileContainerPanel.isVisible())
-			; // show warning about loosing game
-		
 		tileContainerPanel.setVisible(false);
+		
 	}
 
 	/**
