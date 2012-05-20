@@ -31,9 +31,10 @@ public class RulesPanel extends JPanel implements IEventHandler, ActionListener 
 		c.weightx = c.weighty = 1;
 		
 		continueButton = new JButton("Continue Game");
+		continueButton.setVisible(false);
 		continueButton.addActionListener(this);
 		this.add(continueButton, c);
-	
+		
 		c.gridx = 1;
 		c.anchor = GridBagConstraints.NORTH;
 		
@@ -70,16 +71,17 @@ public class RulesPanel extends JPanel implements IEventHandler, ActionListener 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == backButton){
 			EventBus.getInstance().publish(Event.ShowStartPanel, null);
+		}else if (e.getSource() == continueButton){
+			EventBus.getInstance().publish(Event.ContinueGame, null);
 		}
 	}
 
 	public void showContinueButton() {
-		// TODO Auto-generated method stub
-		
+		continueButton.setVisible(true);
 	}
 
 	public void hideContinuaeButton() {
-		// TODO Auto-generated method stub
+		continueButton.setVisible(false);
 		
 	}
 

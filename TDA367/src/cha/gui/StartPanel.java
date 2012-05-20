@@ -2,6 +2,9 @@ package cha.gui;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,14 +23,31 @@ public class StartPanel extends JPanel implements ActionListener {
 	JButton rulesButton;
 	
 	public StartPanel() {
+		super(new GridBagLayout());
+		
+		setBackground(Color.RED);
+		
+		GridBagConstraints c = new GridBagConstraints();
+		
+		c.anchor = GridBagConstraints.CENTER;
+		c.weightx = c.weighty = 1;
+		c.insets = new Insets(250, 0, 0, 0);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		
+		JPanel buttonPanel = new JPanel();
+		
+		buttonPanel.setBackground(new Color(0, 0, 0, 0));
+		
 		startButton = new JButton("New Game");
 		rulesButton = new JButton("Rules");
 		
 		startButton.addActionListener(this);
 		rulesButton.addActionListener(this);
 		
-		this.add(startButton);
-		this.add(rulesButton);
+		buttonPanel.add(startButton);
+		buttonPanel.add(rulesButton);
+		
+		this.add(buttonPanel, c);
 	
 		
 	}

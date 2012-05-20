@@ -83,7 +83,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		this.setLayout(new GridBagLayout());
 		// Filling constraint
 		GridBagConstraints c = new GridBagConstraints();
-		c.fill = GridBagConstraints.NONE;
+		c.fill = GridBagConstraints.BOTH;
 		c.anchor = GridBagConstraints.CENTER;
 		c.weightx = c.weighty = 1;
 		
@@ -161,6 +161,8 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 			showStartPanel();
 		} else if (e == Event.GameOver){
 			showGameOverPanel();
+		} else if(e== Event.ContinueGame){
+			showGameGUI();
 		}
 	}
 
