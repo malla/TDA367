@@ -175,10 +175,6 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			ArrayList<Tile> tiles = (ArrayList<Tile>)o;
 			newGame(tiles);
 		}
-		else if(e == Event.NewGame){
-			ArrayList<Tile> tiles = (ArrayList<Tile>)o;
-			newGame(tiles);
-		}
 		else if (e == Event.ShowBet) {
 			showBet();
 			setBetable(0);

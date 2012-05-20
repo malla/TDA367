@@ -2,9 +2,12 @@ package cha.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -12,10 +15,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 import cha.domain.Board;
 import cha.domain.Tile;
-import cha.event.EventBus;
 import cha.event.Event;
+import cha.event.EventBus;
 import cha.event.IEventHandler;
 
 @SuppressWarnings("serial")
@@ -56,7 +60,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		exitApp = new JMenuItem("Avsluta Challenge Accepted");
 		gameRules = new JMenuItem("Rules");
 		
-		
 		newGame.setMnemonic('N');
 		endGame.setMnemonic('Q');
 		exitApp.setMnemonic('W');
@@ -72,31 +75,31 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		menu.add(exitApp);
 		rules.add(gameRules);
 		
-		this.setJMenuBar(menuBar);
-		
 		menuBar.add(menu);
 		menuBar.add(rules);
+
+		this.setJMenuBar(menuBar);
 		
-		this.setLayout(new BorderLayout());
+		this.setLayout(new GridBagLayout());
+		// Filling constraint
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.NONE;
+		c.anchor = GridBagConstraints.CENTER;
+		c.weightx = c.weighty = 1;
 		
 		// Init Start panel
 		
-		startButton = new JButton("New Game");
-		rulesButton = new JButton("Rules");
-		startButton.addActionListener(this);
-		rulesButton.addActionListener(this);
+		startPanel = new StartPanel();
+		this.add(startPanel, c);
 		
-		startPanel = new JPanel();
-		startPanel.add(startButton);
-		startPanel.add(rulesButton);
-		this.add(startPanel, BorderLayout.NORTH);
-		
-
 		// Init Rules panel
+		
+		c.anchor = GridBagConstraints.NORTH;
+		c.fill = GridBagConstraints.HORIZONTAL;
 		
 		rulesPanel = new RulesPanel();
 		rulesPanel.setVisible(false);
-		this.add(rulesPanel, BorderLayout.CENTER);
+		this.add(rulesPanel, c);
 
 		// Init Game panel
 
@@ -113,7 +116,8 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		//tileContainerPanel.setBackground(Color.WHITE);
 
 		tileContainerPanel.setVisible(false);
-		this.add(tileContainerPanel, BorderLayout.CENTER);
+		c.fill = GridBagConstraints.BOTH;
+		this.add(tileContainerPanel, c);
 		
 		// Some frame settings
 		
@@ -130,7 +134,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == newGame){
 			startGame();
-
 		} else if(e.getSource() == endGame){
 			showStartPanel();
 		} else if(e.getSource() == exitApp){
@@ -159,7 +162,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		} else if (e == Event.GameOver){
 			showGameOverPanel();
 		}
-
 	}
 
 	public void startGame(){
@@ -167,7 +169,8 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		int numPiece;
 		while (true) {
 			try {
-				reply = JOptionPane.showInputDialog("Hur mÂnga lag vill ni vara? (2-8 spelare)", 2);
+				reply = JOptionPane.showInputDialog(
+						"Hur mÂnga lag vill ni vara? (2-8 spelare)", 2);
 				if (reply == null)
 					return;
 				numPiece = Integer.parseInt(reply);
@@ -175,10 +178,11 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 					System.out.println("Players accepted: " + numPiece);
 					break;
 				}
-			} catch (NumberFormatException e) { }
+			} catch (NumberFormatException e) {
+			}
 
-			JOptionPane.showMessageDialog(this, "MÂste vara en siffra mellan 2-8", "Error", 
-
+			JOptionPane.showMessageDialog(this,
+					"MÂste vara en siffra mellan 2-8", "Error",
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 		
@@ -195,18 +199,20 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	} 
 	
 	private void showStartPanel() {
-		if (tileContainerPanel.isVisible()){
-			int reply = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill avsluta?", null, JOptionPane.YES_NO_OPTION);
-			if (reply == JOptionPane.YES_OPTION){
-				startPanel.setVisible(true);
-				rulesPanel.setVisible(false);
-				tileContainerPanel.setVisible(false);
-		    }
+		if (tileContainerPanel.isVisible()) {
+			int reply = JOptionPane.showConfirmDialog(null,
+					"Är du säker på att du vill avbryta pågående spel?", null,
+					JOptionPane.YES_NO_OPTION);
+			if (reply != JOptionPane.YES_OPTION) {
+				return;
+			}
 		}
+		startPanel.setVisible(true);
+		rulesPanel.setVisible(false);
+		tileContainerPanel.setVisible(false);
 	}
 
 	private void showRules() {
-		
 		// TODO: implementera knapp i RulesPanel (hidden from start) och implementera de två metoderna i RulesPanel.
 		if (tileContainerPanel.isVisible()){
 			rulesPanel.showContinueButton();
@@ -214,11 +220,9 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		else{
 			rulesPanel.hideContinuaeButton();
 		}
-		
 		startPanel.setVisible(false);
 		rulesPanel.setVisible(true);
-		tileContainerPanel.setVisible(false);
-		
+		tileContainerPanel.setVisible(false);	
 	}
 
 	/**
@@ -230,7 +234,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		tileContainerPanel.setVisible(true);
 	}
 	
-
 	private void showGameOverPanel() {
 		// TODO: Malla skriver denna när alla paneler är lagade.
 		

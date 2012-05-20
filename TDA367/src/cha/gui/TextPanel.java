@@ -138,7 +138,8 @@ public class TextPanel extends JPanel implements IEventHandler {
 			p2.remove(header);
 		}
 	}
-	private void paintCard( Mission mission){
+	
+	private void paintCard(Mission mission){
 		String[] cardtext = mission.nextCurrentCard().getString();
 		int words = cardtext.length;
 		String text = "";
@@ -154,7 +155,6 @@ public class TextPanel extends JPanel implements IEventHandler {
 		textArea.setText(text);
 		validate();
 		textArea.repaint();
-
 	}
 
 	private Color setCardFGColor(Category category){

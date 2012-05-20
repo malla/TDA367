@@ -20,9 +20,6 @@ public class StartPanel extends JPanel implements ActionListener {
 	JButton rulesButton;
 	
 	public StartPanel() {
-		this.setLayout(new FlowLayout());
-		setBackground(Color.BLUE);
-		
 		startButton = new JButton("New Game");
 		rulesButton = new JButton("Rules");
 		
