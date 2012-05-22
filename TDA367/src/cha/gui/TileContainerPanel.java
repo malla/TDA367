@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -43,12 +45,13 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	// Constructor & initilization
 
 	public TileContainerPanel() {
-		setLayout(new BorderLayout(0, 0));
 		EventBus.getInstance().register(this);
 		init();
 	}
 	
 	private void init() {
+
+		setLayout(new GridBagLayout());
 		
 		// Set layouts of the tile panels.
 		
@@ -70,14 +73,66 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		flowLayout_4.setAlignment(FlowLayout.LEFT);
 		flowLayout_4.setVgap(0);
 		flowLayout_4.setHgap(0);
-		
-		this.add(northPanel, BorderLayout.NORTH);
-		this.add(eastPanel, BorderLayout.EAST);
-		this.add(southPanel, BorderLayout.SOUTH);
-		this.add(westPanel, BorderLayout.WEST);
+
+		GridBagConstraints c = new GridBagConstraints();
+		c.weightx = c.weighty = 0;
+		c.gridwidth = GridBagConstraints.REMAINDER;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTH;
+		this.add(northPanel, c); 
+		c.weighty = 1;
+		c.fill = GridBagConstraints.VERTICAL;
+		c.gridy = 1;
+		c.gridwidth = 1;
+		c.anchor = GridBagConstraints.WEST;
+		this.add(westPanel, c);
+		c.gridx = 2;
+		c.anchor = GridBagConstraints.EAST;
+		this.add(eastPanel, c);
+		c.weighty = 0;
+		c.gridx = 0;
+		c.gridy = 2;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridwidth = GridBagConstraints.REMAINDER;
+		c.anchor = GridBagConstraints.SOUTH;
+		this.add(southPanel, c);
 
 	}
 
+
+//	private void init() {
+//
+//		setLayout(new BorderLayout(0, 0));
+//		
+//		// Set layouts of the tile panels.
+//		
+//		eastPanel.setPreferredSize(new Dimension(50, 0));
+//		FlowLayout flowLayout_1 = (FlowLayout) eastPanel.getLayout();
+//		flowLayout_1.setAlignment(FlowLayout.LEFT);
+//		flowLayout_1.setVgap(0);
+//		flowLayout_1.setHgap(0);
+//		FlowLayout flowLayout_2 = (FlowLayout) southPanel.getLayout();
+//		flowLayout_2.setAlignment(FlowLayout.RIGHT);
+//		flowLayout_2.setVgap(0);
+//		flowLayout_2.setHgap(0);
+//		westPanel.setPreferredSize(new Dimension(50, 0));
+//		FlowLayout flowLayout_3 = (FlowLayout) westPanel.getLayout();
+//		flowLayout_3.setAlignment(FlowLayout.RIGHT);
+//		flowLayout_3.setVgap(0);
+//		flowLayout_3.setHgap(0);
+//		FlowLayout flowLayout_4 = (FlowLayout) northPanel.getLayout();
+//		flowLayout_4.setAlignment(FlowLayout.LEFT);
+//		flowLayout_4.setVgap(0);
+//		flowLayout_4.setHgap(0);
+//		
+//		this.add(northPanel, BorderLayout.NORTH);
+//		this.add(eastPanel, BorderLayout.EAST);
+//		this.add(southPanel, BorderLayout.SOUTH);
+//		this.add(westPanel, BorderLayout.WEST);
+//
+//	}
+
+	
 	// Create new game, update all GUI to match current game
 	
 	public void newGame(ArrayList<Tile> tiles){
@@ -175,10 +230,6 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			ArrayList<Tile> tiles = (ArrayList<Tile>)o;
 			newGame(tiles);
 		}
-		else if(e == Event.NewGame){
-			ArrayList<Tile> tiles = (ArrayList<Tile>)o;
-			newGame(tiles);
-		}
 		else if (e == Event.ShowBet) {
 			showBet();
 			setBetable(0);
@@ -186,7 +237,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		else if (e == Event.MakeBet) {
 			
 			//Board.getInstance().getActivePiece().setBet(0);
-			//Ska vi verkligen s‰tta bet till 0 n‰r vi satt bet redan i click i TilePanel?
+			//Ska vi verkligen sätta bet till 0 när vi satt bet redan i click i TilePanel?
 
 			int pos = Board.getInstance().getActivePiece().getPosition();
 			for (int i = pos + 1; i < pos + 8; i++) {

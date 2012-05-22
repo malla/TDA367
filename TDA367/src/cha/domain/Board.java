@@ -28,11 +28,6 @@ public class Board{
 	private Mission currentMission;
 
 	
-	/**
-	 * @uml.property  name="tileTypes" multiplicity="(0 -1)" dimension="1"
-	 */
-
-	
 	private ArrayList<Category> categoryList = new ArrayList<Category>();
 	private final Color[] colorList = new Color[]{
 			Color.WHITE,
