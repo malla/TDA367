@@ -2,11 +2,15 @@ package cha.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -35,10 +39,13 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	private JButton rulesButton;
 
 	private JPanel startPanel;
+	private JPanel startPanelNorth;
+	private JPanel startPanelSouth;
 	private RulesPanel rulesPanel;
 	private TileContainerPanel tileContainerPanel;
 	
 	private TextPanel textPanel;
+	private JLabel startText;
 	private ButtonPanel buttonPanel;
 	private PlayerPanel playerPanel;
 
@@ -56,6 +63,11 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		closeCA = new JMenuItem("Avsluta Challenge Accepted");
 		gameRules = new JMenuItem("Rules");
 		
+		startPanelSouth = new JPanel();
+		startText = new JLabel("Challenge Accepted");
+		Font startFont = new Font("Serif", Font.PLAIN, 24);
+		startText.setFont(startFont);
+		startPanelSouth.add(startText);
 		
 		newGame.setMnemonic('N');
 		endGame.setMnemonic('Q');
@@ -86,14 +98,16 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		startButton.addActionListener(this);
 		rulesButton.addActionListener(this);
 		
+		startPanelNorth = new JPanel();
 		startPanel = new JPanel();
-		startPanel.add(startButton);
-		startPanel.add(rulesButton);
+		startPanelNorth.add(startButton);
+		startPanelNorth.add(rulesButton);
+		startPanel.add(startPanelNorth, BorderLayout.NORTH);
+		startPanel.add(startPanelSouth, BorderLayout.SOUTH);
 		this.add(startPanel, BorderLayout.NORTH);
 		
 
-		// Init Rules panel
-		
+		// Init Rules panel  
 		rulesPanel = new RulesPanel();
 		rulesPanel.setVisible(false);
 		this.add(rulesPanel);
