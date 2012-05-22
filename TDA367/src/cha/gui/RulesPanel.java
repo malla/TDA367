@@ -53,7 +53,8 @@ public class RulesPanel extends JPanel implements IEventHandler, ActionListener 
 		c.gridx = 0;
 		c.gridwidth = 3;
 		
-		textField = new JLabel("how to play...");
+		
+		textField = new JLabel("");
 		this.add(textField, c);
 		
 	}

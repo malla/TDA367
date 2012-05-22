@@ -197,6 +197,8 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 
 					JOptionPane.ERROR_MESSAGE, null);
 		}
+		
+		
 
 		Board.createNewBoard(numPiece);
 		tileList = Board.getInstance().getTileList();
