@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -17,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import cha.domain.Board;
+import cha.domain.Team;
 import cha.domain.Tile;
 import cha.event.Event;
 import cha.event.EventBus;
@@ -38,14 +40,16 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	private JButton startButton;
 	private JButton rulesButton;
 
-	private JPanel startPanel;
+	private StartPanel startPanel;
 	private RulesPanel rulesPanel;
 	private TileContainerPanel tileContainerPanel;
-	
+
 	private TextPanel textPanel;
 	private ButtonPanel buttonPanel;
 	private PlayerPanel playerPanel;
 
+	private GameOverPanel gameOverPanel;
+	
 	// Constructor
 	
 	public MainFrame() {
@@ -69,6 +73,15 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		endGame.addActionListener(this);
 		exitApp.addActionListener(this);
 		gameRules.addActionListener(this);
+		
+		// test win.
+		JMenuItem testWin = new JMenuItem("Win game (test)");
+		testWin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				EventBus.getInstance().publish(Event.GameOver, new Team("TestTeam", Color.cyan));
+			}
+		});
+		menu.add(testWin);
 		
 		menu.add(newGame);
 		menu.add(endGame);
@@ -107,14 +120,25 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		textPanel = new TextPanel();
 		buttonPanel = new ButtonPanel();
 		playerPanel = new PlayerPanel();
+		gameOverPanel = new GameOverPanel();
+		
+		GridBagConstraints c2 = new GridBagConstraints();
+		c2.gridx = c2.gridy = 1; 
+		c2.weightx = c2.weighty = 1;
+		c2.fill = GridBagConstraints.BOTH;
 		
 		textPanel.add(buttonPanel, BorderLayout.SOUTH);
 		textPanel.add(playerPanel, BorderLayout.NORTH);
-		tileContainerPanel.add(textPanel, BorderLayout.CENTER);
+		tileContainerPanel.add(textPanel, c2);
+		gameOverPanel.setVisible(false);
+		tileContainerPanel.add(gameOverPanel, c2);
 		
-		playerPanel.setBackground(Color.WHITE);
-		//tileContainerPanel.setBackground(Color.WHITE);
-
+//		textPanel.add(buttonPanel, BorderLayout.SOUTH);
+//		textPanel.add(playerPanel, BorderLayout.NORTH);
+//		tileContainerPanel.add(textPanel, BorderLayout.CENTER);
+//		gameOverPanel.setVisible(false);
+//		tileContainerPanel.add(gameOverPanel, BorderLayout.CENTER);
+		
 		tileContainerPanel.setVisible(false);
 		c.fill = GridBagConstraints.BOTH;
 		this.add(tileContainerPanel, c);
@@ -160,6 +184,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		} else if(e == Event.ShowStartPanel){
 			showStartPanel();
 		} else if (e == Event.GameOver){
+			gameOverPanel.setWinnerTeam((Team) o);
 			showGameOverPanel();
 		} else if(e== Event.ContinueGame){
 			showGameGUI();
@@ -172,7 +197,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		while (true) {
 			try {
 				reply = JOptionPane.showInputDialog(
-						"Hur mÂnga lag vill ni vara? (2-8 spelare)", 2);
+						"Hur många lag vill ni vara? (2-8 spelare)", 2);
 				if (reply == null)
 					return;
 				numPiece = Integer.parseInt(reply);
@@ -215,7 +240,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	}
 
 	private void showRules() {
-		// TODO: implementera knapp i RulesPanel (hidden from start) och implementera de två metoderna i RulesPanel.
 		if (tileContainerPanel.isVisible()){
 			rulesPanel.showContinueButton();
 		}
@@ -235,11 +259,15 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		rulesPanel.setVisible(false);
 		tileContainerPanel.setVisible(true);
 	}
-	
+
 	private void showGameOverPanel() {
-		// TODO: Malla skriver denna när alla paneler är lagade.
-		
+		if (!tileContainerPanel.isVisible()){
+			throw new IllegalStateException("The TileContainerPanel is not visible, ergo, no game is running and therefore no one can win.");
+		}	
+		textPanel.setVisible(false);
+		gameOverPanel.setVisible(true);
 	}
+
 	
 	
 }
