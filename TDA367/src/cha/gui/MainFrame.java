@@ -198,7 +198,10 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 		
-		
+		for(int i = 0; i < numPiece; i ++ ){
+			String teamName = JOptionPane.showInputDialog("What is team number " + (i + 1) + " called?");
+			Board.setTeamName(teamName);
+		}
 
 		Board.createNewBoard(numPiece);
 		tileList = Board.getInstance().getTileList();

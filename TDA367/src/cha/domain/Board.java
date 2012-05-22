@@ -16,6 +16,7 @@ public class Board{
 	 */
 	private static Piece[] pieces;
 	public int numberOfPieces = 0;
+	private static ArrayList <String> teamNames = new ArrayList<String>();
 	
 	/**
 	 * Index of the active piece.
@@ -91,7 +92,7 @@ public class Board{
 		// Generate teams
 		pieces = new Piece[numPiece];
 		for(int i = 0; i < numPiece; i++){
-			String teamName = "Team " + (i+1);
+			String teamName = getTeamName(i);
 			Color teamColor = availableColorList.remove(
 					random.nextInt(availableColorList.size()));
 			Team team = new Team(teamName, teamColor);
@@ -176,5 +177,13 @@ public class Board{
 	public ArrayList<Tile> getTileList(){
 		return tileList;
 		
+	}
+	
+	public String getTeamName(int teamNumber){
+		return teamNames.get(teamNumber);
+	}
+	
+	public static void setTeamName(String teamName){
+		teamNames.add(teamName);
 	}
 }

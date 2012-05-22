@@ -69,6 +69,7 @@ public class RulesPanel extends JPanel implements IEventHandler, ActionListener 
 				+ "When one task is finished, click the next button and two new body parts will appear. Without losing grip of the body parts displayed on the first card try to manage the second card, and so on.<br><br>"
 				+ "Green – Word jumble<br>"
 				+ "A card with 8 – 2 letters on it will appear. The team is to find a word with as many letters in it as the amount of tiles betted.</html>";
+
 		textField = new JLabel(rulesText);
 		this.add(textField, c);
 
