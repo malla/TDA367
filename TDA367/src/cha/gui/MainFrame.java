@@ -37,9 +37,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	private JButton startButton;
 	private JButton rulesButton;
 
-	//private JPanel startPanel2;
-	//private JPanel startPanelNorth;
-	//private JPanel startPanelSouth;
+
 	private StartPanel startPanel;
 
 	private RulesPanel rulesPanel;
