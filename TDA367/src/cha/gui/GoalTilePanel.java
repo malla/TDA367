@@ -8,9 +8,10 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class GoalTilePanel extends TilePanel {
-	
+	private static final int GOAL_POSITION = 43;
+
 	public GoalTilePanel(){
-		this.position = 43;		
+		this.position = GOAL_POSITION;		
 		setBackground(Color.WHITE);
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);

@@ -5,12 +5,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import cha.event.Event;
 import cha.event.EventBus;
 import cha.event.IEventHandler;
@@ -38,7 +35,7 @@ public class RulesPanel extends JPanel implements IEventHandler, ActionListener 
 		c.gridx = 1;
 		c.anchor = GridBagConstraints.NORTH;
 		
-		title = new JLabel("Spelregler: ");
+		title = new JLabel("Game rules ");
 		Font titleFont = title.getFont();
 		title.setFont(new Font(titleFont.getName(), titleFont.getStyle(), 42));
 		this.add(title, c);

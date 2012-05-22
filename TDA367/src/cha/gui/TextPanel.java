@@ -43,6 +43,7 @@ public class TextPanel extends JPanel implements IEventHandler {
 		textArea.setSize(500,300);
 		textArea.setEditable(false);
 		
+		
 		this.setBackground(Color.WHITE);
 		
 		textArea.setForeground(Color.BLACK);

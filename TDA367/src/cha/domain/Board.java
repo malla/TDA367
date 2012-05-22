@@ -1,4 +1,4 @@
- package cha.domain;
+package cha.domain;
 import java.awt.Color;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class Board{
 	private Mission currentMission;
 
 	
-	private ArrayList<Category> categoryList = new ArrayList<Category>();
+	
 	private final Color[] colorList = new Color[]{
 			Color.WHITE,
 			Color.GREEN,
@@ -39,6 +39,7 @@ public class Board{
 			Color.ORANGE,
 			Color.CYAN
 	};
+	private ArrayList<Category> categoryList = new ArrayList<Category>();
 	private ArrayList<Color> availableColorList = new ArrayList<Color>();
 	private ArrayList<Tile> tileList = new ArrayList<Tile>();
 

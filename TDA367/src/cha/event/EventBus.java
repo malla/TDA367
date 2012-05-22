@@ -4,8 +4,6 @@ package cha.event;
 import java.util.LinkedList;
 import java.util.List;
 
-import cha.domain.Board;
-
 public class EventBus{
 
 	private static EventBus CHinstance = null;

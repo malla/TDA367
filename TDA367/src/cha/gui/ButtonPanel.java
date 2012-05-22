@@ -91,9 +91,9 @@ public class ButtonPanel extends JPanel implements IEventHandler, ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == startMissionButton){
-			TileContainerPanel.setBetable(1);
+			TileContainerPanel.setBetable(true);
 
-			Board.getInstance().getActivePiece().setBet(TileContainerPanel.getCurrentBet());
+			Board.getInstance().getActivePiece().setBet(TileContainerPanel.getTemporaryBet());
 
 			for (TilePanel panel : TileContainerPanel.getTilePanels()) {
 				panel.notBetable();

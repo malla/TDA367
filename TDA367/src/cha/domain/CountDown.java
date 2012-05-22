@@ -20,13 +20,7 @@ public class CountDown implements ActionListener{
 		timer = new Timer(1000, this);
 		timer.start();
 	}
-	/*	public static void main(String[] args){
-		CountDown tt= new CountDown();
-		while(true){
-			;
-		}
-	}
-	 */
+
 	private void ticktock(){
 		EventBus.getInstance().publish(Event.TimeTick, Integer.toString(count));
 		if (count==-1){
