@@ -42,7 +42,7 @@ public class StartPanel extends JPanel implements ActionListener {
 		JLabel textPanel = new JLabel();
 	
 		textPanel = new JLabel("Challenge Accepted");
-		Font startFont = new Font("Serif", Font.PLAIN, 24);
+		Font startFont = new Font("Serif", Font.PLAIN, 50);
 		textPanel.setFont(startFont);
 		this.add(textPanel);
 		

@@ -37,9 +37,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	private JButton startButton;
 	private JButton rulesButton;
 
-	//private JPanel startPanel2;
-	//private JPanel startPanelNorth;
-	//private JPanel startPanelSouth;
+
 	private StartPanel startPanel;
 
 	private RulesPanel rulesPanel;
@@ -76,15 +74,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		exitApp.addActionListener(this);
 		gameRules.addActionListener(this);
 		
-		// test win.
-//		JMenuItem testWin = new JMenuItem("Win game (test)");
-//		testWin.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				EventBus.getInstance().publish(Event.GameOver, new Team("TestTeam", Color.cyan));
-//			}
-//		});
-//		menu.add(testWin);
-		
+
 		menu.add(newGame);
 		menu.add(endGame);
 		menu.add(exitApp);
