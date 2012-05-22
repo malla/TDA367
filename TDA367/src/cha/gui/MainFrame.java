@@ -75,13 +75,13 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		gameRules.addActionListener(this);
 		
 		// test win.
-		JMenuItem testWin = new JMenuItem("Win game (test)");
-		testWin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				EventBus.getInstance().publish(Event.GameOver, new Team("TestTeam", Color.cyan));
-			}
-		});
-		menu.add(testWin);
+//		JMenuItem testWin = new JMenuItem("Win game (test)");
+//		testWin.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				EventBus.getInstance().publish(Event.GameOver, new Team("TestTeam", Color.cyan));
+//			}
+//		});
+//		menu.add(testWin);
 		
 		menu.add(newGame);
 		menu.add(endGame);
