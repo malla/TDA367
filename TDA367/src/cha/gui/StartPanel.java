@@ -40,6 +40,7 @@ public class StartPanel extends JPanel implements ActionListener {
 		textPanel.setFont(startFont);
 		this.add(textPanel);
 		
+		
 		buttonPanel.setBackground(new Color(0, 0, 0, 0));
 		
 		startButton = new JButton("New Game");
