@@ -1,8 +1,3 @@
-//fnns det et l�ttare/snabbare s�tt att f� in alla ord i en array el dyl?
-//i konstruktorn, kommer jag att beh�va l�gga in en String[]???
-//Kan fixa start gerjejen och kolla-�r n�gon vunnit.
-//fixa currentCard och get NextCard i startmission. GJORT. Om korten �r slut - ....?
-//i textpanel 
 package cha.domain;
 import cha.domain.Categories.Category;
 
