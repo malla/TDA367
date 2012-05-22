@@ -1,7 +1,8 @@
 package cha.domain;
 import java.util.Arrays;
 
-/** Takes te give information and returns it in a Card, which contains an array of strings**/
+/** Takes the given information and returns it in a Card, 
+ * which contains an array of strings**/
 public class Card {
 	
 	private String [] assignment;
