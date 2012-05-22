@@ -29,8 +29,6 @@ public class TextPanel extends JPanel implements IEventHandler {
 	private JPanel northPanel = new JPanel();
 	private JPanel southPanel = new JPanel();
 
-
-
 	public TextPanel() {
 		EventBus.getInstance().register(this);
 		initialize();
@@ -71,7 +69,7 @@ public class TextPanel extends JPanel implements IEventHandler {
 		p2.setMinimumSize(new Dimension(100, 75));
 		p2.setBorder(BorderFactory.createLineBorder(Color.WHITE));
 		add(p2, BorderLayout.NORTH);
-		
+
 		cardPanel.add(northPanel, BorderLayout.PAGE_START);
 		cardPanel.add(southPanel, BorderLayout.CENTER);
 	}
@@ -93,7 +91,7 @@ public class TextPanel extends JPanel implements IEventHandler {
 			this.remove(textArea);
 			repaint();
 			add(cardPanel);
-			
+
 			northPanel.remove(header);
 			northPanel.setBackground(colorFG);
 			northPanel.setForeground(colorFG);
@@ -105,14 +103,14 @@ public class TextPanel extends JPanel implements IEventHandler {
 			southPanel.setForeground(colorFG);
 			southPanel.setPreferredSize(new Dimension(550, 250));
 			southPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-			
+
 			southPanel.add(textArea, BorderLayout.SOUTH);
 			paintCard(mission);			
 			String title = mission.getTitle();
 			header.setText("" + title);
 			header.setFont(new Font("DejaVu Sans", Font.BOLD, 30));
 			northPanel.add(header, BorderLayout.NORTH);
-			
+
 
 		}
 		else if(e == Event.NextCard){
@@ -134,7 +132,7 @@ public class TextPanel extends JPanel implements IEventHandler {
 			textArea.setText("Was the mission completed successfully?");
 		}
 		else if(e == Event.MissionSuccess||e == Event.MissionFail){
-			
+
 			p2.remove(header);
 		}
 	}
@@ -157,6 +155,7 @@ public class TextPanel extends JPanel implements IEventHandler {
 		textArea.repaint();
 	}
 
+	/**Determines the color of the foreground of the card**/
 	private Color setCardFGColor(Category category){
 		Color color;
 		if (category== Category.BACKWARDS){
@@ -173,7 +172,7 @@ public class TextPanel extends JPanel implements IEventHandler {
 		}
 		return color;
 	}
-	
+	/**Determines the color of the background of the card**/
 	private Color setCardBGColor(Category category){
 		Color color;
 		if (category== Category.BACKWARDS){
