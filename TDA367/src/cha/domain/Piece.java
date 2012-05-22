@@ -44,6 +44,7 @@ public class Piece {
 	
 	@Override
 	public String toString() {
-		return "Piece [position=" + position + ", bet=" + bet + "]";
+		return "Piece [position = " + position + 
+		", bet = " + bet + "]";
 	}
 }
