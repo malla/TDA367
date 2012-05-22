@@ -17,5 +17,6 @@ public enum Event {
 	GameOver,
 	ShowGameRules,
 	ShowStartPanel,
-	NextCard
+	NextCard, 
+	ContinueGame
 }

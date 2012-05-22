@@ -9,6 +9,8 @@ import cha.domain.Categories.Category;
 
 public class Board{
 	
+	private static final int MIN_TILES = 0;
+	private static final int MAX_TILES = 48;
 	/**
 	 * Array with all pieces.
 	 */
@@ -26,22 +28,26 @@ public class Board{
 	private Mission currentMission;
 
 	
-	/**
-	 * @uml.property  name="tileTypes" multiplicity="(0 -1)" dimension="1"
-	 */
-	// What is this?
-	
-	//TODO Check if this is a proper solution, 
-	// (use integer-constants with the enum names, and use Random to randomize a Category?)
-	// �r det inte det vi g�r?
 	private ArrayList<Category> categoryList = new ArrayList<Category>();
-	private ArrayList<Color> colorList = new ArrayList<Color>();
+	private final Color[] colorList = new Color[]{
+			Color.WHITE,
+			Color.GREEN,
+			Color.YELLOW,
+			Color.BLACK,
+			Color.RED,
+			Color.BLUE,
+			Color.ORANGE,
+			Color.CYAN
+	};
+	private ArrayList<Color> availableColorList = new ArrayList<Color>();
 	private ArrayList<Tile> tileList = new ArrayList<Tile>();
 
 	private Random random = new Random();
 	
 	private static Board instance = null;
 
+	//Singleton-pattern
+	
 	public static Board getInstance() {
 		if (instance == null) {
 			instance = new Board();
@@ -49,7 +55,7 @@ public class Board{
 		return instance;
 	}
 	
-	public static void createBoard(int numPiece){
+	public static void createNewBoard(int numPiece){
 		Board board = Board.getInstance();
 		board.init(numPiece);
 	}
@@ -58,43 +64,40 @@ public class Board{
 	
 	private Board(){
 		
-		//TODO Check if proper method and if we should place it somewhere else
 		this.categoryList.add(Category.SAMECLASS);
 		this.categoryList.add(Category.BODYTOBODY);
 		this.categoryList.add(Category.WORDJUMBLE);
 		this.categoryList.add(Category.BACKWARDS);
-		
-		this.colorList.add(Color.WHITE);
-		this.colorList.add(Color.GREEN);
-		this.colorList.add(Color.YELLOW);
-		this.colorList.add(Color.BLACK);
-		this.colorList.add(Color.RED);
-		this.colorList.add(Color.BLUE);
-		this.colorList.add(Color.ORANGE);
-		this.colorList.add(Color.CYAN);
-		
-		
-		// Add all tiles
-		for(int i=0; i<43; i++){
-			tileList.add(new Tile(categoryList.get(random.nextInt(categoryList.size()))));
-		}
-//		ChallengeAccepted.getInstance().publish(Event.CreateBoard, tileList);
 	}
 	
 	public void init(int numPiece){
+		
+		// Add a new set of tiles
+		tileList.clear();
+		for(int i=0; i<43; i++){
+			tileList.add(new Tile(categoryList.get(random.nextInt(categoryList.size()))));
+		}
+		
+		// Init number of pieces
 		numberOfPieces = numPiece;
-		System.out.print(numberOfPieces);
 
+		// Add new set of colors
+		availableColorList.clear();
+		for(Color color : colorList){
+			availableColorList.add(color);
+		}
+		
 		// Generate teams
 		pieces = new Piece[numPiece];
 		for(int i = 0; i < numPiece; i++){
 			String teamName = "Team " + (i+1);
-			Color teamColor = colorList.remove(
-					random.nextInt(colorList.size()));
+			Color teamColor = availableColorList.remove(
+					random.nextInt(availableColorList.size()));
 			Team team = new Team(teamName, teamColor);
 			pieces[i] = new Piece(team);
 		}
 		activePiece = 0;
+		currentMission = null;
 	}
 	
 	// Methods 
@@ -141,7 +144,6 @@ public class Board{
 		}
 		
 		if(activePiece == (pieces.length-1)){
-
 			activePiece = 0;
 		}
 		else{
@@ -150,7 +152,7 @@ public class Board{
 	}
 	
 	public Tile getTile(int place){
-		if(place < 0 || place > 48){
+		if(place < MIN_TILES || place > MAX_TILES){
 			throw new IllegalArgumentException();
 		}
 		else {   

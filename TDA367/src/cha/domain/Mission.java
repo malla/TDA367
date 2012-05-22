@@ -8,6 +8,7 @@ import cha.event.Event;
 
 public class Mission {
 
+	private static final int GOAL_TILE = 43;
 	private final CountDown timer;
 	private final Piece piece;
 	private Bet bet;
@@ -59,10 +60,10 @@ public class Mission {
 		public void missionDone(boolean completed){
 			EventBus.getInstance().publish(Event.OldPosition, piece.getPosition());
 			if(completed){
-				if(piece.getPosition() + bet.getBetValue() > 43){
-					piece.setPosition(43);
-					EventBus.getInstance().publish(Event.GameOver, piece.getTeam());
-				}
+
+				if(piece.getPosition() + bet.getBetValue() > GOAL_TILE){
+					piece.setPosition(GOAL_TILE);
+					EventBus.getInstance().publish(Event.GameOver, piece.getTeam());				}
 				else{
 					piece.movePieceForward(bet.getBetValue());
 				}

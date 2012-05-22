@@ -4,53 +4,57 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
-import cha.domain.Bet;
 import cha.domain.Board;
 import cha.domain.Categories.Category;
 import cha.domain.Piece;
 import cha.domain.Tile;
-import cha.event.EventBus;
 import cha.event.Event;
+import cha.event.EventBus;
 import cha.event.IEventHandler;
 
 @SuppressWarnings("serial")
 public class TileContainerPanel extends JPanel implements IEventHandler {
 
-	private static TilePanel[] tilePanels = new TilePanel[44];
+	private static final int MAX_AMOUNT_TILES = 44;
+
+	private static TilePanel[] tilePanels = new TilePanel[MAX_AMOUNT_TILES];
 
 	private JPanel northPanel = new JPanel();
 	private JPanel eastPanel = new JPanel();
 	private JPanel southPanel = new JPanel();
 	private JPanel westPanel = new JPanel();
-	private ArrayList<Color> colorList = new ArrayList<Color>();
 	
 	private ArrayList<PiecePanel> piecePanels = new ArrayList<PiecePanel>();
 
-	//private ArrayList<Color> colorList;
-	//private ArrayList<PiecePanel> pieces;
+	// Board.getInstance().getActivePiece() ????, same as bet, USE ONLY ONE
 	private int currentPiece;
+	
+	// TODO: Current bet already exists and is used in/from each Piece, so determine which to use, ONLY ONE!!!
 	private static int currentBet;
+	
+	// TODO: Why is the type of betable int? Sounds like a boolean to me...
 	private static int betable = 0;
 
+	// Constructor & initilization
 
 	public TileContainerPanel() {
-		setLayout(new BorderLayout(0, 0));
-//		init();
 		EventBus.getInstance().register(this);
+		init();
 	}
+	
+	private void init() {
 
-	public void init(ArrayList<Tile> t) {
-//		colorList = new ArrayList<Color>();
-//		colorList.add(Color.BLUE);
-//		colorList.add(Color.GREEN);
-//		colorList.add(Color.YELLOW);
-//		colorList.add(Color.RED);
-
+		setLayout(new GridBagLayout());
+		
+		// Set layouts of the tile panels.
+		
 		eastPanel.setPreferredSize(new Dimension(50, 0));
 		FlowLayout flowLayout_1 = (FlowLayout) eastPanel.getLayout();
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
@@ -65,20 +69,79 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		flowLayout_3.setAlignment(FlowLayout.RIGHT);
 		flowLayout_3.setVgap(0);
 		flowLayout_3.setHgap(0);
-		FlowLayout flowLayout = (FlowLayout) northPanel.getLayout();
-		flowLayout.setAlignment(FlowLayout.LEFT);
-		flowLayout.setVgap(0);
-		flowLayout.setHgap(0);
+		FlowLayout flowLayout_4 = (FlowLayout) northPanel.getLayout();
+		flowLayout_4.setAlignment(FlowLayout.LEFT);
+		flowLayout_4.setVgap(0);
+		flowLayout_4.setHgap(0);
 
-		this.add(northPanel, BorderLayout.NORTH);
-		this.add(eastPanel, BorderLayout.EAST);
-		this.add(southPanel, BorderLayout.SOUTH);
-		this.add(westPanel, BorderLayout.WEST);
+		GridBagConstraints c = new GridBagConstraints();
+		c.weightx = c.weighty = 0;
+		c.gridwidth = GridBagConstraints.REMAINDER;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTH;
+		this.add(northPanel, c); 
+		c.weighty = 1;
+		c.fill = GridBagConstraints.VERTICAL;
+		c.gridy = 1;
+		c.gridwidth = 1;
+		c.anchor = GridBagConstraints.WEST;
+		this.add(westPanel, c);
+		c.gridx = 2;
+		c.anchor = GridBagConstraints.EAST;
+		this.add(eastPanel, c);
+		c.weighty = 0;
+		c.gridx = 0;
+		c.gridy = 2;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridwidth = GridBagConstraints.REMAINDER;
+		c.anchor = GridBagConstraints.SOUTH;
+		this.add(southPanel, c);
 
-		setTiles(t);
+	}
+
+
+//	private void init() {
+//
+//		setLayout(new BorderLayout(0, 0));
+//		
+//		// Set layouts of the tile panels.
+//		
+//		eastPanel.setPreferredSize(new Dimension(50, 0));
+//		FlowLayout flowLayout_1 = (FlowLayout) eastPanel.getLayout();
+//		flowLayout_1.setAlignment(FlowLayout.LEFT);
+//		flowLayout_1.setVgap(0);
+//		flowLayout_1.setHgap(0);
+//		FlowLayout flowLayout_2 = (FlowLayout) southPanel.getLayout();
+//		flowLayout_2.setAlignment(FlowLayout.RIGHT);
+//		flowLayout_2.setVgap(0);
+//		flowLayout_2.setHgap(0);
+//		westPanel.setPreferredSize(new Dimension(50, 0));
+//		FlowLayout flowLayout_3 = (FlowLayout) westPanel.getLayout();
+//		flowLayout_3.setAlignment(FlowLayout.RIGHT);
+//		flowLayout_3.setVgap(0);
+//		flowLayout_3.setHgap(0);
+//		FlowLayout flowLayout_4 = (FlowLayout) northPanel.getLayout();
+//		flowLayout_4.setAlignment(FlowLayout.LEFT);
+//		flowLayout_4.setVgap(0);
+//		flowLayout_4.setHgap(0);
+//		
+//		this.add(northPanel, BorderLayout.NORTH);
+//		this.add(eastPanel, BorderLayout.EAST);
+//		this.add(southPanel, BorderLayout.SOUTH);
+//		this.add(westPanel, BorderLayout.WEST);
+//
+//	}
+
+	
+	// Create new game, update all GUI to match current game
+	
+	public void newGame(ArrayList<Tile> tiles){
+		
+		setTiles(tiles);
 		
 		int numberOfPieces = Board.getInstance().getNumberOfPieces();
 		
+		piecePanels.clear();
 		for(int i = 0 ; i < numberOfPieces; i++){
 			Piece piece = Board.getInstance().getPiece(i); 
 			piecePanels.add(new PiecePanel(piece,
@@ -91,9 +154,17 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 
 		Board.getInstance().setActivePiece(0);
 		currentPiece = 0;
+		
 	}
-
+	
+	// Methods
+	
 	private void setTiles(ArrayList<Tile> tiles) {
+		northPanel.removeAll();
+		eastPanel.removeAll();
+		southPanel.removeAll();
+		westPanel.removeAll();
+		
 		TilePanel start = new StartTilePanel(tiles.get(0).getCategory());
 		tilePanels[0] = start;
 		northPanel.add(start);
@@ -123,24 +194,24 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			tilePanels[i] = p;
 			westPanel.add(p);
 		}
+		repaint();
 	}
 	
-	private TilePanel createTile(Tile t, int i){
+	private TilePanel createTile(Tile t, int position){
 		TilePanel tile;
 		Category c = t.getCategory();
 		if(c == Category.BACKWARDS){
-			tile = new NormalTilePanel(Color.RED, i);
+			tile = new NormalTilePanel(Color.RED, position);
 		}
 		else if(c == Category.BODYTOBODY){
-			tile = new NormalTilePanel(Color.YELLOW, i);
+			tile = new NormalTilePanel(Color.YELLOW, position);
 		}
 		else if(c == Category.SAMECLASS){
-			tile = new NormalTilePanel(Color.BLUE, i);
+			tile = new NormalTilePanel(Color.BLUE, position);
 		}
 		else {
-			tile = new NormalTilePanel(Color.GREEN, i);
+			tile = new NormalTilePanel(Color.GREEN, position);
 		}
-		
 		return tile;
 	}
 	
@@ -151,46 +222,41 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 
 	public static TilePanel[] getTilePanels() {
 		return tilePanels;
-
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void action(Event e, Object o) {
 		if(e == Event.CreateBoard){
-			ArrayList<Tile> t = (ArrayList<Tile>)o;
-			init(t);
+			ArrayList<Tile> tiles = (ArrayList<Tile>)o;
+			newGame(tiles);
 		}
 		else if (e == Event.ShowBet) {
 			showBet();
 			setBetable(0);
-//			int pos =
-//					Board.getInstance().getActivePiece().getPosition();
-//		//	int pos = 0;
-//			for (int i = pos + 1; i < pos + 8; i++) {
-//				if (i > 43){
-//					return;
-//				}
-//				tilePanels[i].betable();
-//				 repaint();
-//			}
 		} 
 		else if (e == Event.MakeBet) {
 			
 			//Board.getInstance().getActivePiece().setBet(0);
-			//Ska vi verkligen s‰tta bet till 0 n‰r vi satt bet redan i click i TilePanel?
-//			int pos =
-//					Board.getInstance().getActivePiece().getPosition();
-//		//	int pos = 0;
-//			for (int i = pos + 1; i < pos + 8; i++) {
-//				if (i > 43
-//						){
-//					return;
-//				}
-//				tilePanels[i].betable();
-//				
-//				repaint();
-//			}
-//			
-//			Board.getInstance().getActivePiece().setBet((Integer) o);
+			//Ska vi verkligen sätta bet till 0 när vi satt bet redan i click i TilePanel?
+
+			int pos = Board.getInstance().getActivePiece().getPosition();
+			for (int i = pos + 1; i < pos + 8; i++) {
+				if (i > 43){
+					return;
+				}
+				tilePanels[i].betable();
+				repaint();
+			}
+			
+			Board.getInstance().getActivePiece().setBet((Integer) o);
+			
+
+//			TileContainerPanel.getTilePanels()[(Integer)o +
+//		                 				           Board.getInstance().getActivePiece().getPosition()].showBet();
+
+			//TileContainerPanel.getTilePanels()[(Integer)o +
+		                 				        //   Board.getInstance().getActivePiece().getPosition()].
+
 			showBet();
 			setBetable(0);
 			currentBet = (Integer)o;
@@ -200,26 +266,14 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		    
 		} 
 		else if (e == Event.MakeBet) {
-			
-			//ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(0);
-			//Ska vi verkligen s‰tta bet till 0 n‰r vi satt bet redan i click i TilePanel?
-			showBet();
-			
+			showBet();			
 			currentBet = (Integer)o;
 			setBetable(0);
 			
 			TileContainerPanel.getTilePanels()[currentBet +
-		                 				           Board.getInstance().getActivePiece().getPosition()].
-
-		                				           setBorder(new BevelBorder(BevelBorder.LOWERED));
-			
-			//ChallengeAccepted.getInstance().publish(Event.ShowBet, null);
-						
+			                                   Board.getInstance().getActivePiece().getPosition()].
+			                                   setBorder(new BevelBorder(BevelBorder.LOWERED));						
 			repaint();
-			
-//			for (TilePanel panel : tilePanels) {
-//				panel.notBetable();
-//			}
 		}
 		else if(e == Event.OldPosition){
 			int pos = (Integer)o;
@@ -240,15 +294,14 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	public static int getBetable(){
 		return betable;
 	}
+	
 	public static void setBetable(int i){
 		betable = i;
 	}
 	
 	private void showBet(){
 		int pos = Board.getInstance().getActivePiece().getPosition();
-		
-		
-		//ChallengeAccepted.getInstance().getBoard().getActivePiece().setBet(0);
+
 		for (int i = pos + 1; i < pos + 8; i++) {
 			if (i > 43){
 				return;

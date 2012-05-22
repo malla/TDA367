@@ -1,5 +1,7 @@
 package cha.gui;
 
+import java.awt.Color;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -8,14 +10,20 @@ import cha.event.Event;
 import cha.event.EventBus;
 import cha.event.IEventHandler;
 
+@SuppressWarnings("serial")
 public class PlayerPanel extends JPanel implements IEventHandler {
 
 	private JLabel player;
+	
 	public PlayerPanel(){
 		EventBus.getInstance().register(this);
+		
+		setBackground(Color.WHITE);
+		
 		player = new JLabel();
 		this.add(player);
 	}
+	
 	@Override
 	public void action(Event e, Object o) {
 		if(e == Event.NextPlayer){

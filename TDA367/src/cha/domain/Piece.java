@@ -1,8 +1,8 @@
 package cha.domain;
 
 public class Piece {
+	private static final int FAILED_MISSION_PENALTY = 2;
 	private int position;
-//	private int piece;
 	private Bet bet;
 	private Team team;
 	
@@ -14,27 +14,23 @@ public class Piece {
 	public void movePieceForward(int bet){
 		position = position + bet;
 	}
+	
 	public void movePieceBackward(){
-		position = position - 2;
+		position = position - FAILED_MISSION_PENALTY;
 	}
 
 	public Team getTeam() {
 		return this.team;
 	}
 	
-//	public int getPiece() {
-//		return piece;
-//	}
-//
-//	public void setPiece(int piece) {
-//		this.piece = piece;
-//	}
-	
 	public Bet getBet(){
 		return bet;
 	}
 
 	public void setBet(int newBet) {
+		if(newBet < 0){
+			throw new IllegalArgumentException();	
+		}
 		bet = new Bet(newBet);
 	}
 	

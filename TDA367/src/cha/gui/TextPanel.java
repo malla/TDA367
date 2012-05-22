@@ -25,7 +25,7 @@ public class TextPanel extends JPanel implements IEventHandler {
 	private JLabel lblTime;
 	private JPanel p2 = new JPanel();
 	private JPanel cardPanel = new JPanel();
-	private JLabel header=new JLabel();
+	private JLabel header = new JLabel();
 	private JPanel northPanel = new JPanel();
 	private JPanel southPanel = new JPanel();
 
@@ -42,9 +42,12 @@ public class TextPanel extends JPanel implements IEventHandler {
 		textArea.setFont(new Font("DejaVu Sans", Font.PLAIN, 18));
 		textArea.setSize(500,300);
 		textArea.setEditable(false);
+		
+		this.setBackground(Color.WHITE);
+		
 		textArea.setForeground(Color.BLACK);
 		textArea.setOpaque(false);
-		textArea.setText("Card with info");
+		textArea.setText("");
 		add(textArea, BorderLayout.CENTER);
 		textArea.setColumns(2);
 
@@ -64,7 +67,7 @@ public class TextPanel extends JPanel implements IEventHandler {
 		p2.setBackground(Color.WHITE);
 		p2.setPreferredSize(new Dimension(100, 75));
 		p2.setMinimumSize(new Dimension(100, 75));
-		p2.setBorder(BorderFactory.createLineBorder(Color.black));
+		p2.setBorder(BorderFactory.createLineBorder(Color.WHITE));
 		add(p2, BorderLayout.NORTH);
 
 		cardPanel.add(northPanel, BorderLayout.PAGE_START);
@@ -133,7 +136,8 @@ public class TextPanel extends JPanel implements IEventHandler {
 			p2.remove(header);
 		}
 	}
-	private void paintCard( Mission mission){
+	
+	private void paintCard(Mission mission){
 		String[] cardtext = mission.nextCurrentCard().getString();
 		int words = cardtext.length;
 		String text = "";
@@ -149,7 +153,6 @@ public class TextPanel extends JPanel implements IEventHandler {
 		textArea.setText(text);
 		validate();
 		textArea.repaint();
-
 	}
 
 	/**Determines the color of the foreground of the card**/
