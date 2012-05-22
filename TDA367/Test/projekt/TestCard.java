@@ -1,15 +1,6 @@
 package projekt;
 
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
-
 import org.junit.Test;
-
-import cha.domain.Card;
-import cha.domain.Deque;
-import cha.domain.Categories.Category;
-
 
 public class TestCard {
 

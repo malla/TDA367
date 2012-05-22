@@ -4,8 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import cha.domain.Bet;
-import cha.domain.Board;
 import cha.domain.Categories.Category;
 import cha.domain.Mission;
 import cha.domain.Piece;
