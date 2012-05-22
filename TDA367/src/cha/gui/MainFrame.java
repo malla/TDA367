@@ -193,7 +193,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 			}
 
 			JOptionPane.showMessageDialog(this,
-					"It have to be a number between 2-8", "Error",
+					"It has to be a number between 2-8", "Error",
 
 					JOptionPane.ERROR_MESSAGE, null);
 		}
