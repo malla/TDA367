@@ -25,7 +25,7 @@ public class StartPanel extends JPanel implements ActionListener {
 	public StartPanel() {
 		super(new GridBagLayout());
 		
-		setBackground(Color.RED);
+		setBackground(Color.BLUE);
 		
 		GridBagConstraints c = new GridBagConstraints();
 		
