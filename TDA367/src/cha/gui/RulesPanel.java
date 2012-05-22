@@ -35,7 +35,7 @@ public class RulesPanel extends JPanel implements IEventHandler, ActionListener 
 		c.gridx = 1;
 		c.anchor = GridBagConstraints.NORTH;
 		
-		title = new JLabel("Spelregler: ");
+		title = new JLabel("Game rules ");
 		Font titleFont = title.getFont();
 		title.setFont(new Font(titleFont.getName(), titleFont.getStyle(), 42));
 		this.add(title, c);

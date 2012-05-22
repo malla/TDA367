@@ -55,12 +55,12 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		EventBus.getInstance().register(this);
 		JMenuBar menuBar = new JMenuBar();
 		
-		JMenu menu = new JMenu("Meny");
+		JMenu menu = new JMenu("Menu");
 		JMenu rules = new JMenu("Rules");
 		
-		newGame = new JMenuItem("Nytt spel");
-		endGame = new JMenuItem("Avsluta spel");
-		exitApp = new JMenuItem("Avsluta Challenge Accepted");
+		newGame = new JMenuItem("New game");
+		endGame = new JMenuItem("End current game");
+		exitApp = new JMenuItem("Exit Challenge Accepted");
 		gameRules = new JMenuItem("Rules");
 		
 	
@@ -148,7 +148,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		} else if(e.getSource() == endGame){
 			showStartPanel();
 		} else if(e.getSource() == exitApp){
-			int reply = JOptionPane.showConfirmDialog(null, "Är du säker på att du vill avsluta?", null, JOptionPane.YES_NO_OPTION);
+			int reply = JOptionPane.showConfirmDialog(null, "Are you sure that you want to quit", null, JOptionPane.YES_NO_OPTION);
 
 			if (reply == JOptionPane.YES_OPTION){
 		      System.exit(0);
@@ -184,7 +184,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		while (true) {
 			try {
 				reply = JOptionPane.showInputDialog(
-						"Hur många lag vill ni vara? (2-8 spelare)", 2);
+						"How many teams do you want to be? (2-8 teams)", 2);
 				if (reply == null)
 					return;
 				numPiece = Integer.parseInt(reply);
@@ -196,7 +196,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 			}
 
 			JOptionPane.showMessageDialog(this,
-					"MÂste vara en siffra mellan 2-8", "Error",
+					"It has to be a number between 2-8", "Error",
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 		
@@ -213,7 +213,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	private void showStartPanel() {
 		if (tileContainerPanel.isVisible()) {
 			int reply = JOptionPane.showConfirmDialog(null,
-					"Är du säker på att du vill avbryta pågående spel?", null,
+					"Are you sure that you want to end the game?", null,
 					JOptionPane.YES_NO_OPTION);
 			if (reply != JOptionPane.YES_OPTION) {
 				return;
