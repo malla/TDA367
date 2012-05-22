@@ -1,10 +1,6 @@
 package cha.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-
-import java.awt.Font;
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -13,15 +9,11 @@ import java.util.ArrayList;
 
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import cha.domain.Board;
 import cha.domain.Team;
 import cha.domain.Tile;
@@ -54,7 +46,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 	private TileContainerPanel tileContainerPanel;
 
 	private TextPanel textPanel;
-	private JLabel startText;
 	private ButtonPanel buttonPanel;
 	private PlayerPanel playerPanel;
 
@@ -226,8 +217,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		EventBus.getInstance().publish(Event.CreateBoard, tileList);
 		EventBus.getInstance().publish(Event.ShowBet, 
 				Board.getInstance().getActivePiece());
-		// TODO: needed??
-//		EventBus.getInstance().publish(Event.NextPlayer, null);
 		
 		showGameGUI();
 	} 
