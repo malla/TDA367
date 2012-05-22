@@ -1,7 +1,5 @@
 package cha.domain;
 
-import java.awt.Color;
-
 import cha.domain.Categories.Category;
 
 public class Tile {
