@@ -74,7 +74,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler{
 		exitApp.addActionListener(this);
 		gameRules.addActionListener(this);
 		
-
 		menu.add(newGame);
 		menu.add(endGame);
 		menu.add(exitApp);
