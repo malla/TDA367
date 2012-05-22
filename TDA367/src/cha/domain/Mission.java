@@ -43,8 +43,8 @@ public class Mission {
 		return currentCard;
 		}
 		else timeOver();
-		String[] text =new String[]{"Det finns inga fler kort för ditt uppdrag! " +
-				"\nTryck på 'Done' eller vänta tills tiden tagit slut!"};
+		String[] text =new String[]{"There are no more cards for your assignments! " +
+				"\nPress 'Done' or ait until the timer has reached 0!"};
 		return new Card(text);
 	}
 
