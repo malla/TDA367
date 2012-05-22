@@ -13,6 +13,7 @@ import javax.swing.border.LineBorder;
 
 import cha.domain.Team;
 
+@SuppressWarnings("serial")
 public class GameOverPanel extends JPanel {
 	
 	private JLabel teamColorIcon;
