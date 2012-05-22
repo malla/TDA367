@@ -52,13 +52,13 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 	public MainFrame() {
 		EventBus.getInstance().register(this);
 		JMenuBar menuBar = new JMenuBar();
-
-		JMenu menu = new JMenu("Meny");
+		
+		JMenu menu = new JMenu("Menu");
 		JMenu rules = new JMenu("Rules");
-
-		newGame = new JMenuItem("Nytt spel");
-		endGame = new JMenuItem("Avsluta spel");
-		exitApp = new JMenuItem("Avsluta Challenge Accepted");
+		
+		newGame = new JMenuItem("New game");
+		endGame = new JMenuItem("End current game");
+		exitApp = new JMenuItem("Exit Challenge Accepted");
 		gameRules = new JMenuItem("Rules");
 
 		// newGame.setMnemonic('N');
@@ -146,7 +146,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 			int reply = JOptionPane.showConfirmDialog(null,
 					"Are you sure you want to quit playing Challenge Accepted?", null,
 					JOptionPane.YES_NO_OPTION);
-
 			if (reply == JOptionPane.YES_OPTION) {
 				System.exit(0);
 			}
@@ -182,6 +181,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 			try {
 				reply = JOptionPane.showInputDialog(
 						"How many teams would you like to be? (2-8 players)", 2);
+
 				if (reply == null)
 					return;
 				numPiece = Integer.parseInt(reply);
@@ -194,6 +194,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 
 			JOptionPane.showMessageDialog(this,
 					"It have to be a number between 2-8", "Error",
+
 					JOptionPane.ERROR_MESSAGE, null);
 		}
 
@@ -211,6 +212,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		if (tileContainerPanel.isVisible()) {
 			int reply = JOptionPane.showConfirmDialog(null,
 					"Are your sure you want to quit the running game?", null,
+
 					JOptionPane.YES_NO_OPTION);
 			if (reply != JOptionPane.YES_OPTION) {
 				return;
