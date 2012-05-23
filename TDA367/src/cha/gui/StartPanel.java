@@ -33,13 +33,8 @@ public class StartPanel extends JPanel implements ActionListener {
 		c.fill = GridBagConstraints.HORIZONTAL;
 		
 		JPanel buttonPanel = new JPanel();
-		JLabel textPanel = new JLabel();
 	
-		textPanel = new JLabel("Challenge Accepted");
-		Font startFont = new Font("Serif", Font.PLAIN, 50);
-		textPanel.setFont(startFont);
-		this.add(textPanel);
-		
+	
 		
 		buttonPanel.setBackground(new Color(0, 0, 0, 0));
 		
@@ -52,7 +47,17 @@ public class StartPanel extends JPanel implements ActionListener {
 		buttonPanel.add(startButton);
 		buttonPanel.add(rulesButton);
 		
-		this.add(buttonPanel, c);	
+		this.add(buttonPanel, c);
+		
+		c.anchor = GridBagConstraints.CENTER;
+		c.insets = new Insets(0, 0, 0, 0);
+		
+		JLabel textPanel = new JLabel();
+		
+		textPanel = new JLabel("Challenge Accepted");
+		Font startFont = new Font("Serif", Font.PLAIN, 50);
+		textPanel.setFont(startFont);
+		this.add(textPanel, c);
 	}
 
 	@Override
