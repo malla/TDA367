@@ -8,6 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -33,11 +35,16 @@ public class StartPanel extends JPanel implements ActionListener {
 		c.fill = GridBagConstraints.HORIZONTAL;
 		
 		JPanel buttonPanel = new JPanel();
-		JLabel textPanel = new JLabel();
+		JLabel textLabel = new JLabel();
+		JPanel textPanel = new JPanel();
 	
-		textPanel = new JLabel("Challenge Accepted");
 		Font startFont = new Font("Serif", Font.PLAIN, 50);
-		textPanel.setFont(startFont);
+		textLabel = new JLabel("Challenge Accepted");
+		textLabel.setFont(startFont);
+		textPanel.setBackground(Color.BLUE);
+		int i = 1;
+		textPanel.setBorder(BorderFactory.createEtchedBorder(i, Color.black, Color.gray));
+		textPanel.add(textLabel);
 		this.add(textPanel);
 		
 		
