@@ -202,7 +202,7 @@ public class Deque{
 	private Card getBodyCard() {
 		String temp= bodyParts[randomNumber(bodyParts.length)];
 		String temp1= bodyParts[randomNumber(bodyParts.length)];
-		String[] info =new String[]{ temp + " mot " + temp1};
+		String[] info =new String[]{ temp + " to " + temp1};
 		//Create and add the current body parts as a card
 		return new Card(info);
 	}
