@@ -86,16 +86,16 @@ public class Mission {
 		public String getTitle(){
 			String title;
 			if (category== Category.BACKWARDS){
-			title= "Baklänges!";
+			title= "Backwards!";
 			}
 			else if (category== Category.BODYTOBODY){
-			title= "Kropp mot kropp!";
+			title= "Body to body!";
 			}
 			else if (category== Category.SAMECLASS){
-			title= "Samma kategori!";
+			title= "Same category!";
 			}
 			else {
-			title= "Hitta ord!";
+			title= "Word jumble!";
 			}
 			return title;
 		}
