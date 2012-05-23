@@ -18,32 +18,58 @@ public class Deque{
 	public ArrayList<Card> cards = new ArrayList<Card>();
 
 	static String [] wordsss = {
-		"fotboll", "gorilla", "paraply", "balkong", "garderob", "isbjörn", "professor", "toalett", "armband", "prinsessa",
-		"bokstav", "blandad", "borstar", "handlar", "maskiner", "drömmar", "skvätta", "plansch", "trollar", "kortlek",
-		"snorkel", "grannar", "springa", "rulator", "givmild", "mildare", "spackel", "prickig", "trummor", "strumpa",
-		"trumpet", "slumpen", "älskare", "skänker", "känslig", "domaren", "senaste", "fläskig", "bladlus", "knäcker"};
+		"abdomen","abducts","abiding","ability","abolish","aborted","absence","absinth",
+		"absorbs","absurds","abusers","abusing","abusive","acacias","academy","accents",
+		"accepts","acclaim","accords","account","accused","accuser","accuses","acetone",
+		"achieve","acrobat","acronym","acrylic","actable","actings","diamond","rituals",
+		"emerald","rainbow","answers","cooking","laundry","baskets","ribbons","balloon",
+		"compute","physics","chemist","biology","college","letters","postage","dresses",
+		"flowers","jackets","lizards","painter","lockers","duchess","princes","spanish",
+		"germany","russian","italian","english","england","corsica","islands","dessert",
+		"rampage","rodents","peoples","staples","version","windows","recipes","kitchen",
+		"keeping","yodeled","yodlers","yodling","yoghurt","letters","sources","started",
+		"anxiety","history","install","editors","profile","thunder","dreamer","leakage",
+		"control","parties","showers","lessons","travels","painful","message","parties",
+		"slipper","animals","awarded","muscles","cleaner","burners","habitat","product",
+		"natural","smoking","upright","account","desired","through","achieve","confirm",
+		"amounts","prepare","repairs","affairs","voltage","blemish","fighter","classic",
+		"protein","pimples","clearer","morning","damaged","checker","prevent","peeling",
+		"feeling","station","fashion","trusted","graphic","physics","formula","balance",
+		"episode","blurred","collect","screams","females","believe","survive","revives",
+		"revolve","rotates","carries","carried","married","brought","volcano","teacher",
+		"student","peeping","fairies","blessed","coolers","blazing","printer","dancing",
+		"singing","passing","cooking","fathers","mothers","runners","playing","flowers",
+		"grasses","sisters","brother","evolves","knights","players","knowing","release",
+		"reports","present","scented","preview"};
 
 	static ArrayList<String> words = new ArrayList<String>(Arrays.asList(wordsss));
 
 	static String[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","å","ä","ö"};
-	static String[] bodyParts =  {"Panna", "Axel", "Knä", "Hand", "Rumpa", "Armbåge", "Fot", "Mage", "Haka", "Vad", "Lår"};
+	static String[] bodyParts =  {"Forehead", "Shoulder", "Knee", "Hand", "Bottom", "Elbow", "Foot", "Stomach", "Chin", "Nose", "Thigh"};
 	static String[][] sameClasses = {
-		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
-		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
-		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
-		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
-		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
-		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
-		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
-		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
-		{"Tom fråga", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
-		{"Vilka är typiskt svartvita?", "zebra", "skunk", "dalmatin", "panda", "myrornas krig", "streckkoder", "schackbräde", "oreos", "kaja", "panter", "kobra", "skorpion","lemurell", "elefant"},
-		{"Vilka är sporter utan boll?","segling", "rally", "speedway", "höjdhopp", "judo", "längdhopp", "rodd", "hästpolo", "brännboll", "basket", "golf", "tennis", "badminton", "fotboll"},
-		{"Vilka är däggdjur?", "delfin", "elefant", "blåval", "säl", "häst", "ko", "isbjörn", "noshörning", "pingvin", "Struts", "krokodil", "sköldpadda","blåmes", "lax"},
-		{"Vilka djur spederar en stor del av sin tid i vatten?", "delfin", "blåval", "säl", "isbjörn", "pingvin", "krokodil", "sköldpadda", "lax", "elefant", "häst", "ko", "noshörning","struts", "blåmes"},
-		{"Vilka har en färg i sitt namn?", "blåmes", "vithaj", "blåsippa", "vitsippa", "gullviva", "murgröna", "brunbjörn", "brunkulla", "timotej", "laxöring", "fjällräv", "påsklilja","ormbunke", "ärla"},
-		{"Vilka är aktiva sexIT medlemmar?", "rawa", "bella", "malla", "sasse", "anno", "krobbe", "henkit", "wiiw", "brook", "e", "kara", "jocke","pewhl", "fridén"},
-		{"Vilka namn börjar på L?","Lisa","Lennart","Love","Linnea","Linus","Loke","Liv","Ludvig","Josef","Jonna","Jens","Johan","Julius","Jimmy"}};
+		{"Tom fråga1", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Tom fråga2", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Tom fråga3", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Tom fråga4", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Tom fråga5", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Tom fråga6", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Tom fråga7", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Tom fråga8", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Tom fråga9", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Which are typically black and white?", 
+			"Zebra", "Skunk", "Dalmatian Dog", "Panda", "Magpie", "Bar Code", "Chess Board", "Oreos", "Black Mambo", "Panther", "Cobra", "Scorpion","Black Bird", "Elepfant"},
+		{"Which are sports without a ball?",
+			"Sailing", "Racing", "Biking", "High Jump", "Judo", "Long Jump", "Rowing", "Polo", "Cricket", "Basket", "Golf", "Tennis", "Badminton", "Football"},
+		{"Which are mamals?",
+			"Dolphin", "African Elephant", "Blue Whale", "Seal", "Horse", "Cow", "Polar Bear", "Rhinoserous", "Penguin", "Ostrich", "Crocodile", "Tortoise","Black Bird", "Salmon"},
+		{"Which animals spend a lot of time in water?", 
+			"Dolphin", "Blue Whale", "Seal", "Polar Bear", "Penguin", "Crocodile", "Tortoise", "Salmon", "African Elephant", "Horse", "Cow", "Rhinoserous","Ostrich", "Black Bird"},
+		{"Which have a colour in their name?", 
+			"Red Robin", "Great White Shark", "Blue Whale", "Black Mambo", "Goldfish", "Black Bird", "Red Fox", "Bottle Dolphin", "Polar Bear", "African Elephant", "Kangaroo", "Salmon","Crocodile", "Tse Tse Fly"},
+		{"Who are active members of sexit?", 
+			"rawa", "bella", "malla", "sasse", "anno", "krobbe", "henkit", "wiiw", "brook", "e", "kara", "jocke","pewhl", "fridén"},
+		{"Which names start with the letter L?",
+			"Lisa","Lennart","Love","Linnea","Linus","Loke","Liv","Ludvig","Josef","Jonna","Jens","Johan","Julius","Jimmy"}};
 
 	static ArrayList<String[]> categories= new ArrayList<String[]>(Arrays.asList(sameClasses));
 
