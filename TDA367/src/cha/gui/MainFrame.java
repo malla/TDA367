@@ -14,8 +14,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import cha.domain.Board;
 import cha.domain.Team;
 import cha.domain.Tile;
@@ -66,11 +64,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		exitApp = new JMenuItem("Exit Challenge Accepted");
 		gameRules = new JMenuItem("Rules");
 
-		// newGame.setMnemonic('N');
-		// endGame.setMnemonic('Q');
-		// exitApp.setMnemonic('W');
-		// gameRules.setMnemonic('R');
-
+		
 		newGame.addActionListener(this);
 		endGame.addActionListener(this);
 		exitApp.addActionListener(this);
@@ -113,13 +107,14 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		textPanel = new TextPanel();
 		buttonPanel = new ButtonPanel();
 		playerPanel = new PlayerPanel();
+		playerPanel.setVisible(false);
 		gameOverPanel = new GameOverPanel();
 
 		GridBagConstraints c2 = new GridBagConstraints();
 		c2.gridx = c2.gridy = 1;
 		c2.weightx = c2.weighty = 1;
 		c2.fill = GridBagConstraints.BOTH;
-
+		
 		textPanel.add(buttonPanel, BorderLayout.SOUTH);
 		textPanel.add(playerPanel, BorderLayout.NORTH);
 		tileContainerPanel.add(textPanel, c2);
@@ -222,6 +217,10 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 			String teamName = JOptionPane
 					.showInputDialog("What is team number " + (i + 1)
 							+ " called?");
+			if (teamName == null){
+				return;
+			}
+			
 			Board.setTeamName(teamName);
 		}
 
@@ -268,6 +267,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		startPanel.setVisible(false);
 		rulesPanel.setVisible(false);
 		tileContainerPanel.setVisible(true);
+		playerPanel.setVisible(true);
 	}
 
 	private void showGameOverPanel() {

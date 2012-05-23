@@ -60,7 +60,7 @@ public class RulesPanel extends JPanel implements IEventHandler, ActionListener 
 				+ "If you don't complete the number of tasks you betted you will move two steps backwards. "
 				+ "The team next to you will be your judge and when you press play you have 30 seconds to complete your mission. <br><br>"
 				+ "Yellow – Speak backwards <br>"
-				+ "Your judge will read you a word backwards and your team  will guess which word it's supposed to be. The judge will read you as many words backwards as tiles you have betted.<br>"
+				+ "Your judge will read you a word backwards and your team  will guess which word it's supposed to be. The judge will read you as many words backwards as tiles you have betted.<br><br>"
 				+ "Blue – Same class<br>"
 				+ "Fourteen words will appear on the card in front of you. Among these words seven will have a common denominator. "
 				+ "Your task s to remember as many of the words as possible. When you feel ready, click the next button and a question will appear. Try to remember as many words as possible that answers the question.<br><br> "
