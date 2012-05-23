@@ -44,7 +44,7 @@ public class Mission {
 		}
 		else timeOver();
 		String[] text =new String[]{"There are no more cards for your assignments! " +
-				"\nPress 'Done' or ait until the timer has reached 0!"};
+				"\nPress 'Done' or wait until the timer has reached 0!"};
 		return new Card(text);
 	}
 
