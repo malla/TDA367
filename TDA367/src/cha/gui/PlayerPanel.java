@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import cha.domain.Board;
-import cha.domain.Team;
 import cha.event.Event;
 import cha.event.EventBus;
 import cha.event.IEventHandler;

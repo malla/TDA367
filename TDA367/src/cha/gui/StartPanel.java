@@ -4,9 +4,6 @@ package cha.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,8 +11,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import cha.event.EventBus;
+
 import cha.event.Event;
+import cha.event.EventBus;
 
 @SuppressWarnings("serial")
 public class StartPanel extends JPanel implements ActionListener {
