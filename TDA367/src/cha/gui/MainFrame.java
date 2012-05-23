@@ -64,11 +64,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		exitApp = new JMenuItem("Exit Challenge Accepted");
 		gameRules = new JMenuItem("Rules");
 
-		// newGame.setMnemonic('N');
-		// endGame.setMnemonic('Q');
-		// exitApp.setMnemonic('W');
-		// gameRules.setMnemonic('R');
-
+		
 		newGame.addActionListener(this);
 		endGame.addActionListener(this);
 		exitApp.addActionListener(this);
