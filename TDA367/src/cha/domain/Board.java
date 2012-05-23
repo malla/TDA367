@@ -28,20 +28,8 @@ public class Board{
 	 */
 	private Mission currentMission;
 
-	
-	
-	private final Color[] colorList = new Color[]{
-			Color.WHITE,
-			Color.GREEN,
-			Color.YELLOW,
-			Color.BLACK,
-			Color.RED,
-			Color.BLUE,
-			Color.ORANGE,
-			Color.CYAN
-	};
 	private ArrayList<Category> categoryList = new ArrayList<Category>();
-	private ArrayList<Color> availableColorList = new ArrayList<Color>();
+	private static ArrayList<Color> piecesColorList = new ArrayList<Color>();
 	private ArrayList<Tile> tileList = new ArrayList<Tile>();
 
 	private Random random = new Random();
@@ -83,18 +71,12 @@ public class Board{
 		// Init number of pieces
 		numberOfPieces = numPiece;
 
-		// Add new set of colors
-		availableColorList.clear();
-		for(Color color : colorList){
-			availableColorList.add(color);
-		}
-		
+			
 		// Generate teams
 		pieces = new Piece[numPiece];
 		for(int i = 0; i < numPiece; i++){
 			String teamName = getTeamName(i);
-			Color teamColor = availableColorList.remove(
-					random.nextInt(availableColorList.size()));
+			Color teamColor = getTeamColor(i);
 			Team team = new Team(teamName, teamColor);
 			pieces[i] = new Piece(team);
 		}
@@ -176,7 +158,14 @@ public class Board{
 	
 	public ArrayList<Tile> getTileList(){
 		return tileList;
-		
+	}
+	
+	public static void setColorList(Color c){
+		piecesColorList.add(c);
+	}
+	
+	public Color getTeamColor(int teamNumber){
+		return piecesColorList.get(teamNumber);
 	}
 	
 	public String getTeamName(int teamNumber){

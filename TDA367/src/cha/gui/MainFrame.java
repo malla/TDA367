@@ -1,6 +1,7 @@
 package cha.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import cha.domain.Board;
 import cha.domain.Team;
 import cha.domain.Tile;
@@ -47,15 +50,17 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 
 	private GameOverPanel gameOverPanel;
 
+	private final ArrayList<Color> colorList = new ArrayList<Color>();
+
 	// Constructor
 
 	public MainFrame() {
 		EventBus.getInstance().register(this);
 		JMenuBar menuBar = new JMenuBar();
-		
+
 		JMenu menu = new JMenu("Menu");
 		JMenu rules = new JMenu("Rules");
-		
+
 		newGame = new JMenuItem("New game");
 		endGame = new JMenuItem("End current game");
 		exitApp = new JMenuItem("Exit Challenge Accepted");
@@ -143,9 +148,11 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		} else if (e.getSource() == endGame) {
 			showStartPanel();
 		} else if (e.getSource() == exitApp) {
-			int reply = JOptionPane.showConfirmDialog(null,
-					"Are you sure you want to quit playing Challenge Accepted?", null,
-					JOptionPane.YES_NO_OPTION);
+			int reply = JOptionPane
+					.showConfirmDialog(
+							null,
+							"Are you sure you want to quit playing Challenge Accepted?",
+							null, JOptionPane.YES_NO_OPTION);
 			if (reply == JOptionPane.YES_OPTION) {
 				System.exit(0);
 			}
@@ -179,8 +186,10 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		int numPiece;
 		while (true) {
 			try {
-				reply = JOptionPane.showInputDialog(
-						"How many teams would you like to be? (2-8 players)", 2);
+				reply = JOptionPane
+						.showInputDialog(
+								"How many teams would you like to be? (2-8 players)",
+								2);
 
 				if (reply == null)
 					return;
@@ -197,9 +206,28 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 
 					JOptionPane.ERROR_MESSAGE, null);
 		}
-		
-		for(int i = 0; i < numPiece; i ++ ){
-			String teamName = JOptionPane.showInputDialog("What is team number " + (i + 1) + " called?");
+
+		colorList.clear();
+		colorList.add(Color.WHITE);
+		colorList.add(Color.GREEN);
+		colorList.add(Color.YELLOW);
+		colorList.add(Color.BLACK);
+		colorList.add(Color.RED);
+		colorList.add(Color.BLUE);
+		colorList.add(Color.ORANGE);
+		colorList.add(Color.CYAN);
+
+		for (int i = 0; i < numPiece; i++) {
+			JPanel colorPanel = new JPanel();
+			for (final int j = 0; j < colorList.size(); i++) {
+				JButton colorButton = new JButton();
+				colorButton.setBackground(colorList.get(j));
+//				colorButton.addActionListener(new ActionListener());
+				colorPanel.add(colorButton);
+			}
+			String teamName = JOptionPane
+					.showInputDialog("What is team number " + (i + 1)
+							+ " called?", colorPanel);
 			Board.setTeamName(teamName);
 		}
 
