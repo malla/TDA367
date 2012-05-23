@@ -218,16 +218,10 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		colorList.add(Color.CYAN);
 
 		for (int i = 0; i < numPiece; i++) {
-			JPanel colorPanel = new JPanel();
-			for (final int j = 0; j < colorList.size(); i++) {
-				JButton colorButton = new JButton();
-				colorButton.setBackground(colorList.get(j));
-//				colorButton.addActionListener(new ActionListener());
-				colorPanel.add(colorButton);
-			}
+
 			String teamName = JOptionPane
 					.showInputDialog("What is team number " + (i + 1)
-							+ " called?", colorPanel);
+							+ " called?");
 			Board.setTeamName(teamName);
 		}
 
