@@ -27,12 +27,8 @@ public class StartPanel extends JPanel implements ActionListener {
 		
 		GridBagConstraints c = new GridBagConstraints();
 		
-		c.anchor = GridBagConstraints.NORTH;
-		c.ipady = 40;      
-		c.weightx = 1;
-		c.weighty = 1;
-		c.gridx = 2;
-		c.gridy = 2;
+		c.anchor = GridBagConstraints.CENTER;
+		c.weightx = c.weighty = 1;
 		c.insets = new Insets(250, 0, 0, 0);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		
@@ -42,7 +38,7 @@ public class StartPanel extends JPanel implements ActionListener {
 		textPanel = new JLabel("Challenge Accepted");
 		Font startFont = new Font("Serif", Font.PLAIN, 50);
 		textPanel.setFont(startFont);
-		this.add(textPanel, c);
+		this.add(textPanel);
 		
 		
 		buttonPanel.setBackground(new Color(0, 0, 0, 0));
@@ -55,10 +51,6 @@ public class StartPanel extends JPanel implements ActionListener {
 		
 		buttonPanel.add(startButton);
 		buttonPanel.add(rulesButton);
-		
-		c.anchor = GridBagConstraints.SOUTH;
-		c.weightx = 1;
-		c.weighty = 1;
 		
 		this.add(buttonPanel, c);	
 	}
