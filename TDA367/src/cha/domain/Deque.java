@@ -1,8 +1,4 @@
-//fnns det et lï¿½ttare/snabbare sï¿½tt att fï¿½ in alla ord i en array el dyl?
-//i konstruktorn, kommer jag att behï¿½va lï¿½gga in en String[]???
-//Kan fixa start gerjejen och kolla-ï¿½r nï¿½gon vunnit.
-//fixa currentCard och get NextCard i startmission. GJORT. Om korten ï¿½r slut - ....?
-//i textpanel 
+
 package cha.domain;
 import cha.domain.Categories.Category;
 
@@ -47,15 +43,24 @@ public class Deque{
 	static String[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","å","ä","ö"};
 	static String[] bodyParts =  {"Forehead", "Shoulder", "Knee", "Hand", "Bottom", "Elbow", "Foot", "Stomach", "Chin", "Nose", "Thigh"};
 	static String[][] sameClasses = {
-		{"Tom fråga1", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
-		{"Tom fråga2", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
-		{"Tom fråga3", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
-		{"Tom fråga4", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
-		{"Tom fråga5", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
-		{"Tom fråga6", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
-		{"Tom fråga7", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
-		{"Tom fråga8", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
-		{"Tom fråga9", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "rätt", "fel", "fel", "fel", "fel","fel", "fel"},
+		{"Vilka gör inte datorer", 
+			"Elektrolux", "Husqvarna", "IKEA", "OBH Nordica", "Babyliss", "Bang&Olufsen", "Philips", "Bosch", "Asus", "Acer", "HP", "Toshiba","dell", "LG"},
+		{"Which are not official commities of the IT program at Chalmers?", 
+			"postIT", "doIT", "6IT", "ruleIT", "findIT", "dITo", "bITter", "moveIT", "sexIT", "P.R.I.T.", "NollkIT", "drawIT","digIT", "styrIT"},
+		{"Which are countries in Asia?", 
+			"Yemen", "Indonesia", "India", "Thailand", "China", "Burma", "Korea", "Japan", "Ireland", "England", "Australia", "United States","Estonia", "Sweden"},
+		{"Which are countries that start with a vocal?", 
+			"England", "Ireland", "Italy", "Estonia", "United States", "Australia", "Indonesia", "India", "Thailand", "China", "Korea", "Burma","Japan", "Vietnam"},
+		{"Which are countries in Europe?", 
+			"Sweden", "Spain", "England", "France", "Italy", "Norway", "Estonia", "Portugal", "United States", "Mexico", "New Zeeland", "Chile","Yemen", "Canada"},
+		{"Which do not have to be a relative?", 
+			"girl", "person", "friend", "collaegue", "boss", "celebrity", "doctor", "friend", "mother", "sister", "niece", "aunt","ancestor", "relative"},
+		{"Which can be used as a vessel to transport a person?", 
+			"a plane", "zepelin", "helicopter", "a car", "a ferry", "a truck", "a metro", "a caravan", "a station", "a wheel", "a brake","a platform", "an engine", "a stop sign"},
+		{"Which might you logically look to see in the sky?", 
+			"the sun", "a bird", "the moon", "a plane", "a baloon", "stars", "zepelin", "helicopter", "flowers", "the earth", "a dog", "hearts","circles", "a car"},
+		{"Which are commonly used to communicate?", 
+			"telephone", "computor", "blinkers", "letters", "signs", "talking", "emails", "gestures", "mixer", "clothes", "self-reminder notes", "sink","running", "tables"},
 		{"Which are typically black and white?", 
 			"Zebra", "Skunk", "Dalmatian Dog", "Panda", "Magpie", "Bar Code", "Chess Board", "Oreos", "Black Mambo", "Panther", "Cobra", "Scorpion","Black Bird", "Elepfant"},
 		{"Which are sports without a ball?",
@@ -118,13 +123,12 @@ public class Deque{
 			oldChars.remove(index);
 		}
 
-		//Deque.words.remove(i); ta bort ordet som använts så att det inte kommer igen.
-		String[] info =new String[]{"Hitta ett ord på " + bet+ " bokstäver!\n" +jumbled.toString()};
+		String[] info =new String[]{"Find a word with at least " + bet+ " letters!\n" +jumbled.toString()};
 		return new Card(info);
 
 	}
 	private Card getJumbleCorrectCard(String word) {
-		String[] info =new String[]{"Ett ord som fanns var: "+word};
+		String[] info =new String[]{"One possible word: "+word};
 		return new Card(info);
 	}
 
@@ -174,7 +178,7 @@ public class Deque{
 		for (int j = 0; j < bet; j++){
 			String word = randomWord();
 			allCards.add(getBackwardsCard(word));
-			allCards.add(new Card(new String[] {"Rätt svar är: "+word}));
+			allCards.add(new Card(new String[] {"The right answer is: "+word}));
 		}
 		return allCards;
 	}
@@ -187,7 +191,7 @@ public class Deque{
 		for (Character c : oldChars){
 			backwards.append(c);
 		}
-		String[] info =new String[]{"Vad blir ordet baklänges?\n" +backwards.toString()};
+		String[] info =new String[]{"What is the word backwards?\n" +backwards.toString()};
 		return new Card(info);
 	}
 
@@ -207,10 +211,12 @@ public class Deque{
 		return new Card(info);
 	}
 
+	/*Returns a random number between 0 and the given number*/
 	private int randomNumber(int i) {
 		Random randomGenerator = new Random();
 		return randomGenerator.nextInt(i);
 	}
+	/* Returns a random word from ArrayList words, and then removes it from that ArrayList*/
 	private String randomWord() {
 		int i=randomNumber(Deque.words.size());
 		String word=(String) words.get(i);
