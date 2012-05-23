@@ -31,8 +31,11 @@ public class StartPanel extends JPanel implements ActionListener {
 		JPanel textPanel = new JPanel();
 		JPanel centerPanel = new JPanel();
 		
-		centerPanel.setBackground(Color.CYAN);
+		Color backgroundPanel = new Color(25,139,202);
+		
+		centerPanel.setBackground(backgroundPanel);
 		centerPanel.setLayout(new GridLayout(2,0));
+		centerPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		Font startFont = new Font("Serif", Font.PLAIN, 70);
 		textLabel = new JLabel("Challenge Accepted");
