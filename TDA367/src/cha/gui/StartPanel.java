@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,27 +25,23 @@ public class StartPanel extends JPanel implements ActionListener {
 	JButton rulesButton;
 	
 	public StartPanel() {
-//		super(new GridBagLayout());
+
 		
 		setBackground(Color.BLUE);
-		
-//		GridBagConstraints c = new GridBagConstraints();
-//		
-//		c.anchor = GridBagConstraints.CENTER;
-//		c.weightx = c.weighty = 1;
-//		c.insets = new Insets(250, 0, 0, 0);
-//		c.fill = GridBagConstraints.HORIZONTAL;
 		
 		JPanel buttonPanel = new JPanel();
 		JLabel textLabel = new JLabel();
 		JPanel textPanel = new JPanel();
-	
-		Font startFont = new Font("Serif", Font.PLAIN, 50);
+		JPanel centerPanel = new JPanel();
+		
+		centerPanel.setBackground(Color.CYAN);
+		centerPanel.setLayout(new GridLayout(2,0));
+		
+		Font startFont = new Font("Serif", Font.PLAIN, 70);
 		textLabel = new JLabel("Challenge Accepted");
 		textLabel.setFont(startFont);
-		textPanel.setBackground(Color.BLUE);
-		int typeFont = 1;
-		textPanel.setBorder(BorderFactory.createEtchedBorder(typeFont, Color.black, Color.gray));
+		textPanel.setBackground(new Color(0,0,0,0));
+
 		textPanel.add(textLabel);		
 		
 		buttonPanel.setBackground(new Color(0, 0, 0, 0));
@@ -58,9 +55,11 @@ public class StartPanel extends JPanel implements ActionListener {
 		buttonPanel.add(startButton);
 		buttonPanel.add(rulesButton);
 		
-		this.add(buttonPanel, BorderLayout.SOUTH);
+
+		centerPanel.add(textPanel);
+		centerPanel.add(buttonPanel);
+		this.add(centerPanel, BorderLayout.CENTER);
 	
-		this.add(textPanel, BorderLayout.NORTH);
 	}
 
 	@Override
