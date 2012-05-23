@@ -1,8 +1,4 @@
-//fnns det et lï¿½ttare/snabbare sï¿½tt att fï¿½ in alla ord i en array el dyl?
-//i konstruktorn, kommer jag att behï¿½va lï¿½gga in en String[]???
-//Kan fixa start gerjejen och kolla-ï¿½r nï¿½gon vunnit.
-//fixa currentCard och get NextCard i startmission. GJORT. Om korten ï¿½r slut - ....?
-//i textpanel 
+
 package cha.domain;
 
 import cha.domain.Categories.Category;
@@ -59,67 +55,74 @@ public class Deque {
 	static String[] bodyParts = { "Forehead", "Shoulder", "Knee", "Hand",
 			"Bottom", "Elbow", "Foot", "Stomach", "Chin", "Nose", "Thigh" };
 	static String[][] sameClasses = {
-			{ "Which are sports?", "Football", "Tennis", "Icehockey",
-					"Basketball", "Swimming", "Golf", "Badminton", "Running",
-					"Photography", "Writing", "Drawing", "Reading", "Sleeping",
-					"Loving" },
-			{ "Which things are sweet?", "Honey", "Sugar", "Cupcake",
-					"CocaCola", "Sweet", "Lollipop", "IceCream", "Chocolate",
-					"Meat", "Fish", "Pasta", "Chili", "Rice", "Salt" },
-			{ "Which names are male?", "Per", "Ola", "Bert", "Oliver",
-					"Nicklas", "Robin", "Dennis", "Hugo", "Sara", "Olivia",
-					"Pernilla", "Hedvig", "Berit", "Signe" },
-			{ "Which are kitchen appliances", "Stove", "Mixer", "Frigde",
-					"Microwave", "Fryingpan", "Oven", "Pot", "Tv", "Sofa",
-					"Blanket", "Remote", "Painting", "Chair" },
-			{ "Which are desserts?", "Spunge cake", "Macaroon", "Icecream",
-					"Tapioca pudding", "Cranberry pie",
-					"Chocolate chip cookies", "Shortcake", "Apple pie",
-					"Bouillabaisse", "Fish cake", "Fish and chips", "Sausage",
-					"Chicken wings", "French fries" },
-			{ "Which are red?", "Strawberrie", "Tomatoe", "Lady bug",
-					"Ketchup", "Rose", "Lipstick", "Cranberry", "Stop sign",
-					"Blueberry", "Orange", "Cucumber", "Pea", "Rice", "Leaf" },
-			{ "Which are school subjects?", "Math", "English",
-					"Arts and crafts", "Biology", "Science",
-					"Physical education", "Geography", "History", "Football",
-					"DJ:ing", "Ballet", "Twirling", "Jumping", "Sitting" },
-			{ "Which are clothing stores?", "Zara", "H&M", "GinaTricot",
-					"BikBok", "Solo", "Design only", "JC", "Tara", "Kappahl",
-					"Ica", "Clas Ohlson", "Body shop", "Lidel", "Kicks" },
-			{ "Which are drinks?", "Fanta", "CocaCola", "Cider", "Water",
-					"Jucie", "Tea", "Coffe", "7up", "Concrete", "Wood",
-					"Salmon", "Plastic", "Parrot", "Whale" },
-			{ "Which are typically black and white?", "Zebra", "Skunk",
-					"Dalmatian Dog", "Panda", "Magpie", "Bar Code",
-					"Chess Board", "Oreos", "Black Mambo", "Panther", "Cobra",
-					"Scorpion", "Black Bird", "Elepfant" },
-			{ "Which are sports without a ball?", "Sailing", "Racing",
-					"Biking", "High Jump", "Judo", "Long Jump", "Rowing",
-					"Polo", "Cricket", "Basket", "Golf", "Tennis", "Badminton",
-					"Football" },
-			{ "Which are mamals?", "Dolphin", "African Elephant", "Blue Whale",
-					"Seal", "Horse", "Cow", "Polar Bear", "Rhinoserous",
-					"Penguin", "Ostrich", "Crocodile", "Tortoise",
-					"Black Bird", "Salmon" },
-			{ "Which animals spend a lot of time in water?", "Dolphin",
-					"Blue Whale", "Seal", "Polar Bear", "Penguin", "Crocodile",
-					"Tortoise", "Salmon", "African Elephant", "Horse", "Cow",
-					"Rhinoserous", "Ostrich", "Black Bird" },
-			{ "Which have a colour in their name?", "Red Robin",
-					"Great White Shark", "Blue Whale", "Black Mambo",
-					"Goldfish", "Black Bird", "Red Fox", "Bottle Dolphin",
-					"Polar Bear", "African Elephant", "Kangaroo", "Salmon",
-					"Crocodile", "Tse Tse Fly" },
-			{ "Who are active members of sexit?", "rawa", "bella", "malla",
-					"sasse", "anno", "krobbe", "henkit", "wiiw", "brook", "e",
-					"kara", "jocke", "pewhl", "fridén" },
-			{ "Which names start with the letter L?", "Lisa", "Lennart",
-					"Love", "Linnea", "Linus", "Loke", "Liv", "Ludvig",
-					"Josef", "Jonna", "Jens", "Johan", "Julius", "Jimmy" } };
+		{"Vilka gör inte datorer", 
+			"Elektrolux", "Husqvarna", "IKEA", "OBH Nordica", "Babyliss", "Bang&Olufsen", "Philips", "Bosch", "Asus", "Acer", "HP", "Toshiba","dell", "LG"},
+		{"Which are not official commities of the IT program at Chalmers?", 
+			"postIT", "doIT", "6IT", "ruleIT", "findIT", "dITo", "bITter", "moveIT", "sexIT", "P.R.I.T.", "NollkIT", "drawIT","digIT", "styrIT"},
+		{"Which are countries in Asia?", 
+			"Yemen", "Indonesia", "India", "Thailand", "China", "Burma", "Korea", "Japan", "Ireland", "England", "Australia", "United States","Estonia", "Sweden"},
+		{"Which are countries that start with a vocal?", 
+			"England", "Ireland", "Italy", "Estonia", "United States", "Australia", "Indonesia", "India", "Thailand", "China", "Korea", "Burma","Japan", "Vietnam"},
+		{"Which are countries in Europe?", 
+			"Sweden", "Spain", "England", "France", "Italy", "Norway", "Estonia", "Portugal", "United States", "Mexico", "New Zeeland", "Chile","Yemen", "Canada"},
+		{"Which do not have to be a relative?", 
+			"girl", "person", "friend", "collaegue", "boss", "celebrity", "doctor", "friend", "mother", "sister", "niece", "aunt","ancestor", "relative"},
+		{"Which can be used as a vessel to transport a person?", 
+			"a plane", "zepelin", "helicopter", "a car", "a ferry", "a truck", "a metro", "a caravan", "a station", "a wheel", "a brake","a platform", "an engine", "a stop sign"},
+		{"Which might you logically look to see in the sky?", 
+			"the sun", "a bird", "the moon", "a plane", "a baloon", "stars", "zepelin", "helicopter", "flowers", "the earth", "a dog", "hearts","circles", "a car"},
+		{"Which are commonly used to communicate?", 
+			"telephone", "computor", "blinkers", "letters", "signs", "talking", "emails", "gestures", "mixer", "clothes", "self-reminder notes", "sink","running", "tables"},
+		{"Which are typically black and white?", 
+			"Zebra", "Skunk", "Dalmatian Dog", "Panda", "Magpie", "Bar Code", "Chess Board", "Oreos", "Black Mambo", "Panther", "Cobra", "Scorpion","Black Bird", "Elepfant"},
+		{"Which are sports without a ball?",
+			"Sailing", "Racing", "Biking", "High Jump", "Judo", "Long Jump", "Rowing", "Swimming", 
+			"Cricket", "Basket", "Golf", "Tennis", "Badminton", "Football"},
+		{"Which are mamals?",
+			"Dolphin", "African Elephant", "Blue Whale", "Seal", "Horse", "Cow", "Polar Bear", "Rhinoserous", 
+			"Penguin", "Ostrich", "Crocodile", "Tortoise","Black Bird", "Salmon"},
+		{"Which animals spend a lot of time in water?", 
+			"Dolphin", "Blue Whale", "Seal", "Polar Bear", "Penguin", "Crocodile", "Tortoise", "Salmon", 
+			"Lion", "Horse", "Cow", "Rhinoserous","Ostrich", "Black Bird"},
+		{"Which have a colour in their name?", 
+			"Red Robin", "Great White Shark", "Blue Whale", "Black Mambo", "Goldfish", "Black Bird", "Red Fox", 
+			"Bottle Dolphin", "Polar Bear", "African Elephant", "Kangaroo", "Salmon","Crocodile", "Tse Tse Fly"},
+		{"Who are active members of sexit?", 
+			"rawa", "bella", "malla", "sasse", "anno", "krobbe", "henkit", "wiiw", "brook", "e", "kara", "jocke","pewhl", "fridén"},
+		{ "Which are sports?", 
+				"Football", "Tennis", "Icehockey","Basketball", "Swimming", "Golf", "Badminton", "Running",
+				"Photography", "Writing", "Drawing", "Reading", "Sleeping","Loving" },
+		{ "Which things are sweet?", "Honey", "Sugar", "Cupcake",
+				"CocaCola", "Sweet", "Lollipop", "IceCream", "Chocolate",
+				"Meat", "Fish", "Pasta", "Chili", "Rice", "Salt" },
+		{ "Which names are male?", "Per", "Ola", "Bert", "Oliver",
+				"Nicklas", "Robin", "Dennis", "Hugo", "Sara", "Olivia",
+				"Pernilla", "Hedvig", "Berit", "Signe" },
+		{ "Which are kitchen appliances", "Stove", "Mixer", "Frigde",
+				"Microwave", "Fryingpan", "Oven", "Pot", "Tv", "Sofa",
+				"Blanket", "Remote", "Painting", "Chair" },
+		{ "Which are desserts?", "Spunge cake", "Macaroon", "Icecream",
+				"Tapioca pudding", "Cranberry pie",
+				"Chocolate chip cookies", "Shortcake", "Apple pie",
+				"Bouillabaisse", "Fish cake", "Fish and chips", "Sausage",
+				"Chicken wings", "French fries" },
+		{ "Which are red?", "Strawberrie", "Tomatoe", "Lady bug",
+				"Ketchup", "Rose", "Lipstick", "Cranberry", "Stop sign",
+				"Blueberry", "Orange", "Cucumber", "Pea", "Rice", "Leaf" },
+		{ "Which are school subjects?", "Math", "English",
+				"Arts and crafts", "Biology", "Science",
+				"Physical education", "Geography", "History", "Football",
+				"DJ:ing", "Ballet", "Twirling", "Jumping", "Sitting" },
+		{ "Which are clothing stores?", "Zara", "H&M", "GinaTricot",
+				"BikBok", "Solo", "Design only", "JC", "Tara", "Kappahl",
+				"Ica", "Clas Ohlson", "Body shop", "Lidel", "Kicks" },
+		{ "Which are drinks?", "Fanta", "CocaCola", "Cider", "Water",
+				"Jucie", "Tea", "Coffe", "7up", "Concrete", "Wood",
+				"Salmon", "Plastic", "Parrot", "Whale" },
+		{"Which names start with the letter L?",
+			"Lisa","Lennart","Love","Linnea","Linus","Loke","Liv","Ludvig","Josef","Jonna","Jens","Johan","Julius","Jimmy"}};
+static ArrayList<String[]> categories = new ArrayList<String[]>(Arrays.asList(sameClasses));
 
-	static ArrayList<String[]> categories = new ArrayList<String[]>(
-			Arrays.asList(sameClasses));
 
 	public Deque() {
 
@@ -162,16 +165,17 @@ public class Deque {
 			oldChars.remove(index);
 		}
 
-		// Deque.words.remove(i); ta bort ordet som använts så att det inte
-		// kommer igen.
-		String[] info = new String[] { "Hitta ett ord på " + bet
-				+ " bokstäver!\n" + jumbled.toString() };
+
+		String[] info =new String[]{"Find a word with at least " + bet+ " letters!\n" +jumbled.toString()};
+
 		return new Card(info);
 
 	}
 
 	private Card getJumbleCorrectCard(String word) {
-		String[] info = new String[] { "Ett ord som fanns var: " + word };
+
+		String[] info =new String[]{"One possible word: "+word};
+
 		return new Card(info);
 	}
 
@@ -230,7 +234,7 @@ public class Deque {
 		for (int j = 0; j < bet; j++) {
 			String word = randomWord();
 			allCards.add(getBackwardsCard(word));
-			allCards.add(new Card(new String[] { "Rätt svar är: " + word }));
+			allCards.add(new Card(new String[] {"The right answer is: "+word}));
 		}
 		return allCards;
 	}
@@ -244,8 +248,8 @@ public class Deque {
 		for (Character c : oldChars) {
 			backwards.append(c);
 		}
-		String[] info = new String[] { "Vad blir ordet baklänges?\n"
-				+ backwards.toString() };
+
+		String[] info =new String[]{"What is the word backwards?\n" +backwards.toString()};
 		return new Card(info);
 	}
 
@@ -266,11 +270,13 @@ public class Deque {
 		return new Card(info);
 	}
 
+	/*Returns a random number between 0 and the given number*/
 	private int randomNumber(int i) {
 		Random randomGenerator = new Random();
 		return randomGenerator.nextInt(i);
 	}
 
+	/* Returns a random word from ArrayList words, and then removes it from that ArrayList*/
 	private String randomWord() {
 		int i = randomNumber(Deque.words.size());
 		String word = (String) words.get(i);
