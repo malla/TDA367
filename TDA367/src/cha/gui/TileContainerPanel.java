@@ -155,6 +155,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	private TilePanel createTile(Tile t, int position){
 		TilePanel tile;
 		Category c = t.getCategory();
+
 		if(c == Category.BACKWARDS){
 			tile = new NormalTilePanel(Color.RED, position);
 		}
@@ -166,6 +167,9 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		}
 		else {
 			tile = new NormalTilePanel(Color.GREEN, position);
+		}
+		if (t.isChallenge()){
+			tile = new NormalTilePanel(Color.WHITE, position);
 		}
 		return tile;
 	}

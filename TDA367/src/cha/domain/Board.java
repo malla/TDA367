@@ -77,7 +77,10 @@ public class Board{
 		// Add a new set of tiles
 		tileList.clear();
 		for(int i=0; i<43; i++){
-			tileList.add(new Tile(categoryList.get(random.nextInt(categoryList.size()))));
+			if(i%5==0){
+				tileList.add(new Tile(categoryList.get(random.nextInt(categoryList.size())), true ));
+			}
+			else tileList.add(new Tile(categoryList.get(random.nextInt(categoryList.size())), false));
 		}
 
 		// Init number of pieces

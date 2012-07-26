@@ -10,8 +10,8 @@ public class TestTile {
 	@Test
 	public void testTile() {
 		Category c = Category.WORDJUMBLE;
-		Tile t = new Tile(c);
-		Tile f = new Tile(c);
+		Tile t = new Tile(c, false);
+		Tile f = new Tile(c, false);
 		String s1 = t.toString();
 		String s2 = f.toString();
 		assertTrue(s1.contains(s2));
