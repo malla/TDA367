@@ -24,6 +24,13 @@ public class Mission {
 		this.bet = piece.getBet();
 		this.category = category;
 	}
+	//Constructor used at Challenge
+	public Mission(Piece piece, Category category, Bet maxBet){
+		this.timer = new CountDown();
+		this.piece = piece;
+		this.bet = maxBet;
+		this.category = category;
+	}
 	
 	//This methods only use is in the TestMission class. 
 	public int dequeSize(){

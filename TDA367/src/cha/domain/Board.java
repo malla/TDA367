@@ -176,6 +176,13 @@ public class Board{
 		(currentMission = new Mission(getActivePiece(),
 				getTile(getActivePiece().getPosition()).getCategory())).startMission();
 	}
+	
+	public void startChallenge(){
+		if (pieces == null){
+			throw new BoardNotInitializedException();
+		}
+		
+	}
 
 	public ArrayList<Tile> getTileList(){
 		return tileList;

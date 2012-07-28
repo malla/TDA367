@@ -15,7 +15,6 @@ public class Team {
 	}
 	
 	// Methods
-	
 	public String getName() {
 		return name;
 	}

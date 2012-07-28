@@ -217,8 +217,8 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 			String teamName = JOptionPane
 					.showInputDialog("What is team number " + (i + 1)
 							+ " called?");
-			if (teamName == null){
-				return;
+			if (teamName.length() == 0){
+				teamName= "Team " + (i+1);
 			}
 			
 			Board.setTeamName(teamName);
