@@ -30,7 +30,7 @@ public class Board{
 
 
 
-	private final Color[] colorList = new Color[]{
+	private final Color[] pieceColorList = new Color[]{
 			Color.WHITE,
 			Color.GREEN,
 			Color.YELLOW,
@@ -40,6 +40,7 @@ public class Board{
 			Color.ORANGE,
 			Color.CYAN
 	};
+	
 	private ArrayList<Category> categoryList = new ArrayList<Category>();
 	private ArrayList<Color> availableColorList = new ArrayList<Color>();
 	private ArrayList<Tile> tileList = new ArrayList<Tile>();
@@ -88,7 +89,7 @@ public class Board{
 
 		// Add new set of colors
 		availableColorList.clear();
-		for(Color color : colorList){
+		for(Color color : pieceColorList){
 			availableColorList.add(color);
 		}
 
