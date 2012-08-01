@@ -18,5 +18,6 @@ public enum Event {
 	ShowGameRules,
 	ShowStartPanel,
 	NextCard, 
-	ContinueGame
+	ContinueGame, 
+	Challenge
 }
