@@ -16,7 +16,7 @@ public class Tile {
 	}
 	
 	
-	public Category getCategory( ){
+	public Category getCategory(){
 		return type;
 	}
 	

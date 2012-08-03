@@ -3,15 +3,17 @@ package cha.gui;
 import javax.swing.JOptionPane;
 
 import cha.domain.Board;
+import cha.domain.Challenge;
 
 public class ChallengePanel {
 	
 	public ChallengePanel(){
+		String inputOppTeam;
 		int numberOfTeams = Board.getInstance().getNumberOfPieces();
 				
 		while (true) {
 			try {
-				String inputOppTeam = JOptionPane.showInputDialog("Which team would you like to compete against?");
+				inputOppTeam = JOptionPane.showInputDialog("Which team would you like to compete against?");
 
 				if (inputOppTeam == null){
 					return;
@@ -28,6 +30,8 @@ public class ChallengePanel {
 
 			JOptionPane.showMessageDialog(null, "There is no such team");
 		}
+		
+		new Challenge(Board.getInstance().getActivePiece(), inputOppTeam, getTile(getActivePiece().getPosition()).getCategory());
+		
 	}
-	
 }
