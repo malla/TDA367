@@ -31,7 +31,8 @@ public class ChallengePanel {
 			JOptionPane.showMessageDialog(null, "There is no such team");
 		}
 		
-		//Vet inte varf�r jag inte kan anropa getActivePiece()...
+		//Vet inte varf�r jag inte kan anropa getActivePiece()...
+		//Du försöker anropa den i den här klassen, måste göras i Board. /Johan
 		new Challenge(Board.getInstance().getActivePiece(), inputOppTeam, getTile(getActivePiece().getPosition()).getCategory());
 		
 	}
