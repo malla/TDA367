@@ -4,13 +4,15 @@ import javax.swing.JOptionPane;
 
 import cha.domain.Board;
 import cha.domain.Challenge;
+import cha.domain.Piece;
 
 public class ChallengePanel {
 	
 	public ChallengePanel(){
 		String inputOppTeam;
 		int numberOfTeams = Board.getInstance().getNumberOfPieces();
-				
+		Piece oppTeam;
+		
 		while (true) {
 			try {
 				inputOppTeam = JOptionPane.showInputDialog("Which team would you like to compete against?");
@@ -21,6 +23,7 @@ public class ChallengePanel {
 				
 				for(int i = 0; i < numberOfTeams; i++){
 					if(inputOppTeam.contains(Board.getInstance().getTeamName(i))){
+						oppTeam = Board.getInstance().getPiece(i);
 					break;
 					}
 				}
@@ -31,9 +34,8 @@ public class ChallengePanel {
 			JOptionPane.showMessageDialog(null, "There is no such team");
 		}
 		
-		//Vet inte varf�r jag inte kan anropa getActivePiece()...
-		//Du försöker anropa den i den här klassen, måste göras i Board. /Johan
-		new Challenge(Board.getInstance().getActivePiece(), inputOppTeam, getTile(getActivePiece().getPosition()).getCategory());
+		
+		Board.StartChallenge(oppTeam);
 		
 	}
 }

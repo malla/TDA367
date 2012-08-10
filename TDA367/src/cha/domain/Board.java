@@ -197,5 +197,9 @@ public class Board{
 	public static void setTeamName(String teamName){
 		teamNames.add(teamName);
 	}
+	
+	public void StartChallenge(Piece inputOppTeam){
+		new Challenge(Board.getInstance().getActivePiece(), inputOppTeam, getTile(getActivePiece().getPosition()).getCategory());
+	}
 }
 
