@@ -198,7 +198,7 @@ public class Board{
 		teamNames.add(teamName);
 	}
 	
-	public void StartChallenge(Piece inputOppTeam){
+	public void startChallenge(Piece inputOppTeam){
 		new Challenge(Board.getInstance().getActivePiece(), inputOppTeam, getTile(getActivePiece().getPosition()).getCategory());
 	}
 }
