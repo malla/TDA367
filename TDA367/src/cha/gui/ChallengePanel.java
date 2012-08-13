@@ -15,8 +15,8 @@ public class ChallengePanel {
 
 		while (true) {
 			try {
-				inputOppTeam = JOptionPane
-						.showInputDialog("Which team would you like to compete against?");
+				inputOppTeam = JOptionPane.showInputDialog(null,"Which team would you like to compete against?",
+						"Chose an opponent team", JOptionPane.QUESTION_MESSAGE);
 
 				if (inputOppTeam == null) {
 					return;
@@ -26,6 +26,7 @@ public class ChallengePanel {
 					if (inputOppTeam.contains(Board.getInstance()
 							.getTeamName(i))) {
 						oppTeam = Board.getInstance().getPiece(i);
+						Board.getInstance().startChallenge(oppTeam);
 						return;
 					}
 				}
@@ -33,13 +34,16 @@ public class ChallengePanel {
 			}
 
 			JOptionPane.showMessageDialog(null, "There is no such team");
-		}
-		Board.getInstance().startChallenge(oppTeam);
+		}		
+
+
 	}
 
-	public int pointsEarned() {
+
+	public static int pointsEarned() {
 		String pointInput;
 		int points;
+
 
 		while (true) {
 			pointInput = JOptionPane
