@@ -26,7 +26,7 @@ public class ChallengePanel {
 					if (inputOppTeam.contains(Board.getInstance()
 							.getTeamName(i))) {
 						oppTeam = Board.getInstance().getPiece(i);
-						break;
+						return;
 					}
 				}
 			} catch (NumberFormatException e) {
@@ -34,10 +34,6 @@ public class ChallengePanel {
 
 			JOptionPane.showMessageDialog(null, "There is no such team");
 		}
-
-		Board.getInstance().startChallenge(oppTeam);
-		
-
 	}
 
 	public int pointsEarned() {
@@ -52,7 +48,7 @@ public class ChallengePanel {
 			try {
 				points = Integer.parseInt(pointInput);
 				if (pointInput == null)
-					return;
+					continue;
 
 				if (points >= 0 && points <= 7) {
 					System.out.println("Missions accepted " + points);
