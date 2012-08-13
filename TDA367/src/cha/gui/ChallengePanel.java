@@ -36,6 +36,7 @@ public class ChallengePanel {
 		}
 	}
 
+
 	public int pointsEarned() {
 		String pointInput;
 		int points;
@@ -60,4 +61,5 @@ public class ChallengePanel {
 		return points;
 
 	}
+
 }
