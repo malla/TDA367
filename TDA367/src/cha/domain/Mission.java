@@ -17,6 +17,7 @@ public class Mission {
 	private final Deque deque = new Deque();
 	private List<Card> cards;
 	private Card currentCard;
+	private static boolean isMissionActive;
 
 
 
@@ -38,6 +39,7 @@ public class Mission {
 
 
 	public void startMission(){
+		setIsMissionActive(true);
 		cards = deque.getCards(category, bet.getBetValue());
 		//nextCurrentCard();
 	}
@@ -112,5 +114,10 @@ public class Mission {
 				", timer=" + timer + 
 				", piece=" + piece + "]";
 		}
-
+		public static void setIsMissionActive(boolean b){
+			isMissionActive=b;
+		}
+		public static boolean isMissionActive(){
+			return isMissionActive;
+		}
 	}

@@ -3,7 +3,6 @@ package cha.gui;
 import javax.swing.JOptionPane;
 
 import cha.domain.Board;
-import cha.domain.Challenge;
 import cha.domain.Piece;
 
 public class ChallengePanel {
