@@ -18,13 +18,12 @@ public class Mission {
 	private List<Card> cards;
 	private Card currentCard;
 
+
+
 	public Mission(Piece piece, Category category){
-		this.timer = new CountDown();
-		this.piece = piece;
-		this.bet = piece.getBet();
-		this.category = category;
+		this(piece, category, piece.getBet());
 	}
-	//Constructor used at Challenge
+
 	public Mission(Piece piece, Category category, Bet maxBet){
 		this.timer = new CountDown();
 		this.piece = piece;
@@ -113,4 +112,5 @@ public class Mission {
 				", timer=" + timer + 
 				", piece=" + piece + "]";
 		}
+
 	}

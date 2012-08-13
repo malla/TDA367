@@ -34,8 +34,8 @@ public class ChallengePanel {
 
 			JOptionPane.showMessageDialog(null, "There is no such team");
 		}
+		Board.getInstance().startChallenge(oppTeam);
 	}
-
 
 	public int pointsEarned() {
 		String pointInput;
@@ -61,5 +61,4 @@ public class ChallengePanel {
 		return points;
 
 	}
-
 }
