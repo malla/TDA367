@@ -34,14 +34,13 @@ public class ChallengePanel {
 			}
 
 			JOptionPane.showMessageDialog(null, "There is no such team");
-		}
-
-		
+		}		
 
 
 	}
 
-	public int pointsEarned() {
+
+	public static int pointsEarned() {
 		String pointInput;
 		int points;
 

@@ -2,6 +2,7 @@ package cha.domain;
 
 
 import cha.domain.Categories.Category;
+import cha.gui.ChallengePanel;
 
 public class Challenge {
 	private final Piece challenger;
@@ -24,15 +25,16 @@ public class Challenge {
 	}
 
 	private void startChallenge(){
+		Board.setChallenge(true);
 		chaMission = new Mission(challenger, category, maxBet);
 		oppMission = new Mission(opponent, category, maxBet);
 		chaMission.startMission();
-		//här måste det komma upp dialogruta lr liknande som frågar hur många som klarades av.
-		//varpå setChaScore() anropas.
+		setChaScore(ChallengePanel.pointsEarned());
 		oppMission.startMission();
-		//här måste det komma upp dialogruta lr liknande som frågar hur många som klarades av.
-		//varpå setOppScore() anropas.
+		setOppScore(ChallengePanel.pointsEarned());
 		getResult();
+		Board.setChallenge(false);
+		//oppMission.setChallenge(false);
 	}
 	//Called when challenger has done their Mission.
 	public void setChaScore(int i){

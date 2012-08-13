@@ -8,6 +8,7 @@ import javax.swing.JTextArea;
 import javax.swing.JLabel;
 
 import cha.domain.Categories.Category;
+import cha.domain.Board;
 import cha.domain.Mission;
 import cha.event.EventBus;
 import cha.event.Event;
@@ -130,7 +131,10 @@ public class TextPanel extends JPanel implements IEventHandler {
 			this.remove(cardPanel);
 			this.add(textArea);
 			this.repaint();
-			textArea.setText("Was the mission completed successfully?");
+			if (Board.isChallenge=true){
+				textArea.setText("Challenging team has done their best! \nOpponents turn!");
+			}
+			else textArea.setText("Was the mission completed successfully?");
 		}
 		else if(e == Event.MissionSuccess||e == Event.MissionFail){
 
