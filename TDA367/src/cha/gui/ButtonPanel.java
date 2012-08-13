@@ -80,9 +80,10 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 			nextButton.setVisible(false);
 			doneButton.setVisible(false);
 			timer.setVisible(false);
-			
-			yesButton.setVisible(true);
-			noButton.setVisible(true);
+			if (Board.isChallenge=true){
+				nextChallenge.setVisible(true);}
+			else{yesButton.setVisible(true);
+			noButton.setVisible(true);}
 
 		} else if (e == Event.TimeTick) {
 			String time = (String) o;
