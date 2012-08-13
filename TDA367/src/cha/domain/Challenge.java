@@ -8,7 +8,7 @@ public class Challenge {
 	private final Piece challenger;
 	public Piece opponent;
 	Category category;
-	private Mission chaMission;
+	public static Mission chaMission;
 	private Mission oppMission;
 	private Bet maxBet=new Bet(7);
 	public int chaScore;
@@ -25,15 +25,19 @@ public class Challenge {
 	}
 
 	private void startChallenge(){
-		Board.setChallenge(true);
+//		Board.setChallenge(true);
 		chaMission = new Mission(challenger, category, maxBet);
-		oppMission = new Mission(opponent, category, maxBet);
+		
 		chaMission.startMission();
+		while(Mission.isMissionActive()==false){
 		setChaScore(ChallengePanel.pointsEarned());
+		oppMission = new Mission(opponent, category, maxBet);
 		oppMission.startMission();
 		setOppScore(ChallengePanel.pointsEarned());
 		getResult();
-		Board.setChallenge(false);
+		continue;
+		}
+//		Board.setChallenge(false);
 		//oppMission.setChallenge(false);
 	}
 	//Called when challenger has done their Mission.

@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import cha.domain.Board;
+import cha.domain.Mission;
 import cha.event.EventBus;
 import cha.event.Event;
 import cha.event.IEventHandler;
@@ -77,13 +78,16 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 			doneButton.setVisible(true);
 			timer.setVisible(true);
 		} else if (e == Event.TimeOver) {
+			Mission.setIsMissionActive(false);
 			nextButton.setVisible(false);
 			doneButton.setVisible(false);
 			timer.setVisible(false);
-			if (Board.isChallenge=true){
-				nextChallenge.setVisible(true);}
-			else{yesButton.setVisible(true);
-			noButton.setVisible(true);}
+//			if (Board.isChallengeActive()==true){
+//				nextChallenge.setVisible(true);}
+//			else{
+				yesButton.setVisible(true);
+			noButton.setVisible(true);
+//			}
 
 		} else if (e == Event.TimeTick) {
 			String time = (String) o;
@@ -107,7 +111,22 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 
 			EventBus.getInstance().publish(Event.StartMission,
 					Board.getInstance().getMission());
-		} else if (e.getSource() == nextButton) {
+			
+		} else if(e.getSource() == nextChallenge) {//ALLT SOM HÄNDER NÄR OPP SKA KÖRA!
+			TileContainerPanel.setBetable(true);
+
+			Board.getInstance().getActivePiece()
+					.setBet(TileContainerPanel.getTemporaryBet());
+
+			for (TilePanel panel : TileContainerPanel.getTilePanels()) {
+				panel.notBetable();
+			}
+			Board.getInstance().startMission();
+
+			EventBus.getInstance().publish(Event.StartMission,
+					Board.getInstance().getMission());
+			
+		}else if (e.getSource() == nextButton) {
 			EventBus.getInstance().publish(Event.NextCard,
 					Board.getInstance().getMission());
 		} else if (e.getSource() == doneButton) {

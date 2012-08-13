@@ -131,10 +131,11 @@ public class TextPanel extends JPanel implements IEventHandler {
 			this.remove(cardPanel);
 			this.add(textArea);
 			this.repaint();
-			if (Board.isChallenge=true){
-				textArea.setText("Challenging team has done their best! \nOpponents turn!");
-			}
-			else textArea.setText("Was the mission completed successfully?");
+	//		if (Board.isChallengeActive()==true){
+	//			textArea.setText("Challenging team has done their best! \nOpponents turn!");
+	//		}
+	//		else 
+				textArea.setText("Was the mission completed successfully?");
 		}
 		else if(e == Event.MissionSuccess||e == Event.MissionFail){
 
