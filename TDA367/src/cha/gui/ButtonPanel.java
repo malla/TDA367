@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import cha.domain.Board;
-import cha.domain.Mission;
+import cha.domain.Challenge;
 import cha.event.EventBus;
 import cha.event.Event;
 import cha.event.IEventHandler;
@@ -25,7 +25,6 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 	private JButton noButton;
 	private JButton nextButton;
 	private JButton doneButton;
-	private JButton nextChallenge;
 	private JLabel timer;
 
 	public ButtonPanel() {
@@ -37,7 +36,6 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 		noButton = new JButton("No");
 		nextButton = new JButton("Next Card");
 		doneButton = new JButton("Done");
-		nextChallenge = new JButton("Start Challenge!");
 		startMissionButton = new JButton("Start Mission");
 		startMissionButton.addActionListener(this);
 		yesButton.addActionListener(this);
@@ -50,7 +48,6 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 		this.add(doneButton);
 		this.add(yesButton);
 		this.add(noButton);
-		this.add(nextChallenge);
 		this.add(timer);
 
 		startMissionButton.setVisible(false);
@@ -58,7 +55,6 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 		doneButton.setVisible(false);
 		yesButton.setVisible(false);
 		noButton.setVisible(false);
-		nextChallenge.setVisible(false);
 		timer.setVisible(false);
 
 		this.setBackground(Color.WHITE);
@@ -78,17 +74,15 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 			doneButton.setVisible(true);
 			timer.setVisible(true);
 		} else if (e == Event.TimeOver) {
-			Mission.setIsMissionActive(false);
 			nextButton.setVisible(false);
 			doneButton.setVisible(false);
 			timer.setVisible(false);
-//			if (Board.isChallengeActive()==true){
-//				nextChallenge.setVisible(true);}
-//			else{
+			if (Challenge.isChallengeActive() == true) {
+				startMissionButton.setVisible(true);
+			} else {
 				yesButton.setVisible(true);
-			noButton.setVisible(true);
-//			}
-
+				noButton.setVisible(true);
+			}
 		} else if (e == Event.TimeTick) {
 			String time = (String) o;
 			timer.setText(time);
@@ -99,39 +93,34 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == startMissionButton) {
-			TileContainerPanel.setBetable(true);
-
-			Board.getInstance().getActivePiece()
-					.setBet(TileContainerPanel.getTemporaryBet());
-
-			for (TilePanel panel : TileContainerPanel.getTilePanels()) {
-				panel.notBetable();
+			if (Challenge.isChallengeActive() == true) {
+				EventBus.getInstance().publish(Event.Challenge, null);
+				EventBus.getInstance().publish(Event.StartMission,
+						Challenge.chaMission);
+			} else {
+				TileContainerPanel.setBetable(true);
+				Board.getInstance().getActivePiece()
+						.setBet(TileContainerPanel.getTemporaryBet());
+				for (TilePanel panel : TileContainerPanel.getTilePanels()) {
+					panel.notBetable();
+				}
+				Board.getInstance().startMission();
+				EventBus.getInstance().publish(Event.StartMission,
+						Board.getInstance().getMission());
 			}
-			Board.getInstance().startMission();
-
-			EventBus.getInstance().publish(Event.StartMission,
-					Board.getInstance().getMission());
-			
-		} else if(e.getSource() == nextChallenge) {//ALLT SOM HÄNDER NÄR OPP SKA KÖRA!
-			TileContainerPanel.setBetable(true);
-
-			Board.getInstance().getActivePiece()
-					.setBet(TileContainerPanel.getTemporaryBet());
-
-			for (TilePanel panel : TileContainerPanel.getTilePanels()) {
-				panel.notBetable();
-			}
-			Board.getInstance().startMission();
-
-			EventBus.getInstance().publish(Event.StartMission,
-					Board.getInstance().getMission());
-			
-		}else if (e.getSource() == nextButton) {
+		} else if (e.getSource() == nextButton) {
 			EventBus.getInstance().publish(Event.NextCard,
 					Board.getInstance().getMission());
 		} else if (e.getSource() == doneButton) {
-			Board.getInstance().getMission().stopTimer();
-			EventBus.getInstance().publish(Event.TimeOver, null);
+			if (Challenge.isChallengeActive() == true) {
+				System.out.print("\nDone button pressed. Challenge = TRUE");
+				Challenge.chaMission.stopTimer();
+				EventBus.getInstance().publish(Event.TimeOver, null);
+			} else {
+				System.out.print("done button pressed. CHallenge = FALSE");
+				Board.getInstance().getMission().stopTimer();
+				EventBus.getInstance().publish(Event.TimeOver, null);
+			}
 		} else if (e.getSource() == yesButton) {
 			Board.getInstance().getMission().missionDone(true);
 			EventBus.getInstance().publish(Event.MissionSuccess, null);

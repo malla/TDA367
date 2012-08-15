@@ -28,7 +28,7 @@ public class Board {
 	 * The current mission
 	 */
 	private Mission currentMission;
-//	public static boolean isChallenge;
+	// public static boolean isChallenge;
 
 	private final Color[] pieceColorList = new Color[] { Color.WHITE,
 			Color.GREEN, Color.YELLOW, Color.BLACK, Color.RED, Color.BLUE,
@@ -70,9 +70,9 @@ public class Board {
 
 		// Add a new set of tiles
 		tileList.clear();
-		//setChallenge(false);
+		// setChallenge(false);
 		for (int i = 0; i < 43; i++) {
-			if (i % 5 == 0 && i!=0) {
+			if (i % 5 == 0 && i != 0) {
 				tileList.add(new Tile(categoryList.get(random
 						.nextInt(categoryList.size())), true));
 			} else
@@ -162,7 +162,10 @@ public class Board {
 	}
 
 	public Mission getMission() {
-		return currentMission;
+		if (Challenge.isChallengeActive() == true) {
+			return Challenge.getMission();
+		} else
+			return currentMission;
 	}
 
 	public void startMission() {
@@ -171,8 +174,6 @@ public class Board {
 		}
 		if (getTile(getActivePiece().getPosition()).isChallenge()) {
 			new ChallengePanel();
-			currentMission = Challenge.chaMission;
-
 		} else
 			(currentMission = new Mission(getActivePiece(), getTile(
 					getActivePiece().getPosition()).getCategory()))
@@ -183,12 +184,10 @@ public class Board {
 		if (pieces == null) {
 			throw new BoardNotInitializedException();
 		}
-
 	}
 
 	public ArrayList<Tile> getTileList() {
 		return tileList;
-
 	}
 
 	public String getTeamName(int teamNumber) {
@@ -203,10 +202,4 @@ public class Board {
 		new Challenge(Board.getInstance().getActivePiece(), inputOppTeam,
 				getTile(getActivePiece().getPosition()).getCategory());
 	}
-/**	public static void setChallenge(boolean b){
-		isChallenge=b;
-	}
-	public static boolean isChallengeActive(){
-		return isChallenge;
-	}**/
 }
