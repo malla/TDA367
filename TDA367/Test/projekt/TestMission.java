@@ -15,7 +15,7 @@ public class TestMission {
 	private static final Team Team = null;
 	@Test
 	public void testMission() {
-		Piece p = new Piece(Team);
+		Piece p = new Piece(Team, 1);
 		Mission m = new Mission(p, Category.SAMECLASS);
 		m.startMission();
 		int dequeSize = m.dequeSize();

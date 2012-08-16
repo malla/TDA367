@@ -186,7 +186,8 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			newGame(tiles);
 		} else if (e == Event.ShowBet) {
 			if (Board.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge()) {
-				new ChallengePanel();
+				setBetable(false);
+//				new ChallengePanel();
 			
 			} else {
 				showBet();
@@ -195,7 +196,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		} else if (e == Event.MakeBet) {
 			if (Board.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge()) {
 				setBetable(false);
-				new ChallengePanel();
+				
 			}
 			else{
 			int pos = Board.getInstance().getActivePiece().getPosition();

@@ -38,10 +38,7 @@ public class PlayerPanel extends JPanel implements IEventHandler {
 			player.setText("Active team: " + Board.getInstance().getActivePiece().getTeam().getName());
 			panelColor.setBackground(Board.getInstance().getActivePiece().getTeam().getColor());
 			
-			
-//			if (Board.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge()) {
-//				new ChallengePanel();
-//			}
+		
 			this.repaint();
 		}
 		else if(e == Event.CreateBoard){

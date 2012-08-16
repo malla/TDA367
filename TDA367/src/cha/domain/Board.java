@@ -145,15 +145,16 @@ public class Board {
 			activePiece = 0;
 		} else {
 			activePiece = activePiece + 1;
-//			if (isTimeForChallenge(activePiece)){
-//				
-//			}
+			if (isTimeForChallenge()){
+				new ChallengePanel();
+			}
 		}
 	}
 
-//	private boolean isTimeForChallenge(int i){
-//		return true;
-//	}
+	private boolean isTimeForChallenge(){
+		return (Board.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge());
+
+	}
 	
 	public Tile getTile(int place) {
 		if (place < MIN_TILES || place > MAX_TILES) {
