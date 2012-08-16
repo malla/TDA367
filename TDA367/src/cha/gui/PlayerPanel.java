@@ -30,10 +30,6 @@ public class PlayerPanel extends JPanel implements IEventHandler {
 		player.setFont(activePlayerFont);
 		this.add(player);
 		this.add(panelColor);
-		
-	
-		
-		
 	}
 	
 	@Override
