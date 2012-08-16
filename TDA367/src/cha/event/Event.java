@@ -9,9 +9,9 @@ public enum Event {
 	TimeOver,
 	MissionSuccess,
 	MissionFail,
-	NextPlayer,
-	OldPosition,//Only removes piece when moved. Called from 2 methods in Piece.
-	NewPosition,//Only adds piece when moved. And repaints. Called from 2 methods in Piece.
+	NextPlayer,// Is called when mission(Y/N button) or challenge is over. Only repaints the GUI.
+	OldPosition,//DONE. Only removes piece when moved. Called from 2 methods in Piece.
+	NewPosition,//DONE. Only adds piece when moved. And repaints. Called from 2 methods in Piece.
 	CreateBoard,
 	NewGame,
 	GameOver,

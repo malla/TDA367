@@ -16,6 +16,5 @@ public class Main {
  *  - Om spelare står på Challenge ruta, ska ha inte göra en bet utan 
  *  	rutan som frågar om opponent ska komma direkt! GÖRS I BOARD!
  *  - Göra alla spelrutor unbetable när Challenge.isChallengeActive()==true.
- *  - Se till att spelpjäserna rör på sig som de ska efter en challenge.
  *  - Se till att texten ändras efter att turen gått över efter challenge.
  */
