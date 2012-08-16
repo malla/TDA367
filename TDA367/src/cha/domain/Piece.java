@@ -9,45 +9,38 @@ public class Piece {
 	private Bet bet;
 	private Team team;
 	private static final int GOAL_TILE = 43;
+	private int index;
 
-	public Piece(Team team) {
+	public Piece(Team team, int index) {
 		this.team = team;
 		bet = new Bet(0);
+		this.index = index;
 	}
 
-	public void movePieceForward(Piece piece, int bet) {
-		EventBus.getInstance().publish(Event.OldPosition, getPosition(), piece);
+	public void movePieceForward(int bet) {
+		EventBus.getInstance().publish(Event.OldPosition, getPosition(), this.getIndex());
 		if (position + bet > GOAL_TILE) {
 			setPosition(GOAL_TILE);
 			EventBus.getInstance().publish(Event.GameOver, getTeam(), null);
 		} else {
 			position = position + bet;
 		}
-		EventBus.getInstance().publish(Event.NewPosition, getPosition(), piece);
+		EventBus.getInstance().publish(Event.NewPosition, getPosition(), this.getIndex());
 		setBet(0);
 	}
 
-	public void movePieceBackward(Piece piece) {
+	public void movePieceBackward() {
 		//EventBus.getInstance().publish(Event.OldPosition, getPosition());
-		EventBus.getInstance().publish(Event.OldPosition, getPosition(), piece);
+		EventBus.getInstance().publish(Event.OldPosition, getPosition(), this.getIndex());
 		if (getPosition() < 2) {
 			setPosition(0);
 		} else {
 			position = position - FAILED_MISSION_PENALTY;
 		}
-		EventBus.getInstance().publish(Event.NewPosition, getPosition(), piece);
+		EventBus.getInstance().publish(Event.NewPosition, getPosition(), this.getIndex());
 		setBet(0);
 	}
-	
-//	private int pos;
-//	
-//	private void setPos(int newPos){
-//		pos=newPos;
-//	}
-//	
-//	public int getPos(){
-//		return pos;
-//	}
+
 
 	public Team getTeam() {
 		return this.team;
@@ -57,6 +50,10 @@ public class Piece {
 		return bet;
 	}
 
+	public int getIndex(){
+		return index;
+	}
+	
 	public void setBet(int newBet) {
 		if (newBet < 0) {
 			throw new IllegalArgumentException();

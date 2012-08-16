@@ -87,7 +87,7 @@ public class Board {
 		for (Color color : pieceColorList) {
 			availableColorList.add(color);
 		}
-
+		
 		// Generate teams
 		pieces = new Piece[numPiece];
 		for (int i = 0; i < numPiece; i++) {
@@ -95,14 +95,14 @@ public class Board {
 			Color teamColor = availableColorList.remove(random
 					.nextInt(availableColorList.size()));
 			Team team = new Team(teamName, teamColor);
-			pieces[i] = new Piece(team);
+			pieces[i] = new Piece(team, i);
 		}
 		activePiece = 0;
 		currentMission = null;
 	}
 
 	// Methods
-
+	
 	public int getNumberOfPieces() {
 		if (pieces == null) {
 			throw new BoardNotInitializedException();

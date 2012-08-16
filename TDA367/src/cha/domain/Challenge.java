@@ -73,15 +73,15 @@ public class Challenge implements IEventHandler {
 			
 			
 			
-			challenger.movePieceForward(challenger, chaScore);
-			opponent.movePieceBackward(opponent);
+			challenger.movePieceForward(chaScore);
+			opponent.movePieceBackward();
 			resultString = "Congratulations " + challenger.getTeam().getName()
 					+ "! " + "\nYou have won the challenge!";
 		} else { // opponent also wins at draw!
 			System.out.print("\nchaScore== ||<oppScore");
 
-			opponent.movePieceForward(challenger, oppScore);
-			challenger.movePieceBackward(opponent);
+			opponent.movePieceForward(oppScore);
+			challenger.movePieceBackward();
 			resultString = "Congratulations " + opponent.getTeam().getName()
 					+ "! " + "\nYou have won the challenge!";
 		}

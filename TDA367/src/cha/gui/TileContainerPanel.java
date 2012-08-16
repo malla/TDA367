@@ -225,18 +225,19 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		}
 		else if(e == Event.OldPosition){
 			int pos = (Integer)o;
-			Piece piece = (Piece) p;
+			int index = (Integer) p;
 
-			tilePanels[pos].removePiece(piecePanels.get(Board.getInstance().getActivePieceNumber()));
+			tilePanels[pos].removePiece(piecePanels.get(index));
 		}
 		else if(e == Event.NewPosition){
 			int pos = (Integer)o;
-			Piece piece = (Piece) p;
-			tilePanels[pos].addPiecePanel(piecePanels.get(Board.getInstance().getActivePieceNumber()));
+			int index = (Integer) p;
+			tilePanels[pos].addPiecePanel(piecePanels.get(index));
 			tilePanels[pos].repaint();
 			nextPlayer();
 		}
 	}
+	
 	
 	public static int getTemporaryBet(){
 		return temporaryBet;
