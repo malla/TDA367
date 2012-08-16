@@ -62,7 +62,7 @@ public class TilePanel extends JPanel {
 		
 		this.setBorder(new BevelBorder(BevelBorder.LOWERED));
 		this.repaint();
-
+		
 
 
 		if (Board.getInstance().getActivePiece()

@@ -8,6 +8,7 @@ import javax.swing.JTextArea;
 import javax.swing.JLabel;
 
 import cha.domain.Categories.Category;
+import cha.domain.Board;
 import cha.domain.Challenge;
 import cha.domain.Mission;
 import cha.event.EventBus;
@@ -114,8 +115,13 @@ public class TextPanel extends JPanel implements IEventHandler {
 		}
 
 		else if (e == Event.MakeBet) {
+			if (Board.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge()) {
+				
+			}
+			else{
 			int bet = (Integer) o;
 			textArea.setText("Bet: " + bet);
+			}
 		} else if (e == Event.ShowBet) {
 			textArea.setText("Make bet!");
 		} else if (e == Event.TimeOver) {
