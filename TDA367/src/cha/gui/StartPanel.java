@@ -66,9 +66,9 @@ public class StartPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == startButton){
-			EventBus.getInstance().publish(Event.NewGame, null);
+			EventBus.getInstance().publish(Event.NewGame, null, null);
 		}else if(e.getSource() == rulesButton){
-			EventBus.getInstance().publish(Event.ShowGameRules, null);
+			EventBus.getInstance().publish(Event.ShowGameRules, null, null);
 		}	
 	}
 }

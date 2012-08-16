@@ -22,10 +22,10 @@ public class CountDown implements ActionListener{
 	}
 
 	private void ticktock(){
-		EventBus.getInstance().publish(Event.TimeTick, Integer.toString(count));
+		EventBus.getInstance().publish(Event.TimeTick, Integer.toString(count), null);
 		if (count==-1){
 			timer.stop();
-			EventBus.getInstance().publish(Event.TimeOver, null);
+			EventBus.getInstance().publish(Event.TimeOver, null, null);
 		}
 		System.out.println(count--);
 		

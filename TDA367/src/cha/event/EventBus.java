@@ -4,6 +4,8 @@ package cha.event;
 import java.util.LinkedList;
 import java.util.List;
 
+import cha.domain.Piece;
+
 public class EventBus{
 
 	private static EventBus CHinstance = null;
@@ -24,9 +26,9 @@ public class EventBus{
 		handlers.add(handler);
 	}
 	
-	public void publish(Event e, Object o){
+	public void publish(Event e, Object o, Object p){
 		for(IEventHandler h : handlers){
-			h.action(e, o);
+			h.action(e, o, p);
 		}
 	}
 }

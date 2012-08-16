@@ -61,7 +61,7 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 	}
 
 	@Override
-	public void action(Event e, Object o) {
+	public void action(Event e, Object o, Object p) {
 		if (e == Event.ShowBet) {
 			startMissionButton.setVisible(false);
 			yesButton.setVisible(false);
@@ -94,9 +94,9 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == startMissionButton) {
 			if (Challenge.isChallengeActive() == true) {
-				EventBus.getInstance().publish(Event.Challenge, null);
+				EventBus.getInstance().publish(Event.Challenge, null, null);
 				EventBus.getInstance().publish(Event.StartMission,
-						Challenge.chaMission);
+						Challenge.chaMission, null);
 			} else {
 				TileContainerPanel.setBetable(true);
 				Board.getInstance().getActivePiece()
@@ -106,31 +106,31 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 				}
 				Board.getInstance().startMission();
 				EventBus.getInstance().publish(Event.StartMission,
-						Board.getInstance().getMission());
+						Board.getInstance().getMission(), null);
 			}
 		} else if (e.getSource() == nextButton) {
 			EventBus.getInstance().publish(Event.NextCard,
-					Board.getInstance().getMission());
+					Board.getInstance().getMission(), null);
 		} else if (e.getSource() == doneButton) {
 			if (Challenge.isChallengeActive() == true) {
 				System.out.print("\nDone button pressed. Challenge = TRUE");
 				Challenge.chaMission.stopTimer();
-				EventBus.getInstance().publish(Event.TimeOver, null);
+				EventBus.getInstance().publish(Event.TimeOver, null, null);
 			} else {
 				System.out.print("done button pressed. CHallenge = FALSE");
 				Board.getInstance().getMission().stopTimer();
-				EventBus.getInstance().publish(Event.TimeOver, null);
+				EventBus.getInstance().publish(Event.TimeOver, null, null);
 			}
 		} else if (e.getSource() == yesButton) {
 			Board.getInstance().getMission().missionDone(true);
-			EventBus.getInstance().publish(Event.MissionSuccess, null);
-			EventBus.getInstance().publish(Event.ShowBet, null);
-			EventBus.getInstance().publish(Event.NextPlayer, null);
+			EventBus.getInstance().publish(Event.MissionSuccess, null, null);
+			EventBus.getInstance().publish(Event.ShowBet, null, null);
+			EventBus.getInstance().publish(Event.NextPlayer, null, null);
 		} else if (e.getSource() == noButton) {
 			Board.getInstance().getMission().missionDone(false);
-			EventBus.getInstance().publish(Event.MissionFail, null);
-			EventBus.getInstance().publish(Event.NextPlayer, null);
-			EventBus.getInstance().publish(Event.ShowBet, null);
+			EventBus.getInstance().publish(Event.MissionFail, null, null);
+			EventBus.getInstance().publish(Event.NextPlayer, null, null);
+			EventBus.getInstance().publish(Event.ShowBet, null, null);
 		}
 	}
 }

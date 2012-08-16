@@ -83,6 +83,6 @@ public class TilePanel extends JPanel {
 		int bet = this.position - piecePos;
 
 		Board.getInstance().getActivePiece().setBet(bet);
-		EventBus.getInstance().publish(Event.MakeBet, bet);
+		EventBus.getInstance().publish(Event.MakeBet, bet, null);
 	}
 }

@@ -150,9 +150,16 @@ public class Board {
 			activePiece = 0;
 		} else {
 			activePiece = activePiece + 1;
+//			if (isTimeForChallenge(activePiece)){
+//				
+//			}
 		}
 	}
 
+//	private boolean isTimeForChallenge(int i){
+//		return true;
+//	}
+	
 	public Tile getTile(int place) {
 		if (place < MIN_TILES || place > MAX_TILES) {
 			throw new IllegalArgumentException();

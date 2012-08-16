@@ -33,7 +33,7 @@ public class PlayerPanel extends JPanel implements IEventHandler {
 	}
 	
 	@Override
-	public void action(Event e, Object o) {
+	public void action(Event e, Object o, Object p) {
 		if(e == Event.NextPlayer){
 			player.setText("Active team: " + Board.getInstance().getActivePiece().getTeam().getName());
 			panelColor.setBackground(Board.getInstance().getActivePiece().getTeam().getColor());

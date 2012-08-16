@@ -66,20 +66,28 @@ public class Challenge implements IEventHandler {
 
 	/** This method is not fully working! */
 	private void getResult() {
+		System.out.print("\nit got into the method");
+		System.out.print("\nchaScore=" + chaScore + "\noppScore=" + oppScore);
 		if (chaScore > oppScore) {
-			challenger.movePieceForward(chaScore);
-			opponent.movePieceBackward();
+			System.out.print("\nchaScore>oppScore");
+			
+			
+			
+			challenger.movePieceForward(challenger, chaScore);
+			opponent.movePieceBackward(opponent);
 			resultString = "Congratulations " + challenger.getTeam().getName()
 					+ "! " + "\nYou have won the challenge!";
 		} else { // opponent also wins at draw!
-			opponent.movePieceForward(oppScore);
-			challenger.movePieceBackward();
+			System.out.print("\nchaScore== ||<oppScore");
+
+			opponent.movePieceForward(challenger, oppScore);
+			challenger.movePieceBackward(opponent);
 			resultString = "Congratulations " + opponent.getTeam().getName()
 					+ "! " + "\nYou have won the challenge!";
 		}
 	}
 
-	public void action(Event e, Object o) {
+	public void action(Event e, Object o, Object p) {
 		if (e == Event.TimeOver) {
 			if (chaScore > 10) {
 				setScore(ChallengePanel.pointsEarned());
@@ -88,14 +96,20 @@ public class Challenge implements IEventHandler {
 				setScore(ChallengePanel.pointsEarned());
 				System.out.print("Den registerarde opponent poäng!");
 				getResult();
-				setChallengeActivity(false);
-				System.out.print("\nChallenge = FALSE");
-				Board.getInstance().changeActivePiece();
+				endChallenge();
 			}
 		}
 		if (e == Event.Challenge) {
 			startPart2();
 		}
+	}
+	
+	private void endChallenge(){
+		setChallengeActivity(false);
+		System.out.print("\nChallenge = FALSE");
+		EventBus.getInstance().publish(Event.NextPlayer, null, null);
+		Board.getInstance().changeActivePiece();
+		EventBus.getInstance().publish(Event.ShowBet, null, null);
 	}
 
 	public static Mission getMission() {

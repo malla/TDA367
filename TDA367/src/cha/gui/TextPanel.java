@@ -72,7 +72,7 @@ public class TextPanel extends JPanel implements IEventHandler {
 	}
 
 	@Override
-	public void action(Event e, Object o) {
+	public void action(Event e, Object o, Object p) {
 		if (e == Event.StartMission) {
 			Mission mission = (Mission) o;
 			cardPanel.setMaximumSize(new Dimension(50, 50));

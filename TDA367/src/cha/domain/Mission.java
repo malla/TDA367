@@ -68,33 +68,24 @@ public class Mission {
 			System.out.print("\nMission = FALSE");
 			timeOver();
 		}
-
+		
+		/** Method only called if YES or NO button is pressed*/
 		public void missionDone(boolean completed){
-			EventBus.getInstance().publish(Event.OldPosition, piece.getPosition());
+//			EventBus.getInstance().publish(Event.OldPosition, piece.getPosition());
 			if(completed){
-
-				if(piece.getPosition() + bet.getBetValue() > GOAL_TILE){
-					piece.setPosition(GOAL_TILE);
-					EventBus.getInstance().publish(Event.GameOver, piece.getTeam());				}
-				else{
-					piece.movePieceForward(bet.getBetValue());
-				}
+					piece.movePieceForward(piece, bet.getBetValue());
 			}
 			else{
-				if(piece.getPosition() < 2){
-					piece.setPosition(0);
-				}
-				else{
-					piece.movePieceBackward();
-				}
+					piece.movePieceBackward(piece);
 			}
-			EventBus.getInstance().publish(Event.NewPosition, piece.getPosition());
-			piece.setBet(0);
+
 		}
+		
 		public Category getCategory(){
 			return category;
 		}
 		
+		/**Returns the title of the Mission as a String*/
 		public String getTitle(){
 			String title;
 			if (category== Category.BACKWARDS){

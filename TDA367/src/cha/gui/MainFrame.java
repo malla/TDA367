@@ -161,7 +161,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 	}
 
 	@Override
-	public void action(Event e, Object o) {
+	public void action(Event e, Object o, Object p) {
 		if (e == Event.NewGame) {
 			startGame();
 		} else if (e == Event.ShowGameRules) {
@@ -227,9 +227,9 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		Board.createNewBoard(numPiece);
 		tileList = Board.getInstance().getTileList();
 
-		EventBus.getInstance().publish(Event.CreateBoard, tileList);
+		EventBus.getInstance().publish(Event.CreateBoard, tileList, null);
 		EventBus.getInstance().publish(Event.ShowBet,
-				Board.getInstance().getActivePiece());
+				Board.getInstance().getActivePiece(), null);
 
 		showGameGUI();
 	}

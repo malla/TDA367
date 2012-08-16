@@ -76,7 +76,7 @@ public class RulesPanel extends JPanel implements IEventHandler, ActionListener 
 	}
 
 	@Override
-	public void action(Event e, Object o) {
+	public void action(Event e, Object o, Object p) {
 		// TODO Auto-generated method stub
 
 	}
@@ -84,9 +84,9 @@ public class RulesPanel extends JPanel implements IEventHandler, ActionListener 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == backButton) {
-			EventBus.getInstance().publish(Event.ShowStartPanel, null);
+			EventBus.getInstance().publish(Event.ShowStartPanel, null, null);
 		} else if (e.getSource() == continueButton) {
-			EventBus.getInstance().publish(Event.ContinueGame, null);
+			EventBus.getInstance().publish(Event.ContinueGame, null, null);
 		}
 	}
 

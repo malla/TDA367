@@ -183,7 +183,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void action(Event e, Object o) {
+	public void action(Event e, Object o, Object p) {
 		if(e == Event.CreateBoard){
 			ArrayList<Tile> tiles = (ArrayList<Tile>)o;
 			newGame(tiles);
@@ -225,10 +225,13 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		}
 		else if(e == Event.OldPosition){
 			int pos = (Integer)o;
+			Piece piece = (Piece) p;
+
 			tilePanels[pos].removePiece(piecePanels.get(Board.getInstance().getActivePieceNumber()));
 		}
 		else if(e == Event.NewPosition){
 			int pos = (Integer)o;
+			Piece piece = (Piece) p;
 			tilePanels[pos].addPiecePanel(piecePanels.get(Board.getInstance().getActivePieceIndex()));
 			tilePanels[pos].repaint();
 			nextPlayer();
