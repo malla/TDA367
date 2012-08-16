@@ -11,7 +11,7 @@ public class TestPiece {
 	public void testPiece() {
 		Bet bet = new Bet(4);
 		Team team = new Team("team 1", Color.red);
-		Piece piece = new Piece(team);
+		Piece piece = new Piece(team, 1);
 		
 		piece.setPosition(6);
 		assertTrue(piece.getPosition()== 6);
