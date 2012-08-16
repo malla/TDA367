@@ -185,31 +185,21 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			ArrayList<Tile> tiles = (ArrayList<Tile>) o;
 			newGame(tiles);
 		} else if (e == Event.ShowBet) {
-<<<<<<< HEAD
-			if (Board
-					.getInstance()
-					.getTile(Board.getInstance().getActivePiece().getPosition())
-					.isChallenge()) {
-				new ChallengePanel();
 
-=======
 			if (Board.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge()) {
 				setBetable(false);
 //				new ChallengePanel();
 			
->>>>>>> 3ee8615f4cbe1549953c00df6d22226ab24de52c
+
 			} else {
 				showBet();
 				setBetable(false);
 			}
 		} else if (e == Event.MakeBet) {
 			if (Board
-					.getInstance()
-					.getTile(Board.getInstance().getActivePiece().getPosition())
-					.isChallenge()) {
+					.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge()) {
 				setBetable(false);
-<<<<<<< HEAD
-				new ChallengePanel();
+				
 			} else {
 				int pos = Board.getInstance().getActivePiece().getPosition();
 				for (int i = pos + 1; i < pos + 8; i++) {
@@ -218,15 +208,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 					}
 					tilePanels[i].betable();
 					repaint();
-=======
-				
-			}
-			else{
-			int pos = Board.getInstance().getActivePiece().getPosition();
-			for (int i = pos + 1; i < pos + 8; i++) {
-				if (i > 43) {
-					return;
->>>>>>> 3ee8615f4cbe1549953c00df6d22226ab24de52c
+
 				}
 
 				Board.getInstance().getActivePiece().setBet((Integer) o);
