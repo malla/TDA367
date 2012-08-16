@@ -90,6 +90,7 @@ public class Challenge implements IEventHandler {
 				getResult();
 				setChallengeActivity(false);
 				System.out.print("\nChallenge = FALSE");
+				Board.getInstance().changeActivePiece();
 			}
 		}
 		if (e == Event.Challenge) {
