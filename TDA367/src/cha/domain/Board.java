@@ -179,9 +179,7 @@ public class Board {
 		if (pieces == null) {
 			throw new BoardNotInitializedException();
 		}
-		if (getTile(getActivePiece().getPosition()).isChallenge()) {
-			new ChallengePanel();
-		} else
+		else
 			(currentMission = new Mission(getActivePiece(), getTile(
 					getActivePiece().getPosition()).getCategory()))
 					.startMission();
