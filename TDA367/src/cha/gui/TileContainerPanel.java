@@ -234,8 +234,9 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		} else if (e == Event.NewPosition) {
 			int pos = (Integer) o;
 			Piece piece = (Piece) p;
-			tilePanels[pos].addPiecePanel(piecePanels.get(Board.getInstance()
-					.getActivePieceIndex()));
+
+			tilePanels[pos].addPiecePanel(piecePanels.get(Board.getInstance().getActivePieceNumber()));
+
 			tilePanels[pos].repaint();
 			nextPlayer();
 		}
