@@ -3,12 +3,9 @@ package cha.domain;
 import java.util.List;
 
 import cha.domain.Categories.Category;
-import cha.event.EventBus;
-import cha.event.Event;
 
 public class Mission {
 
-	private static final int GOAL_TILE = 43;
 	private final CountDown timer;
 	private final Piece piece;
 	private Bet bet;

@@ -57,7 +57,6 @@ public class Board {
 	}
 
 	// Constructor
-
 	private Board() {
 
 		this.categoryList.add(Category.SAMECLASS);
@@ -120,10 +119,6 @@ public class Board {
 			throw new IllegalArgumentException(
 					"activePiece must be in the legal range");
 		this.activePiece = activePiece;
-	}
-
-	public int getActivePieceIndex() {
-		return activePiece;
 	}
 
 	public Piece getPiece(int index) {
