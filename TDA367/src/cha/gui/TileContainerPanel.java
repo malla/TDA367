@@ -186,7 +186,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			newGame(tiles);
 		} else if (e == Event.ShowBet) {
 			if (Board.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge()) {
-				setBetable(false);
+				new ChallengePanel();
 			
 			} else {
 				showBet();
