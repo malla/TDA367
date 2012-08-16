@@ -70,10 +70,10 @@ public class Mission {
 		public void missionDone(boolean completed){
 //			EventBus.getInstance().publish(Event.OldPosition, piece.getPosition());
 			if(completed){
-					piece.movePieceForward(piece, bet.getBetValue());
+					piece.movePieceForward(bet.getBetValue());
 			}
 			else{
-					piece.movePieceBackward(piece);
+					piece.movePieceBackward();
 			}
 
 		}
