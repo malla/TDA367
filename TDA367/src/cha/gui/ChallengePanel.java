@@ -67,7 +67,7 @@ public class ChallengePanel {
 				}
 			} catch (NumberFormatException e) {
 			}
-			JOptionPane.showMessageDialog(null, "The number of completed missions has to be  between 0-7",
+			JOptionPane.showMessageDialog(null, "The number of completed missions has to be between 0-7",
 
 			"Error", JOptionPane.ERROR_MESSAGE);
 		}

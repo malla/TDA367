@@ -91,7 +91,7 @@ public class Challenge implements IEventHandler {
 		if (e == Event.TimeOver) {
 			if (chaScore > 10) {
 				setScore(ChallengePanel.pointsEarned());
-				System.out.print("Den registerarde challenger poäng!");
+				System.out.print("Den registerade challenger poäng!");
 			} else if (oppScore > 10) {
 				setScore(ChallengePanel.pointsEarned());
 				System.out.print("Den registerarde opponent poäng!");
