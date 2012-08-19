@@ -107,6 +107,7 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 				EventBus.getInstance().publish(Event.Challenge, null, null);
 				EventBus.getInstance().publish(Event.StartMission,
 						Challenge.chaMission, null);
+				//Board.getInstance()Challenge.startChallenge(); 
 			} else {
 				TileContainerPanel.setBetable(true);
 				Board.getInstance().getActivePiece()

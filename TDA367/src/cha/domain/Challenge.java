@@ -27,7 +27,8 @@ public class Challenge implements IEventHandler {
 		this.challenger = activePiece;
 		this.opponent = opponent;
 		this.category = c;
-		startChallenge(); // Duellen startar...
+		// Duellen startar...
+		startChallenge(); 
 	}
 
 	/**
@@ -35,7 +36,7 @@ public class Challenge implements IEventHandler {
 	 * making it start. It is called from the Challenge constructor when a
 	 * Challenge has been initiated.
 	 */
-	private void startChallenge() {
+	public void startChallenge() {
 		setChallengeActivity(true);
 		System.out.print("\nChallenge = TRUE");
 		chaMission = new Mission(challenger, category, maxBet);
