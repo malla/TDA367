@@ -145,13 +145,13 @@ public class Board {
 			activePiece = 0;
 		} else {
 			activePiece = activePiece + 1;
-			if (isTimeForChallenge()){
-				new ChallengePanel();
-			}
+//			if (isTimeForChallenge()){
+//				new ChallengePanel();
+//			}
 		}
 	}
 
-	private boolean isTimeForChallenge(){
+	public boolean isTimeForChallenge(){
 		return (Board.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge());
 
 	}

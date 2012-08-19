@@ -25,8 +25,14 @@ public class EventBus{
 	}
 	
 	public void publish(Event e, Object o, Object p){
-		for(IEventHandler h : handlers){
-			h.action(e, o, p);
+		
+		int i = 0;
+		while(i < handlers.size()){
+			handlers.get(i).action(e, o, p);
+			i++;
 		}
+//		for(IEventHandler h : handlers){
+//			h.action(e, o, p);
+//		}
 	}
 }

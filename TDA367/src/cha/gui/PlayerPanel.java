@@ -41,6 +41,9 @@ public class PlayerPanel extends JPanel implements IEventHandler {
 			panelColor.setBackground(Board.getInstance().getActivePiece()
 					.getTeam().getColor());
 
+			if(Board.getInstance().isTimeForChallenge()){
+				new ChallengePanel();
+			}
 			// if
 			// (Board.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge())
 			// {
