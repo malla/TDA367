@@ -4,6 +4,7 @@ import cha.domain.Categories.Category;
 import cha.event.Event;
 import cha.gui.ChallengePanel;
 import cha.event.EventBus;
+import cha.event.Event;
 import cha.event.IEventHandler;
 
 public class Challenge implements IEventHandler {
@@ -21,7 +22,7 @@ public class Challenge implements IEventHandler {
 
 	//Challenge fönster kommer upp, frågar vem som utmanas, följande kallas därefter.
 	public Challenge(Piece activePiece, Piece opponent, Category c){
-		EventBus.getInstance().register(this);
+		//EventBus.getInstance().register(this);
 		chaScore = 11;
 		oppScore = 11;
 		this.challenger = activePiece;
