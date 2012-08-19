@@ -19,17 +19,19 @@ public class Challenge implements IEventHandler {
 	public String resultString;
 	private static boolean ChallengeActivity;
 
-
-	//Challenge fönster kommer upp, frågar vem som utmanas, följande kallas därefter.
-	public Challenge(Piece activePiece, Piece opponent, Category c){
-		//EventBus.getInstance().register(this);
+	// Challenge fönster kommer upp, frågar vem som utmanas, följande kallas
+	// därefter.
+	public Challenge(Piece activePiece, Piece opponent, Category c) {
+		EventBus.getInstance().register(this);
 		chaScore = 11;
 		oppScore = 11;
 		this.challenger = activePiece;
 		this.opponent = opponent;
 		this.category = c;
-		// Duellen startar...
-		startChallenge(); 
+
+		setChallengeActivity(true);
+		System.out.print("\nChallenge = TRUE");
+		// startChallenge(); // Duellen startar...
 	}
 
 	/**
@@ -37,22 +39,24 @@ public class Challenge implements IEventHandler {
 	 * making it start. It is called from the Challenge constructor when a
 	 * Challenge has been initiated.
 	 */
-	public void startChallenge() {
-		setChallengeActivity(true);
-		System.out.print("\nChallenge = TRUE");
-		chaMission = new Mission(challenger, category, maxBet);
-		chaMission.startMission();
-
+	private void startChallenge() {
+		if (chaScore > 10) {
+			chaMission = new Mission(challenger, category, maxBet);
+			chaMission.startMission();
+		} else if (!Mission.isMissionActive()) {
+			chaMission = new Mission(opponent, category, maxBet);
+			chaMission.startMission();
+		}
 	}
 
 	/**
 	 * This method creates and starts the 2nd mission in the Challenge. It is
 	 * called when the EventBus returns 'Challenge'. See below.
 	 */
-	private void startPart2() {
-		chaMission = new Mission(opponent, category, maxBet);
-		chaMission.startMission();
-	}
+	// private void startPart2() {
+	// chaMission = new Mission(opponent, category, maxBet);
+	// chaMission.startMission();
+	// }
 
 	/**
 	 * This method sets the opponent and the challengers scores. When creating a
@@ -72,9 +76,7 @@ public class Challenge implements IEventHandler {
 		System.out.print("\nchaScore=" + chaScore + "\noppScore=" + oppScore);
 		if (chaScore > oppScore) {
 			System.out.print("\nchaScore>oppScore");
-			
-			
-			
+
 			challenger.movePieceForward(chaScore);
 			opponent.movePieceBackward();
 			resultString = "Congratulations " + challenger.getTeam().getName()
@@ -102,11 +104,12 @@ public class Challenge implements IEventHandler {
 			}
 		}
 		if (e == Event.Challenge) {
-			startPart2();
+			startChallenge();
+			// startPart2();
 		}
 	}
-	
-	private void endChallenge(){
+
+	private void endChallenge() {
 		setChallengeActivity(false);
 		System.out.print("\nChallenge = FALSE");
 		EventBus.getInstance().publish(Event.NextPlayer, null, null);
