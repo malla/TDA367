@@ -43,10 +43,12 @@ public class Challenge implements IEventHandler {
 		if (chaScore > 10) {
 			chaMission = new Mission(challenger, category, maxBet);
 			chaMission.startMission();
+
 		} else
 			if (!Mission.isMissionActive()){
 			chaMission = new Mission(opponent, category, maxBet);
 			chaMission.startMission();}
+
 	}
 
 	/**
