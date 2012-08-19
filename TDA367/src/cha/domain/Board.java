@@ -87,7 +87,7 @@ public class Board {
 		for (Color color : pieceColorList) {
 			availableColorList.add(color);
 		}
-		
+
 		// Generate teams
 		pieces = new Piece[numPiece];
 		for (int i = 0; i < numPiece; i++) {
@@ -102,7 +102,7 @@ public class Board {
 	}
 
 	// Methods
-	
+
 	public int getNumberOfPieces() {
 		if (pieces == null) {
 			throw new BoardNotInitializedException();
@@ -145,17 +145,17 @@ public class Board {
 			activePiece = 0;
 		} else {
 			activePiece = activePiece + 1;
-			if (isTimeForChallenge()){
-				new ChallengePanel();
-			}
 		}
 	}
 
-	private boolean isTimeForChallenge(){
-		return (Board.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge());
+	public boolean isTimeForChallenge() {
+		System.out.print("Did check if time for challenge");
+		return (Board.getInstance().getTile(
+				Board.getInstance().getActivePiece().getPosition())
+				.isChallenge());
 
 	}
-	
+
 	public Tile getTile(int place) {
 		if (place < MIN_TILES || place > MAX_TILES) {
 			throw new IllegalArgumentException();
@@ -174,18 +174,17 @@ public class Board {
 	public void startMission() {
 		if (pieces == null) {
 			throw new BoardNotInitializedException();
-		}
-		else
+		} else
 			(currentMission = new Mission(getActivePiece(), getTile(
 					getActivePiece().getPosition()).getCategory()))
 					.startMission();
 	}
-
-	public void startChallenge() {
-		if (pieces == null) {
-			throw new BoardNotInitializedException();
-		}
-	}
+//WHAT IS THIS??? NEEDED?
+//	public void startChallenge() {
+//		if (pieces == null) {
+//			throw new BoardNotInitializedException();
+//		}
+//	}
 
 	public ArrayList<Tile> getTileList() {
 		return tileList;
@@ -200,6 +199,7 @@ public class Board {
 	}
 
 	public void startChallenge(Piece inputOppTeam) {
+		System.out.println("Gets to startChallenge in Board");
 		new Challenge(Board.getInstance().getActivePiece(), inputOppTeam,
 				getTile(getActivePiece().getPosition()).getCategory());
 	}
