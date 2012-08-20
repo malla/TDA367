@@ -111,6 +111,7 @@ public class Challenge implements IEventHandler {
 
 	private void endChallenge() {
 		setChallengeActivity(false);
+		chaMission = null;
 		System.out.print("\nChallenge = FALSE");
 		EventBus.getInstance().publish(Event.NextPlayer, null, null);
 		Board.getInstance().changeActivePiece();
