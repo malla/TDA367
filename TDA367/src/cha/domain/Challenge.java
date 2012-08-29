@@ -44,7 +44,7 @@ public class Challenge implements IEventHandler {
 			chaMission.startMission();
 
 		} else
-			if (!Mission.isMissionActive()){
+			if (oppScore > 10){
 			chaMission = new Mission(opponent, category, maxBet);
 			chaMission.startMission();}
 	}
@@ -100,6 +100,7 @@ public class Challenge implements IEventHandler {
 
 	private void endChallenge() {
 		setChallengeActivity(false);
+		chaMission = null;
 		System.out.print("\nChallenge = FALSE");
 		EventBus.getInstance().publish(Event.NextPlayer, null, null);
 		Board.getInstance().changeActivePiece();
