@@ -4,7 +4,7 @@ import cha.domain.Categories.Category;
 import cha.event.Event;
 import cha.gui.ChallengePanel;
 import cha.event.EventBus;
-import cha.event.Event;
+//import cha.event.Event;
 import cha.event.IEventHandler;
 
 public class Challenge implements IEventHandler {
@@ -12,7 +12,7 @@ public class Challenge implements IEventHandler {
 	public Piece opponent;
 	public Category category;
 	public static Mission chaMission;
-	public static Mission oppMission;
+//	public static Mission oppMission;
 	private Bet maxBet = new Bet(7);
 	public int chaScore;
 	public int oppScore;
@@ -31,7 +31,6 @@ public class Challenge implements IEventHandler {
 
 		setChallengeActivity(true);
 		System.out.print("\nChallenge = TRUE");
-		// startChallenge(); // Duellen startar...
 	}
 
 	/**
@@ -48,17 +47,7 @@ public class Challenge implements IEventHandler {
 			if (!Mission.isMissionActive()){
 			chaMission = new Mission(opponent, category, maxBet);
 			chaMission.startMission();}
-
 	}
-
-	/**
-	 * This method creates and starts the 2nd mission in the Challenge. It is
-	 * called when the EventBus returns 'Challenge'. See below.
-	 */
-	// private void startPart2() {
-	// chaMission = new Mission(opponent, category, maxBet);
-	// chaMission.startMission();
-	// }
 
 	/**
 	 * This method sets the opponent and the challengers scores. When creating a
@@ -72,20 +61,18 @@ public class Challenge implements IEventHandler {
 		}
 	}
 
-	/** This method is not fully working! */
+	/** Checks who has won the challenge and calls method to move pieces. */
 	private void getResult() {
 		System.out.print("\nit got into the method");
 		System.out.print("\nchaScore=" + chaScore + "\noppScore=" + oppScore);
 		if (chaScore > oppScore) {
-			System.out.print("\nchaScore>oppScore");
-
+			System.out.print("\ncha won with " + chaScore + "points. opp had " + oppScore + "points");
 			challenger.movePieceForward(chaScore);
 			opponent.movePieceBackward();
 			resultString = "Congratulations " + challenger.getTeam().getName()
 					+ "! " + "\nYou have won the challenge!";
 		} else { // opponent also wins at draw!
-			System.out.print("\nchaScore== ||<oppScore");
-
+			System.out.print("\nopp won with " + oppScore + "points. cha had " + chaScore + "points");
 			opponent.movePieceForward(oppScore);
 			challenger.movePieceBackward();
 			resultString = "Congratulations " + opponent.getTeam().getName()
