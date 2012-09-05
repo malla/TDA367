@@ -4,10 +4,7 @@ import cha.domain.Categories.Category;
 import cha.event.Event;
 import cha.gui.ChallengePanel;
 import cha.event.EventBus;
-<<<<<<< HEAD
-=======
-//import cha.event.Event;
->>>>>>> 8fd8fbe0f93a56de24a72e820fd0ec73bc3bd3ce
+
 import cha.event.IEventHandler;
 
 public class Challenge implements IEventHandler {
@@ -66,7 +63,6 @@ public class Challenge implements IEventHandler {
 
 	/** Checks who has won the challenge and calls method to move pieces. */
 	private void getResult() {
-		System.out.print("\nit got into the method");
 		System.out.print("\nchaScore=" + chaScore + "\noppScore=" + oppScore);
 		if (chaScore > oppScore) {
 			System.out.print("\ncha won with " + chaScore + "points. opp had " + oppScore + "points");
@@ -106,7 +102,8 @@ public class Challenge implements IEventHandler {
 		chaMission = null;
 		System.out.print("\nChallenge = FALSE");
 		EventBus.getInstance().publish(Event.NextPlayer, null, null);
-		Board.getInstance().changeActivePiece();
+//La in det i PlayerPanel där den tar hand om att byta tur redan...		
+//		Board.getInstance().changeActivePiece();
 		EventBus.getInstance().publish(Event.ShowBet, null, null);
 	}
 

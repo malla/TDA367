@@ -18,6 +18,7 @@ public class Piece {
 	}
 
 	public void movePieceForward(int bet) {
+		System.out.println("Piece: Moved forward");
 		EventBus.getInstance().publish(Event.OldPosition, getPosition(), this.getIndex());
 		if (position + bet > GOAL_TILE) {
 			setPosition(GOAL_TILE);
@@ -30,7 +31,7 @@ public class Piece {
 	}
 
 	public void movePieceBackward() {
-		//EventBus.getInstance().publish(Event.OldPosition, getPosition());
+		System.out.println("Piece: Moved backwards");
 		EventBus.getInstance().publish(Event.OldPosition, getPosition(), this.getIndex());
 		if (getPosition() < 2) {
 			setPosition(0);

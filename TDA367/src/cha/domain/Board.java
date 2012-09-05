@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import cha.domain.Categories.Category;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5b5f04d71560cbf887da9c1d26ba6105fe39172e
 
 public class Board {
 
@@ -114,6 +117,7 @@ public class Board {
 		return getPiece(activePiece);
 	}
 
+	// Kallas bara när nytt spel initieras.
 	public void setActivePiece(int activePiece) {
 		if (activePiece < 0 || activePiece >= pieces.length)
 			throw new IllegalArgumentException(
@@ -136,21 +140,22 @@ public class Board {
 	}
 
 	public void changeActivePiece() {
-
+		System.out.println("Board: Team before:"+(activePiece+1));
 		if (pieces == null) {
 			throw new BoardNotInitializedException();
 		}
-
-		if (activePiece == (pieces.length - 1)) {
+		activePiece = activePiece + 1;
+		if (activePiece == (pieces.length)) {
 			activePiece = 0;
-		} else {
-			activePiece = activePiece + 1;
-		}}
+		}
+		System.out.println("Board: Team after:"+(activePiece+1));
 
-	public boolean isTimeForChallenge(){
-		return (Board.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge());
+	}
 
-
+	public boolean isTimeForChallenge() {
+		return (Board.getInstance().getTile(
+				Board.getInstance().getActivePiece().getPosition())
+				.isChallenge());
 	}
 
 	public Tile getTile(int place) {
@@ -176,12 +181,13 @@ public class Board {
 					getActivePiece().getPosition()).getCategory()))
 					.startMission();
 	}
-//WHAT IS THIS??? NEEDED?
-//	public void startChallenge() {
-//		if (pieces == null) {
-//			throw new BoardNotInitializedException();
-//		}
-//	}
+
+	// WHAT IS THIS??? NEEDED?
+	// public void startChallenge() {
+	// if (pieces == null) {
+	// throw new BoardNotInitializedException();
+	// }
+	// }
 
 	public ArrayList<Tile> getTileList() {
 		return tileList;
@@ -196,7 +202,7 @@ public class Board {
 	}
 
 	public void startChallenge(Piece inputOppTeam) {
-		System.out.println("Gets to startChallenge in Board");
+		System.out.println("Board: startChallenge har kallats");
 		new Challenge(Board.getInstance().getActivePiece(), inputOppTeam,
 				getTile(getActivePiece().getPosition()).getCategory());
 	}

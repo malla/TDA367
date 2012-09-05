@@ -17,4 +17,5 @@ public class Main {
  *  	rutan som frågar om opponent ska komma direkt! GÖRS I BOARD!
  *  - Göra alla spelrutor unbetable när Challenge.isChallengeActive()==true.
  *  - Se till att texten ändras efter att turen gått över efter challenge.
+ *  - Färger - Två lag ska inte kunna vara samma färg.
  */
