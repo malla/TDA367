@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import cha.domain.Categories.Category;
-import cha.gui.ChallengePanel;
+
 
 public class Board {
 
@@ -199,5 +199,8 @@ public class Board {
 		System.out.println("Gets to startChallenge in Board");
 		new Challenge(Board.getInstance().getActivePiece(), inputOppTeam,
 				getTile(getActivePiece().getPosition()).getCategory());
+	}
+	public static void clearBoard(){
+		instance = null;
 	}
 }

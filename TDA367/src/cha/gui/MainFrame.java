@@ -234,7 +234,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		showGameGUI();
 	}
 
-	private void showStartPanel() {
+	private void showStartPanel(){
 		if (tileContainerPanel.isVisible()) {
 			int reply = JOptionPane.showConfirmDialog(null,
 					"Are your sure you want to quit the running game?", null,
@@ -244,6 +244,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 				return;
 			}
 		}
+		Board.clearBoard();
 		startPanel.setVisible(true);
 		rulesPanel.setVisible(false);
 		tileContainerPanel.setVisible(false);

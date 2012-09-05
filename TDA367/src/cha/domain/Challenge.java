@@ -4,7 +4,6 @@ import cha.domain.Categories.Category;
 import cha.event.Event;
 import cha.gui.ChallengePanel;
 import cha.event.EventBus;
-import cha.event.Event;
 import cha.event.IEventHandler;
 
 public class Challenge implements IEventHandler {

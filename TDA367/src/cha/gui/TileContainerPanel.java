@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import cha.domain.Board;
 import cha.domain.Categories.Category;
-import cha.domain.Challenge;
 import cha.domain.Piece;
 import cha.domain.Tile;
 import cha.event.Event;
@@ -188,7 +187,6 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 
 			if (Board.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge()) {
 				setBetable(false);
-//				new ChallengePanel();
 			
 
 			} else {
