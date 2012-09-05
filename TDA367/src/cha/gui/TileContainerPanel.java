@@ -170,10 +170,10 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		}
 		return tile;
 	}
-
-	private void nextPlayer() {
-		Board.getInstance().changeActivePiece();
-	}
+//La in det i PlayerPanel där den tar hand om att byta tur redan...
+//	private void nextPlayer() {
+//		Board.getInstance().changeActivePiece();
+//	}
 
 	public static TilePanel[] getTilePanels() {
 		return tilePanels;
@@ -241,7 +241,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			int index = (Integer) p;
 			tilePanels[pos].addPiecePanel(piecePanels.get(index));
 			tilePanels[pos].repaint();
-			nextPlayer();
+			//nextPlayer();
 		}
 	}
 

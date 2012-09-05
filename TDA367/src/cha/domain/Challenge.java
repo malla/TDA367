@@ -63,7 +63,6 @@ public class Challenge implements IEventHandler {
 
 	/** Checks who has won the challenge and calls method to move pieces. */
 	private void getResult() {
-		System.out.print("\nit got into the method");
 		System.out.print("\nchaScore=" + chaScore + "\noppScore=" + oppScore);
 		if (chaScore > oppScore) {
 			System.out.print("\ncha won with " + chaScore + "points. opp had " + oppScore + "points");
@@ -103,7 +102,8 @@ public class Challenge implements IEventHandler {
 		chaMission = null;
 		System.out.print("\nChallenge = FALSE");
 		EventBus.getInstance().publish(Event.NextPlayer, null, null);
-		Board.getInstance().changeActivePiece();
+//La in det i PlayerPanel där den tar hand om att byta tur redan...		
+//		Board.getInstance().changeActivePiece();
 		EventBus.getInstance().publish(Event.ShowBet, null, null);
 	}
 
