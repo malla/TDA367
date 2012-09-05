@@ -37,7 +37,7 @@ public class Mission {
 
 	public void startMission(){
 		setMissionActivity(true);
-		System.out.print("\nMission = TRUE");
+		System.out.println("Mission: Mission TRUE");
 
 		cards = deque.getCards(category, bet.getBetValue());
 		//nextCurrentCard();
@@ -62,7 +62,7 @@ public class Mission {
 		public void stopTimer(){
 			timer.stopTimer();
 			setMissionActivity(false);
-			System.out.print("\nMission = FALSE");
+			System.out.println("Mission: Mission FALSE");
 			timeOver();
 		}
 		

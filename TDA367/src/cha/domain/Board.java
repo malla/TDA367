@@ -6,10 +6,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import cha.domain.Categories.Category;
-<<<<<<< HEAD
-
-=======
->>>>>>> 5b5f04d71560cbf887da9c1d26ba6105fe39172e
 
 public class Board {
 

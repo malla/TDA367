@@ -115,13 +115,13 @@ public class TextPanel extends JPanel implements IEventHandler {
 		}
 
 		else if (e == Event.MakeBet) {
-			if (Board.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge()) {
-				
+			if (!(Board.getInstance().getTile(
+					Board.getInstance().getActivePiece().getPosition())
+					.isChallenge())) {
+				int bet = (Integer) o;
+				textArea.setText("Bet: " + bet);
 			}
-			else{
-			int bet = (Integer) o;
-			textArea.setText("Bet: " + bet);
-			}
+
 		} else if (e == Event.ShowBet) {
 			textArea.setText("Make bet!");
 		} else if (e == Event.TimeOver) {
