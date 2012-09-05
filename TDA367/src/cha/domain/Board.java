@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import cha.domain.Categories.Category;
-import cha.gui.ChallengePanel;
 
 public class Board {
 
@@ -114,6 +113,7 @@ public class Board {
 		return getPiece(activePiece);
 	}
 
+	// Kallas bara när nytt spel initieras.
 	public void setActivePiece(int activePiece) {
 		if (activePiece < 0 || activePiece >= pieces.length)
 			throw new IllegalArgumentException(
@@ -136,24 +136,23 @@ public class Board {
 	}
 
 	public void changeActivePiece() {
-
+		System.out.println("Board: Team before:" + (activePiece + 1));
 		if (pieces == null) {
 			throw new BoardNotInitializedException();
 		}
-
-		if (activePiece == (pieces.length - 1)) {
+		activePiece = activePiece + 1;
+		if (activePiece == (pieces.length)) {
 			activePiece = 0;
-		} else {
-			activePiece = activePiece + 1;
-//			if (isTimeForChallenge(activePiece)){
-//				
-//			}
 		}
+		System.out.println("Board: Team after:" + (activePiece + 1));
+
 	}
 
-//	private boolean isTimeForChallenge(int i){
-//		return true;
-//	}
+	public boolean isTimeForChallenge() {
+		return (Board.getInstance().getTile(
+				Board.getInstance().getActivePiece().getPosition())
+				.isChallenge());
+	}
 
 	public Tile getTile(int place) {
 		if (place < MIN_TILES || place > MAX_TILES) {
@@ -173,20 +172,18 @@ public class Board {
 	public void startMission() {
 		if (pieces == null) {
 			throw new BoardNotInitializedException();
-		}
-		if (getTile(getActivePiece().getPosition()).isChallenge()) {
-			new ChallengePanel();
 		} else
 			(currentMission = new Mission(getActivePiece(), getTile(
 					getActivePiece().getPosition()).getCategory()))
 					.startMission();
 	}
 
-	public void startChallenge() {
-		if (pieces == null) {
-			throw new BoardNotInitializedException();
-		}
-	}
+	// WHAT IS THIS??? NEEDED?
+	// public void startChallenge() {
+	// if (pieces == null) {
+	// throw new BoardNotInitializedException();
+	// }
+	// }
 
 	public ArrayList<Tile> getTileList() {
 		return tileList;
@@ -201,11 +198,12 @@ public class Board {
 	}
 
 	public void startChallenge(Piece inputOppTeam) {
+		System.out.println("Board: startChallenge har kallats");
 		new Challenge(Board.getInstance().getActivePiece(), inputOppTeam,
 				getTile(getActivePiece().getPosition()).getCategory());
 	}
 
-	public static void clearBoard(){
+	public static void clearBoard() {
 		instance = null;
 	}
 }

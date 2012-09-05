@@ -63,10 +63,13 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 	@Override
 	public void action(Event e, Object o, Object p) {
 		if (e == Event.ShowBet) {
-			if (Board
-					.getInstance()
-					.getTile(Board.getInstance().getActivePiece().getPosition())
-					.isChallenge()) {
+//			if (Board
+//					.getInstance()
+//					.getTile(Board.getInstance().getActivePiece().getPosition())
+//					.isChallenge()) {
+				if (Challenge.isChallengeActive()){
+					
+				
 				startMissionButton.setVisible(true);
 				yesButton.setVisible(false);
 				noButton.setVisible(false);
