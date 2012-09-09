@@ -135,7 +135,7 @@ public class Board {
 	}
 
 	public void changeActivePiece() {
-		System.out.println("Board: Team before:"+(activePiece+1));
+		System.out.println("Board: Team before:" + (activePiece + 1));
 		if (pieces == null) {
 			throw new BoardNotInitializedException();
 		}
@@ -143,7 +143,7 @@ public class Board {
 		if (activePiece == (pieces.length)) {
 			activePiece = 0;
 		}
-		System.out.println("Board: Team after:"+(activePiece+1));
+		System.out.println("Board: Team after:" + (activePiece + 1));
 
 	}
 
@@ -201,7 +201,8 @@ public class Board {
 		new Challenge(Board.getInstance().getActivePiece(), inputOppTeam,
 				getTile(getActivePiece().getPosition()).getCategory());
 	}
-	public static void clearBoard(){
+
+	public static void clearBoard() {
 		instance = null;
 	}
 }
