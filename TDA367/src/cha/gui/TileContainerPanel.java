@@ -184,15 +184,8 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			ArrayList<Tile> tiles = (ArrayList<Tile>) o;
 			newGame(tiles);
 		} else if (e == Event.ShowBet) {
-
-			if (Board.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge()) {
-				setBetable(false);
-			
-
-			} else {
 				showBet();
 				setBetable(false);
-			}
 		} else if (e == Event.MakeBet) {
 			if (Board
 					.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge()) {
@@ -206,11 +199,8 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 					}
 					tilePanels[i].betable();
 					repaint();
-
 				}
-
 				Board.getInstance().getActivePiece().setBet((Integer) o);
-
 				showBet();
 				setBetable(false);
 				temporaryBet = (Integer) o;
@@ -218,17 +208,14 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 						+ Board.getInstance().getActivePiece().getPosition()]
 						.setBorder(new BevelBorder(BevelBorder.LOWERED));
 			}
-
 		} else if (e == Event.MakeBet) {
-			showBet();
-			temporaryBet = (Integer) o;
+			//showBet();
+			//temporaryBet = (Integer) o;
 			setBetable(false);
-
 			TileContainerPanel.getTilePanels()[temporaryBet
 					+ Board.getInstance().getActivePiece().getPosition()]
 					.setBorder(new BevelBorder(BevelBorder.LOWERED));
 			repaint();
-
 			// Flyttar pjäser på GUIt. KLART!!! Kallas från pjäsflytt i Piece.
 		} else if (e == Event.OldPosition) {
 			int pos = (Integer) o;

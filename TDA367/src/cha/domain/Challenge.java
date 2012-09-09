@@ -102,8 +102,6 @@ public class Challenge implements IEventHandler {
 		chaMission = null;
 		System.out.print("\nChallenge = FALSE");
 		EventBus.getInstance().publish(Event.NextPlayer, null, null);
-//La in det i PlayerPanel där den tar hand om att byta tur redan...		
-//		Board.getInstance().changeActivePiece();
 		EventBus.getInstance().publish(Event.ShowBet, null, null);
 	}
 
