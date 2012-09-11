@@ -23,6 +23,7 @@ public class Challenge implements IEventHandler {
 	// därefter.
 	public Challenge(Piece activePiece, Piece opponent, Category c) {
 		EventBus.getInstance().register(this);
+		EventBus.getInstance().publish(Event.ShowBet, null, null);
 		chaScore = 11;
 		oppScore = 11;
 		this.challenger = activePiece;

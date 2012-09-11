@@ -3,6 +3,7 @@ package cha.gui;
 import javax.swing.JOptionPane;
 
 import cha.domain.Board;
+import cha.domain.Challenge;
 import cha.domain.Piece;
 
 public class ChallengePanel {
@@ -77,43 +78,3 @@ public class ChallengePanel {
 	}
 }
 
-//String inputOppTeam;
-//int numberOfTeams;
-//Piece oppTeam = null;
-//
-//public ChallengePanel() {
-//	numberOfTeams= Board.getInstance().getNumberOfPieces();
-//	decideOpponent();
-//	Board.getInstance().startChallenge(oppTeam);
-//}
-//
-//private void decideOpponent(){
-//	outerloop: while (true) {
-//		try {
-//			inputOppTeam = JOptionPane.showInputDialog(null,
-//					"Which team would you like to compete against?",
-//					"Chose an opponent team", JOptionPane.QUESTION_MESSAGE);
-//
-//			if (inputOppTeam == null) {
-//				return;
-//			}
-//			for (int i = 0; i < numberOfTeams; i++) {
-//				if (inputOppTeam.contains(Board.getInstance()
-//						.getTeamName(i))) {
-//					if (inputOppTeam.contains(Board.getInstance()
-//							.getActivePiece().getTeam().getName())) {
-//
-//						JOptionPane.showMessageDialog(null,
-//								"You can't compete against yourself",
-//								"Error", JOptionPane.ERROR_MESSAGE);
-//						continue outerloop;
-//					} else
-//						oppTeam = Board.getInstance().getPiece(i);
-//					return;
-//				}
-//			}
-//		} catch (NumberFormatException e) {
-//		}
-//		JOptionPane.showMessageDialog(null, "There is no such team");
-//	}
-//}

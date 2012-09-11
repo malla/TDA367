@@ -178,12 +178,6 @@ public class Board {
 					.startMission();
 	}
 
-	// WHAT IS THIS??? NEEDED?
-	// public void startChallenge() {
-	// if (pieces == null) {
-	// throw new BoardNotInitializedException();
-	// }
-	// }
 
 	public ArrayList<Tile> getTileList() {
 		return tileList;
