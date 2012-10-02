@@ -149,6 +149,7 @@ public class Board {
 		}
 		System.out.println("Board: Team after:" + (activePiece + 1));
 		EventBus.getInstance().publish(Event.NextPlayer, null, null);
+		EventBus.getInstance().publish(Event.ShowBet, activePiece, null);
 	}
 
 	public boolean isTimeForChallenge() {

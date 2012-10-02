@@ -73,7 +73,6 @@ public class Challenge {
 		System.out.println("Challenge = FALSE");
 		getResult();
 		Board.getInstance().changeActivePiece();
-		EventBus.getInstance().publish(Event.ShowBet, null, null);
 	}
 
 	public static Mission getMission() {
