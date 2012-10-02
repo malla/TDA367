@@ -154,7 +154,6 @@ public class TextPanel extends JPanel implements IEventHandler {
 		} else {
 			text = cardtext[0];
 		}
-
 		textArea.setText(text);
 		validate();
 		textArea.repaint();
