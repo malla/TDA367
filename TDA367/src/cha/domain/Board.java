@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import cha.domain.Categories.Category;
+import cha.event.Event;
+import cha.event.EventBus;
 
 public class Board {
 
@@ -21,6 +23,7 @@ public class Board {
 	 * Index of the active piece.
 	 */
 	private int activePiece;
+	private Challenge currentChallenge;
 
 	/**
 	 * The current mission
@@ -144,7 +147,8 @@ public class Board {
 			activePiece = 0;
 		}
 		System.out.println("Board: Team after:" + (activePiece + 1));
-
+		EventBus.getInstance().publish(Event.NextPlayer, null, null);
+		EventBus.getInstance().publish(Event.ShowBet, activePiece, null);
 	}
 
 	public boolean isTimeForChallenge() {
@@ -191,6 +195,9 @@ public class Board {
 	public String getTeamName(int teamNumber) {
 		return teamNames.get(teamNumber);
 	}
+	public Challenge getChallenge(){
+		return currentChallenge;
+	}
 
 	public static void setTeamName(String teamName) {
 		teamNames.add(teamName);
@@ -198,7 +205,7 @@ public class Board {
 
 	public void startChallenge(Piece inputOppTeam) {
 		System.out.println("Board: startChallenge har kallats");
-		new Challenge(Board.getInstance().getActivePiece(), inputOppTeam,
+		currentChallenge=new Challenge(Board.getInstance().getActivePiece(), inputOppTeam,
 				getTile(getActivePiece().getPosition()).getCategory());
 	}
 

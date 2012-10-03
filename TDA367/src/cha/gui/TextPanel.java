@@ -125,11 +125,15 @@ public class TextPanel extends JPanel implements IEventHandler {
 		} else if (e == Event.ShowBet) {
 			textArea.setText("Make bet!");
 		} else if (e == Event.TimeOver) {
+			System.out.println("TextPanel: Notice Event TimeOver");
+
 			this.remove(cardPanel);
 			this.add(textArea);
 			this.repaint();
 			if (Challenge.isChallengeActive() == true) {
 				textArea.setText("Challenging team has done their best! \nOpponents turn!");
+				Board.getInstance().getChallenge().setScore(ChallengePanel.pointsEarned());
+
 			} else {
 				textArea.setText("Was the mission completed successfully?");
 			}
@@ -150,7 +154,6 @@ public class TextPanel extends JPanel implements IEventHandler {
 		} else {
 			text = cardtext[0];
 		}
-
 		textArea.setText(text);
 		validate();
 		textArea.repaint();

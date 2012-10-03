@@ -2,17 +2,13 @@ package cha.domain;
 
 import cha.domain.Categories.Category;
 import cha.event.Event;
-import cha.gui.ChallengePanel;
 import cha.event.EventBus;
 
-import cha.event.IEventHandler;
-
-public class Challenge implements IEventHandler {
+public class Challenge {
 	private final Piece challenger;
 	public Piece opponent;
 	public Category category;
 	public static Mission chaMission;
-//	public static Mission oppMission;
 	private Bet maxBet = new Bet(7);
 	public int chaScore;
 	public int oppScore;
@@ -22,15 +18,13 @@ public class Challenge implements IEventHandler {
 	// Challenge fönster kommer upp, frågar vem som utmanas, följande kallas
 	// därefter.
 	public Challenge(Piece activePiece, Piece opponent, Category c) {
-		EventBus.getInstance().register(this);
 		chaScore = 11;
 		oppScore = 11;
 		this.challenger = activePiece;
 		this.opponent = opponent;
 		this.category = c;
-
 		setChallengeActivity(true);
-		System.out.print("\nChallenge = TRUE");
+		System.out.println("Challenge: Challenge = TRUE");
 	}
 
 	/**
@@ -38,11 +32,10 @@ public class Challenge implements IEventHandler {
 	 * making it start. It is called from the Challenge constructor when a
 	 * Challenge has been initiated.
 	 */
-	private void startChallenge() {
+	public void startChallenge() {
 		if (chaScore > 10) {
 			chaMission = new Mission(challenger, category, maxBet);
 			chaMission.startMission();
-
 		} else
 			if (oppScore > 10){
 			chaMission = new Mission(opponent, category, maxBet);
@@ -58,51 +51,29 @@ public class Challenge implements IEventHandler {
 			chaScore = i;
 		} else if (oppScore > 10) {
 			oppScore = i;
+			endChallenge();
 		}
 	}
 
-	/** Checks who has won the challenge and calls method to move pieces. */
-	private void getResult() {
-		System.out.print("\nchaScore=" + chaScore + "\noppScore=" + oppScore);
+	/** Checks who has won the challenge and calls method to move pieces. Opponent wins at draw.*/
+	public void getResult() {
+		System.out.println("Challenge: chaScore= " + chaScore + ", oppScore= " + oppScore);
 		if (chaScore > oppScore) {
-			System.out.print("\ncha won with " + chaScore + "points. opp had " + oppScore + "points");
 			challenger.movePieceForward(chaScore);
 			opponent.movePieceBackward();
-			resultString = "Congratulations " + challenger.getTeam().getName()
-					+ "! " + "\nYou have won the challenge!";
-		} else { // opponent also wins at draw!
-			System.out.print("\nopp won with " + oppScore + "points. cha had " + chaScore + "points");
+		} else {
 			opponent.movePieceForward(oppScore);
 			challenger.movePieceBackward();
-			resultString = "Congratulations " + opponent.getTeam().getName()
-					+ "! " + "\nYou have won the challenge!";
 		}
 	}
 
-	public void action(Event e, Object o, Object p) {
-		if (e == Event.TimeOver) {
-			if (chaScore > 10) {
-				setScore(ChallengePanel.pointsEarned());
-				System.out.println("Challenge: Den registerade challenger poäng!");
-			} else if (oppScore > 10) {
-				setScore(ChallengePanel.pointsEarned());
-				System.out.println("Challenge: Den registerarde opponent poäng!");
-				getResult();
-				endChallenge();
-			}
-		}
-		if (e == Event.Challenge) {
-			startChallenge();
-			// startPart2();
-		}
-	}
-
-	private void endChallenge() {
+	public void endChallenge() {
 		setChallengeActivity(false);
 		chaMission = null;
-		System.out.print("\nChallenge = FALSE");
-		EventBus.getInstance().publish(Event.NextPlayer, null, null);
-		EventBus.getInstance().publish(Event.ShowBet, null, null);
+		System.out.println("Challenge = FALSE");
+		getResult();
+		Board.getInstance().changeActivePiece();
+
 	}
 
 	public static Mission getMission() {

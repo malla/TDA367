@@ -24,19 +24,19 @@ public class CountDown implements ActionListener{
 	private void ticktock(){
 		EventBus.getInstance().publish(Event.TimeTick, Integer.toString(count), null);
 		if (count==-1){
-			timer.stop();
-			EventBus.getInstance().publish(Event.TimeOver, null, null);
+			stopTimer();
 		}
 		System.out.println(count--);
-		
-
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		ticktock();
 	}
 	
 	public void stopTimer(){
+		System.out.println("CountDown: stannar timer");
 		timer.stop();
+		EventBus.getInstance().publish(Event.TimeOver, null, null);
 	}
 }

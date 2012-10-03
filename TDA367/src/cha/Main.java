@@ -16,6 +16,7 @@ public class Main {
  *  - Göra alla spelrutor unbetable när Challenge.isChallengeActive()==true.
  *  - Se till att texten ändras efter att turen gått över efter challenge.
  *  - Färger - Två lag ska inte kunna vara samma färg.
+ *  - Finns 2st MakeBet Event i TileContainerPanel
 <<<<<<< HEAD
  *  - Piece hoppar av sig själv när någon står på en Challenge-tile
 =======
