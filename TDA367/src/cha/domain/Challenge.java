@@ -70,9 +70,11 @@ public class Challenge {
 	public void endChallenge() {
 		setChallengeActivity(false);
 		chaMission = null;
+
 		System.out.println("Challenge = FALSE");
 		getResult();
 		Board.getInstance().changeActivePiece();
+
 	}
 
 	public static Mission getMission() {

@@ -182,17 +182,12 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	public void action(Event e, Object o, Object p) {
 		if (e == Event.CreateBoard) {
 			ArrayList<Tile> tiles = (ArrayList<Tile>) o;
-			newGame(tiles);} 
 
-		else if (e == Event.ShowBet) {
-			if (Board.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge()) {
-				setBetable(false);
-			} else {
+			newGame(tiles);
+		} else if (e == Event.ShowBet) {
 				showBet();
 				setBetable(false);
-			}} 
-
-		else if (e == Event.MakeBet) {
+		} else if (e == Event.MakeBet) {
 			if (Board
 					.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge()) {
 				setBetable(false);} 
@@ -205,29 +200,26 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 					}
 					tilePanels[i].betable();
 					repaint();
-
 				}
-
 				Board.getInstance().getActivePiece().setBet((Integer) o);
-
 				showBet();
 				setBetable(false);
 				temporaryBet = (Integer) o;
 				TileContainerPanel.getTilePanels()[temporaryBet
-				                                   + Board.getInstance().getActivePiece().getPosition()]
-				                                   .setBorder(new BevelBorder(BevelBorder.LOWERED));
-			}} 
-		
-		else if (e == Event.MakeBet) {
-			showBet();
-			temporaryBet = (Integer) o;
-			setBetable(false);
 
+
+						+ Board.getInstance().getActivePiece().getPosition()]
+						.setBorder(new BevelBorder(BevelBorder.LOWERED));
+			}
+		} else if (e == Event.MakeBet) {
+			//showBet();
+			//temporaryBet = (Integer) o;
+
+			setBetable(false);
 			TileContainerPanel.getTilePanels()[temporaryBet
 			                                   + Board.getInstance().getActivePiece().getPosition()]
 			                                   .setBorder(new BevelBorder(BevelBorder.LOWERED));
 			repaint();
-
 			// Flyttar pjäser på GUIt. KLART!!! Kallas från pjäsflytt i Piece.
 		} 
 		

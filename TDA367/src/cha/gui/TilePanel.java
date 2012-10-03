@@ -72,6 +72,7 @@ public class TilePanel extends JPanel {
 		this.setBorder(new BevelBorder(BevelBorder.LOWERED));
 		this.repaint();
 
+		//Om betable är falsk, om 
 		if (!TileContainerPanel.getBetable()) {
 			if (position > piecePos && position < piecePos + 8) {
 				bet(piecePos);
