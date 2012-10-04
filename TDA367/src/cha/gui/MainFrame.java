@@ -16,7 +16,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import cha.domain.Board;
 import cha.domain.Team;
-import cha.domain.Tile;
+//import cha.domain.Tile;
 import cha.event.Event;
 import cha.event.EventBus;
 import cha.event.IEventHandler;
@@ -27,7 +27,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 	private static final int MIN_PLAYERS = 2;
 
 	private static final int MAX_PLAYERS = 8;
-	private ArrayList<Tile> tileList = new ArrayList<Tile>();
+//	private ArrayList<Tile> tileList = new ArrayList<Tile>();
 
 	private JMenuItem newGame;
 	private JMenuItem endGame;
@@ -225,11 +225,9 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		}
 
 		Board.createNewBoard(numPiece);
-		tileList = Board.getInstance().getTileList();
+//		tileList = Board.getInstance().getTileList();   Behövs inte flyttad till Board.
 
-		EventBus.getInstance().publish(Event.CreateBoard, tileList, null);
-		EventBus.getInstance().publish(Event.ShowBet,
-				Board.getInstance().getActivePiece(), null);
+
 
 		showGameGUI();
 	}

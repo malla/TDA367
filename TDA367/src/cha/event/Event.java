@@ -2,14 +2,14 @@ package cha.event;
 
 public enum Event {
 	MakeBet,	//Is done when player presses a tile t make a bet.
-	ShowBet,
+	ShowBet,	//Done. Malla.
 	StartMission,
 	TimeTick,
 	MissionDone,
 	TimeOver,
 	MissionSuccess,
 	MissionFail,
-	NextPlayer,// Is called when mission(Y/N button) or challenge is over. Only repaints the GUI.
+	NextPlayer,	//Done. Malla.
 	OldPosition,//DONE. Only removes piece when moved. Called from 2 methods in Piece.
 	NewPosition,//DONE. Only adds piece when moved. And repaints. Called from 2 methods in Piece.
 	CreateBoard,
@@ -19,5 +19,5 @@ public enum Event {
 	ShowStartPanel,
 	NextCard, 
 	ContinueGame, 
-	Challenge
+	Challenge 	//Done. Malla.
 }

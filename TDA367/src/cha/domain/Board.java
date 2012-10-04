@@ -52,9 +52,12 @@ public class Board {
 		return instance;
 	}
 
-	public static void createNewBoard(int numPiece) {
+	public static void createNewBoard(int numPiece ) {
 		Board board = Board.getInstance();
 		board.init(numPiece);
+		EventBus.getInstance().publish(Event.CreateBoard, Board.getInstance().getTileList(), null);
+		EventBus.getInstance().publish(Event.ShowBet,
+				Board.getInstance().getActivePiece(), null);
 	}
 
 	// Constructor
