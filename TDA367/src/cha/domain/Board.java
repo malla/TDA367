@@ -115,7 +115,7 @@ public class Board {
 		return getPiece(activePiece);
 	}
 
-	// Kallas bara när nytt spel initieras.
+	// Kallas bara nï¿½r nytt spel initieras.
 	public void setActivePiece(int activePiece) {
 		if (activePiece < 0 || activePiece >= pieces.length)
 			throw new IllegalArgumentException(
@@ -175,10 +175,14 @@ public class Board {
 	public void startMission() {
 		if (pieces == null) {
 			throw new BoardNotInitializedException();
-		} else
+		} 
+		else{
 			(currentMission = new Mission(getActivePiece(), getTile(
 					getActivePiece().getPosition()).getCategory()))
 					.startMission();
+			EventBus.getInstance().publish(Event.StartMission,
+					currentMission, null);
+		}
 	}
 
 	// WHAT IS THIS??? NEEDED?

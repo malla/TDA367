@@ -56,7 +56,7 @@ ActionListener {
 		yesButton.setVisible(false);
 		noButton.setVisible(false);
 		timer.setVisible(false);
-
+		
 		this.setBackground(Color.WHITE);
 	}
 
@@ -113,8 +113,6 @@ ActionListener {
 					panel.notBetable();
 				}
 				Board.getInstance().startMission();
-				EventBus.getInstance().publish(Event.StartMission,
-						Board.getInstance().getMission(), null);
 			}
 		} else if (e.getSource() == nextButton) {
 			EventBus.getInstance().publish(Event.NextCard,
@@ -131,15 +129,11 @@ ActionListener {
 			}
 
 		} else if (e.getSource() == yesButton) {
-			Board.getInstance().getMission().missionDone(true);
-			EventBus.getInstance().publish(Event.MissionSuccess, null, null);
-			//			EventBus.getInstance().publish(Event.ShowBet, null, null);
+			Board.getInstance().getMission().missionDone(true);			
 			Board.getInstance().changeActivePiece();
 
 		} else if (e.getSource() == noButton) {
-			Board.getInstance().getMission().missionDone(false);
-			EventBus.getInstance().publish(Event.MissionFail, null, null);
-			//			EventBus.getInstance().publish(Event.ShowBet, null, null);
+			Board.getInstance().getMission().missionDone(false);			
 			Board.getInstance().changeActivePiece();
 
 		}

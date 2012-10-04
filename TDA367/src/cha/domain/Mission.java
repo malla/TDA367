@@ -3,6 +3,8 @@ package cha.domain;
 import java.util.List;
 
 import cha.domain.Categories.Category;
+import cha.event.Event;
+import cha.event.EventBus;
 
 public class Mission {
 
@@ -71,9 +73,11 @@ public class Mission {
 //			EventBus.getInstance().publish(Event.OldPosition, piece.getPosition());
 			if(completed){
 					piece.movePieceForward(bet.getBetValue());
+					EventBus.getInstance().publish(Event.MissionSuccess, null, null);
 			}
 			else{
 					piece.movePieceBackward();
+					EventBus.getInstance().publish(Event.MissionFail, null, null);
 			}
 
 		}
