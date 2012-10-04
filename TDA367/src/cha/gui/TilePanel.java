@@ -72,7 +72,7 @@ public class TilePanel extends JPanel {
 		this.setBorder(new BevelBorder(BevelBorder.LOWERED));
 		this.repaint();
 
-		//Om betable är falsk, om 
+		//Om betable ï¿½r falsk, om 
 		if (!TileContainerPanel.getBetable()) {
 			if (position > piecePos && position < piecePos + 8) {
 				bet(piecePos);
@@ -84,6 +84,6 @@ public class TilePanel extends JPanel {
 		int bet = this.position - piecePos;
 
 		Board.getInstance().getActivePiece().setBet(bet);
-		EventBus.getInstance().publish(Event.MakeBet, bet, null);
+		
 	}
 }

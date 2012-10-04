@@ -169,7 +169,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		}
 		return tile;
 	}
-	//La in det i PlayerPanel där den tar hand om att byta tur redan...
+	//La in det i PlayerPanel dï¿½r den tar hand om att byta tur redan...
 	//	private void nextPlayer() {
 	//		Board.getInstance().changeActivePiece();
 	//	}
@@ -201,27 +201,16 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 					tilePanels[i].betable();
 					repaint();
 				}
-				Board.getInstance().getActivePiece().setBet((Integer) o);
+		//		Board.getInstance().getActivePiece().setBet((Integer) o);
 				showBet();
 				setBetable(false);
 				temporaryBet = (Integer) o;
 				TileContainerPanel.getTilePanels()[temporaryBet
-
-
 						+ Board.getInstance().getActivePiece().getPosition()]
 						.setBorder(new BevelBorder(BevelBorder.LOWERED));
+				repaint();
 			}
-		} else if (e == Event.MakeBet) {
-			//showBet();
-			//temporaryBet = (Integer) o;
-			setBetable(false);
-			TileContainerPanel.getTilePanels()[temporaryBet
-			                                   + Board.getInstance().getActivePiece().getPosition()]
-			                                   .setBorder(new BevelBorder(BevelBorder.LOWERED));
-			repaint();
-			// Flyttar pjäser på GUIt. KLART!!! Kallas från pjäsflytt i Piece.
-		} 
-		
+		}		
 		else if (e == Event.OldPosition) {
 			int pos = (Integer) o;
 			int index = (Integer) p;
@@ -249,6 +238,10 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 
 	private void showBet() {
 		int pos = Board.getInstance().getActivePiece().getPosition();
+		
+		for(TilePanel t : tilePanels){
+			t.setBorder(new BevelBorder(BevelBorder.LOWERED));
+		}
 
 		for (int i = pos + 1; i < pos + 8; i++) {
 			if (i > 43) {
