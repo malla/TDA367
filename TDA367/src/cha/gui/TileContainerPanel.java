@@ -201,7 +201,6 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 					tilePanels[i].betable();
 					repaint();
 				}
-		//		Board.getInstance().getActivePiece().setBet((Integer) o);
 				showBet();
 				setBetable(false);
 				temporaryBet = (Integer) o;
