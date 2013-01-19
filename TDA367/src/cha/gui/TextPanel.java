@@ -137,7 +137,7 @@ public class TextPanel extends JPanel implements IEventHandler {
 			} else {
 				textArea.setText("Was the mission completed successfully?");
 			}
-		} else if (e == Event.MissionSuccess || e == Event.MissionFail) {
+		} else if (e == Event.MissionOver) {
 
 			p2.remove(header);
 		}
