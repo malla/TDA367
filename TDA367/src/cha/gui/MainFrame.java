@@ -16,7 +16,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import cha.domain.Board;
 import cha.domain.Team;
-//import cha.domain.Tile;
+
 import cha.event.Event;
 import cha.event.EventBus;
 import cha.event.IEventHandler;
@@ -27,7 +27,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 	private static final int MIN_PLAYERS = 2;
 
 	private static final int MAX_PLAYERS = 8;
-//	private ArrayList<Tile> tileList = new ArrayList<Tile>();
 
 	private JMenuItem newGame;
 	private JMenuItem endGame;
@@ -50,7 +49,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 	private final ArrayList<Color> colorList = new ArrayList<Color>();
 
 	// Constructor
-
 	public MainFrame() {
 		EventBus.getInstance().register(this);
 		JMenuBar menuBar = new JMenuBar();
@@ -132,12 +130,8 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
-	//Constructor2
-	
-	
 
 	// Methods
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == newGame) {
@@ -159,14 +153,14 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 			startGame();
 		} else if (e.getSource() == startPanel.rulesButton) {
 			showRules();
+		} else if (e.getSource() == startPanel.newGameButton) {
+			startGame();
 		}
 	}
 
 	@Override
 	public void action(Event e, Object o, Object p) {
-		if (e == Event.NewGame) {
-			startGame();
-		} else if (e == Event.ShowStartPanel) {
+			if (e == Event.ShowStartPanel) {
 			showStartPanel();
 		} else if (e == Event.GameOver) {
 			gameOverPanel.setWinnerTeam((Team) o);
@@ -226,9 +220,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		}
 
 		Board.createNewBoard(numPiece);
-//		tileList = Board.getInstance().getTileList();   Behövs inte flyttad till Board.
-
-
 
 		showGameGUI();
 	}
@@ -278,5 +269,4 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		textPanel.setVisible(false);
 		gameOverPanel.setVisible(true);
 	}
-
 }

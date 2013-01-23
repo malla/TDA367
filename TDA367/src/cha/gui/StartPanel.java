@@ -5,25 +5,19 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import cha.event.Event;
-import cha.event.EventBus;
-
-//import cha.gui.MainFrame;
-
 @SuppressWarnings("serial")
-public class StartPanel extends JPanel implements ActionListener {
+public class StartPanel extends JPanel{
 
-	JButton startButton;
+	JButton newGameButton;
 	JButton rulesButton;
 	MainFrame mf;
+	
 	public StartPanel(MainFrame mf) {
 		this.mf = mf;
 
@@ -49,31 +43,18 @@ public class StartPanel extends JPanel implements ActionListener {
 
 		buttonPanel.setBackground(new Color(0, 0, 0, 0));
 
-		startButton = new JButton("New Game");
+		newGameButton = new JButton("New Game");
 		rulesButton = new JButton("Rules");
-
-		startButton.addActionListener(this);
-		rulesButton.addActionListener(this);
-
-
+		
+		newGameButton.addActionListener(mf);
 		rulesButton.addActionListener(mf);
 
-
-		buttonPanel.add(startButton);
+		buttonPanel.add(newGameButton);
 		buttonPanel.add(rulesButton);
-
 
 		centerPanel.add(textPanel);
 		centerPanel.add(buttonPanel);
 		this.add(centerPanel, BorderLayout.CENTER);
 
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == startButton){
-			EventBus.getInstance().publish(Event.NewGame, null, null);
-
-		}	
 	}
 }

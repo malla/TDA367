@@ -11,7 +11,6 @@ public enum Event {
 	OldPosition,	//DONE. Only removes piece when moved. Called from 2 methods in Piece.
 	NewPosition,	//DONE. Only adds piece when moved. And repaints. Called from 2 methods in Piece.
 	CreateBoard,	//Ok.
-	NewGame,		//BÖR FIXAS!
 	GameOver,		//Ok.
 	ShowStartPanel,	//BÖR FIXAS!
 	NextCard, 		//BÖR FIXAS!
