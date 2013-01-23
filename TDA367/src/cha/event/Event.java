@@ -13,7 +13,6 @@ public enum Event {
 	CreateBoard,	//Ok.
 	NewGame,		//BÖR FIXAS!
 	GameOver,		//Ok.
-	ShowGameRules,	//BÖR FIXAS!
 	ShowStartPanel,	//BÖR FIXAS!
 	NextCard, 		//BÖR FIXAS!
 	ContinueGame, 	//BÖR FIXAS!

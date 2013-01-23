@@ -35,7 +35,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 	private JMenuItem gameRules;
 
 	private JButton startButton;
-	private JButton rulesButton;
 
 	private StartPanel startPanel;
 
@@ -89,7 +88,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 
 		// Init Start panel
 
-		startPanel = new StartPanel();
+		startPanel = new StartPanel(this);
 		this.add(startPanel, c);
 
 		// Init Rules panel
@@ -133,6 +132,9 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
+	//Constructor2
+	
+	
 
 	// Methods
 
@@ -155,7 +157,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 			showRules();
 		} else if (e.getSource() == startButton) {
 			startGame();
-		} else if (e.getSource() == rulesButton) {
+		} else if (e.getSource() == startPanel.rulesButton) {
 			showRules();
 		}
 	}
@@ -164,8 +166,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 	public void action(Event e, Object o, Object p) {
 		if (e == Event.NewGame) {
 			startGame();
-		} else if (e == Event.ShowGameRules) {
-			showRules();
 		} else if (e == Event.ShowStartPanel) {
 			showStartPanel();
 		} else if (e == Event.GameOver) {
@@ -175,6 +175,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 			showGameGUI();
 		}
 	}
+
 
 	public void startGame() {
 		String reply = null;
