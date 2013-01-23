@@ -56,7 +56,7 @@ ActionListener {
 		yesButton.setVisible(false);
 		noButton.setVisible(false);
 		timer.setVisible(false);
-		
+
 		this.setBackground(Color.WHITE);
 	}
 
@@ -100,20 +100,15 @@ ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == startMissionButton) {
-			if (Challenge.isChallengeActive() == true) {
-				Board.getInstance().getChallenge().startChallenge();
-				//				EventBus.getInstance().publish(Event.Challenge, null, null);
-				EventBus.getInstance().publish(Event.StartMission,
-						Challenge.chaMission, null);
-			} else {
+			if (Challenge.isChallengeActive() != true) {
 				TileContainerPanel.setBetable(true);
 				Board.getInstance().getActivePiece()
 				.setBet(TileContainerPanel.getTemporaryBet());
 				for (TilePanel panel : TileContainerPanel.getTilePanels()) {
 					panel.notBetable();
 				}
-				Board.getInstance().startMission();
 			}
+			Board.getInstance().startMission();
 		} else if (e.getSource() == nextButton) {
 			EventBus.getInstance().publish(Event.NextCard,
 					Board.getInstance().getMission(), null);

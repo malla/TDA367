@@ -3,7 +3,7 @@ package cha.event;
 public enum Event {
 	MakeBet,		//Done. Is done when player presses a tile t make a bet.
 	ShowBet, 		//Done. Malla.
-	StartMission, 	//BÖR FIXAS!
+	StartMission, 	//Done. Malla
 	TimeTick,		//Ok.
 	TimeOver,		//Ok.
 	MissionOver, 	//Done Malla.

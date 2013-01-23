@@ -122,7 +122,7 @@ public class Board {
 	public void setActivePiece(int activePiece) {
 		if (activePiece < 0 || activePiece >= pieces.length)
 			throw new IllegalArgumentException(
-					"activePiece must be in the legal range");
+			"activePiece must be in the legal range");
 		this.activePiece = activePiece;
 	}
 
@@ -131,7 +131,7 @@ public class Board {
 			throw new BoardNotInitializedException();
 		} else if (index < 0 || index >= pieces.length) {
 			throw new IllegalArgumentException(
-					"activePiece must be in the legal range");
+			"activePiece must be in the legal range");
 		}
 		return pieces[index];
 	}
@@ -179,13 +179,18 @@ public class Board {
 		if (pieces == null) {
 			throw new BoardNotInitializedException();
 		} 
-		else{
-			(currentMission = new Mission(getActivePiece(), getTile(
-					getActivePiece().getPosition()).getCategory()))
-					.startMission();
-			EventBus.getInstance().publish(Event.StartMission,
-					currentMission, null);
-		}
+		else
+			if (Challenge.isChallengeActive() == true) {
+				getChallenge().startChallenge();
+				EventBus.getInstance().publish(Event.StartMission,
+						Challenge.chaMission, null);
+			} else{
+				(currentMission = new Mission(getActivePiece(), getTile(
+						getActivePiece().getPosition()).getCategory()))
+						.startMission();
+				EventBus.getInstance().publish(Event.StartMission,
+						currentMission, null);
+			}
 	}
 
 	// WHAT IS THIS??? NEEDED?
