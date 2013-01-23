@@ -23,12 +23,14 @@ ActionListener {
 	private JButton startMissionButton;
 	private JButton yesButton;
 	private JButton noButton;
-	private JButton nextButton;
+	public JButton nextButton;
 	private JButton doneButton;
 	private JLabel timer;
+	private TextPanel tp;
 
-	public ButtonPanel() {
+	public ButtonPanel(TextPanel panel) {
 		EventBus.getInstance().register(this);
+		this.tp=panel;
 
 		timer = new JLabel();
 		timer.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -40,7 +42,7 @@ ActionListener {
 		startMissionButton.addActionListener(this);
 		yesButton.addActionListener(this);
 		noButton.addActionListener(this);
-		nextButton.addActionListener(this);
+		nextButton.addActionListener(tp);
 		doneButton.addActionListener(this);
 
 		this.add(startMissionButton);
@@ -109,10 +111,6 @@ ActionListener {
 				}
 			}
 			Board.getInstance().startMission();
-		} else if (e.getSource() == nextButton) {
-			EventBus.getInstance().publish(Event.NextCard,
-					Board.getInstance().getMission(), null);
-
 		} else if (e.getSource() == doneButton) {
 			System.out.println("ButtonPanel: Done button pressed.");
 			if (Challenge.isChallengeActive() == true) {

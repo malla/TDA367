@@ -12,6 +12,5 @@ public enum Event {
 	NewPosition,	//DONE. Only adds piece when moved. And repaints. Called from 2 methods in Piece.
 	CreateBoard,	//Ok.
 	GameOver,		//Ok.
-	NextCard, 		//BÖR FIXAS!
 	Challenge 		//Är ingenting.
 }

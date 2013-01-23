@@ -41,7 +41,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 	private TileContainerPanel tileContainerPanel;
 
 	private TextPanel textPanel;
-	private ButtonPanel buttonPanel;
+	ButtonPanel buttonPanel;
 	private PlayerPanel playerPanel;
 
 	private GameOverPanel gameOverPanel;
@@ -61,7 +61,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		exitApp = new JMenuItem("Exit Challenge Accepted");
 		gameRules = new JMenuItem("Rules");
 
-		
+
 		newGame.addActionListener(this);
 		endGame.addActionListener(this);
 		exitApp.addActionListener(this);
@@ -101,8 +101,8 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		// Init Game panel
 
 		tileContainerPanel = new TileContainerPanel();
-		textPanel = new TextPanel();
-		buttonPanel = new ButtonPanel();
+		textPanel = new TextPanel(this);
+		buttonPanel = new ButtonPanel(textPanel);
 		playerPanel = new PlayerPanel();
 		playerPanel.setVisible(false);
 		gameOverPanel = new GameOverPanel();
@@ -111,7 +111,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		c2.gridx = c2.gridy = 1;
 		c2.weightx = c2.weighty = 1;
 		c2.fill = GridBagConstraints.BOTH;
-		
+
 		textPanel.add(buttonPanel, BorderLayout.SOUTH);
 		textPanel.add(playerPanel, BorderLayout.NORTH);
 		tileContainerPanel.add(textPanel, c2);
@@ -140,10 +140,10 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 			showStartPanel();
 		} else if (e.getSource() == exitApp) {
 			int reply = JOptionPane
-					.showConfirmDialog(
-							null,
-							"Are you sure you want to quit playing Challenge Accepted?",
-							null, JOptionPane.YES_NO_OPTION);
+			.showConfirmDialog(
+					null,
+					"Are you sure you want to quit playing Challenge Accepted?",
+					null, JOptionPane.YES_NO_OPTION);
 			if (reply == JOptionPane.YES_OPTION) {
 				System.exit(0);
 			}
@@ -162,7 +162,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 
 	@Override
 	public void action(Event e, Object o, Object p) {
-			if (e == Event.GameOver) {
+		if (e == Event.GameOver) {
 			gameOverPanel.setWinnerTeam((Team) o);
 			showGameOverPanel();
 		}
@@ -175,9 +175,9 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		while (true) {
 			try {
 				reply = JOptionPane
-						.showInputDialog(
-								"How many teams would you like to be? (2-8 players)",
-								2);
+				.showInputDialog(
+						"How many teams would you like to be? (2-8 players)",
+						2);
 
 				if (reply == null)
 					return;
@@ -208,12 +208,12 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		for (int i = 0; i < numPiece; i++) {
 
 			String teamName = JOptionPane
-					.showInputDialog("What is team number " + (i + 1)
-							+ " called?");
+			.showInputDialog("What is team number " + (i + 1)
+					+ " called?");
 			if (teamName.length() == 0){
 				teamName= "Team " + (i+1);
 			}
-			
+
 			Board.setTeamName(teamName);
 		}
 
@@ -262,7 +262,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 	private void showGameOverPanel() {
 		if (!tileContainerPanel.isVisible()) {
 			throw new IllegalStateException(
-					"The TileContainerPanel is not visible, ergo, no game is running and therefore no one can win.");
+			"The TileContainerPanel is not visible, ergo, no game is running and therefore no one can win.");
 		}
 		textPanel.setVisible(false);
 		gameOverPanel.setVisible(true);

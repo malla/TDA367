@@ -19,9 +19,11 @@ import java.awt.FlowLayout;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 @SuppressWarnings("serial")
-public class TextPanel extends JPanel implements IEventHandler {
+public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 
 	private JTextArea textArea;
 	private JLabel lblTime;
@@ -30,10 +32,12 @@ public class TextPanel extends JPanel implements IEventHandler {
 	private JLabel header = new JLabel();
 	private JPanel northPanel = new JPanel();
 	private JPanel southPanel = new JPanel();
+	private MainFrame mf;
 
-	public TextPanel() {
+	public TextPanel(MainFrame mf) {
 		EventBus.getInstance().register(this);
 		initialize();
+		this.mf=mf;
 	}
 
 	public void initialize() {
@@ -109,12 +113,7 @@ public class TextPanel extends JPanel implements IEventHandler {
 			header.setFont(new Font("DejaVu Sans", Font.BOLD, 30));
 			northPanel.add(header, BorderLayout.NORTH);
 
-		} else if (e == Event.NextCard) {
-			Mission mission = (Mission) o;
-			paintCard(mission);
-		}
-
-		else if (e == Event.MakeBet) {
+		} else if (e == Event.MakeBet) {
 			if (!(Board.getInstance().getTile(
 					Board.getInstance().getActivePiece().getPosition())
 					.isChallenge())) {
@@ -187,5 +186,15 @@ public class TextPanel extends JPanel implements IEventHandler {
 			color = Color.green;
 		}
 		return color;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == mf.buttonPanel.nextButton){
+			Mission mission = Board.getInstance().getMission();
+			paintCard(mission);
+
+		}
+
 	}
 }
