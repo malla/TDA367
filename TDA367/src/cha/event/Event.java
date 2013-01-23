@@ -14,6 +14,5 @@ public enum Event {
 	GameOver,		//Ok.
 	ShowStartPanel,	//BÖR FIXAS!
 	NextCard, 		//BÖR FIXAS!
-	ContinueGame, 	//BÖR FIXAS!
 	Challenge 		//Är ingenting.
 }

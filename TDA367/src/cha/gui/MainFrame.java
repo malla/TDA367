@@ -94,7 +94,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		c.anchor = GridBagConstraints.NORTH;
 		c.fill = GridBagConstraints.HORIZONTAL;
 
-		rulesPanel = new RulesPanel();
+		rulesPanel = new RulesPanel(this);
 		rulesPanel.setVisible(false);
 		this.add(rulesPanel, c);
 
@@ -147,14 +147,14 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 			if (reply == JOptionPane.YES_OPTION) {
 				System.exit(0);
 			}
-		} else if (e.getSource() == gameRules) {
+		} else if (e.getSource() == gameRules || e.getSource() ==  startPanel.rulesButton) {
 			showRules();
 		} else if (e.getSource() == startButton) {
 			startGame();
-		} else if (e.getSource() == startPanel.rulesButton) {
-			showRules();
 		} else if (e.getSource() == startPanel.newGameButton) {
 			startGame();
+		}else if (e.getSource() == rulesPanel.continueButton) {
+			showGameGUI();
 		}
 	}
 
@@ -165,8 +165,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		} else if (e == Event.GameOver) {
 			gameOverPanel.setWinnerTeam((Team) o);
 			showGameOverPanel();
-		} else if (e == Event.ContinueGame) {
-			showGameGUI();
 		}
 	}
 

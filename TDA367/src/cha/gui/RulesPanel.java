@@ -15,14 +15,17 @@ import cha.event.IEventHandler;
 @SuppressWarnings("serial")
 public class RulesPanel extends JPanel implements IEventHandler, ActionListener {
 
-	private JButton backButton, continueButton;
+	public JButton backButton, continueButton;
 	private JLabel textField;
 	private JLabel title;
 	public static String newline = System.getProperty("line.separator");
+	private MainFrame mf;
 
-	public RulesPanel() {
+	public RulesPanel(MainFrame mainF) {
 		super(new GridBagLayout());
-
+		
+		this.mf=mainF;
+		
 		GridBagConstraints c = new GridBagConstraints();
 
 		c.anchor = GridBagConstraints.NORTHWEST;
@@ -30,7 +33,7 @@ public class RulesPanel extends JPanel implements IEventHandler, ActionListener 
 
 		continueButton = new JButton("Continue Game");
 		continueButton.setVisible(false);
-		continueButton.addActionListener(this);
+		continueButton.addActionListener(mf);
 		this.add(continueButton, c);
 
 		c.gridx = 1;
@@ -85,8 +88,6 @@ public class RulesPanel extends JPanel implements IEventHandler, ActionListener 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == backButton) {
 			EventBus.getInstance().publish(Event.ShowStartPanel, null, null);
-		} else if (e.getSource() == continueButton) {
-			EventBus.getInstance().publish(Event.ContinueGame, null, null);
 		}
 	}
 
