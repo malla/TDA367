@@ -155,14 +155,14 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 			startGame();
 		}else if (e.getSource() == rulesPanel.continueButton) {
 			showGameGUI();
+		}else if (e.getSource() == rulesPanel.backButton){
+			showStartPanel();
 		}
 	}
 
 	@Override
 	public void action(Event e, Object o, Object p) {
-			if (e == Event.ShowStartPanel) {
-			showStartPanel();
-		} else if (e == Event.GameOver) {
+			if (e == Event.GameOver) {
 			gameOverPanel.setWinnerTeam((Team) o);
 			showGameOverPanel();
 		}

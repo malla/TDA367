@@ -3,17 +3,12 @@ package cha.gui;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import cha.event.Event;
-import cha.event.EventBus;
-import cha.event.IEventHandler;
 
 @SuppressWarnings("serial")
-public class RulesPanel extends JPanel implements IEventHandler, ActionListener {
+public class RulesPanel extends JPanel {
 
 	public JButton backButton, continueButton;
 	private JLabel textField;
@@ -48,7 +43,7 @@ public class RulesPanel extends JPanel implements IEventHandler, ActionListener 
 		c.anchor = GridBagConstraints.NORTHEAST;
 
 		backButton = new JButton("Back");
-		backButton.addActionListener(this);
+		backButton.addActionListener(mf);
 		this.add(backButton, c);
 
 		c.anchor = GridBagConstraints.CENTER;
@@ -78,26 +73,12 @@ public class RulesPanel extends JPanel implements IEventHandler, ActionListener 
 
 	}
 
-	@Override
-	public void action(Event e, Object o, Object p) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == backButton) {
-			EventBus.getInstance().publish(Event.ShowStartPanel, null, null);
-		}
-	}
-
 	public void showContinueButton() {
 		continueButton.setVisible(true);
 	}
 
 	public void hideContinuaeButton() {
 		continueButton.setVisible(false);
-
 	}
 
 }
