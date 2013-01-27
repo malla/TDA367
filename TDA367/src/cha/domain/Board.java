@@ -7,6 +7,7 @@ import java.util.Random;
 import cha.domain.Categories.Category;
 import cha.event.Event;
 import cha.event.EventBus;
+import cha.gui.ChallengePanel;
 
 public class Board {
 
@@ -151,7 +152,13 @@ public class Board {
 		}
 		System.out.println("Board: Team after:" + (activePiece + 1));
 		EventBus.getInstance().publish(Event.NextPlayer, null, null);
-		EventBus.getInstance().publish(Event.ShowBet, activePiece, null);
+		if (Board.getInstance().isTimeForChallenge()) {
+			System.out.println("PlayerPanel: Challenge ska dra igång enl. boolean!");
+			EventBus.getInstance().publish(Event.IsChallenge, null, null);
+			new ChallengePanel();
+		}
+		else
+			EventBus.getInstance().publish(Event.ShowBet, activePiece, null);
 	}
 
 	public boolean isTimeForChallenge() {

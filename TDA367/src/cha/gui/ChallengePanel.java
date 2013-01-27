@@ -19,7 +19,7 @@ public class ChallengePanel{// implements IEventHandler {
 				inputOppTeam = JOptionPane.showInputDialog(null,"Which team would you like to compete against?",
 						"Chose an opponent team", JOptionPane.QUESTION_MESSAGE);
 				if (inputOppTeam == null) {
-					return;
+					continue outerloop;
 				}
 				for (int i = 0; i < numberOfTeams; i++) {
 					if (inputOppTeam.contains(Board.getInstance()
@@ -30,10 +30,14 @@ public class ChallengePanel{// implements IEventHandler {
 									"Error", JOptionPane.ERROR_MESSAGE);
 							continue outerloop;
 						}
-						else
+						else{
+							for (TilePanel panel : TileContainerPanel.getTilePanels()) {
+								panel.notBetable();
+							}
 						oppTeam = Board.getInstance().getPiece(i);
 						Board.getInstance().startChallenge(oppTeam);
 						return;
+						}
 					}
 				}
 			} catch (NumberFormatException e) {

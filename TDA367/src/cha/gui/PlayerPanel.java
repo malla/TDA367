@@ -43,13 +43,7 @@ public class PlayerPanel extends JPanel implements IEventHandler {
 					.getTeam().getColor());
 			// Uppdatera GUI
 			this.repaint();
-
-			if (Board.getInstance().isTimeForChallenge()) {
-				System.out.println("PlayerPanel: Challenge ska dra igång enl. boolean!");
-				new ChallengePanel();
-			}
-
-
+			
 		} else if (e == Event.CreateBoard) {
 			playerJLabel.setText("Team: "
 					+ Board.getInstance().getActivePiece().getTeam().getName()

@@ -1,8 +1,6 @@
 package cha.domain;
 
 import cha.domain.Categories.Category;
-import cha.event.Event;
-import cha.event.EventBus;
 
 public class Challenge {
 	private final Piece challenger;
@@ -14,6 +12,7 @@ public class Challenge {
 	public int oppScore;
 	public String resultString;
 	private static boolean ChallengeActivity;
+	public static boolean ChallengeEnded;
 
 	// Challenge fönster kommer upp, frågar vem som utmanas, följande kallas
 	// därefter.
@@ -25,6 +24,7 @@ public class Challenge {
 		this.category = c;
 		setChallengeActivity(true);
 		System.out.println("Challenge: Challenge = TRUE");
+		ChallengeEnded = false;
 	}
 
 	/**
@@ -33,6 +33,7 @@ public class Challenge {
 	 * Challenge has been initiated.
 	 */
 	public void startChallenge() {
+		ChallengeEnded = false;
 		if (chaScore > 10) {
 			chaMission = new Mission(challenger, category, maxBet);
 			chaMission.startMission();
@@ -67,13 +68,14 @@ public class Challenge {
 		}
 	}
 
+
 	public void endChallenge() {
+		ChallengeEnded = true;
 		setChallengeActivity(false);
 		chaMission = null;
 		System.out.println("Challenge = FALSE");
 		getResult();
 		Board.getInstance().changeActivePiece();
-
 	}
 
 	public static Mission getMission() {

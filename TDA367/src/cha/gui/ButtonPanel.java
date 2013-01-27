@@ -18,7 +18,7 @@ import cha.event.IEventHandler;
 
 @SuppressWarnings("serial")
 public class ButtonPanel extends JPanel implements IEventHandler,
-ActionListener {
+		ActionListener {
 
 	private JButton startMissionButton;
 	private JButton yesButton;
@@ -30,7 +30,7 @@ ActionListener {
 
 	public ButtonPanel(TextPanel panel) {
 		EventBus.getInstance().register(this);
-		this.tp=panel;
+		this.tp = panel;
 
 		timer = new JLabel();
 		timer.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -65,15 +65,9 @@ ActionListener {
 	@Override
 	public void action(Event e, Object o, Object p) {
 		if (e == Event.ShowBet) {
-			if (Challenge.isChallengeActive()){
-				startMissionButton.setVisible(true);
-				yesButton.setVisible(false);
-				noButton.setVisible(false);
-			} else {
-				startMissionButton.setVisible(false);
-				yesButton.setVisible(false);
-				noButton.setVisible(false);
-			}
+			startMissionButton.setVisible(false);
+			yesButton.setVisible(false);
+			noButton.setVisible(false);
 		} else if (e == Event.MakeBet) {
 			startMissionButton.setVisible(true);
 		} else if (e == Event.StartMission) {
@@ -88,6 +82,10 @@ ActionListener {
 			timer.setVisible(false);
 			if (Challenge.isChallengeActive() == true) {
 				startMissionButton.setVisible(true);
+			} else if (Challenge.ChallengeEnded) {
+				yesButton.setVisible(false);
+				noButton.setVisible(false);
+				Challenge.ChallengeEnded = false;
 			} else {
 				yesButton.setVisible(true);
 				noButton.setVisible(true);
@@ -95,8 +93,11 @@ ActionListener {
 		} else if (e == Event.TimeTick) {
 			String time = (String) o;
 			timer.setText(time);
+		} else if (e == Event.IsChallenge) {
+			startMissionButton.setVisible(true);
+			yesButton.setVisible(false);
+			noButton.setVisible(false);
 		}
-
 	}
 
 	@Override
@@ -105,7 +106,7 @@ ActionListener {
 			if (Challenge.isChallengeActive() != true) {
 				TileContainerPanel.setBetable(true);
 				Board.getInstance().getActivePiece()
-				.setBet(TileContainerPanel.getTemporaryBet());
+						.setBet(TileContainerPanel.getTemporaryBet());
 				for (TilePanel panel : TileContainerPanel.getTilePanels()) {
 					panel.notBetable();
 				}
@@ -114,19 +115,19 @@ ActionListener {
 		} else if (e.getSource() == doneButton) {
 			System.out.println("ButtonPanel: Done button pressed.");
 			if (Challenge.isChallengeActive() == true) {
-				//				System.out.println("ButtonPanel: Done button pressed. Challenge = TRUE");
+				// System.out.println("ButtonPanel: Done button pressed. Challenge = TRUE");
 				Challenge.chaMission.stopTimer();
 			} else {
-				//				System.out.println("ButtonPanel: Done button pressed. Challenge = FALSE");
+				// System.out.println("ButtonPanel: Done button pressed. Challenge = FALSE");
 				Board.getInstance().getMission().stopTimer();
 			}
 
 		} else if (e.getSource() == yesButton) {
-			Board.getInstance().getMission().missionDone(true);			
+			Board.getInstance().getMission().missionDone(true);
 			Board.getInstance().changeActivePiece();
 
 		} else if (e.getSource() == noButton) {
-			Board.getInstance().getMission().missionDone(false);			
+			Board.getInstance().getMission().missionDone(false);
 			Board.getInstance().changeActivePiece();
 
 		}
