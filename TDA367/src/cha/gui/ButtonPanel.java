@@ -3,7 +3,6 @@ package cha.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -31,35 +30,41 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 	private JLabel timer;
 	private TextPanel tp;
 	
-	private JPanel betButtons = new JPanel();
-	private JPanel missionButtons = new JPanel();
-	private JPanel successButtons = new JPanel();
-	private JPanel challengeButtons;
-	private JPanel currentPanel = new JPanel();
+	private JPanel betButtons;
+	private JPanel missionButtons;
+	private JPanel successButtons;
+	private JPanel currentPanel;
 
 	
-
-
 	public ButtonPanel(TextPanel panel) {
 		EventBus.getInstance().register(this);
 		this.tp = panel;
 		
-		
-
 		timer = new JLabel();
 		timer.setFont(new Font("Dialog", Font.BOLD, 20));
+		
+		//Create Panels
+		betButtons = new JPanel();
+		missionButtons = new JPanel();
+		successButtons = new JPanel();
+		currentPanel = new JPanel();
+		betButtons.setPreferredSize(new Dimension(400, 40));
+		missionButtons.setPreferredSize(new Dimension(400, 40));
+		successButtons.setPreferredSize(new Dimension(400, 40));
+		
+		//Create the buttons
 		yesButton = prettyButton("Yes");
 		noButton = prettyButton("No");
 		nextButton = prettyButton("Next");
 		doneButton = prettyButton("Done");
 		startMissionButton=prettyButton("Start Mission");
-		
+		//Add listeners to buttons
 		startMissionButton.addActionListener(this);
 		yesButton.addActionListener(this);
 		noButton.addActionListener(this);
 		nextButton.addActionListener(tp);
 		doneButton.addActionListener(this);
-		
+		//Divide buttons into panels
 		betButtons.add(startMissionButton);
 		missionButtons.add(nextButton, BorderLayout.WEST);
 		missionButtons.add(doneButton, BorderLayout.CENTER);
@@ -85,22 +90,25 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 //		successButtons.setBackground(Color.GREEN);
 		
 		this.add(betButtons, BorderLayout.CENTER);
-		betButtons.setPreferredSize(new Dimension(400, 40));
 		this.add(missionButtons, BorderLayout.CENTER);
-		missionButtons.setPreferredSize(new Dimension(400, 40));
 		this.add(successButtons, BorderLayout.CENTER);
-		successButtons.setPreferredSize(new Dimension(400, 40));
 
 		currentPanel=betButtons;
 		setPanel();
 	}
+	
+	/*
+	 * Makes the buttons look pretty.
+	 */
 	private JButton prettyButton(String s){
 		JButton temp= new JButton(s);
 		temp.setPreferredSize(new Dimension(120, 30));
 		return temp;
 	}
 	
-	
+	/*
+	 * Switches between the different button-containing panels.
+	 */
 	private void setPanel(){
 		betButtons.setVisible(false);
 		missionButtons.setVisible(false);
