@@ -5,8 +5,10 @@ import javax.swing.JOptionPane;
 import cha.domain.Board;
 import cha.domain.Challenge;
 import cha.domain.Piece;
+//import cha.event.Event;
+//import cha.event.IEventHandler;
 
-public class ChallengePanel {
+public class ChallengePanel{// implements IEventHandler {
 
 	public ChallengePanel() {
 		String inputOppTeam;
@@ -17,11 +19,9 @@ public class ChallengePanel {
 			try {
 				inputOppTeam = JOptionPane.showInputDialog(null,"Which team would you like to compete against?",
 						"Chose an opponent team", JOptionPane.QUESTION_MESSAGE);
-
 				if (inputOppTeam == null) {
-					return;
+					continue outerloop;
 				}
-
 				for (int i = 0; i < numberOfTeams; i++) {
 					if (inputOppTeam.contains(Board.getInstance()
 							.getTeamName(i))){
@@ -31,37 +31,32 @@ public class ChallengePanel {
 									"Error", JOptionPane.ERROR_MESSAGE);
 							continue outerloop;
 						}
-						else
+						else{
+							for (TilePanel panel : TileContainerPanel.getTilePanels()) {
+								panel.notBetable();
+							}
 						oppTeam = Board.getInstance().getPiece(i);
 						Board.getInstance().startChallenge(oppTeam);
 						return;
-						
+						}
 					}
 				}
 			} catch (NumberFormatException e) {
 			}
-
 			JOptionPane.showMessageDialog(null, "There is no such team");
 		}		
-
-
 	}
-
 
 	public static int pointsEarned() {
 		String pointInput;
 		int points;
-
-
 		while (true) {
 			pointInput = JOptionPane
 					.showInputDialog(null, "How many missions did you complete?", "Missions", JOptionPane.QUESTION_MESSAGE);
-
 			try {
 				points = Integer.parseInt(pointInput);
 				if (pointInput == null)
 					continue;
-
 				if (points >= 0 && points <= 7) {
 					System.out.println("Missions accepted " + points);
 					return points;
@@ -69,12 +64,18 @@ public class ChallengePanel {
 			} catch (NumberFormatException e) {
 			}
 			JOptionPane.showMessageDialog(null, "The number of completed missions has to be between 0-7",
-
 			"Error", JOptionPane.ERROR_MESSAGE);
 		}
-
-		
-
 	}
+
+
+//	@Override
+//	public void action(Event e, Object o, Object p) {
+//		if (e == Event.TimeOver) {
+//			System.out.println("ChallengePanel: Notice Event TimeOver");
+//			Board.getInstance().getChallenge().setScore(pointsEarned());
+//		}
+//		
+//	}
 }
 

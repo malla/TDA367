@@ -19,9 +19,11 @@ import java.awt.FlowLayout;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 @SuppressWarnings("serial")
-public class TextPanel extends JPanel implements IEventHandler {
+public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 
 	private JTextArea textArea;
 	private JLabel lblTime;
@@ -30,10 +32,12 @@ public class TextPanel extends JPanel implements IEventHandler {
 	private JLabel header = new JLabel();
 	private JPanel northPanel = new JPanel();
 	private JPanel southPanel = new JPanel();
+	private MainFrame mf;
 
-	public TextPanel() {
+	public TextPanel(MainFrame mf) {
 		EventBus.getInstance().register(this);
 		initialize();
+		this.mf=mf;
 	}
 
 	public void initialize() {
@@ -109,12 +113,7 @@ public class TextPanel extends JPanel implements IEventHandler {
 			header.setFont(new Font("DejaVu Sans", Font.BOLD, 30));
 			northPanel.add(header, BorderLayout.NORTH);
 
-		} else if (e == Event.NextCard) {
-			Mission mission = (Mission) o;
-			paintCard(mission);
-		}
-
-		else if (e == Event.MakeBet) {
+		} else if (e == Event.MakeBet) {
 			if (!(Board.getInstance().getTile(
 					Board.getInstance().getActivePiece().getPosition())
 					.isChallenge())) {
@@ -125,15 +124,19 @@ public class TextPanel extends JPanel implements IEventHandler {
 		} else if (e == Event.ShowBet) {
 			textArea.setText("Make bet!");
 		} else if (e == Event.TimeOver) {
+			System.out.println("TextPanel: Notice Event TimeOver");
+
 			this.remove(cardPanel);
 			this.add(textArea);
 			this.repaint();
 			if (Challenge.isChallengeActive() == true) {
 				textArea.setText("Challenging team has done their best! \nOpponents turn!");
+				Board.getInstance().getChallenge().setScore(ChallengePanel.pointsEarned());
+
 			} else {
 				textArea.setText("Was the mission completed successfully?");
 			}
-		} else if (e == Event.MissionSuccess || e == Event.MissionFail) {
+		} else if (e == Event.MissionOver) {
 
 			p2.remove(header);
 		}
@@ -150,7 +153,6 @@ public class TextPanel extends JPanel implements IEventHandler {
 		} else {
 			text = cardtext[0];
 		}
-
 		textArea.setText(text);
 		validate();
 		textArea.repaint();
@@ -184,5 +186,15 @@ public class TextPanel extends JPanel implements IEventHandler {
 			color = Color.green;
 		}
 		return color;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == mf.buttonPanel.nextButton){
+			Mission mission = Board.getInstance().getMission();
+			paintCard(mission);
+
+		}
+
 	}
 }

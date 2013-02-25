@@ -16,7 +16,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import cha.domain.Board;
 import cha.domain.Team;
-import cha.domain.Tile;
+
 import cha.event.Event;
 import cha.event.EventBus;
 import cha.event.IEventHandler;
@@ -27,7 +27,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 	private static final int MIN_PLAYERS = 2;
 
 	private static final int MAX_PLAYERS = 8;
-	private ArrayList<Tile> tileList = new ArrayList<Tile>();
 
 	private JMenuItem newGame;
 	private JMenuItem endGame;
@@ -35,7 +34,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 	private JMenuItem gameRules;
 
 	private JButton startButton;
-	private JButton rulesButton;
 
 	private StartPanel startPanel;
 
@@ -43,7 +41,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 	private TileContainerPanel tileContainerPanel;
 
 	private TextPanel textPanel;
-	private ButtonPanel buttonPanel;
+	ButtonPanel buttonPanel;
 	private PlayerPanel playerPanel;
 
 	private GameOverPanel gameOverPanel;
@@ -51,7 +49,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 	private final ArrayList<Color> colorList = new ArrayList<Color>();
 
 	// Constructor
-
 	public MainFrame() {
 		EventBus.getInstance().register(this);
 		JMenuBar menuBar = new JMenuBar();
@@ -64,7 +61,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		exitApp = new JMenuItem("Exit Challenge Accepted");
 		gameRules = new JMenuItem("Rules");
 
-		
+
 		newGame.addActionListener(this);
 		endGame.addActionListener(this);
 		exitApp.addActionListener(this);
@@ -89,7 +86,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 
 		// Init Start panel
 
-		startPanel = new StartPanel();
+		startPanel = new StartPanel(this);
 		this.add(startPanel, c);
 
 		// Init Rules panel
@@ -97,15 +94,15 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		c.anchor = GridBagConstraints.NORTH;
 		c.fill = GridBagConstraints.HORIZONTAL;
 
-		rulesPanel = new RulesPanel();
+		rulesPanel = new RulesPanel(this);
 		rulesPanel.setVisible(false);
 		this.add(rulesPanel, c);
 
 		// Init Game panel
 
 		tileContainerPanel = new TileContainerPanel();
-		textPanel = new TextPanel();
-		buttonPanel = new ButtonPanel();
+		textPanel = new TextPanel(this);
+		buttonPanel = new ButtonPanel(textPanel);
 		playerPanel = new PlayerPanel();
 		playerPanel.setVisible(false);
 		gameOverPanel = new GameOverPanel();
@@ -114,7 +111,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		c2.gridx = c2.gridy = 1;
 		c2.weightx = c2.weighty = 1;
 		c2.fill = GridBagConstraints.BOTH;
-		
+
 		textPanel.add(buttonPanel, BorderLayout.SOUTH);
 		textPanel.add(playerPanel, BorderLayout.NORTH);
 		tileContainerPanel.add(textPanel, c2);
@@ -135,7 +132,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 	}
 
 	// Methods
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == newGame) {
@@ -144,37 +140,34 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 			showStartPanel();
 		} else if (e.getSource() == exitApp) {
 			int reply = JOptionPane
-					.showConfirmDialog(
-							null,
-							"Are you sure you want to quit playing Challenge Accepted?",
-							null, JOptionPane.YES_NO_OPTION);
+			.showConfirmDialog(
+					null,
+					"Are you sure you want to quit playing Challenge Accepted?",
+					null, JOptionPane.YES_NO_OPTION);
 			if (reply == JOptionPane.YES_OPTION) {
 				System.exit(0);
 			}
-		} else if (e.getSource() == gameRules) {
+		} else if (e.getSource() == gameRules || e.getSource() ==  startPanel.rulesButton) {
 			showRules();
 		} else if (e.getSource() == startButton) {
 			startGame();
-		} else if (e.getSource() == rulesButton) {
-			showRules();
+		} else if (e.getSource() == startPanel.newGameButton) {
+			startGame();
+		}else if (e.getSource() == rulesPanel.continueButton) {
+			showGameGUI();
+		}else if (e.getSource() == rulesPanel.backButton){
+			showStartPanel();
 		}
 	}
 
 	@Override
 	public void action(Event e, Object o, Object p) {
-		if (e == Event.NewGame) {
-			startGame();
-		} else if (e == Event.ShowGameRules) {
-			showRules();
-		} else if (e == Event.ShowStartPanel) {
-			showStartPanel();
-		} else if (e == Event.GameOver) {
+		if (e == Event.GameOver) {
 			gameOverPanel.setWinnerTeam((Team) o);
 			showGameOverPanel();
-		} else if (e == Event.ContinueGame) {
-			showGameGUI();
 		}
 	}
+
 
 	public void startGame() {
 		String reply = null;
@@ -182,9 +175,9 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		while (true) {
 			try {
 				reply = JOptionPane
-						.showInputDialog(
-								"How many teams would you like to be? (2-8 players)",
-								2);
+				.showInputDialog(
+						"How many teams would you like to be? (2-8 players)",
+						2);
 
 				if (reply == null)
 					return;
@@ -215,21 +208,16 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		for (int i = 0; i < numPiece; i++) {
 
 			String teamName = JOptionPane
-					.showInputDialog("What is team number " + (i + 1)
-							+ " called?");
+			.showInputDialog("What is team number " + (i + 1)
+					+ " called?");
 			if (teamName.length() == 0){
 				teamName= "Team " + (i+1);
 			}
-			
+
 			Board.setTeamName(teamName);
 		}
 
 		Board.createNewBoard(numPiece);
-		tileList = Board.getInstance().getTileList();
-
-		EventBus.getInstance().publish(Event.CreateBoard, tileList, null);
-		EventBus.getInstance().publish(Event.ShowBet,
-				Board.getInstance().getActivePiece(), null);
 
 		showGameGUI();
 	}
@@ -274,10 +262,9 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 	private void showGameOverPanel() {
 		if (!tileContainerPanel.isVisible()) {
 			throw new IllegalStateException(
-					"The TileContainerPanel is not visible, ergo, no game is running and therefore no one can win.");
+			"The TileContainerPanel is not visible, ergo, no game is running and therefore no one can win.");
 		}
 		textPanel.setVisible(false);
 		gameOverPanel.setVisible(true);
 	}
-
 }

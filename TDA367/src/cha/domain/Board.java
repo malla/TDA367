@@ -1,11 +1,13 @@
 package cha.domain;
 
 import java.awt.Color;
-
 import java.util.ArrayList;
 import java.util.Random;
 
 import cha.domain.Categories.Category;
+import cha.event.Event;
+import cha.event.EventBus;
+import cha.gui.ChallengePanel;
 
 public class Board {
 
@@ -22,6 +24,7 @@ public class Board {
 	 * Index of the active piece.
 	 */
 	private int activePiece;
+	private Challenge currentChallenge;
 
 	/**
 	 * The current mission
@@ -50,9 +53,12 @@ public class Board {
 		return instance;
 	}
 
-	public static void createNewBoard(int numPiece) {
+	public static void createNewBoard(int numPiece ) {
 		Board board = Board.getInstance();
 		board.init(numPiece);
+		EventBus.getInstance().publish(Event.CreateBoard, Board.getInstance().getTileList(), null);
+		EventBus.getInstance().publish(Event.ShowBet,
+				Board.getInstance().getActivePiece(), null);
 	}
 
 	// Constructor
@@ -113,11 +119,11 @@ public class Board {
 		return getPiece(activePiece);
 	}
 
-	// Kallas bara när nytt spel initieras.
+	// Kallas bara nï¿½r nytt spel initieras.
 	public void setActivePiece(int activePiece) {
 		if (activePiece < 0 || activePiece >= pieces.length)
 			throw new IllegalArgumentException(
-					"activePiece must be in the legal range");
+			"activePiece must be in the legal range");
 		this.activePiece = activePiece;
 	}
 
@@ -126,7 +132,7 @@ public class Board {
 			throw new BoardNotInitializedException();
 		} else if (index < 0 || index >= pieces.length) {
 			throw new IllegalArgumentException(
-					"activePiece must be in the legal range");
+			"activePiece must be in the legal range");
 		}
 		return pieces[index];
 	}
@@ -145,7 +151,14 @@ public class Board {
 			activePiece = 0;
 		}
 		System.out.println("Board: Team after:" + (activePiece + 1));
-
+		EventBus.getInstance().publish(Event.NextPlayer, null, null);
+		if (Board.getInstance().isTimeForChallenge()) {
+			System.out.println("PlayerPanel: Challenge ska dra igång enl. boolean!");
+			EventBus.getInstance().publish(Event.IsChallenge, null, null);
+			new ChallengePanel();
+		}
+		else
+			EventBus.getInstance().publish(Event.ShowBet, activePiece, null);
 	}
 
 	public boolean isTimeForChallenge() {
@@ -172,10 +185,19 @@ public class Board {
 	public void startMission() {
 		if (pieces == null) {
 			throw new BoardNotInitializedException();
-		} else
-			(currentMission = new Mission(getActivePiece(), getTile(
-					getActivePiece().getPosition()).getCategory()))
-					.startMission();
+		} 
+		else
+			if (Challenge.isChallengeActive() == true) {
+				getChallenge().startChallenge();
+				EventBus.getInstance().publish(Event.StartMission,
+						Challenge.chaMission, null);
+			} else{
+				(currentMission = new Mission(getActivePiece(), getTile(
+						getActivePiece().getPosition()).getCategory()))
+						.startMission();
+				EventBus.getInstance().publish(Event.StartMission,
+						currentMission, null);
+			}
 	}
 
 
@@ -186,6 +208,9 @@ public class Board {
 	public String getTeamName(int teamNumber) {
 		return teamNames.get(teamNumber);
 	}
+	public Challenge getChallenge(){
+		return currentChallenge;
+	}
 
 	public static void setTeamName(String teamName) {
 		teamNames.add(teamName);
@@ -193,7 +218,7 @@ public class Board {
 
 	public void startChallenge(Piece inputOppTeam) {
 		System.out.println("Board: startChallenge har kallats");
-		new Challenge(Board.getInstance().getActivePiece(), inputOppTeam,
+		currentChallenge=new Challenge(Board.getInstance().getActivePiece(), inputOppTeam,
 				getTile(getActivePiece().getPosition()).getCategory());
 	}
 

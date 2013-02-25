@@ -1,6 +1,8 @@
 package cha.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -23,126 +25,163 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 	private JButton startMissionButton;
 	private JButton yesButton;
 	private JButton noButton;
-	private JButton nextButton;
+	public JButton nextButton;
 	private JButton doneButton;
 	private JLabel timer;
+	private TextPanel tp;
+	
+	private JPanel betButtons;
+	private JPanel missionButtons;
+	private JPanel successButtons;
+	private JPanel currentPanel;
 
-	public ButtonPanel() {
+	
+	public ButtonPanel(TextPanel panel) {
 		EventBus.getInstance().register(this);
-
+		this.tp = panel;
+		
 		timer = new JLabel();
 		timer.setFont(new Font("Dialog", Font.BOLD, 20));
-		yesButton = new JButton("Yes");
-		noButton = new JButton("No");
-		nextButton = new JButton("Next Card");
-		doneButton = new JButton("Done");
-		startMissionButton = new JButton("Start Mission");
+		
+		//Create Panels
+		betButtons = new JPanel();
+		missionButtons = new JPanel();
+		successButtons = new JPanel();
+		currentPanel = new JPanel();
+		betButtons.setPreferredSize(new Dimension(400, 40));
+		missionButtons.setPreferredSize(new Dimension(400, 40));
+		successButtons.setPreferredSize(new Dimension(400, 40));
+		
+		//Create the buttons
+		yesButton = prettyButton("Yes");
+		noButton = prettyButton("No");
+		nextButton = prettyButton("Next");
+		doneButton = prettyButton("Done");
+		startMissionButton=prettyButton("Start Mission");
+		//Add listeners to buttons
 		startMissionButton.addActionListener(this);
 		yesButton.addActionListener(this);
 		noButton.addActionListener(this);
-		nextButton.addActionListener(this);
+		nextButton.addActionListener(tp);
 		doneButton.addActionListener(this);
+		//Divide buttons into panels
+		betButtons.add(startMissionButton);
+		missionButtons.add(nextButton, BorderLayout.WEST);
+		missionButtons.add(doneButton, BorderLayout.CENTER);
+		successButtons.add(noButton);
+		successButtons.add(yesButton);
+		missionButtons.add(timer, BorderLayout.EAST);
 
-		this.add(startMissionButton);
-		this.add(nextButton);
-		this.add(doneButton);
-		this.add(yesButton);
-		this.add(noButton);
-		this.add(timer);
-
-		startMissionButton.setVisible(false);
-		nextButton.setVisible(false);
-		doneButton.setVisible(false);
-		yesButton.setVisible(false);
-		noButton.setVisible(false);
-		timer.setVisible(false);
+		startMissionButton.setVisible(true);
+		nextButton.setVisible(true);
+		doneButton.setVisible(true);
+		yesButton.setVisible(true);
+		noButton.setVisible(true);
+		timer.setVisible(true);
 
 		this.setBackground(Color.WHITE);
+		betButtons.setBackground(Color.WHITE);
+		missionButtons.setBackground(Color.WHITE);
+		successButtons.setBackground(Color.WHITE);
+		
+//		this.setBackground(Color.YELLOW);
+//		betButtons.setBackground(Color.RED);
+//		missionButtons.setBackground(Color.BLUE);
+//		successButtons.setBackground(Color.GREEN);
+		
+		this.add(betButtons, BorderLayout.CENTER);
+		this.add(missionButtons, BorderLayout.CENTER);
+		this.add(successButtons, BorderLayout.CENTER);
+
+		currentPanel=betButtons;
+		setPanel();
+	}
+	
+	/*
+	 * Makes the buttons look pretty.
+	 */
+	private JButton prettyButton(String s){
+		JButton temp= new JButton(s);
+		temp.setPreferredSize(new Dimension(120, 30));
+		return temp;
+	}
+	
+	/*
+	 * Switches between the different button-containing panels.
+	 */
+	private void setPanel(){
+		betButtons.setVisible(false);
+		missionButtons.setVisible(false);
+		successButtons.setVisible(false);
+		currentPanel.setVisible(true);
 	}
 
 	@Override
 	public void action(Event e, Object o, Object p) {
 		if (e == Event.ShowBet) {
-//			if (Board
-//					.getInstance()
-//					.getTile(Board.getInstance().getActivePiece().getPosition())
-//					.isChallenge()) {
-				if (Challenge.isChallengeActive()){
-					
-				
-				startMissionButton.setVisible(true);
-				yesButton.setVisible(false);
-				noButton.setVisible(false);
-			} else {
-				startMissionButton.setVisible(false);
-				yesButton.setVisible(false);
-				noButton.setVisible(false);
-			}
+			currentPanel=betButtons;
+			setPanel();
+			startMissionButton.setVisible(false);
 		} else if (e == Event.MakeBet) {
 			startMissionButton.setVisible(true);
+			currentPanel=betButtons;
+			setPanel();
 		} else if (e == Event.StartMission) {
-			startMissionButton.setVisible(false);
-			nextButton.setVisible(true);
-			doneButton.setVisible(true);
-			timer.setVisible(true);
+			currentPanel=missionButtons;
+			setPanel();
 		} else if (e == Event.TimeOver) {
-			nextButton.setVisible(false);
-			doneButton.setVisible(false);
-			timer.setVisible(false);
+			System.out.println("ButtonPanel: Notice Event TimeOver");
+
 			if (Challenge.isChallengeActive() == true) {
-				startMissionButton.setVisible(true);
+				currentPanel=betButtons;
+				setPanel();
+			} else if (Challenge.ChallengeEnded) {
+				currentPanel=betButtons;
+				setPanel();
+				Challenge.ChallengeEnded = false;
 			} else {
-				yesButton.setVisible(true);
-				noButton.setVisible(true);
+				currentPanel=successButtons;
+				setPanel();
 			}
 		} else if (e == Event.TimeTick) {
 			String time = (String) o;
 			timer.setText(time);
+		} else if (e == Event.IsChallenge) {
+			currentPanel=betButtons;
+			setPanel();
 		}
-
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == startMissionButton) {
-			if (Challenge.isChallengeActive() == true) {
-				EventBus.getInstance().publish(Event.Challenge, null, null);
-				EventBus.getInstance().publish(Event.StartMission,
-						Challenge.chaMission, null);
-			} else {
+			if (Challenge.isChallengeActive() != true) {
 				TileContainerPanel.setBetable(true);
 				Board.getInstance().getActivePiece()
 						.setBet(TileContainerPanel.getTemporaryBet());
 				for (TilePanel panel : TileContainerPanel.getTilePanels()) {
 					panel.notBetable();
 				}
-				Board.getInstance().startMission();
-				EventBus.getInstance().publish(Event.StartMission,
-						Board.getInstance().getMission(), null);
 			}
-		} else if (e.getSource() == nextButton) {
-			EventBus.getInstance().publish(Event.NextCard,
-					Board.getInstance().getMission(), null);
+			Board.getInstance().startMission();
 		} else if (e.getSource() == doneButton) {
+			System.out.println("ButtonPanel: Done button pressed.");
 			if (Challenge.isChallengeActive() == true) {
-				System.out.print("\nDone button pressed. Challenge = TRUE");
+				// System.out.println("ButtonPanel: Done button pressed. Challenge = TRUE");
 				Challenge.chaMission.stopTimer();
-				EventBus.getInstance().publish(Event.TimeOver, null, null);
 			} else {
-				System.out.print("done button pressed. CHallenge = FALSE");
+				// System.out.println("ButtonPanel: Done button pressed. Challenge = FALSE");
 				Board.getInstance().getMission().stopTimer();
-				EventBus.getInstance().publish(Event.TimeOver, null, null);
 			}
+
 		} else if (e.getSource() == yesButton) {
 			Board.getInstance().getMission().missionDone(true);
-			EventBus.getInstance().publish(Event.MissionSuccess, null, null);
-			EventBus.getInstance().publish(Event.ShowBet, null, null);
-			EventBus.getInstance().publish(Event.NextPlayer, null, null);
+			Board.getInstance().changeActivePiece();
+
 		} else if (e.getSource() == noButton) {
 			Board.getInstance().getMission().missionDone(false);
-			EventBus.getInstance().publish(Event.MissionFail, null, null);
-			EventBus.getInstance().publish(Event.NextPlayer, null, null);
-			EventBus.getInstance().publish(Event.ShowBet, null, null);
+			Board.getInstance().changeActivePiece();
+
 		}
 	}
 }

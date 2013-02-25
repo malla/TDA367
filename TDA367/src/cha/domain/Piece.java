@@ -60,6 +60,7 @@ public class Piece {
 			throw new IllegalArgumentException();
 		}
 		bet = new Bet(newBet);
+		EventBus.getInstance().publish(Event.MakeBet, newBet, null);
 	}
 
 	public int getPosition() {

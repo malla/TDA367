@@ -34,7 +34,7 @@ public class PlayerPanel extends JPanel implements IEventHandler {
 	@Override
 	public void action(Event e, Object o, Object p) {
 		if (e == Event.NextPlayer) {
-			Board.getInstance().changeActivePiece();
+//			Board.getInstance().changeActivePiece();
 			// Ändrar så att det står vems tur det är.
 			playerJLabel.setText("Active team: "
 					+ Board.getInstance().getActivePiece().getTeam().getName());
@@ -43,13 +43,7 @@ public class PlayerPanel extends JPanel implements IEventHandler {
 					.getTeam().getColor());
 			// Uppdatera GUI
 			this.repaint();
-
-			if (Board.getInstance().isTimeForChallenge()) {
-				System.out.println("PlayerPanel: Challenge ska dra igång enl. boolean!");
-				new ChallengePanel();
-			}
-
-
+			
 		} else if (e == Event.CreateBoard) {
 			playerJLabel.setText("Team: "
 					+ Board.getInstance().getActivePiece().getTeam().getName()
