@@ -103,7 +103,7 @@ ActionListener {
 		//*************************************************************
 
 		//**********THIS PANEL*****************************************
-		this.setBackground(Color.WHITE);
+		this.setBackground(Color.GREEN);
 		this.add(betButtons, BorderLayout.CENTER);
 		this.add(missionButtons, BorderLayout.CENTER);
 		this.add(successButtons, BorderLayout.CENTER);
