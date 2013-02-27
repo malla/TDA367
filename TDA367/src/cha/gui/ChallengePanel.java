@@ -1,20 +1,32 @@
 package cha.gui;
 
+import java.awt.Dimension;
+
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import cha.domain.Board;
 import cha.domain.Piece;
 //import cha.event.Event;
 //import cha.event.IEventHandler;
 
-public class ChallengePanel{// implements IEventHandler {
+public class ChallengePanel extends JPanel{// implements IEventHandler {
 
 	int noOfOpponents;
 	String[] allTeams;
 	JComboBox<String> combo;
+	JButton startChallenge;
+	JLabel label;
+	
 
 	public ChallengePanel(String s){
+		label=new JLabel("Choose an opponent team!");
+		this.add(label);
+		label.setVisible(true);
+		
 		noOfOpponents=Board.getInstance().getNumberOfPieces()-1;
 		allTeams=new String[noOfOpponents];
 		for(int i=0; i<noOfOpponents; i++){
@@ -24,6 +36,14 @@ public class ChallengePanel{// implements IEventHandler {
 			}
 		}
 		combo=new JComboBox<String>(allTeams);
+		this.add(combo);
+		combo.setVisible(true);
+		
+		startChallenge=new JButton("Start Challenge!");
+		startChallenge.setPreferredSize(new Dimension(120, 30));
+		this.add(startChallenge);
+		startChallenge.setVisible(true);
+		
 	}
 
 	public ChallengePanel() {

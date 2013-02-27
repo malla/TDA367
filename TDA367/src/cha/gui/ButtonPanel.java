@@ -9,18 +9,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import cha.domain.Board;
 import cha.domain.Challenge;
+import cha.domain.Piece;
 import cha.event.EventBus;
 import cha.event.Event;
 import cha.event.IEventHandler;
 
 @SuppressWarnings("serial")
 public class ButtonPanel extends JPanel implements IEventHandler,
-		ActionListener {
+ActionListener {
 
 	private JButton startMissionButton;
 	private JButton yesButton;
@@ -29,20 +31,28 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 	private JButton doneButton;
 	private JLabel timer;
 	private TextPanel tp;
-	
+
 	private JPanel betButtons;
 	private JPanel missionButtons;
 	private JPanel successButtons;
 	private JPanel currentPanel;
+	private JPanel challengePanel;
 
-	
+	//challengePanel items.
+	int noOfOpponents;
+	String[] allTeams;
+	JComboBox<String> combo;
+	JButton startChallenge;
+	JButton challengeButton;
+	JLabel label;
+
 	public ButtonPanel(TextPanel panel) {
 		EventBus.getInstance().register(this);
 		this.tp = panel;
-		
+
 		timer = new JLabel();
 		timer.setFont(new Font("Dialog", Font.BOLD, 20));
-		
+
 		//Create Panels
 		betButtons = new JPanel();
 		missionButtons = new JPanel();
@@ -51,7 +61,22 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 		betButtons.setPreferredSize(new Dimension(400, 40));
 		missionButtons.setPreferredSize(new Dimension(400, 40));
 		successButtons.setPreferredSize(new Dimension(400, 40));
-		
+
+		challengePanel=new JPanel();
+		challengePanel.setPreferredSize(new Dimension(400, 40));
+		challengePanel.setBackground(Color.GREEN);
+		combo=new JComboBox<String>();
+		combo.setPreferredSize(new Dimension(150, 30));
+		challengePanel.add(combo);
+		combo.setVisible(true);
+		challengeButton = prettyButton("Start Challenge");
+		challengePanel.add(challengeButton);
+		challengeButton.setVisible(true);
+		challengeButton.addActionListener(this);		
+		this.add(challengePanel, BorderLayout.CENTER);
+
+
+
 		//Create the buttons
 		yesButton = prettyButton("Yes");
 		noButton = prettyButton("No");
@@ -83,29 +108,34 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 		betButtons.setBackground(Color.WHITE);
 		missionButtons.setBackground(Color.WHITE);
 		successButtons.setBackground(Color.WHITE);
-		
-//		this.setBackground(Color.YELLOW);
-//		betButtons.setBackground(Color.RED);
-//		missionButtons.setBackground(Color.BLUE);
-//		successButtons.setBackground(Color.GREEN);
-		
+
+		//		this.setBackground(Color.YELLOW);
+		//		betButtons.setBackground(Color.RED);
+		//		missionButtons.setBackground(Color.BLUE);
+		//		successButtons.setBackground(Color.GREEN);
+
+
 		this.add(betButtons, BorderLayout.CENTER);
 		this.add(missionButtons, BorderLayout.CENTER);
 		this.add(successButtons, BorderLayout.CENTER);
+		betButtons.setVisible(false);
+		missionButtons.setVisible(false);
+		successButtons.setVisible(false);
+		challengePanel.setVisible(false);
 
 		currentPanel=betButtons;
 		setPanel();
 	}
-	
+
 	/*
 	 * Makes the buttons look pretty.
 	 */
 	private JButton prettyButton(String s){
 		JButton temp= new JButton(s);
-		temp.setPreferredSize(new Dimension(120, 30));
+		temp.setPreferredSize(new Dimension(150, 30));
 		return temp;
 	}
-	
+
 	/*
 	 * Switches between the different button-containing panels.
 	 */
@@ -116,6 +146,28 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 		currentPanel.setVisible(true);
 	}
 
+	private void updateChallengeCombo(){
+		noOfOpponents=Board.getInstance().getNumberOfPieces()-1;
+		allTeams=new String[noOfOpponents];
+		for(int i=0; i<=noOfOpponents; i++){
+			String aTeam=Board.getInstance().getTeamName(i);
+			if(aTeam!=Board.getInstance().getActivePiece().getTeam().getName()){
+				combo.addItem(aTeam);
+			}
+		}
+	}
+
+	private void teamChosen(){
+		String chosenTeam=(String) combo.getSelectedItem();
+		Piece oppTeam=null;
+		for (int i = 0; i < noOfOpponents+1; i++) {
+			if (chosenTeam.contains(Board.getInstance()
+					.getTeamName(i))){
+				oppTeam = Board.getInstance().getPiece(i);
+				Board.getInstance().startChallenge(oppTeam);
+			}
+		}
+	}
 	@Override
 	public void action(Event e, Object o, Object p) {
 		if (e == Event.ShowBet) {
@@ -147,7 +199,11 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 			String time = (String) o;
 			timer.setText(time);
 		} else if (e == Event.IsChallenge) {
-			currentPanel=betButtons;
+			System.out.println("ButtonPanel: Challenge event made it here.");
+			//	challengePanel=createChallengePanel();
+			updateChallengeCombo();
+			currentPanel=challengePanel;
+			//updateChallengePanel();
 			setPanel();
 		}
 	}
@@ -158,13 +214,17 @@ public class ButtonPanel extends JPanel implements IEventHandler,
 			if (Challenge.isChallengeActive() != true) {
 				TileContainerPanel.setBetable(true);
 				Board.getInstance().getActivePiece()
-						.setBet(TileContainerPanel.getTemporaryBet());
+				.setBet(TileContainerPanel.getTemporaryBet());
 				for (TilePanel panel : TileContainerPanel.getTilePanels()) {
 					panel.notBetable();
 				}
 			}
 			Board.getInstance().startMission();
-		} else if (e.getSource() == doneButton) {
+		} 
+		else if (e.getSource()==challengeButton){
+			teamChosen();
+		}
+				else if (e.getSource() == doneButton) {
 			System.out.println("ButtonPanel: Done button pressed.");
 			if (Challenge.isChallengeActive() == true) {
 				// System.out.println("ButtonPanel: Done button pressed. Challenge = TRUE");

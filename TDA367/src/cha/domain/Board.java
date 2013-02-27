@@ -155,7 +155,7 @@ public class Board {
 		if (Board.getInstance().isTimeForChallenge()) {
 			System.out.println("PlayerPanel: Challenge ska dra igång enl. boolean!");
 			EventBus.getInstance().publish(Event.IsChallenge, null, null);
-			new ChallengePanel();
+			//new ChallengePanel();
 		}
 		else
 			EventBus.getInstance().publish(Event.ShowBet, activePiece, null);
