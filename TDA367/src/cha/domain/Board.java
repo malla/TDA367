@@ -70,7 +70,7 @@ public class Board {
 		this.categoryList.add(Category.BACKWARDS);
 	}
 
-	public void init(int numPiece) {
+	private void init(int numPiece) {
 
 		// Add a new set of tiles
 		tileList.clear();

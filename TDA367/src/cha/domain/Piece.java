@@ -4,7 +4,7 @@ import cha.event.Event;
 import cha.event.EventBus;
 
 public class Piece {
-	private static final int FAILED_MISSION_PENALTY = 2;
+	private final int FAILED_MISSION_PENALTY = 2;
 	private int position;
 	private Bet bet;
 	private Team team;
