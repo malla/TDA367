@@ -116,7 +116,7 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 		} else if (e == Event.MakeBet) {
 			if (!(Board.getInstance().getTile(
 					Board.getInstance().getActivePiece().getPosition())
-					.isChallenge())) {
+					.isChallenge()) && !Mission.isMissionActive()){
 				int bet = (Integer) o;
 				textArea.setText("Bet: " + bet);
 			}

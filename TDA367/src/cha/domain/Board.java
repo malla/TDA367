@@ -160,6 +160,19 @@ public class Board {
 	}
 
 	public boolean isTimeForChallenge() {
+		System.out.println("*******************************************************");
+		System.out.println("*	Checking if new piece is on challenge board");
+		System.out.println("*	Tile number:"+ Board.getInstance().getActivePiece().getPosition());
+		
+		if (Board.getInstance().getTile(
+				Board.getInstance().getActivePiece().getPosition())
+				.isChallenge()){
+			System.out.println("*	TRUE");
+		}
+		else System.out.println("*	FALSE");
+		System.out.println("*******************************************************");
+
+		
 		return (Board.getInstance().getTile(
 				Board.getInstance().getActivePiece().getPosition())
 				.isChallenge());
@@ -185,16 +198,18 @@ public class Board {
 			throw new BoardNotInitializedException();
 		} 
 		else
-			if (Challenge.isChallengeActive() == true) {
-				getChallenge().startChallenge();
-				EventBus.getInstance().publish(Event.StartMission,
-						Challenge.chaMission, null);
-			} else{
-				(currentMission = new Mission(getActivePiece(), getTile(
-						getActivePiece().getPosition()).getCategory()))
-						.startMission();
-				EventBus.getInstance().publish(Event.StartMission,
-						currentMission, null);
+			if (!Mission.isMissionActive()){
+				if (Challenge.isChallengeActive() == true) {
+					getChallenge().startChallenge();
+					EventBus.getInstance().publish(Event.StartMission,
+							Challenge.chaMission, null);
+				} else{
+					(currentMission = new Mission(getActivePiece(), getTile(
+							getActivePiece().getPosition()).getCategory()))
+							.startMission();
+					EventBus.getInstance().publish(Event.StartMission,
+							currentMission, null);
+				}
 			}
 	}
 

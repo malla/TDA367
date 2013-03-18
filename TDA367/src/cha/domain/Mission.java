@@ -63,9 +63,12 @@ public class Mission {
 
 	public void stopTimer(){
 		timer.stopTimer();
-		setMissionActivity(false);
-		System.out.println("Mission: Mission FALSE");
 		timeOver();
+	}
+	
+	public void setMissionFalse(){
+		System.out.println("Mission: Mission FALSE");
+		setMissionActivity(false);
 	}
 
 	/** Method only called if YES or NO button is pressed*/

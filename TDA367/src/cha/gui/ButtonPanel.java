@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import cha.domain.Board;
 import cha.domain.Challenge;
+import cha.domain.Mission;
 import cha.domain.Piece;
 import cha.event.EventBus;
 import cha.event.Event;
@@ -169,14 +170,18 @@ ActionListener {
 	@Override
 	public void action(Event e, Object o, Object p) {
 		if (e == Event.ShowBet) {
+//			System.out.println("ShowBet");
 			currentPanel=betButtons;
 			setPanel();
 			startMissionButton.setVisible(false);
 		} else if (e == Event.MakeBet) {
+			if(!Mission.isMissionActive()){
 			startMissionButton.setVisible(true);
 			currentPanel=betButtons;
 			setPanel();
+			}
 		} else if (e == Event.StartMission) {
+//			System.out.println("StartMission");
 			currentPanel=missionButtons;
 			setPanel();
 		} else if (e == Event.TimeOver) {
@@ -235,11 +240,22 @@ ActionListener {
 		} else if (e.getSource() == yesButton) {
 			Board.getInstance().getMission().missionDone(true);
 			Board.getInstance().changeActivePiece();
+			
+			if (Challenge.isChallengeActive() == true) {
+				Challenge.chaMission.setMissionFalse();
+			} else {
+				Board.getInstance().getMission().setMissionFalse();
+			}
 
 		} else if (e.getSource() == noButton) {
 			Board.getInstance().getMission().missionDone(false);
 			Board.getInstance().changeActivePiece();
 
+			if (Challenge.isChallengeActive() == true) {
+				Challenge.chaMission.setMissionFalse();
+			} else {
+				Board.getInstance().getMission().setMissionFalse();
+			}
 		}
 	}
 }

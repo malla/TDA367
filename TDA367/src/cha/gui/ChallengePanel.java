@@ -2,6 +2,8 @@ package cha.gui;
 
 import javax.swing.JOptionPane;
 
+import cha.domain.Challenge;
+
 public class ChallengePanel{
 
 	public static int pointsEarned() {
@@ -16,6 +18,8 @@ public class ChallengePanel{
 					continue;
 				if (points >= 0 && points <= 7) {
 					System.out.println("Missions accepted " + points);
+					Challenge.chaMission.setMissionFalse();
+
 					return points;
 				}
 			} catch (NumberFormatException e) {
