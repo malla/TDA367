@@ -8,7 +8,7 @@ public class Card {
 	private String [] assignment;
 	
 	public Card(String[] s){
-		assignment= s;
+		assignment = s;
 	}
 
 	@Override
