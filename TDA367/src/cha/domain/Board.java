@@ -7,6 +7,7 @@ import java.util.Random;
 import cha.domain.Categories.Category;
 import cha.event.Event;
 import cha.event.EventBus;
+import cha.gui.TileContainerPanel;
 
 public class Board {
 
@@ -231,9 +232,12 @@ public class Board {
 		turn.getTurnType().stopMission();
 	}
 	public void missionStatus(boolean b){
-		
+		turn.finishTurn(b);
 	}
 	
+	public void setBet(int i){
+		turn.setTurnType(i);
+	}
 	
 	public Turn getTurn(){
 		return turn;

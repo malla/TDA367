@@ -81,7 +81,7 @@ public class TilePanel extends JPanel {
 	public void bet(int piecePos) {
 		int bet = this.position - piecePos;
 
-		Board.getInstance().getActivePiece().setBet(bet);
+		Board.getInstance().getTurn().setSteps(bet);
 
 	}
 }

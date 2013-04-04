@@ -18,9 +18,6 @@ public class ChallengePanel{
 					continue;
 				if (points >= 0 && points <= 7) {
 					System.out.println("Missions accepted " + points);
-//					Challenge.chaMission.setMissionFalse();
-					Challenge.chaMission.missionDone(true);
-					
 					return points;
 				}
 			} catch (NumberFormatException e) {

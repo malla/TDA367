@@ -58,14 +58,14 @@ ActionListener {
 		successButtons = prettyPanel();
 		challengePanel=prettyPanel();
 		//*************************************************************
-		
+
 		//**********COMBO BOX******************************************
 		combo=new JComboBox<String>();
 		combo.setPreferredSize(new Dimension(150, 30));
 		challengePanel.add(combo);
 		combo.setVisible(true);
 		//*************************************************************
-		
+
 		//**********BUTTONS********************************************
 		yesButton = prettyButton("Yes");
 		noButton = prettyButton("No");
@@ -95,7 +95,7 @@ ActionListener {
 		noButton.setVisible(true);
 		challengeButton.setVisible(true);
 		//*************************************************************
-		
+
 		//**********TIMER**********************************************
 		timer = new JLabel();
 		timer.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -159,7 +159,7 @@ ActionListener {
 	private String teamChosen(){
 		return (String) combo.getSelectedItem();
 	}
-	
+
 	@Override
 	public void action(Event e, Object o, Object p) {
 		if (e == Event.ShowBet) {
@@ -170,9 +170,9 @@ ActionListener {
 		} else if (e == Event.MakeBet) {
 			System.out.println("BP: MakeBet");
 			if(!Mission.isMissionActive()){
-			startMissionButton.setVisible(true);
-			currentPanel=startButtons;
-			setPanel();
+				startMissionButton.setVisible(true);
+				currentPanel=startButtons;
+				setPanel();
 			}
 		} else if (e == Event.StartMission) {
 			System.out.println("BP: StartMission");
@@ -181,19 +181,19 @@ ActionListener {
 		} else if (e == Event.TimeOver) {
 			System.out.println("BP: TimeOver");
 			if (currentPanel!=challengePanel){
-			if (Challenge.isChallengeActive() == true) {
-				currentPanel=startButtons;
-				setPanel();
-			} else if (Challenge.ChallengeEnded) {
-				currentPanel=startButtons;
-				setPanel();
-				Challenge.ChallengeEnded = false;
-			} else {
-				currentPanel=successButtons;
-				setPanel();
-			}}
+				if (Challenge.isChallengeActive() == true) {
+					currentPanel=startButtons;
+					setPanel();
+				} else if (Challenge.ChallengeEnded) {
+					currentPanel=startButtons;
+					setPanel();
+					Challenge.ChallengeEnded = false;
+				} else {
+					currentPanel=successButtons;
+					setPanel();
+				}}
 		} else if (e == Event.NextPlayer) {
-//DOES NOTHING
+			//DOES NOTHING
 		} else if (e == Event.TimeTick) {
 			String time = (String) o;
 			timer.setText(time);
@@ -208,13 +208,14 @@ ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == startMissionButton) {
-			if (Challenge.isChallengeActive() != true) {
-				TileContainerPanel.setBetable(true);
-				Board.getInstance().getActivePiece()
-				.setBet(TileContainerPanel.getTemporaryBet());
-				for (TilePanel panel : TileContainerPanel.getTilePanels()) {
-					panel.notBetable();
-				}
+			if(Board.getInstance().getTurn().getTurnType()==null)
+				Board.getInstance().setBet(TileContainerPanel.getTemporaryBet());
+			//startMission in MIssion class is called within domain
+			
+			//WHAT DOES THIS DO?
+			TileContainerPanel.setBetable(true);
+			for (TilePanel panel : TileContainerPanel.getTilePanels()) {
+				panel.notBetable();
 			}
 			Board.getInstance().startMission();
 		} 
@@ -224,36 +225,16 @@ ActionListener {
 			currentPanel=startButtons;
 			setPanel();
 		}
-		else if (e.getSource() == doneButton) {
+		else if (e.getSource() == doneButton) {		//mission shall end
 			System.out.println("ButtonPanel: Done button pressed.");
-//			if (Challenge.isChallengeActive() == true) {
-//				Challenge.chaMission.stopMission();
-//			} else {
-//				Board.getInstance().getMission().stopMission();
-//			}
 			Board.getInstance().stopMission();
-
-		} else if (e.getSource() == yesButton) {
+		} else if (e.getSource() == yesButton) {	//turn shall end
 			Board.getInstance().missionStatus(true);
 			Board.getInstance().changeActivePiece();
-			
-			if (Challenge.isChallengeActive() == true) {
-//				Challenge.chaMission.setMissionFalse();
-				Challenge.chaMission.missionDone(true);
-			} else {
-//				Board.getInstance().getMission().setMissionFalse();
-			}
-
-		} else if (e.getSource() == noButton) {
+		} else if (e.getSource() == noButton) {		//turn shall end
 			Board.getInstance().missionStatus(false);
 			Board.getInstance().changeActivePiece();
 
-			if (Challenge.isChallengeActive() == true) {
-//				Challenge.chaMission.setMissionFalse();
-				Challenge.chaMission.missionDone(true);
-			} else {
-//				Board.getInstance().getMission().setMissionFalse();
-			}
 		}
 	}
 }

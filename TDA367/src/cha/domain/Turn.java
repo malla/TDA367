@@ -7,14 +7,19 @@ import cha.event.EventBus;
 public class Turn {
 
 	private final Piece piece;
-	private TurnType tt;
+	private TurnType tt=null;
 	private Category c;
+	private int steps;
 
 
 	public Turn(Piece p){
 		this.piece = p;
 		determinType();
 		c=Board.getInstance().getTile(piece.getPosition()).getCategory();
+	}
+	
+	public Piece getPiece(){
+		return piece;
 	}
 
 	private void determinType(){
@@ -26,7 +31,8 @@ public class Turn {
 	}
 
 	public void setTurnType(int i){
-		tt=new NormalType(i, c);
+		steps=i;
+		tt=new NormalTurn(i);
 	}
 
 	public void setTurnType(String oppName){
@@ -37,16 +43,24 @@ public class Turn {
 				oppPiece = Board.getInstance().getPiece(i);
 			}
 		}
-		tt=new Challenge(oppPiece, c);
+		tt=new Challenge(oppPiece);
 	}
-	
+
 	public TurnType getTurnType(){
 		return tt;
 	}
+	
+	public void setSteps(int i){
+		steps=i;
+	}
+
+
 
 	public void finishTurn(boolean b){
-		if (b)moveforward();
-		else moveBackwards();
+		if(b && tt instanceof Challenge)
+			piece.movePieceForward(((Challenge)tt).getChaScore());
+		else if (b)piece.movePieceForward(steps);
+		else piece.movePieceBackward();
 	}
 
 }

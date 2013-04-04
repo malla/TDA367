@@ -131,7 +131,7 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 			this.repaint();
 			if (Challenge.isChallengeActive() == true) {
 				textArea.setText("Challenging team has done their best! \nOpponents turn!");
-				Board.getInstance().getChallenge().setScore(ChallengePanel.pointsEarned());
+				Board.getInstance().getTurn().setSteps(ChallengePanel.pointsEarned());
 
 			} else {
 				textArea.setText("Was the mission completed successfully?");
@@ -191,7 +191,7 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == mf.buttonPanel.nextButton){
-			Mission mission = Board.getInstance().getMission();
+			Mission mission = Board.getInstance().getTurn().getTurnType().getMission();
 			paintCard(mission);
 
 		}
