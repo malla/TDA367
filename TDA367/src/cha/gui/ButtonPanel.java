@@ -156,17 +156,10 @@ ActionListener {
 		}
 	}
 
-	private Piece teamChosen(){
-		String chosenTeam=(String) combo.getSelectedItem();
-		Piece oppTeam=null;
-		for (int i = 0; i < noOfOpponents+1; i++) {
-			if (chosenTeam.contains(Board.getInstance()
-					.getTeamName(i))){
-				oppTeam = Board.getInstance().getPiece(i);
-			}
-		}
-		return oppTeam;
+	private String teamChosen(){
+		return (String) combo.getSelectedItem();
 	}
+	
 	@Override
 	public void action(Event e, Object o, Object p) {
 		if (e == Event.ShowBet) {
@@ -226,22 +219,22 @@ ActionListener {
 			Board.getInstance().startMission();
 		} 
 		else if (e.getSource()==challengeButton){
-			Piece oppteam= teamChosen();
+			String opp=teamChosen();
+			Board.getInstance().getTurn().setTurnType(opp);
 			currentPanel=startButtons;
 			setPanel();
-			Board.getInstance().startChallenge(oppteam);
-
 		}
 		else if (e.getSource() == doneButton) {
 			System.out.println("ButtonPanel: Done button pressed.");
-			if (Challenge.isChallengeActive() == true) {
-				Challenge.chaMission.stopMission();
-			} else {
-				Board.getInstance().getMission().stopMission();
-			}
+//			if (Challenge.isChallengeActive() == true) {
+//				Challenge.chaMission.stopMission();
+//			} else {
+//				Board.getInstance().getMission().stopMission();
+//			}
+			Board.getInstance().stopMission();
 
 		} else if (e.getSource() == yesButton) {
-			Board.getInstance().getMission().missionDone(true);
+			Board.getInstance().missionStatus(true);
 			Board.getInstance().changeActivePiece();
 			
 			if (Challenge.isChallengeActive() == true) {
@@ -252,7 +245,7 @@ ActionListener {
 			}
 
 		} else if (e.getSource() == noButton) {
-			Board.getInstance().getMission().missionDone(false);
+			Board.getInstance().missionStatus(false);
 			Board.getInstance().changeActivePiece();
 
 			if (Challenge.isChallengeActive() == true) {

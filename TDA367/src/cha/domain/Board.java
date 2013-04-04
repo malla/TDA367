@@ -12,39 +12,23 @@ public class Board {
 
 	private static final int MIN_TILES = 0;
 	private static final int MAX_TILES = 48;
-	/**
-	 * Array with all pieces.
-	 */
 	private static Piece[] pieces;
 	public int numberOfPieces = 0;
 	private static ArrayList<String> teamNames = new ArrayList<String>();
-
-	/**
-	 * Index of the active piece.
-	 */
 	private int activePiece;
-	private Challenge currentChallenge;
-
-	/**
-	 * The current mission
-	 */
-	private Mission currentMission;
-	// public static boolean isChallenge;
-
+//	private Challenge currentChallenge;
+	private Turn turn;
+//	private Mission currentMission;
 	private final Color[] pieceColorList = new Color[] { Color.WHITE,
 			Color.GREEN, Color.YELLOW, Color.BLACK, Color.RED, Color.BLUE,
 			Color.ORANGE, Color.CYAN };
-
 	private ArrayList<Category> categoryList = new ArrayList<Category>();
 	private ArrayList<Color> availableColorList = new ArrayList<Color>();
 	private ArrayList<Tile> tileList = new ArrayList<Tile>();
-
 	private Random random = new Random();
-
 	private static Board instance = null;
 
 	// Singleton-pattern
-
 	public static Board getInstance() {
 		if (instance == null) {
 			instance = new Board();
@@ -56,13 +40,12 @@ public class Board {
 		Board board = Board.getInstance();
 		board.init(numPiece);
 		EventBus.getInstance().publish(Event.CreateBoard, Board.getInstance().getTileList(), null);
-		EventBus.getInstance().publish(Event.ShowBet,
-				Board.getInstance().getActivePiece(), null);
+//		EventBus.getInstance().publish(Event.ShowBet,
+//				Board.getInstance().getActivePiece(), null);
 	}
 
 	// Constructor
 	private Board() {
-
 		this.categoryList.add(Category.SAMECLASS);
 		this.categoryList.add(Category.BODYTOBODY);
 		this.categoryList.add(Category.WORDJUMBLE);
@@ -70,10 +53,7 @@ public class Board {
 	}
 
 	private void init(int numPiece) {
-
-		// Add a new set of tiles
-		tileList.clear();
-		// setChallenge(false);
+		tileList.clear();		// Add a new set of tiles
 		for (int i = 0; i < 43; i++) {
 			if (i % 5 == 0 && i != 0) {
 				tileList.add(new Tile(categoryList.get(random
@@ -101,8 +81,9 @@ public class Board {
 			Team team = new Team(teamName, teamColor);
 			pieces[i] = new Piece(team, i);
 		}
-		activePiece = 0;
-		currentMission = null;
+		activePiece = -1;
+//		currentMission = null;
+		newTurn();
 	}
 
 	// Methods
@@ -120,9 +101,9 @@ public class Board {
 
 	// Kallas bara nï¿½r nytt spel initieras.
 	public void setActivePiece(int activePiece) {
-		if (activePiece < 0 || activePiece >= pieces.length)
-			throw new IllegalArgumentException(
-			"activePiece must be in the legal range");
+//		if (activePiece < 0 || activePiece >= pieces.length)
+//			throw new IllegalArgumentException(
+//			"activePiece must be in the legal range");
 		this.activePiece = activePiece;
 	}
 
@@ -139,6 +120,11 @@ public class Board {
 	public int getActivePieceNumber() {
 		return activePiece;
 	}
+	
+	private void newTurn(){
+		changeActivePiece();
+		turn= new Turn(pieces[activePiece]);
+	}
 
 	public void changeActivePiece() {
 		System.out.println("Board: Team before:" + (activePiece + 1));
@@ -151,32 +137,32 @@ public class Board {
 		}
 		System.out.println("Board: Team after:" + (activePiece + 1));
 		EventBus.getInstance().publish(Event.NextPlayer, null, null);
-		if (Board.getInstance().isTimeForChallenge()) {
-			System.out.println("PlayerPanel: Challenge ska dra igång enl. boolean!");
-			EventBus.getInstance().publish(Event.IsChallenge, null, null);
-		}
-		else
-			EventBus.getInstance().publish(Event.ShowBet, activePiece, null);
+//		if (Board.getInstance().isTimeForChallenge()) {
+//			System.out.println("PlayerPanel: Challenge ska dra igång enl. boolean!");
+//			EventBus.getInstance().publish(Event.IsChallenge, null, null);
+//		}
+//		else
+//			EventBus.getInstance().publish(Event.ShowBet, activePiece, null);
 	}
 
-	public boolean isTimeForChallenge() {
-		System.out.println("*******************************************************");
-		System.out.println("*	Checking if new piece is on challenge board");
-		System.out.println("*	Tile number:"+ Board.getInstance().getActivePiece().getPosition());
-		
-		if (Board.getInstance().getTile(
-				Board.getInstance().getActivePiece().getPosition())
-				.isChallenge()){
-			System.out.println("*	TRUE");
-		}
-		else System.out.println("*	FALSE");
-		System.out.println("*******************************************************");
-
-		
-		return (Board.getInstance().getTile(
-				Board.getInstance().getActivePiece().getPosition())
-				.isChallenge());
-	}
+//	public boolean isTimeForChallenge() {
+//		System.out.println("*******************************************************");
+//		System.out.println("*	Checking if new piece is on challenge board");
+//		System.out.println("*	Tile number:"+ Board.getInstance().getActivePiece().getPosition());
+//		
+//		if (Board.getInstance().getTile(
+//				Board.getInstance().getActivePiece().getPosition())
+//				.isChallenge()){
+//			System.out.println("*	TRUE");
+//		}
+//		else System.out.println("*	FALSE");
+//		System.out.println("*******************************************************");
+//
+//		
+//		return (Board.getInstance().getTile(
+//				Board.getInstance().getActivePiece().getPosition())
+//				.isChallenge());
+//	}
 
 	public Tile getTile(int place) {
 		if (place < MIN_TILES || place > MAX_TILES) {
@@ -186,32 +172,14 @@ public class Board {
 		}
 	}
 
-	public Mission getMission() {
-		if (Challenge.isChallengeActive() == true) {
-			return Challenge.getMission();
-		} else
-			return currentMission;
-	}
+//	public Mission getMission() {
+//		if (Challenge.isChallengeActive() == true) {
+//			return Challenge.getMission();
+//		} else
+//			return currentMission;
+//	}
 
-	public void startMission() {
-		if (pieces == null) {
-			throw new BoardNotInitializedException();
-		} 
-		else
-			if (!Mission.isMissionActive()){
-				if (Challenge.isChallengeActive() == true) {
-					getChallenge().startChallenge();
-					EventBus.getInstance().publish(Event.StartMission,
-							Challenge.chaMission, null);
-				} else{
-					(currentMission = new Mission(getActivePiece(), getTile(
-							getActivePiece().getPosition()).getCategory()))
-							.startMission();
-					EventBus.getInstance().publish(Event.StartMission,
-							currentMission, null);
-				}
-			}
-	}
+
 
 
 	public ArrayList<Tile> getTileList() {
@@ -221,21 +189,54 @@ public class Board {
 	public String getTeamName(int teamNumber) {
 		return teamNames.get(teamNumber);
 	}
-	public Challenge getChallenge(){
-		return currentChallenge;
-	}
+//	public Challenge getChallenge(){
+//		return currentChallenge;
+//	}
 
 	public static void setTeamName(String teamName) {
 		teamNames.add(teamName);
 	}
 
-	public void startChallenge(Piece inputOppTeam) {
-		System.out.println("Board: startChallenge har kallats");
-		currentChallenge=new Challenge(Board.getInstance().getActivePiece(), inputOppTeam,
-				getTile(getActivePiece().getPosition()).getCategory());
-	}
+
 
 	public static void clearBoard() {
 		instance = null;
 	}
+	
+//	public void startChallenge(Piece inputOppTeam) {
+////		System.out.println("Board: startChallenge har kallats");
+////		currentChallenge=new Challenge(Board.getInstance().getActivePiece(), inputOppTeam,
+////				getTile(getActivePiece().getPosition()).getCategory());
+//	}
+	public void startMission() {
+		if (pieces == null) {
+			throw new BoardNotInitializedException();
+		} 
+		else{}
+//			if (!Mission.isMissionActive()){
+//				if (Challenge.isChallengeActive() == true) {
+//					getChallenge().startChallenge();
+//					EventBus.getInstance().publish(Event.StartMission,
+//							Challenge.chaMission, null);
+//				} else{
+//					(currentMission = new Mission(getActivePiece(), getTile(
+//							getActivePiece().getPosition()).getCategory()))
+//							.startMission();
+//					EventBus.getInstance().publish(Event.StartMission,
+//							currentMission, null);
+//				}
+//			}
+	}
+	public void stopMission(){
+		turn.getTurnType.stopMission();
+	}
+	public void missionStatus(boolean b){
+		
+	}
+	
+	
+	public Turn getTurn(){
+		return turn;
+	}
+	
 }
