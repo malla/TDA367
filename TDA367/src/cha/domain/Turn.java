@@ -24,10 +24,10 @@ public class Turn {
 
 	private void determinType(){
 		if(Board.getInstance().getTile(piece.getPosition())
-				.isChallenge()){
-			EventBus.getInstance().publish(Event.IsChallenge, null, null);		}
-		else 
-			EventBus.getInstance().publish(Event.ShowBet, piece.getIndex(), null);
+				.isChallenge()){}
+//			EventBus.getInstance().publish(Event.IsChallenge, null, null);		}
+//		else 
+//			EventBus.getInstance().publish(Event.ShowBet, piece.getIndex(), null);
 	}
 
 	public void setTurnType(int i){

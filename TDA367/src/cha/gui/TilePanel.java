@@ -19,8 +19,7 @@ public class TilePanel extends JPanel {
 			null, null);
 
 	public TilePanel() {
-		this.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null,
-				null));
+		this.setBorder(loweredBorder);
 		this.setPreferredSize(new Dimension(50, 50));
 		this.setMinimumSize(new Dimension(50, 50));
 		this.setSize(50, 50);
@@ -53,8 +52,7 @@ public class TilePanel extends JPanel {
 	}
 
 	private void click() {
-
-		int piecePos = Board.getInstance().getActivePiece().getPosition();
+		int piecePos = Board.getInstance().getTurn().getPiece().getPosition();
 
 		TileContainerPanel.getTilePanels()[Board.getInstance().getActivePiece()
 				.getBet().getBetValue()

@@ -41,8 +41,9 @@ public class Board {
 		Board board = Board.getInstance();
 		board.init(numPiece);
 		EventBus.getInstance().publish(Event.CreateBoard, Board.getInstance().getTileList(), null);
-//		EventBus.getInstance().publish(Event.ShowBet,
-//				Board.getInstance().getActivePiece(), null);
+		EventBus.getInstance().publish(Event.ShowBet,
+				Board.getInstance().getActivePiece(), null);
+		
 	}
 
 	// Constructor
