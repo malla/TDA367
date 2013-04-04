@@ -33,7 +33,7 @@ ActionListener {
 	private JLabel timer;
 	private TextPanel tp;
 
-	private JPanel betButtons;
+	private JPanel startButtons;
 	private JPanel missionButtons;
 	private JPanel successButtons;
 	private JPanel currentPanel;
@@ -53,7 +53,7 @@ ActionListener {
 
 		//**********PANELS*********************************************
 		currentPanel = new JPanel();
-		betButtons = prettyPanel();
+		startButtons = prettyPanel();
 		missionButtons = prettyPanel();
 		successButtons = prettyPanel();
 		challengePanel=prettyPanel();
@@ -81,7 +81,7 @@ ActionListener {
 		doneButton.addActionListener(this);
 		challengeButton.addActionListener(this);		
 		//Divide buttons into panels
-		betButtons.add(startMissionButton);
+		startButtons.add(startMissionButton);
 		missionButtons.add(nextButton, BorderLayout.WEST);
 		missionButtons.add(doneButton, BorderLayout.CENTER);
 		successButtons.add(noButton);
@@ -105,17 +105,17 @@ ActionListener {
 
 		//**********THIS PANEL*****************************************
 		this.setBackground(Color.WHITE);
-		this.add(betButtons, BorderLayout.CENTER);
+		this.add(startButtons, BorderLayout.CENTER);
 		this.add(missionButtons, BorderLayout.CENTER);
 		this.add(successButtons, BorderLayout.CENTER);
 		this.add(challengePanel, BorderLayout.CENTER);
-		betButtons.setVisible(false);
+		startButtons.setVisible(false);
 		missionButtons.setVisible(false);
 		successButtons.setVisible(false);
 		challengePanel.setVisible(false);
 		//*************************************************************
 
-		currentPanel=betButtons;
+		currentPanel=startButtons;
 		setPanel();
 	}
 
@@ -138,7 +138,7 @@ ActionListener {
 	 * Switches between the different button-containing panels.
 	 */
 	private void setPanel(){
-		betButtons.setVisible(false);
+		startButtons.setVisible(false);
 		missionButtons.setVisible(false);
 		successButtons.setVisible(false);
 		challengePanel.setVisible(false);
@@ -170,39 +170,42 @@ ActionListener {
 	@Override
 	public void action(Event e, Object o, Object p) {
 		if (e == Event.ShowBet) {
-//			System.out.println("ShowBet");
-			currentPanel=betButtons;
+			System.out.println("BP: ShowBet");
+			currentPanel=startButtons;
 			setPanel();
 			startMissionButton.setVisible(false);
 		} else if (e == Event.MakeBet) {
+			System.out.println("BP: MakeBet");
 			if(!Mission.isMissionActive()){
 			startMissionButton.setVisible(true);
-			currentPanel=betButtons;
+			currentPanel=startButtons;
 			setPanel();
 			}
 		} else if (e == Event.StartMission) {
-//			System.out.println("StartMission");
+			System.out.println("BP: StartMission");
 			currentPanel=missionButtons;
 			setPanel();
 		} else if (e == Event.TimeOver) {
-			System.out.println("ButtonPanel: Notice Event TimeOver");
-
+			System.out.println("BP: TimeOver");
+			if (currentPanel!=challengePanel){
 			if (Challenge.isChallengeActive() == true) {
-				currentPanel=betButtons;
+				currentPanel=startButtons;
 				setPanel();
 			} else if (Challenge.ChallengeEnded) {
-				currentPanel=betButtons;
+				currentPanel=startButtons;
 				setPanel();
 				Challenge.ChallengeEnded = false;
 			} else {
 				currentPanel=successButtons;
 				setPanel();
-			}
+			}}
+		} else if (e == Event.NextPlayer) {
+//DOES NOTHING
 		} else if (e == Event.TimeTick) {
 			String time = (String) o;
 			timer.setText(time);
 		} else if (e == Event.IsChallenge) {
-			System.out.println("ButtonPanel: Challenge event made it here.");
+			System.out.println("BP: IsChallenge");
 			updateChallengeCombo();
 			currentPanel=challengePanel;
 			setPanel();
@@ -224,7 +227,7 @@ ActionListener {
 		} 
 		else if (e.getSource()==challengeButton){
 			Piece oppteam= teamChosen();
-			currentPanel=betButtons;
+			currentPanel=startButtons;
 			setPanel();
 			Board.getInstance().startChallenge(oppteam);
 
@@ -232,9 +235,9 @@ ActionListener {
 		else if (e.getSource() == doneButton) {
 			System.out.println("ButtonPanel: Done button pressed.");
 			if (Challenge.isChallengeActive() == true) {
-				Challenge.chaMission.stopTimer();
+				Challenge.chaMission.stopMission();
 			} else {
-				Board.getInstance().getMission().stopTimer();
+				Board.getInstance().getMission().stopMission();
 			}
 
 		} else if (e.getSource() == yesButton) {
@@ -242,9 +245,10 @@ ActionListener {
 			Board.getInstance().changeActivePiece();
 			
 			if (Challenge.isChallengeActive() == true) {
-				Challenge.chaMission.setMissionFalse();
+//				Challenge.chaMission.setMissionFalse();
+				Challenge.chaMission.missionDone(true);
 			} else {
-				Board.getInstance().getMission().setMissionFalse();
+//				Board.getInstance().getMission().setMissionFalse();
 			}
 
 		} else if (e.getSource() == noButton) {
@@ -252,9 +256,10 @@ ActionListener {
 			Board.getInstance().changeActivePiece();
 
 			if (Challenge.isChallengeActive() == true) {
-				Challenge.chaMission.setMissionFalse();
+//				Challenge.chaMission.setMissionFalse();
+				Challenge.chaMission.missionDone(true);
 			} else {
-				Board.getInstance().getMission().setMissionFalse();
+//				Board.getInstance().getMission().setMissionFalse();
 			}
 		}
 	}

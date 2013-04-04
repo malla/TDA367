@@ -14,6 +14,7 @@ import cha.event.Event;
 public class CountDown implements ActionListener{
 	private Timer timer;
 	private int count;
+	boolean now;
 
 	public CountDown(){
 		count = 30;
@@ -38,5 +39,6 @@ public class CountDown implements ActionListener{
 		System.out.println("CountDown: stannar timer");
 		timer.stop();
 		EventBus.getInstance().publish(Event.TimeOver, null, null);
+		System.out.println("TIMEOVER PUBLISHED FROM COUNTDOWN");
 	}
 }
