@@ -7,6 +7,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import cha.domain.Board;
+import cha.event.Event;
+import cha.event.EventBus;
 
 @SuppressWarnings("serial")
 public class TilePanel extends JPanel {
@@ -53,9 +55,11 @@ public class TilePanel extends JPanel {
 	}
 
 	private void click() {
+		
+		EventBus.getInstance().publish(Event.ShowBet, null, null);
 
-		int piecePos = Board.getInstance().getActivePiece().getPosition();
-
+		int piecePos = Board.getInstance().getTurn().getPiece().getPosition();
+		
 		TileContainerPanel.getTilePanels()[Board.getInstance().getActivePiece()
 				.getBet().getBetValue()
 				+ Board.getInstance().getActivePiece().getPosition()]

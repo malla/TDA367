@@ -41,8 +41,9 @@ public class Board {
 		Board board = Board.getInstance();
 		board.init(numPiece);
 		EventBus.getInstance().publish(Event.CreateBoard, Board.getInstance().getTileList(), null);
-//		EventBus.getInstance().publish(Event.ShowBet,
-//				Board.getInstance().getActivePiece(), null);
+		/*EventBus.getInstance().publish(Event.ShowBet,
+				Board.getInstance().getActivePiece(), null);*/
+		board.newTurn();
 	}
 
 	// Constructor
@@ -84,7 +85,6 @@ public class Board {
 		}
 		activePiece = -1;
 //		currentMission = null;
-		newTurn();
 	}
 
 	// Methods
