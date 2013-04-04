@@ -8,5 +8,8 @@ public abstract class TurnType {
 
 	public abstract void startMission(Category category);
 	public abstract void missionDone();
+	public Mission getMission(){
+		return mission;
+	}
 
 }

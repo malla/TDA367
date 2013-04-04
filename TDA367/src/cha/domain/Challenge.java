@@ -1,6 +1,8 @@
 package cha.domain;
 
 import cha.domain.Categories.Category;
+import cha.event.Event;
+import cha.event.EventBus;
 
 public class Challenge extends TurnType {
 	// private final Piece challenger;
@@ -36,9 +38,13 @@ public class Challenge extends TurnType {
 		ChallengeEnded = false;
 		if (chaScore < 0) {
 			mission = new Mission(category, NUMBER_OF_CARDS);
+			EventBus.getInstance().publish(Event.StartMission,
+					mission, null);
 		} else {
 			if (oppScore < 0) {
 				mission = new Mission(category, NUMBER_OF_CARDS);
+				EventBus.getInstance().publish(Event.StartMission,
+						mission, null);
 			}
 		}
 	}
@@ -64,11 +70,11 @@ public class Challenge extends TurnType {
 		System.out.println("Challenge: chaScore= " + chaScore + ", oppScore= "
 				+ oppScore);
 		if (chaScore > oppScore) {
-	//		challenger.movePieceForward(chaScore);
+			Board.getInstance().missionStatus(true);
 			opponent.movePieceBackward();
 		} else {
 			opponent.movePieceForward(oppScore);
-	//		challenger.movePieceBackward();
+			Board.getInstance().missionStatus(false);
 		}
 	}
 
@@ -94,6 +100,12 @@ public class Challenge extends TurnType {
 	}
 
 	public void missionDone() {
-			
+		mission.stopMission();
+		EventBus.getInstance().publish(Event.TimeOver, null, null);
+		System.out.println("TIMEOVER PUBLISHED FROM COUNTDOWN");
+	}
+	
+	public int getChaScore(){
+		return chaScore;
 	}
 }

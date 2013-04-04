@@ -234,7 +234,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	public static void setBetable(boolean i) {
 		betable = i;
 	}
-
+	
 	private void showBet() {
 		int pos = Board.getInstance().getActivePiece().getPosition();
 		
