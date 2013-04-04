@@ -2,26 +2,26 @@ package cha.domain;
 
 import cha.domain.Categories.Category;
 
-public class Challenge {
-	private final Piece challenger;
+public class Challenge extends TurnType {
+	// private final Piece challenger;
 	public Piece opponent;
-	public Category category;
-	public static Mission chaMission;
-	private Bet maxBet = new Bet(7);
-	public int chaScore;
-	public int oppScore;
+	// public Category category;
+//	private Mission chaMission;
+	private int chaScore;
+	private int oppScore;
 	public String resultString;
 	private static boolean ChallengeActivity;
 	public static boolean ChallengeEnded;
+	private static final int NUMBER_OF_CARDS = 7;
 
 	// Challenge fönster kommer upp, frågar vem som utmanas, följande kallas
 	// därefter.
-	public Challenge(Piece activePiece, Piece opponent, Category c) {
-		chaScore = 11;
-		oppScore = 11;
-		this.challenger = activePiece;
+	public Challenge(/* Piece activePiece, */Piece opponent) {// , Category c) {
+		chaScore = -1;
+		oppScore = -1;
+		// this.challenger = activePiece;
 		this.opponent = opponent;
-		this.category = c;
+		// this.category = c;
 		setChallengeActivity(true);
 		System.out.println("Challenge: Challenge = TRUE");
 		ChallengeEnded = false;
@@ -32,15 +32,15 @@ public class Challenge {
 	 * making it start. It is called from the Challenge constructor when a
 	 * Challenge has been initiated.
 	 */
-	public void startChallenge() {
+	public void startMission(Category category) {
 		ChallengeEnded = false;
-		if (chaScore > 10) {
-			chaMission = new Mission(challenger, category, maxBet);
-			chaMission.startMission();
-		} else
-			if (oppScore > 10){
-			chaMission = new Mission(opponent, category, maxBet);
-			chaMission.startMission();}
+		if (chaScore < 0) {
+			mission = new Mission(category, NUMBER_OF_CARDS);
+		} else {
+			if (oppScore < 0) {
+				mission = new Mission(category, NUMBER_OF_CARDS);
+			}
+		}
 	}
 
 	/**
@@ -48,39 +48,42 @@ public class Challenge {
 	 * Challenge, both values are set to 11.
 	 */
 	public void setScore(int i) {
-		if (chaScore > 10) {
+		if (chaScore < 0) {
 			chaScore = i;
-		} else if (oppScore > 10) {
+		} else if (oppScore < 0) {
 			oppScore = i;
 			endChallenge();
 		}
 	}
 
-	/** Checks who has won the challenge and calls method to move pieces. Opponent wins at draw.*/
+	/**
+	 * Checks who has won the challenge and calls method to move pieces.
+	 * Opponent wins at draw.
+	 */
 	public void getResult() {
-		System.out.println("Challenge: chaScore= " + chaScore + ", oppScore= " + oppScore);
+		System.out.println("Challenge: chaScore= " + chaScore + ", oppScore= "
+				+ oppScore);
 		if (chaScore > oppScore) {
-			challenger.movePieceForward(chaScore);
+	//		challenger.movePieceForward(chaScore);
 			opponent.movePieceBackward();
 		} else {
 			opponent.movePieceForward(oppScore);
-			challenger.movePieceBackward();
+	//		challenger.movePieceBackward();
 		}
 	}
-
 
 	public void endChallenge() {
 		ChallengeEnded = true;
 		setChallengeActivity(false);
-		chaMission = null;
+		mission = null;
 		System.out.println("Challenge = FALSE");
 		getResult();
-		Board.getInstance().changeActivePiece();
+	//	Board.getInstance().changeActivePiece();
 	}
 
-	public static Mission getMission() {
+/*	public static Mission getMission() {
 		return chaMission;
-	}
+	}*/
 
 	public static void setChallengeActivity(boolean b) {
 		ChallengeActivity = b;
@@ -88,5 +91,9 @@ public class Challenge {
 
 	public static boolean isChallengeActive() {
 		return ChallengeActivity;
+	}
+
+	public void missionDone() {
+			
 	}
 }

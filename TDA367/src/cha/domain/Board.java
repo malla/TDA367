@@ -204,11 +204,10 @@ public class Board {
 					EventBus.getInstance().publish(Event.StartMission,
 							Challenge.chaMission, null);
 				} else{
-					(currentMission = new Mission(getActivePiece(), getTile(
-							getActivePiece().getPosition()).getCategory()))
-							.startMission();
-					EventBus.getInstance().publish(Event.StartMission,
-							currentMission, null);
+					currentMission = new Mission(getActivePiece(), getTile(
+							getActivePiece().getPosition()).getCategory());
+				/*	EventBus.getInstance().publish(Event.StartMission,
+							currentMission, null);  MOVED*/
 				}
 			}
 	}
