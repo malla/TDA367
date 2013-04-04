@@ -229,7 +229,7 @@ public class Board {
 //			}
 	}
 	public void stopMission(){
-		turn.getTurnType().stopMission();
+		turn.getTurnType().missionDone();
 	}
 	public void missionStatus(boolean b){
 		turn.finishTurn(b);
