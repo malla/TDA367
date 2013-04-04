@@ -17,4 +17,18 @@ public class Main {
  *  - Färger - Två lag ska inte kunna vara samma färg.
  *  - Piece hoppar av sig själv när någon står på en Challenge-tile
  *  - Den repaintar inte efter en Challenge innan det blir ny Challenge tur.
+ *
+ *	Johan:
+ *	Mission/challenge UC
+ *	challenge på challenge
+ *	combobox (vid nytt spel)
+ *
+ *	Malla:
+ *	Gå i mål
+ *	Rätt knappar
+ *	Rätt text
+ *	Flytta pjäser
+ *	Klickbara tiles
+ *	Nytt spel
+ *	Rules knappar
  */
