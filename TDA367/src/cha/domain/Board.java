@@ -228,7 +228,7 @@ public class Board {
 //			}
 	}
 	public void stopMission(){
-		turn.getTurnType.stopMission();
+		turn.getTurnType().stopMission();
 	}
 	public void missionStatus(boolean b){
 		

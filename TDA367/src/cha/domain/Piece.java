@@ -27,7 +27,7 @@ public class Piece {
 			position = position + bet;
 		}
 		EventBus.getInstance().publish(Event.NewPosition, getPosition(), this.getIndex());
-		setBet(0);
+	//	setBet(0);
 	}
 
 	public void movePieceBackward() {
@@ -39,7 +39,7 @@ public class Piece {
 			position = position - FAILED_MISSION_PENALTY;
 		}
 		EventBus.getInstance().publish(Event.NewPosition, getPosition(), this.getIndex());
-		setBet(0);
+	//	setBet(0);
 	}
 
 
@@ -55,13 +55,13 @@ public class Piece {
 		return index;
 	}
 	
-	public void setBet(int newBet) {
+	/*public void setBet(int newBet) {
 		if (newBet < 0) {
 			throw new IllegalArgumentException();
 		}
 		bet = new Bet(newBet);
 		EventBus.getInstance().publish(Event.MakeBet, newBet, null);
-	}
+	}*/
 
 	public int getPosition() {
 		return this.position;

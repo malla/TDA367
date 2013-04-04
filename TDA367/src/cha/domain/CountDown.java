@@ -25,7 +25,7 @@ public class CountDown implements ActionListener{
 	private void ticktock(){
 		EventBus.getInstance().publish(Event.TimeTick, Integer.toString(count), null);
 		if (count==-1){
-			stopTimer();
+			timeUp();
 		}
 		System.out.println(count--);
 	}
@@ -35,10 +35,14 @@ public class CountDown implements ActionListener{
 		ticktock();
 	}
 	
+	private void timeUp(){
+		System.out.println("CountDown: stannar timer");
+		timer.stop();
+	//	EventBus.getInstance().publish(Event.TimeUp, null, null); Nytt
+	}
+	
 	public void stopTimer(){
 		System.out.println("CountDown: stannar timer");
 		timer.stop();
-		EventBus.getInstance().publish(Event.TimeOver, null, null);
-		System.out.println("TIMEOVER PUBLISHED FROM COUNTDOWN");
 	}
 }
