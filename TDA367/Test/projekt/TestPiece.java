@@ -15,7 +15,7 @@ public class TestPiece {
 		Team team = new Team("team 1", Color.red);
 		Piece piece = new Piece(team, 1);
 
-		piece.setBet(4);
+		piece.initNormalTurn(4);
 		
 		assertTrue(piece.getBet().getBetValue() == 4);
 		
@@ -32,7 +32,7 @@ public class TestPiece {
 		
 		assertTrue(piece.getTeam().equals(team));
 		
-		piece.setBet(2);
+		piece.initNormalTurn(2);
 		assertTrue(piece.getBet().getBetValue() == 2);
 		
 	}

@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import cha.domain.Board;
 import cha.domain.Challenge;
 import cha.domain.Mission;
-import cha.domain.Piece;
 import cha.event.EventBus;
 import cha.event.Event;
 import cha.event.IEventHandler;
@@ -50,13 +49,16 @@ ActionListener {
 	public ButtonPanel(TextPanel panel) {
 		EventBus.getInstance().register(this);
 		this.tp = panel;
+		this.setPreferredSize(new Dimension(500, 50));
+
 
 		//**********PANELS*********************************************
+		
 		currentPanel = new JPanel();
-		startButtons = prettyPanel();
-		missionButtons = prettyPanel();
-		successButtons = prettyPanel();
-		challengePanel=prettyPanel();
+		startButtons = prettyPanel(Color.RED);
+		missionButtons = prettyPanel(Color.BLUE);
+		successButtons = prettyPanel(Color.CYAN);
+		challengePanel=prettyPanel(Color.MAGENTA);
 		//*************************************************************
 
 		//**********COMBO BOX******************************************
@@ -71,7 +73,7 @@ ActionListener {
 		noButton = prettyButton("No");
 		nextButton = prettyButton("Next");
 		doneButton = prettyButton("Done");
-		startMissionButton=prettyButton("Start Mission");
+		startMissionButton=new JButton("Start Mission");
 		challengeButton = prettyButton("Start Challenge");
 		//Add listeners to buttons
 		startMissionButton.addActionListener(this);
@@ -104,7 +106,7 @@ ActionListener {
 		//*************************************************************
 
 		//**********THIS PANEL*****************************************
-		this.setBackground(Color.WHITE);
+		this.setBackground(Color.GREEN);
 		this.add(startButtons, BorderLayout.CENTER);
 		this.add(missionButtons, BorderLayout.CENTER);
 		this.add(successButtons, BorderLayout.CENTER);
@@ -115,7 +117,7 @@ ActionListener {
 		challengePanel.setVisible(false);
 		//*************************************************************
 
-		currentPanel=startButtons;
+		currentPanel=missionButtons;
 		setPanel();
 	}
 
@@ -125,12 +127,19 @@ ActionListener {
 	private JButton prettyButton(String s){
 		JButton temp= new JButton(s);
 		temp.setPreferredSize(new Dimension(150, 30));
+
 		return temp;
 	}
 	private JPanel prettyPanel(){
 		JPanel temp= new JPanel();
 		temp.setPreferredSize(new Dimension(400, 40));
 		temp.setBackground(Color.WHITE);
+		return temp;
+	}
+	private JPanel prettyPanel(Color c){
+		JPanel temp= new JPanel();
+		temp.setPreferredSize(new Dimension(400, 40));
+		temp.setBackground(c);
 		return temp;
 	}
 
@@ -150,7 +159,7 @@ ActionListener {
 		allTeams=new String[noOfOpponents];
 		for(int i=0; i<=noOfOpponents; i++){
 			String aTeam=Board.getInstance().getTeamName(i);
-			if(aTeam!=Board.getInstance().getActivePiece().getTeam().getName()){
+			if(aTeam!=Board.getInstance().getTurn().getPiece().getTeam().getName()){
 				combo.addItem(aTeam);
 			}
 		}
@@ -162,11 +171,17 @@ ActionListener {
 
 	@Override
 	public void action(Event e, Object o, Object p) {
-		if (e == Event.ShowBet) {
-			System.out.println("BP: ShowBet");
+		if (e == Event.MakeABet) {
+			System.out.println("BP: MakeABet");
 			currentPanel=startButtons;
 			setPanel();
 			startMissionButton.setVisible(false);
+		}
+		if (e == Event.UpdateBet) {
+			System.out.println("BP: UpdateBet");
+			currentPanel=startButtons;
+			setPanel();
+			startMissionButton.setVisible(true);
 		} else if (e == Event.MakeBet) {
 			System.out.println("BP: MakeBet");
 			if(!Mission.isMissionActive()){
@@ -195,6 +210,8 @@ ActionListener {
 		} else if (e == Event.NextPlayer) {
 			//DOES NOTHING
 		} else if (e == Event.TimeTick) {
+			System.out.println("BP: TimeTick");
+
 			String time = (String) o;
 			timer.setText(time);
 		} else if (e == Event.IsChallenge) {
@@ -208,8 +225,9 @@ ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == startMissionButton) {
-			if(Board.getInstance().getTurn().getTurnType()==null)
-				Board.getInstance().setBet(TileContainerPanel.getTemporaryBet());
+			if(Board.getInstance().getTurn().getTurnType()==null){	//If NormalTurn is to be initiated
+				Board.getInstance().initNormalTurn();//TileContainerPanel.getTemporaryBet());
+			}
 			//startMission in MIssion class is called within domain
 			
 			//WHAT DOES THIS DO?
@@ -217,23 +235,26 @@ ActionListener {
 			for (TilePanel panel : TileContainerPanel.getTilePanels()) {
 				panel.notBetable();
 			}
-			Board.getInstance().startMission();
+			Board.getInstance().getTurn().startMission();
 		} 
 		else if (e.getSource()==challengeButton){
 			String opp=teamChosen();
-			Board.getInstance().getTurn().setTurnType(opp);
+			Board.getInstance().getTurn().setTempOpp(opp);
+			Board.getInstance().getTurn().setTurnType();
 			currentPanel=startButtons;
 			setPanel();
 		}
 		else if (e.getSource() == doneButton) {		//mission shall end
 			System.out.println("ButtonPanel: Done button pressed.");
 			Board.getInstance().stopMission();
-		} else if (e.getSource() == yesButton) {	//turn shall end
-			Board.getInstance().missionStatus(true);
-			Board.getInstance().changeActivePiece();
-		} else if (e.getSource() == noButton) {		//turn shall end
-			Board.getInstance().missionStatus(false);
-			Board.getInstance().changeActivePiece();
+		} 
+		else if (e.getSource() == yesButton) {	//turn shall end
+			Board.getInstance().getTurn().finishTurn(true);
+			Board.getInstance().newTurn();
+		} 
+		else if (e.getSource() == noButton) {		//turn shall end
+			Board.getInstance().getTurn().finishTurn(false);
+			Board.getInstance().newTurn();
 
 		}
 	}

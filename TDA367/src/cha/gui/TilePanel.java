@@ -22,8 +22,7 @@ public class TilePanel extends JPanel {
 			null, null);
 
 	public TilePanel() {
-		this.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null,
-				null));
+		this.setBorder(loweredBorder);
 		this.setPreferredSize(new Dimension(50, 50));
 		this.setMinimumSize(new Dimension(50, 50));
 		this.setSize(50, 50);
@@ -46,7 +45,7 @@ public class TilePanel extends JPanel {
 	}
 
 	public void betable() {
-		this.setBorder(new BevelBorder(BevelBorder.RAISED));
+		this.setBorder(raisedBorder);
 	}
 
 	public void notBetable() {
@@ -56,34 +55,36 @@ public class TilePanel extends JPanel {
 	}
 
 	private void click() {
-		
-		EventBus.getInstance().publish(Event.ShowBet, null, null);
-
 		int piecePos = Board.getInstance().getTurn().getPiece().getPosition();
-		
-		TileContainerPanel.getTilePanels()[Board.getInstance().getActivePiece()
-				.getBet().getBetValue()
-				+ Board.getInstance().getActivePiece().getPosition()]
-				.setBorder(new BevelBorder(BevelBorder.LOWERED));
+//		EventBus.getInstance().publish(Event.ShowBet, null, null);
+//		//sänker clickad ruta GÖR DEN HÄR NÅGOT???
+//		TileContainerPanel.getTilePanels()[Board.getInstance().getTurn().getPiece()
+//				.getBet().getBetValue()
+//				+ piecePos]
+//				.setBorder(loweredBorder);
+//
+//		this.setBorder(loweredBorder);
+//		this.repaint();
+//
+//		if (Board.getInstance().getTurn().getPiece().getBet().getBetValue() == 0) {
+//		}
+//
+//		this.setBorder(loweredBorder);
+//		this.repaint();
 
-		this.setBorder(new BevelBorder(BevelBorder.LOWERED));
-		this.repaint();
-
-		if (Board.getInstance().getActivePiece().getBet().getBetValue() == 0) {
-		}
-
-		this.setBorder(new BevelBorder(BevelBorder.LOWERED));
-		this.repaint();
-
-		// Om betable ï¿½r falsk, om
-		if (!TileContainerPanel.getBetable()) {
-			if (position > piecePos && position < piecePos + 8) {
-				bet(piecePos);
+		// Om betable är falsk, om
+		if (!TileContainerPanel.getBetable()) {		//Kollar om man får man beta nu
+			if (position > piecePos && position < piecePos + 8) { //Kollar om klickad Tile är giltig
+				//
+				Board.getInstance().getTurn().setTempBet(position-piecePos);
+				this.setBorder(loweredBorder);
+				this.repaint();
+				makeBet(piecePos);
 			}
 		}
 	}
 
-	public void bet(int piecePos) {
+	public void makeBet(int piecePos) {
 		int bet = this.position - piecePos;
 
 		Board.getInstance().getTurn().setSteps(bet);

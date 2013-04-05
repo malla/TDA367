@@ -184,9 +184,9 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			ArrayList<Tile> tiles = (ArrayList<Tile>) o;
 
 			newGame(tiles);
-		} else if (e == Event.ShowBet) {
-				showBet();
-				setBetable(false);
+		} else if (e == Event.UpdateBet||e==Event.MakeABet) {
+			showBet();
+			setBetable(false);
 		} else if (e == Event.MakeBet) {
 			if (Board
 					.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge()) {
@@ -205,8 +205,8 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 				setBetable(false);
 				temporaryBet = (Integer) o;
 				TileContainerPanel.getTilePanels()[temporaryBet
-						+ Board.getInstance().getActivePiece().getPosition()]
-						.setBorder(new BevelBorder(BevelBorder.LOWERED));
+				                                   + Board.getInstance().getActivePiece().getPosition()]
+				                                   .setBorder(new BevelBorder(BevelBorder.LOWERED));
 				repaint();
 			}
 		}		
@@ -234,10 +234,10 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 	public static void setBetable(boolean i) {
 		betable = i;
 	}
-	
+
 	private void showBet() {
 		int pos = Board.getInstance().getActivePiece().getPosition();
-		
+
 		for(TilePanel t : tilePanels){
 			t.setBorder(new BevelBorder(BevelBorder.LOWERED));
 		}

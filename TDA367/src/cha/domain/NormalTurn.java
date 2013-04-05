@@ -27,4 +27,10 @@ public class NormalTurn extends TurnType{
 		EventBus.getInstance().publish(Event.TimeOver, null, null);
 		System.out.println("TIMEOVER PUBLISHED FROM COUNTDOWN");
 	}
+
+	@Override
+	public void setScore(int i) {
+		// TODO Auto-generated method stub
+		
+	}
 }

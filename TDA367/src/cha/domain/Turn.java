@@ -11,16 +11,24 @@ public class Turn {
 	private TurnType tt=null;
 	private Category c;
 	private int steps;
+	private int tempBet;
+	private String tempOpp;
 
 
 	public Turn(Piece p){
 		this.piece = p;
+		tempBet=0;
+		tempOpp=null;
 		determinType();
 		c=Board.getInstance().getTile(piece.getPosition()).getCategory();
 	}
-	
+
 	public Piece getPiece(){
 		return piece;
+	}
+
+	public void startMission(){
+		tt.startMission(c);
 	}
 
 	private void determinType(){
@@ -28,7 +36,7 @@ public class Turn {
 				.isChallenge()){
 			EventBus.getInstance().publish(Event.IsChallenge, null, null);		}
 		else 
-			EventBus.getInstance().publish(Event.ShowBet, piece.getIndex(), null);
+			EventBus.getInstance().publish(Event.MakeABet, null, null);
 	}
 
 	public void setTurnType(int i){
@@ -46,11 +54,44 @@ public class Turn {
 		}
 		tt=new Challenge(oppPiece);
 	}
+	public void setTurnType(){
+		//REMOVE****************************************************************
+		System.out.println("tempBet="+tempBet);
+		if (tempOpp==null)
+			System.out.println("tempOpp==null");
+		else System.out.println("tempOpp!=null");
+		//REMOVE****************************************************************
+		if(tempBet==0){
+			if(tempOpp!=null){
+				Piece oppPiece=null;
+				for (int i = 0; i < Board.getInstance().numberOfPieces; i++) {
+					if (/*oppName*/tempOpp.contains(Board.getInstance()
+							.getTeamName(i))){
+						oppPiece = Board.getInstance().getPiece(i);
+					}
+				}
+				tt=new Challenge(oppPiece);
+			}
+		}
+		else{
+			steps=tempBet;
+			tt=new NormalTurn(steps);
+		}
+	}
+	
+	public void setTempBet(int tb){
+		tempBet=tb;
+		System.out.println("Turn:UpdateBet publicerat. TempBet = "+ tb);
+		EventBus.getInstance().publish(Event.UpdateBet, null, null);	//Publicerar att Tile clickats
+	}
+	public void setTempOpp(String s){
+		tempOpp=s;
+	}
 
 	public TurnType getTurnType(){
 		return tt;
 	}
-	
+
 	public void setSteps(int i){
 		steps=i;
 	}

@@ -16,8 +16,7 @@ public class Challenge extends TurnType {
 	public static boolean ChallengeEnded;
 	private static final int NUMBER_OF_CARDS = 7;
 
-	// Challenge fönster kommer upp, frågar vem som utmanas, följande kallas
-	// därefter.
+	// I ButtonPanel frågas efter motståndare. Denna klass initieras när det valet har gjorts.
 	public Challenge(/* Piece activePiece, */Piece opponent) {// , Category c) {
 		chaScore = -1;
 		oppScore = -1;
@@ -55,10 +54,13 @@ public class Challenge extends TurnType {
 	 */
 	public void setScore(int i) {
 		if (chaScore < 0) {
+			System.out.println("chaScore set to "+i);
 			chaScore = i;
 		} else if (oppScore < 0) {
+			System.out.println("oppScore set to "+i);
 			oppScore = i;
 			endChallenge();
+			
 		}
 	}
 

@@ -78,6 +78,9 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 
 	@Override
 	public void action(Event e, Object o, Object p) {
+		if (e == Event.MakeABet) {
+			textArea.setText("Make A Bet!");
+		} 
 		if (e == Event.StartMission) {
 			Mission mission = (Mission) o;
 			cardPanel.setMaximumSize(new Dimension(50, 50));
@@ -121,8 +124,8 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 				textArea.setText("Bet: " + bet);
 			}
 
-		} else if (e == Event.ShowBet) {
-			textArea.setText("Make bet!");
+		} else if (e == Event.UpdateBet) {
+			textArea.setText("Your bet has been updated!");
 		} else if (e == Event.TimeOver) {
 			System.out.println("TextPanel: Notice Event TimeOver");
 
@@ -131,7 +134,7 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 			this.repaint();
 			if (Challenge.isChallengeActive() == true) {
 				textArea.setText("Challenging team has done their best! \nOpponents turn!");
-				Board.getInstance().getTurn().setSteps(ChallengePanel.pointsEarned());
+				(Board.getInstance().getTurn().getTurnType()).setScore(ChallengePanel.pointsEarned());
 
 			} else {
 				textArea.setText("Was the mission completed successfully?");

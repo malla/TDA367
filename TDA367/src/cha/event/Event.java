@@ -1,8 +1,8 @@
 package cha.event;
 
 public enum Event {
-	MakeBet,		//Done. Is done when player presses a tile t make a bet.
-	ShowBet, 		//Done. Malla.
+	MakeBet,		//FÖRSÖK FÅ BORT DEN HÄR
+	UpdateBet, 		//Done. Malla.
 	StartMission, 	//Done. Malla
 	TimeTick,		//Ok.
 	TimeOver,		//Ok.
@@ -15,5 +15,6 @@ public enum Event {
 	IsChallenge, 	//Used when it is a challenge to show the correct buttons. Johan
 	ChaMissionOver,
 	ChaOver,
-	TurnOver
+	TurnOver,
+	MakeABet		//Checked, Malla
 }

@@ -123,12 +123,12 @@ public class Board {
 		return activePiece;
 	}
 	
-	private void newTurn(){
+	public void newTurn(){
 		changeActivePiece();
 		turn= new Turn(pieces[activePiece]);
 	}
 
-	public void changeActivePiece() {
+	private void changeActivePiece() {
 		System.out.println("Board: Team before:" + (activePiece + 1));
 		if (pieces == null) {
 			throw new BoardNotInitializedException();
@@ -236,8 +236,8 @@ public class Board {
 		turn.finishTurn(b);
 	}
 	
-	public void setBet(int i){
-		turn.setTurnType(i);
+	public void initNormalTurn(){
+		turn.setTurnType();
 	}
 	
 	public Turn getTurn(){
