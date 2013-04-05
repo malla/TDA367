@@ -13,7 +13,6 @@ public class NormalTurn extends TurnType{
 			throw new IllegalArgumentException();
 		}
 		bet = new Bet(newBet);
-		EventBus.getInstance().publish(Event.MakeBet, newBet, null);
 	}
 
 	public void startMission(Category category) {

@@ -11,7 +11,7 @@ public abstract class TurnType {
 	public Mission getMission(){
 		return mission;
 	}
-	//TempFix to make Challenge work
+	//TempFix to make Challenge kinda work
 	public abstract void setScore(int i);
-
+	
 }

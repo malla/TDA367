@@ -115,20 +115,14 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 			header.setText("" + title);
 			header.setFont(new Font("DejaVu Sans", Font.BOLD, 30));
 			northPanel.add(header, BorderLayout.NORTH);
-
-		} else if (e == Event.MakeBet) {
-			if (!(Board.getInstance().getTile(
-					Board.getInstance().getActivePiece().getPosition())
-					.isChallenge()) && !Mission.isMissionActive()){
-				int bet = (Integer) o;
-				textArea.setText("Bet: " + bet);
-			}
-
-		} else if (e == Event.UpdateBet) {
+		}
+		//Checked	
+		else if (e == Event.UpdateBet) {
 			textArea.setText("Your bet has been updated!");
-		} else if (e == Event.TimeOver) {
-			System.out.println("TextPanel: Notice Event TimeOver");
-
+		} 
+		//
+		else if (e == Event.TimeOver) {
+			System.out.println("TextPanel : TimeOver");
 			this.remove(cardPanel);
 			this.add(textArea);
 			this.repaint();

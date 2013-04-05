@@ -105,6 +105,7 @@ public class Challenge extends TurnType {
 		mission.stopMission();
 		EventBus.getInstance().publish(Event.TimeOver, null, null);
 		System.out.println("TIMEOVER PUBLISHED FROM COUNTDOWN");
+		EventBus.getInstance().publish(Event.GetChallengeScore, null, null);
 	}
 	
 	public int getChaScore(){

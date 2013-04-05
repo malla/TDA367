@@ -55,10 +55,10 @@ ActionListener {
 		//**********PANELS*********************************************
 		
 		currentPanel = new JPanel();
-		startButtons = prettyPanel(Color.RED);
-		missionButtons = prettyPanel(Color.BLUE);
-		successButtons = prettyPanel(Color.CYAN);
-		challengePanel=prettyPanel(Color.MAGENTA);
+		startButtons = prettyPanel();
+		missionButtons = prettyPanel();
+		successButtons = prettyPanel();
+		challengePanel=prettyPanel();
 		//*************************************************************
 
 		//**********COMBO BOX******************************************
@@ -136,12 +136,6 @@ ActionListener {
 		temp.setBackground(Color.WHITE);
 		return temp;
 	}
-	private JPanel prettyPanel(Color c){
-		JPanel temp= new JPanel();
-		temp.setPreferredSize(new Dimension(400, 40));
-		temp.setBackground(c);
-		return temp;
-	}
 
 	/*
 	 * Switches between the different button-containing panels.
@@ -177,18 +171,13 @@ ActionListener {
 			setPanel();
 			startMissionButton.setVisible(false);
 		}
+		//Checked
 		if (e == Event.UpdateBet) {
 			System.out.println("BP: UpdateBet");
 			currentPanel=startButtons;
 			setPanel();
 			startMissionButton.setVisible(true);
-		} else if (e == Event.MakeBet) {
-			System.out.println("BP: MakeBet");
-			if(!Mission.isMissionActive()){
-				startMissionButton.setVisible(true);
-				currentPanel=startButtons;
-				setPanel();
-			}
+		//Checked	
 		} else if (e == Event.StartMission) {
 			System.out.println("BP: StartMission");
 			currentPanel=missionButtons;
@@ -210,8 +199,7 @@ ActionListener {
 		} else if (e == Event.NextPlayer) {
 			//DOES NOTHING
 		} else if (e == Event.TimeTick) {
-			System.out.println("BP: TimeTick");
-
+			//System.out.println("BP: TimeTick");
 			String time = (String) o;
 			timer.setText(time);
 		} else if (e == Event.IsChallenge) {

@@ -28,7 +28,6 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 
 	private ArrayList<PiecePanel> piecePanels = new ArrayList<PiecePanel>();
 
-	private static int temporaryBet;
 	private static boolean betable = false;
 
 	// Constructor & initilization
@@ -187,44 +186,19 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		} else if (e == Event.UpdateBet||e==Event.MakeABet) {
 			showBet();
 			setBetable(false);
-		} else if (e == Event.MakeBet) {
-			if (Board
-					.getInstance().getTile(Board.getInstance().getActivePiece().getPosition()).isChallenge()) {
-				setBetable(false);} 
-
-			else {
-				int pos = Board.getInstance().getActivePiece().getPosition();
-				for (int i = pos + 1; i < pos + 8; i++) {
-					if (i > 43) {
-						return;
-					}
-					tilePanels[i].betable();
-					repaint();
-				}
-				showBet();
-				setBetable(false);
-				temporaryBet = (Integer) o;
-				TileContainerPanel.getTilePanels()[temporaryBet
-				                                   + Board.getInstance().getActivePiece().getPosition()]
-				                                   .setBorder(new BevelBorder(BevelBorder.LOWERED));
-				repaint();
-			}
-		}		
+		} 
+		//Checked
 		else if (e == Event.OldPosition) {
 			int pos = (Integer) o;
 			int index = (Integer) p;
 			tilePanels[pos].removePiece(piecePanels.get(index));
+		//Checked	
 		} else if (e == Event.NewPosition) {
 			int pos = (Integer) o;
 			int index = (Integer) p;
 			tilePanels[pos].addPiecePanel(piecePanels.get(index));
 			tilePanels[pos].repaint();
-			//nextPlayer();
 		}
-	}
-
-	public static int getTemporaryBet() {
-		return temporaryBet;
 	}
 
 	public static boolean getBetable() {
