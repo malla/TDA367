@@ -102,10 +102,14 @@ public class Challenge extends TurnType {
 	}
 
 	public void missionDone() {
+		System.out.println("Challenge: missionDone()");
 		mission.stopMission();
-		EventBus.getInstance().publish(Event.TimeOver, null, null);
-		System.out.println("TIMEOVER PUBLISHED FROM COUNTDOWN");
+		if(chaScore==-1||oppScore==-1){
+			System.out.println("Challenge: Published GetChallengeScore");
 		EventBus.getInstance().publish(Event.GetChallengeScore, null, null);
+		}
+//		EventBus.getInstance().publish(Event.TimeOver, null, null);
+//		System.out.println("TIMEOVER PUBLISHED FROM CHALLENGE");
 	}
 	
 	public int getChaScore(){

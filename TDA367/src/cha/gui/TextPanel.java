@@ -121,14 +121,14 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 			textArea.setText("Your bet has been updated!");
 		} 
 		//
-		else if (e == Event.TimeOver) {
+		else if (e == Event.NormalTurnDone||e==Event.GetChallengeScore) {
 			System.out.println("TextPanel : TimeOver");
 			this.remove(cardPanel);
 			this.add(textArea);
 			this.repaint();
 			if (Challenge.isChallengeActive() == true) {
-				textArea.setText("Challenging team has done their best! \nOpponents turn!");
-				(Board.getInstance().getTurn().getTurnType()).setScore(ChallengePanel.pointsEarned());
+//				textArea.setText("Challenging team has done their best! \nOpponents turn!");
+//				(Board.getInstance().getTurn().getTurnType()).setScore(ChallengePanel.pointsEarned());
 
 			} else {
 				textArea.setText("Was the mission completed successfully?");

@@ -2,6 +2,7 @@ package cha.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 
 import java.awt.Font;
@@ -29,6 +30,7 @@ ActionListener {
 	private JButton noButton;
 	public JButton nextButton;
 	private JButton doneButton;
+	private JButton setScoreButton;
 	private JLabel timer;
 	private TextPanel tp;
 
@@ -37,11 +39,13 @@ ActionListener {
 	private JPanel successButtons;
 	private JPanel currentPanel;
 	private JPanel challengePanel;
+	private JPanel setScore;
 
 	//challengePanel items.
 	int noOfOpponents;
 	String[] allTeams;
-	JComboBox<String> combo;
+	JComboBox<String> opponentCombo;
+	JComboBox<Integer> scoreCombo;
 	JButton startChallenge;
 	JButton challengeButton;
 	JLabel label;
@@ -59,13 +63,22 @@ ActionListener {
 		missionButtons = prettyPanel();
 		successButtons = prettyPanel();
 		challengePanel=prettyPanel();
+		setScore=prettyPanel();
 		//*************************************************************
 
-		//**********COMBO BOX******************************************
-		combo=new JComboBox<String>();
-		combo.setPreferredSize(new Dimension(150, 30));
-		challengePanel.add(combo);
-		combo.setVisible(true);
+		//**********COMBO BOXES******************************************
+		opponentCombo=new JComboBox<String>();
+		opponentCombo.setPreferredSize(new Dimension(150, 30));
+		challengePanel.add(opponentCombo);
+		opponentCombo.setVisible(true);
+		
+		scoreCombo=new JComboBox<Integer>();//{1,2,3,4};
+		int[] bets={0,1,2,3,4,5,6,7};
+		for(int i:bets)
+			scoreCombo.addItem(bets[i]);
+		scoreCombo.setPreferredSize(new Dimension(150, 30));
+		setScore.add(scoreCombo);
+		scoreCombo.setVisible(true);
 		//*************************************************************
 
 		//**********BUTTONS********************************************
@@ -75,13 +88,15 @@ ActionListener {
 		doneButton = prettyButton("Done");
 		startMissionButton=new JButton("Start Mission");
 		challengeButton = prettyButton("Start Challenge");
+		setScoreButton =prettyButton("Set Score");
 		//Add listeners to buttons
 		startMissionButton.addActionListener(this);
 		yesButton.addActionListener(this);
 		noButton.addActionListener(this);
 		nextButton.addActionListener(tp);
 		doneButton.addActionListener(this);
-		challengeButton.addActionListener(this);		
+		challengeButton.addActionListener(this);	
+		setScoreButton.addActionListener(this);		
 		//Divide buttons into panels
 		startButtons.add(startMissionButton);
 		missionButtons.add(nextButton, BorderLayout.WEST);
@@ -89,6 +104,7 @@ ActionListener {
 		successButtons.add(noButton);
 		successButtons.add(yesButton);
 		challengePanel.add(challengeButton);
+		setScore.add(setScoreButton);
 		//Set visibility
 		startMissionButton.setVisible(true);
 		nextButton.setVisible(true);
@@ -96,6 +112,7 @@ ActionListener {
 		yesButton.setVisible(true);
 		noButton.setVisible(true);
 		challengeButton.setVisible(true);
+		setScoreButton.setVisible(true);
 		//*************************************************************
 
 		//**********TIMER**********************************************
@@ -111,10 +128,12 @@ ActionListener {
 		this.add(missionButtons, BorderLayout.CENTER);
 		this.add(successButtons, BorderLayout.CENTER);
 		this.add(challengePanel, BorderLayout.CENTER);
+		this.add(setScore, BorderLayout.CENTER);
 		startButtons.setVisible(false);
 		missionButtons.setVisible(false);
 		successButtons.setVisible(false);
 		challengePanel.setVisible(false);
+		setScore.setVisible(false);
 		//*************************************************************
 
 		currentPanel=missionButtons;
@@ -154,18 +173,21 @@ ActionListener {
 		for(int i=0; i<=noOfOpponents; i++){
 			String aTeam=Board.getInstance().getTeamName(i);
 			if(aTeam!=Board.getInstance().getTurn().getPiece().getTeam().getName()){
-				combo.addItem(aTeam);
+				opponentCombo.addItem(aTeam);
 			}
 		}
 	}
 
 	private String teamChosen(){
-		return (String) combo.getSelectedItem();
+		return (String) opponentCombo.getSelectedItem();
 	}
 
 	@Override
 	public void action(Event e, Object o, Object p) {
-		if (e == Event.MakeABet) {
+		if (e == Event.TimeOver) {
+			System.out.println("BP: TimeOver");
+			Board.getInstance().getTurn().getTurnType().missionDone();
+		}if (e == Event.MakeABet) {
 			System.out.println("BP: MakeABet");
 			currentPanel=startButtons;
 			setPanel();
@@ -182,20 +204,15 @@ ActionListener {
 			System.out.println("BP: StartMission");
 			currentPanel=missionButtons;
 			setPanel();
-		} else if (e == Event.TimeOver) {
-			System.out.println("BP: TimeOver");
-			if (currentPanel!=challengePanel){
-				if (Challenge.isChallengeActive() == true) {
-					currentPanel=startButtons;
-					setPanel();
-				} else if (Challenge.ChallengeEnded) {
-					currentPanel=startButtons;
-					setPanel();
-					Challenge.ChallengeEnded = false;
-				} else {
+		} else if (e == Event.GetChallengeScore) {
+			System.out.println("BP: GetChallengeScore");
+			currentPanel=setScore;
+			setPanel();
+		} else if (e == Event.NormalTurnDone) {
+			System.out.println("BP: NormalTurnDone");
 					currentPanel=successButtons;
 					setPanel();
-				}}
+				
 		} else if (e == Event.NextPlayer) {
 			//DOES NOTHING
 		} else if (e == Event.TimeTick) {
@@ -229,6 +246,12 @@ ActionListener {
 			String opp=teamChosen();
 			Board.getInstance().getTurn().setTempOpp(opp);
 			Board.getInstance().getTurn().setTurnType();
+			currentPanel=startButtons;
+			setPanel();
+		}
+		else if (e.getSource()==setScoreButton){
+			int score=(Integer)scoreCombo.getSelectedItem();
+			Board.getInstance().getTurn().getTurnType().setScore(score);
 			currentPanel=startButtons;
 			setPanel();
 		}
