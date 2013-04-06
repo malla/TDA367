@@ -121,7 +121,7 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 			textArea.setText("Your bet has been updated!");
 		} 
 		//
-		else if (e == Event.NormalTurnDone||e==Event.GetChallengeScore) {
+		else if (e == Event.MissionOver||e==Event.GetChallengeScore) {
 			System.out.println("TextPanel : TimeOver");
 			this.remove(cardPanel);
 			this.add(textArea);
@@ -133,10 +133,7 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 			} else {
 				textArea.setText("Was the mission completed successfully?");
 			}
-		} else if (e == Event.MissionOver) {
-
-			p2.remove(header);
-		}
+		} 
 	}
 
 	private void paintCard(Mission mission) {

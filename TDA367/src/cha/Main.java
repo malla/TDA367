@@ -28,7 +28,12 @@ public class Main {
  *	Rätt knappar
  *	Rätt text
  *	Flytta pjäser
- *	Klickbara tiles
  *	Nytt spel
  *	Rules knappar
+ *
+ *Malla 6e april:
+ *comboboxen vid challenge visar fel namn.
+ *
+ *
+ *
  */

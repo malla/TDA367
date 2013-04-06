@@ -109,8 +109,6 @@ public class Challenge extends TurnType {
 			System.out.println("Challenge: Published GetChallengeScore");
 		EventBus.getInstance().publish(Event.GetChallengeScore, null, null);
 		}
-//		EventBus.getInstance().publish(Event.TimeOver, null, null);
-//		System.out.println("TIMEOVER PUBLISHED FROM CHALLENGE");
 	}
 	
 	public int getChaScore(){

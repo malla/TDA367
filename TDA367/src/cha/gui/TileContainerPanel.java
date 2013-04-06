@@ -106,8 +106,6 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		}
 
 		Board.getInstance().setActivePiece(0);
-		// currentPiece = 0;
-
 	}
 
 	// Methods

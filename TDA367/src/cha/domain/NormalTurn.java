@@ -23,8 +23,8 @@ public class NormalTurn extends TurnType{
 
 	public void missionDone() {
 		mission.stopMission();
-		EventBus.getInstance().publish(Event.NormalTurnDone, null, null);
-		System.out.println("TIMEOVER PUBLISHED FROM COUNTDOWN");
+		EventBus.getInstance().publish(Event.MissionOver, null, null);
+
 	}
 
 	@Override

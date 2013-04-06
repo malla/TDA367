@@ -110,6 +110,7 @@ public class Turn {
 			System.out.println("finishTurn: move backward");
 			piece.movePieceBackward();
 		}
+		Board.getInstance().newTurn();
 	}
 }
 

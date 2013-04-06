@@ -172,9 +172,12 @@ ActionListener {
 		allTeams=new String[noOfOpponents];
 		for(int i=0; i<=noOfOpponents; i++){
 			String aTeam=Board.getInstance().getTeamName(i);
+			System.out.println("Active teams name:"+ Board.getInstance().getTurn().getPiece().getTeam().getName());
 			if(aTeam!=Board.getInstance().getTurn().getPiece().getTeam().getName()){
+				System.out.println("Adding "+aTeam+" to comboBox");
 				opponentCombo.addItem(aTeam);
 			}
+			else System.out.println("Won't add "+aTeam+" to comboBox");
 		}
 	}
 
@@ -208,7 +211,7 @@ ActionListener {
 			System.out.println("BP: GetChallengeScore");
 			currentPanel=setScore;
 			setPanel();
-		} else if (e == Event.NormalTurnDone) {
+		} else if (e == Event.MissionOver) {
 			System.out.println("BP: NormalTurnDone");
 					currentPanel=successButtons;
 					setPanel();
@@ -261,11 +264,11 @@ ActionListener {
 		} 
 		else if (e.getSource() == yesButton) {	//turn shall end
 			Board.getInstance().getTurn().finishTurn(true);
-			Board.getInstance().newTurn();
+			//Board.getInstance().newTurn();
 		} 
 		else if (e.getSource() == noButton) {		//turn shall end
 			Board.getInstance().getTurn().finishTurn(false);
-			Board.getInstance().newTurn();
+			//Board.getInstance().newTurn();
 
 		}
 	}

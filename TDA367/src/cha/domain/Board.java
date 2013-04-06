@@ -29,6 +29,7 @@ public class Board {
 	private ArrayList<Tile> tileList = new ArrayList<Tile>();
 	private Random random = new Random();
 	private static Board instance = null;
+	private boolean isNewGame;
 
 	// Singleton-pattern
 	public static Board getInstance() {
@@ -56,6 +57,7 @@ public class Board {
 	}
 
 	private void init(int numPiece) {
+		isNewGame=true;
 		tileList.clear();		// Add a new set of tiles
 		for (int i = 0; i < 43; i++) {
 			if (i % 5 == 0 && i != 0) {
@@ -85,6 +87,7 @@ public class Board {
 			pieces[i] = new Piece(team, i);
 		}
 		activePiece = -1;
+
 //		currentMission = null;
 	}
 
@@ -101,12 +104,10 @@ public class Board {
 		return getPiece(activePiece);
 	}
 
-	// Kallas bara nï¿½r nytt spel initieras.
+	// Kallas bara när nytt spel initieras.
 	public void setActivePiece(int activePiece) {
-//		if (activePiece < 0 || activePiece >= pieces.length)
-//			throw new IllegalArgumentException(
-//			"activePiece must be in the legal range");
 		this.activePiece = activePiece;
+
 	}
 
 	public Piece getPiece(int index) {
@@ -124,7 +125,9 @@ public class Board {
 	}
 	
 	public void newTurn(){
+		if(!isNewGame)
 		changeActivePiece();
+		isNewGame=false;
 		turn= new Turn(pieces[activePiece]);
 	}
 
