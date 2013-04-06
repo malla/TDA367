@@ -27,7 +27,8 @@ public class Piece {
 			position = position + bet;
 		}
 		EventBus.getInstance().publish(Event.NewPosition, getPosition(), this.getIndex());
-	//	setBet(0);
+		System.out.println("Piece moved: position of "+this.team.getName()+ " is now "+position);
+
 	}
 
 	public void movePieceBackward() {
@@ -39,7 +40,7 @@ public class Piece {
 			position = position - FAILED_MISSION_PENALTY;
 		}
 		EventBus.getInstance().publish(Event.NewPosition, getPosition(), this.getIndex());
-	//	setBet(0);
+		System.out.println("Piece moved: position of "+this.team.getName()+ " is now "+position);
 	}
 
 

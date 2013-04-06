@@ -65,7 +65,7 @@ public class Turn {
 			if(tempOpp!=null){
 				Piece oppPiece=null;
 				for (int i = 0; i < Board.getInstance().numberOfPieces; i++) {
-					if (/*oppName*/tempOpp.contains(Board.getInstance()
+					if (tempOpp.contains(Board.getInstance()
 							.getTeamName(i))){
 						oppPiece = Board.getInstance().getPiece(i);
 					}
@@ -78,7 +78,7 @@ public class Turn {
 			tt=new NormalTurn(steps);
 		}
 	}
-	
+
 	public void setTempBet(int tb){
 		tempBet=tb;
 		System.out.println("Turn:UpdateBet publicerat. TempBet = "+ tb);
@@ -99,11 +99,19 @@ public class Turn {
 
 
 	public void finishTurn(boolean b){
-		if(b && tt instanceof Challenge)
+		if(b && tt instanceof Challenge){
+			System.out.println("finishTurn: move challenger forward");
 			piece.movePieceForward(((Challenge)tt).getChaScore());
-		else if (b)piece.movePieceForward(steps);
-		else piece.movePieceBackward();
+		}
+		else if (b){
+			System.out.println("finishTurn: move  forward");
+			piece.movePieceForward(steps);}
+		else {
+			System.out.println("finishTurn: move backward");
+			piece.movePieceBackward();
+		}
 	}
-
 }
+
+
 

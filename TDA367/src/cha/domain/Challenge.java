@@ -15,6 +15,7 @@ public class Challenge extends TurnType {
 	private static boolean ChallengeActivity;
 	public static boolean ChallengeEnded;
 	private static final int NUMBER_OF_CARDS = 7;
+	private boolean didChallengerWin;
 
 	// I ButtonPanel frågas efter motståndare. Denna klass initieras när det valet har gjorts.
 	public Challenge(/* Piece activePiece, */Piece opponent) {// , Category c) {
@@ -60,7 +61,6 @@ public class Challenge extends TurnType {
 			System.out.println("oppScore set to "+i);
 			oppScore = i;
 			endChallenge();
-			
 		}
 	}
 
@@ -72,9 +72,13 @@ public class Challenge extends TurnType {
 		System.out.println("Challenge: chaScore= " + chaScore + ", oppScore= "
 				+ oppScore);
 		if (chaScore > oppScore) {
+		//	didChallengerWin=true;
 			Board.getInstance().missionStatus(true);
+			System.out.println("Moving opponent back");
 			opponent.movePieceBackward();
 		} else {
+		//	didChallengerWin=false;
+			System.out.println("Moving opponent forward");
 			opponent.movePieceForward(oppScore);
 			Board.getInstance().missionStatus(false);
 		}
@@ -86,12 +90,9 @@ public class Challenge extends TurnType {
 		mission = null;
 		System.out.println("Challenge = FALSE");
 		getResult();
-	//	Board.getInstance().changeActivePiece();
 	}
 
-/*	public static Mission getMission() {
-		return chaMission;
-	}*/
+
 
 	public static void setChallengeActivity(boolean b) {
 		ChallengeActivity = b;

@@ -192,6 +192,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 			int pos = (Integer) o;
 			int index = (Integer) p;
 			tilePanels[pos].removePiece(piecePanels.get(index));
+			tilePanels[pos].repaint();
 		//Checked	
 		} else if (e == Event.NewPosition) {
 			int pos = (Integer) o;
