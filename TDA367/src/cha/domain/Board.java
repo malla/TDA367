@@ -8,7 +8,6 @@ import java.util.Random;
 import cha.domain.Categories.Category;
 import cha.event.Event;
 import cha.event.EventBus;
-import cha.gui.TileContainerPanel;
 
 public class Board {
 
@@ -18,9 +17,7 @@ public class Board {
 	public int numberOfPieces = 0;
 	private static ArrayList<String> teamNames = new ArrayList<String>();
 	private int activePiece;
-//	private Challenge currentChallenge;
 	private Turn turn;
-//	private Mission currentMission;
 	private final Color[] pieceColorList = new Color[] { Color.WHITE,
 			Color.GREEN, Color.YELLOW, Color.BLACK, Color.RED, Color.BLUE,
 			Color.ORANGE, Color.CYAN };
@@ -89,8 +86,6 @@ public class Board {
 			pieces[i] = new Piece(team, i);
 		}
 		activePiece = 0;
-
-//		currentMission = null;
 	}
 
 	// Methods
@@ -149,32 +144,7 @@ public class Board {
 		}
 		System.out.println("Board: Team after:" + (activePiece + 1));
 		EventBus.getInstance().publish(Event.NextPlayer, null, null);
-//		if (Board.getInstance().isTimeForChallenge()) {
-//			System.out.println("PlayerPanel: Challenge ska dra igång enl. boolean!");
-//			EventBus.getInstance().publish(Event.IsChallenge, null, null);
-//		}
-//		else
-//			EventBus.getInstance().publish(Event.ShowBet, activePiece, null);
 	}
-
-//	public boolean isTimeForChallenge() {
-//		System.out.println("*******************************************************");
-//		System.out.println("*	Checking if new piece is on challenge board");
-//		System.out.println("*	Tile number:"+ Board.getInstance().getActivePiece().getPosition());
-//		
-//		if (Board.getInstance().getTile(
-//				Board.getInstance().getActivePiece().getPosition())
-//				.isChallenge()){
-//			System.out.println("*	TRUE");
-//		}
-//		else System.out.println("*	FALSE");
-//		System.out.println("*******************************************************");
-//
-//		
-//		return (Board.getInstance().getTile(
-//				Board.getInstance().getActivePiece().getPosition())
-//				.isChallenge());
-//	}
 
 	public Tile getTile(int place) {
 		if (place < MIN_TILES || place > MAX_TILES) {
@@ -184,16 +154,6 @@ public class Board {
 		}
 	}
 
-//	public Mission getMission() {
-//		if (Challenge.isChallengeActive() == true) {
-//			return Challenge.getMission();
-//		} else
-//			return currentMission;
-//	}
-
-
-
-
 	public ArrayList<Tile> getTileList() {
 		return tileList;
 	}
@@ -201,44 +161,15 @@ public class Board {
 	public String getTeamName(int teamNumber) {
 		return teamNames.get(teamNumber);
 	}
-//	public Challenge getChallenge(){
-//		return currentChallenge;
-//	}
 
 	public static void setTeamName(String teamName) {
 		teamNames.add(teamName);
 	}
 
-
-
 	public static void clearBoard() {
 		instance = null;
 	}
-	
-//	public void startChallenge(Piece inputOppTeam) {
-////		System.out.println("Board: startChallenge har kallats");
-////		currentChallenge=new Challenge(Board.getInstance().getActivePiece(), inputOppTeam,
-////				getTile(getActivePiece().getPosition()).getCategory());
-//	}
-	public void startMission() {
-		if (pieces == null) {
-			throw new BoardNotInitializedException();
-		} 
-		else{}
-//			if (!Mission.isMissionActive()){
-//				if (Challenge.isChallengeActive() == true) {
-//					getChallenge().startChallenge();
-//					EventBus.getInstance().publish(Event.StartMission,
-//							Challenge.chaMission, null);
-//				} else{
-//					(currentMission = new Mission(getActivePiece(), getTile(
-//							getActivePiece().getPosition()).getCategory()))
-//							.startMission();
-//					EventBus.getInstance().publish(Event.StartMission,
-//							currentMission, null);
-//				}
-//			}
-	}
+
 	public void stopMission(){
 		turn.getTurnType().missionDone();
 	}

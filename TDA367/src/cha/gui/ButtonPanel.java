@@ -236,7 +236,6 @@ ActionListener {
 			if(Board.getInstance().getTurn().getTurnType()==null){	//If NormalTurn is to be initiated
 				Board.getInstance().initNormalTurn();//TileContainerPanel.getTemporaryBet());
 			}
-			//startMission in MIssion class is called within domain
 			
 			//WHAT DOES THIS DO?
 			TileContainerPanel.setBetable(true);

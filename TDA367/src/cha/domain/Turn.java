@@ -39,28 +39,22 @@ public class Turn {
 			EventBus.getInstance().publish(Event.MakeABet, null, null);
 	}
 
-	public void setTurnType(int i){
-		steps=i;
-		tt=new NormalTurn(i);
-	}
-
-	public void setTurnType(String oppName){
-		Piece oppPiece=null;
-		for (int i = 0; i < Board.getInstance().numberOfPieces; i++) {
-			if (oppName.contains(Board.getInstance()
-					.getTeamName(i))){
-				oppPiece = Board.getInstance().getPiece(i);
-			}
-		}
-		tt=new Challenge(oppPiece);
-	}
+//	public void setTurnType(int i){
+//		steps=i;
+//		tt=new NormalTurn(i);
+//	}
+//
+//	public void setTurnType(String oppName){
+//		Piece oppPiece=null;
+//		for (int i = 0; i < Board.getInstance().numberOfPieces; i++) {
+//			if (oppName.contains(Board.getInstance()
+//					.getTeamName(i))){
+//				oppPiece = Board.getInstance().getPiece(i);
+//			}
+//		}
+//		tt=new Challenge(oppPiece);
+//	}
 	public void setTurnType(){
-		//REMOVE****************************************************************
-		System.out.println("tempBet="+tempBet);
-		if (tempOpp==null)
-			System.out.println("tempOpp==null");
-		else System.out.println("tempOpp!=null");
-		//REMOVE****************************************************************
 		if(tempBet==0){
 			if(tempOpp!=null){
 				Piece oppPiece=null;
@@ -96,9 +90,12 @@ public class Turn {
 		steps=i;
 	}
 
-
-
 	public void finishTurn(boolean b){
+		movePiece(b);
+		Board.getInstance().newTurn();
+	}
+	
+	private void movePiece(boolean b){
 		if(b && tt instanceof Challenge){
 			System.out.println("finishTurn: move challenger forward");
 			piece.movePieceForward(((Challenge)tt).getChaScore());
@@ -109,8 +106,7 @@ public class Turn {
 		else {
 			System.out.println("finishTurn: move backward");
 			piece.movePieceBackward();
-		}
-		Board.getInstance().newTurn();
+		}	
 	}
 }
 
