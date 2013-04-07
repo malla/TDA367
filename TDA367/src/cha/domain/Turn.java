@@ -13,9 +13,11 @@ public class Turn {
 	private int steps;
 	private int tempBet;
 	private String tempOpp;
+	private boolean isTurnOver;
 
 
 	public Turn(Piece p){
+		isTurnOver=false;
 		this.piece = p;
 		tempBet=0;
 		tempOpp=null;
@@ -77,8 +79,12 @@ public class Turn {
 
 	public void finishTurn(boolean b){
 		movePiece(b);
-		
-		Board.getInstance().newTurn();
+		isTurnOver=true;
+		//Board.getInstance().newTurn();
+	}
+	
+	public boolean isTurnOver(){
+		return isTurnOver;
 	}
 	
 	private void movePiece(boolean b){

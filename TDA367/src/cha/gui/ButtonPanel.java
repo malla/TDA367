@@ -165,6 +165,7 @@ ActionListener {
 	}
 
 	private void updateChallengeCombo(){
+		opponentCombo.removeAllItems();
 		noOfOpponents=Board.getInstance().getNumberOfPieces()-1;
 		allTeams=new String[noOfOpponents];
 		for(int i=0; i<=noOfOpponents; i++){
@@ -251,6 +252,10 @@ ActionListener {
 		else if (e.getSource()==setScoreButton){
 			int score=(Integer)scoreCombo.getSelectedItem();
 			Board.getInstance().getTurn().getTurnType().setScore(score);
+			if(Board.getInstance().getTurn().isTurnOver()){
+				Board.getInstance().newTurn();
+			}
+			else
 			currentPanel=startButtons;
 			setPanel();
 		}
@@ -260,10 +265,13 @@ ActionListener {
 		} 
 		else if (e.getSource() == yesButton) {	//turn shall end
 			Board.getInstance().getTurn().finishTurn(true);
+			Board.getInstance().newTurn();
 			//Board.getInstance().newTurn();
 		} 
 		else if (e.getSource() == noButton) {		//turn shall end
 			Board.getInstance().getTurn().finishTurn(false);
+			Board.getInstance().newTurn();
+
 			//Board.getInstance().newTurn();
 
 		}
