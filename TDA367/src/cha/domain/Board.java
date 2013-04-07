@@ -12,7 +12,7 @@ import cha.event.EventBus;
 public class Board {
 
 	private static final int MIN_TILES = 0;
-	private static final int MAX_TILES = 48;
+	private static final int MAX_TILES = 43;
 	private static Piece[] pieces;
 	public int numberOfPieces = 0;
 	private static ArrayList<String> teamNames = new ArrayList<String>();

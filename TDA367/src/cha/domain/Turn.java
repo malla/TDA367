@@ -39,21 +39,6 @@ public class Turn {
 			EventBus.getInstance().publish(Event.MakeABet, null, null);
 	}
 
-//	public void setTurnType(int i){
-//		steps=i;
-//		tt=new NormalTurn(i);
-//	}
-//
-//	public void setTurnType(String oppName){
-//		Piece oppPiece=null;
-//		for (int i = 0; i < Board.getInstance().numberOfPieces; i++) {
-//			if (oppName.contains(Board.getInstance()
-//					.getTeamName(i))){
-//				oppPiece = Board.getInstance().getPiece(i);
-//			}
-//		}
-//		tt=new Challenge(oppPiece);
-//	}
 	public void setTurnType(){
 		if(tempBet==0){
 			if(tempOpp!=null){
@@ -92,6 +77,7 @@ public class Turn {
 
 	public void finishTurn(boolean b){
 		movePiece(b);
+		
 		Board.getInstance().newTurn();
 	}
 	

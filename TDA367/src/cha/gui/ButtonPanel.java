@@ -2,7 +2,6 @@ package cha.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 
 import java.awt.Font;
@@ -15,8 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import cha.domain.Board;
-import cha.domain.Challenge;
-import cha.domain.Mission;
 import cha.event.EventBus;
 import cha.event.Event;
 import cha.event.IEventHandler;

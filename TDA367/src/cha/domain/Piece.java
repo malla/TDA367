@@ -18,21 +18,17 @@ public class Piece {
 	}
 
 	public void movePieceForward(int bet) {
-	//	System.out.println("Piece "+this.team.getName()+": Moved forward");
 		EventBus.getInstance().publish(Event.OldPosition, getPosition(), this.getIndex());
-		if (position + bet > GOAL_TILE) {
+		if (position + bet >= GOAL_TILE) {
 			setPosition(GOAL_TILE);
 			EventBus.getInstance().publish(Event.GameOver, getTeam(), null);
 		} else {
 			position = position + bet;
 		}
 		EventBus.getInstance().publish(Event.NewPosition, getPosition(), this.getIndex());
-	//	System.out.println("Piece moved: position of "+this.team.getName()+ " is now "+position);
-
 	}
 
 	public void movePieceBackward() {
-	//	System.out.println("Piece "+this.team.getName()+": Moved backwards");
 		EventBus.getInstance().publish(Event.OldPosition, getPosition(), this.getIndex());
 		if (getPosition() < 2) {
 			setPosition(0);
@@ -40,7 +36,6 @@ public class Piece {
 			position = position - FAILED_MISSION_PENALTY;
 		}
 		EventBus.getInstance().publish(Event.NewPosition, getPosition(), this.getIndex());
-	//	System.out.println("Piece moved: position of "+this.team.getName()+ " is now "+position);
 	}
 
 
