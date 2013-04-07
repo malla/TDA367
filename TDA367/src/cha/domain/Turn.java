@@ -19,8 +19,8 @@ public class Turn {
 		this.piece = p;
 		tempBet=0;
 		tempOpp=null;
-		determinType();
 		c=Board.getInstance().getTile(piece.getPosition()).getCategory();
+
 	}
 
 	public Piece getPiece(){
@@ -31,11 +31,11 @@ public class Turn {
 		tt.startMission(c);
 	}
 
-	private void determinType(){
+	public void determinType(){
 		if(Board.getInstance().getTile(piece.getPosition())
 				.isChallenge()){
-			EventBus.getInstance().publish(Event.IsChallenge, null, null);		}
-		else 
+			EventBus.getInstance().publish(Event.IsChallenge, null, null);	
+	} else 
 			EventBus.getInstance().publish(Event.MakeABet, null, null);
 	}
 

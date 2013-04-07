@@ -40,11 +40,13 @@ public class Board {
 	}
 
 	public static void createNewBoard(int numPiece ) {
+		System.out.println("1");
 		Board board = Board.getInstance();
+		System.out.println("2");
 		board.init(numPiece);
+		System.out.println("3");
 		EventBus.getInstance().publish(Event.CreateBoard, Board.getInstance().getTileList(), null);
-		/*EventBus.getInstance().publish(Event.ShowBet,
-				Board.getInstance().getActivePiece(), null);*/
+		System.out.println("4");
 		board.newTurn();
 	}
 
@@ -86,7 +88,7 @@ public class Board {
 			Team team = new Team(teamName, teamColor);
 			pieces[i] = new Piece(team, i);
 		}
-		activePiece = -1;
+		activePiece = 0;
 
 //		currentMission = null;
 	}
@@ -101,7 +103,9 @@ public class Board {
 	}
 
 	public Piece getActivePiece() {
-		return getPiece(activePiece);
+		if (turn == null) 
+			throw new BoardNotInitializedException();
+		return this.turn.getPiece();
 	}
 
 	// Kallas bara när nytt spel initieras.
@@ -125,10 +129,13 @@ public class Board {
 	}
 	
 	public void newTurn(){
+		System.out.println("nu skapas en ny tur");
 		if(!isNewGame)
 		changeActivePiece();
 		isNewGame=false;
 		turn= new Turn(pieces[activePiece]);
+		EventBus.getInstance().publish(Event.NewTurn, null, null);
+		turn.determinType();
 	}
 
 	private void changeActivePiece() {

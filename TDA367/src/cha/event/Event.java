@@ -14,6 +14,7 @@ public enum Event {
 	ChaMissionOver,
 	ChaOver,
 	
+	NewTurn,
 	MakeABet,		//Checked, Malla 	(Is published when a new turn is initialized and it is a NormalTurn.)
 	UpdateBet, 		//Checked, Malla. 	(Is published at NormalTurn when player clicks a tile(updating his/her bet.)
 	GetChallengeScore,
