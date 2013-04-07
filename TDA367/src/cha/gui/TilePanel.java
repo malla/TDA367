@@ -49,28 +49,11 @@ public class TilePanel extends JPanel {
 	}
 
 	public void notBetable() {
-		//this.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null,
-		//		null));
 		this.setBorder(loweredBorder);
 	}
 
 	private void click() {
 		int piecePos = Board.getInstance().getTurn().getPiece().getPosition();
-//		EventBus.getInstance().publish(Event.ShowBet, null, null);
-//		//sänker clickad ruta GÖR DEN HÄR NÅGOT???
-//		TileContainerPanel.getTilePanels()[Board.getInstance().getTurn().getPiece()
-//				.getBet().getBetValue()
-//				+ piecePos]
-//				.setBorder(loweredBorder);
-//
-//		this.setBorder(loweredBorder);
-//		this.repaint();
-//
-//		if (Board.getInstance().getTurn().getPiece().getBet().getBetValue() == 0) {
-//		}
-//
-//		this.setBorder(loweredBorder);
-//		this.repaint();
 
 		// Om betable är falsk, om
 		if (!TileContainerPanel.getBetable()) {		//Kollar om man får man beta nu

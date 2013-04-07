@@ -1,7 +1,6 @@
 package cha.event;
 
 public enum Event {
-//	MakeBet,		//FÖRSÖK FÅ BORT DEN HÄR
 	StartMission, 	//Done. Malla
 	TimeTick,		//Checked, Malla.	(Is published when clock ticks in Mission)
 	TimeOver,		//MÅSTE FIXAS SNYGGARE
@@ -15,7 +14,7 @@ public enum Event {
 	ChaOver,
 	
 	NewTurn,
-	MakeABet,		//Checked, Malla 	(Is published when a new turn is initialized and it is a NormalTurn.)
+	MakeBet,		//Checked, Malla 	(Is published when a new turn is initialized and it is a NormalTurn.)
 	UpdateBet, 		//Checked, Malla. 	(Is published at NormalTurn when player clicks a tile(updating his/her bet.)
 	GetChallengeScore,
 	MissionOver

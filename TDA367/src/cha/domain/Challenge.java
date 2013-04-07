@@ -38,6 +38,7 @@ public class Challenge extends TurnType {
 		ChallengeEnded = false;
 		if (chaScore < 0) {
 			mission = new Mission(category, NUMBER_OF_CARDS);
+			System.out.println("Challenge: EVENT StartMission");
 			EventBus.getInstance().publish(Event.StartMission,
 					mission, null);
 		} else {

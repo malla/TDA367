@@ -83,7 +83,7 @@ ActionListener {
 		noButton = prettyButton("No");
 		nextButton = prettyButton("Next");
 		doneButton = prettyButton("Done");
-		startMissionButton=new JButton("Start Mission");
+		startMissionButton=prettyButton("Start Mission");
 		challengeButton = prettyButton("Start Challenge");
 		setScoreButton =prettyButton("Set Score");
 		//Add listeners to buttons
@@ -120,7 +120,7 @@ ActionListener {
 		//*************************************************************
 
 		//**********THIS PANEL*****************************************
-		this.setBackground(Color.GREEN);
+		this.setBackground(Color.WHITE);
 		this.add(startButtons, BorderLayout.CENTER);
 		this.add(missionButtons, BorderLayout.CENTER);
 		this.add(successButtons, BorderLayout.CENTER);
@@ -143,7 +143,7 @@ ActionListener {
 	private JButton prettyButton(String s){
 		JButton temp= new JButton(s);
 		temp.setPreferredSize(new Dimension(150, 30));
-
+		temp.setFont(Board.getInstance().fontSmall);
 		return temp;
 	}
 	private JPanel prettyPanel(){
@@ -188,7 +188,7 @@ ActionListener {
 		if (e == Event.TimeOver) {
 			System.out.println("BP: TimeOver");
 			Board.getInstance().getTurn().getTurnType().missionDone();
-		}if (e == Event.MakeABet) {
+		}if (e == Event.MakeBet) {
 			System.out.println("BP: MakeABet");
 			currentPanel=startButtons;
 			setPanel();
@@ -213,9 +213,6 @@ ActionListener {
 			System.out.println("BP: NormalTurnDone");
 					currentPanel=successButtons;
 					setPanel();
-				
-		} else if (e == Event.NextPlayer) {
-			//DOES NOTHING
 		} else if (e == Event.TimeTick) {
 			//System.out.println("BP: TimeTick");
 			String time = (String) o;

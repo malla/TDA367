@@ -2,6 +2,7 @@
 package cha.domain;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,11 +12,14 @@ import cha.event.EventBus;
 
 public class Board {
 
+	public Font fontTextPanel =new Font("Comic Sans MS", Font.PLAIN, 18);
+	public Font fontSmall =new Font("Comic Sans MS", Font.PLAIN, 12);
+
 	private static final int MIN_TILES = 0;
 	private static final int MAX_TILES = 43;
 	private static Piece[] pieces;
 	public int numberOfPieces = 0;
-	private static ArrayList<String> teamNames = new ArrayList<String>();
+	private ArrayList<String> teamNames = new ArrayList<String>();
 	private int activePiece;
 	private Turn turn;
 	private final Color[] pieceColorList = new Color[] { Color.WHITE,
@@ -37,13 +41,9 @@ public class Board {
 	}
 
 	public static void createNewBoard(int numPiece ) {
-		System.out.println("1");
 		Board board = Board.getInstance();
-		System.out.println("2");
 		board.init(numPiece);
-		System.out.println("3");
 		EventBus.getInstance().publish(Event.CreateBoard, Board.getInstance().getTileList(), null);
-		System.out.println("4");
 		board.newTurn();
 	}
 
@@ -129,12 +129,12 @@ public class Board {
 		changeActivePiece();
 		isNewGame=false;
 		turn= new Turn(pieces[activePiece]);
+		System.out.println("Board: EVENT NewTurn");
 		EventBus.getInstance().publish(Event.NewTurn, null, null);
 		turn.determinType();
 	}
 
 	private void changeActivePiece() {
-		System.out.println("Board: Team before:" + (activePiece + 1));
 		if (pieces == null) {
 			throw new BoardNotInitializedException();
 		}
@@ -142,7 +142,7 @@ public class Board {
 		if (activePiece == (pieces.length)) {
 			activePiece = 0;
 		}
-		System.out.println("Board: Team after:" + (activePiece + 1));
+		System.out.println("Board: EVENT NextPlayer");
 		EventBus.getInstance().publish(Event.NextPlayer, null, null);
 	}
 
@@ -162,7 +162,7 @@ public class Board {
 		return teamNames.get(teamNumber);
 	}
 
-	public static void setTeamName(String teamName) {
+	public  void setTeamName(String teamName) {
 		teamNames.add(teamName);
 	}
 
@@ -183,6 +183,10 @@ public class Board {
 	
 	public Turn getTurn(){
 		return turn;
+	}
+
+	public ArrayList<String> getAllNames() {
+		return teamNames;
 	}
 	
 }

@@ -38,7 +38,7 @@ public class Turn {
 				.isChallenge()){
 			EventBus.getInstance().publish(Event.IsChallenge, null, null);	
 	} else 
-			EventBus.getInstance().publish(Event.MakeABet, null, null);
+			EventBus.getInstance().publish(Event.MakeBet, null, null);
 	}
 
 	public void setTurnType(){

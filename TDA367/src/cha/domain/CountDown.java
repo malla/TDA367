@@ -38,6 +38,7 @@ public class CountDown implements ActionListener{
 	private void timeUp(){
 		System.out.println("CountDown: stannar timer");
 		timer.stop();
+		System.out.println("CountDown: EVENT TimeOver");
 		EventBus.getInstance().publish(Event.TimeOver, null, null);
 	}
 	
