@@ -1,17 +1,23 @@
 package projekt;
 
 import java.awt.Color;
+
+import org.junit.Test;
+
 import static org.junit.Assert.*;
-import cha.domain.Bet;
 import cha.domain.Piece;
 import cha.domain.Team;
 
 public class TestPiece {
 	
+	@Test
 	public void testPiece() {
-		Bet bet = new Bet(4);
 		Team team = new Team("team 1", Color.red);
 		Piece piece = new Piece(team, 1);
+
+		piece.initNormalTurn(4);
+		
+		assertTrue(piece.getBet().getBetValue() == 4);
 		
 		piece.setPosition(6);
 		assertTrue(piece.getPosition()== 6);
@@ -22,10 +28,11 @@ public class TestPiece {
 		piece.movePieceBackward();
 		assertTrue(piece.getPosition() == 9);
 		
-		assertTrue(piece.getBet().equals(bet));
+		assertTrue(piece.getBet().getBetValue() == 0);
+		
 		assertTrue(piece.getTeam().equals(team));
 		
-		piece.setBet(2);
+		piece.initNormalTurn(2);
 		assertTrue(piece.getBet().getBetValue() == 2);
 		
 	}

@@ -9,7 +9,7 @@ import cha.domain.Deque;
 
 public class TestDeque {
 	
-	public String string ="abdomen abducts abiding ability abolish aborted" +
+	public String string = "abdomen abducts abiding ability abolish aborted" +
 	" absence absinth absorbs absurds abusers abusing abusive acacias" +
 	" academy accents accepts acclaim accords account accused accuser" +
 	" accuses acetone achieve acrobat acronym acrylic actable actings" +
@@ -33,13 +33,11 @@ public class TestDeque {
 	" playing flowers grasses sisters brother evolves knights players" +
 	" knowing release reports present scented preview";
 
-String newstring =string.replaceAll(" ", "\",\"");
+	String newstring = string.replaceAll(" ", "\",\"");
 
 
 	@Test
 	public void testGetCardsBACKWARDS() {
-		System.out.println(newstring);
-
 		Deque deque = new Deque();
 		int testedInt = 4;
 		List<Card> cards = deque.getCards(Category.BACKWARDS, testedInt);

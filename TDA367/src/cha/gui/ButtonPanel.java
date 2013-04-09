@@ -14,8 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import cha.domain.Board;
-import cha.domain.Challenge;
-import cha.domain.Piece;
 import cha.event.EventBus;
 import cha.event.Event;
 import cha.event.IEventHandler;
@@ -29,19 +27,22 @@ ActionListener {
 	private JButton noButton;
 	public JButton nextButton;
 	private JButton doneButton;
+	private JButton setScoreButton;
 	private JLabel timer;
 	private TextPanel tp;
 
-	private JPanel betButtons;
+	private JPanel startButtons;
 	private JPanel missionButtons;
 	private JPanel successButtons;
 	private JPanel currentPanel;
 	private JPanel challengePanel;
+	private JPanel setScore;
 
 	//challengePanel items.
 	int noOfOpponents;
 	String[] allTeams;
-	JComboBox<String> combo;
+	JComboBox<String> opponentCombo;
+	JComboBox<Integer> scoreCombo;
 	JButton startChallenge;
 	JButton challengeButton;
 	JLabel label;
@@ -49,22 +50,34 @@ ActionListener {
 	public ButtonPanel(TextPanel panel) {
 		EventBus.getInstance().register(this);
 		this.tp = panel;
+		this.setPreferredSize(new Dimension(500, 50));
+
 
 		//**********PANELS*********************************************
+		
 		currentPanel = new JPanel();
-		betButtons = prettyPanel();
+		startButtons = prettyPanel();
 		missionButtons = prettyPanel();
 		successButtons = prettyPanel();
 		challengePanel=prettyPanel();
+		setScore=prettyPanel();
 		//*************************************************************
+
+		//**********COMBO BOXES******************************************
+		opponentCombo=new JComboBox<String>();
+		opponentCombo.setPreferredSize(new Dimension(150, 30));
+		challengePanel.add(opponentCombo);
+		opponentCombo.setVisible(true);
 		
-		//**********COMBO BOX******************************************
-		combo=new JComboBox<String>();
-		combo.setPreferredSize(new Dimension(150, 30));
-		challengePanel.add(combo);
-		combo.setVisible(true);
+		scoreCombo=new JComboBox<Integer>();//{1,2,3,4};
+		int[] bets={0,1,2,3,4,5,6,7};
+		for(int i:bets)
+			scoreCombo.addItem(bets[i]);
+		scoreCombo.setPreferredSize(new Dimension(150, 30));
+		setScore.add(scoreCombo);
+		scoreCombo.setVisible(true);
 		//*************************************************************
-		
+
 		//**********BUTTONS********************************************
 		yesButton = prettyButton("Yes");
 		noButton = prettyButton("No");
@@ -72,20 +85,23 @@ ActionListener {
 		doneButton = prettyButton("Done");
 		startMissionButton=prettyButton("Start Mission");
 		challengeButton = prettyButton("Start Challenge");
+		setScoreButton =prettyButton("Set Score");
 		//Add listeners to buttons
 		startMissionButton.addActionListener(this);
 		yesButton.addActionListener(this);
 		noButton.addActionListener(this);
 		nextButton.addActionListener(tp);
 		doneButton.addActionListener(this);
-		challengeButton.addActionListener(this);		
+		challengeButton.addActionListener(this);	
+		setScoreButton.addActionListener(this);		
 		//Divide buttons into panels
-		betButtons.add(startMissionButton);
+		startButtons.add(startMissionButton);
 		missionButtons.add(nextButton, BorderLayout.WEST);
 		missionButtons.add(doneButton, BorderLayout.CENTER);
 		successButtons.add(noButton);
 		successButtons.add(yesButton);
 		challengePanel.add(challengeButton);
+		setScore.add(setScoreButton);
 		//Set visibility
 		startMissionButton.setVisible(true);
 		nextButton.setVisible(true);
@@ -93,8 +109,9 @@ ActionListener {
 		yesButton.setVisible(true);
 		noButton.setVisible(true);
 		challengeButton.setVisible(true);
+		setScoreButton.setVisible(true);
 		//*************************************************************
-		
+
 		//**********TIMER**********************************************
 		timer = new JLabel();
 		timer.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -104,17 +121,19 @@ ActionListener {
 
 		//**********THIS PANEL*****************************************
 		this.setBackground(Color.WHITE);
-		this.add(betButtons, BorderLayout.CENTER);
+		this.add(startButtons, BorderLayout.CENTER);
 		this.add(missionButtons, BorderLayout.CENTER);
 		this.add(successButtons, BorderLayout.CENTER);
 		this.add(challengePanel, BorderLayout.CENTER);
-		betButtons.setVisible(false);
+		this.add(setScore, BorderLayout.CENTER);
+		startButtons.setVisible(false);
 		missionButtons.setVisible(false);
 		successButtons.setVisible(false);
 		challengePanel.setVisible(false);
+		setScore.setVisible(false);
 		//*************************************************************
 
-		currentPanel=betButtons;
+		currentPanel=missionButtons;
 		setPanel();
 	}
 
@@ -124,6 +143,7 @@ ActionListener {
 	private JButton prettyButton(String s){
 		JButton temp= new JButton(s);
 		temp.setPreferredSize(new Dimension(150, 30));
+		temp.setFont(Board.getInstance().fontSmall);
 		return temp;
 	}
 	private JPanel prettyPanel(){
@@ -137,7 +157,7 @@ ActionListener {
 	 * Switches between the different button-containing panels.
 	 */
 	private void setPanel(){
-		betButtons.setVisible(false);
+		startButtons.setVisible(false);
 		missionButtons.setVisible(false);
 		successButtons.setVisible(false);
 		challengePanel.setVisible(false);
@@ -145,59 +165,60 @@ ActionListener {
 	}
 
 	private void updateChallengeCombo(){
+		opponentCombo.removeAllItems();
 		noOfOpponents=Board.getInstance().getNumberOfPieces()-1;
 		allTeams=new String[noOfOpponents];
 		for(int i=0; i<=noOfOpponents; i++){
 			String aTeam=Board.getInstance().getTeamName(i);
-			if(aTeam!=Board.getInstance().getActivePiece().getTeam().getName()){
-				combo.addItem(aTeam);
+			System.out.println("Active teams name:"+ Board.getInstance().getTurn().getPiece().getTeam().getName());
+			if(aTeam!=Board.getInstance().getTurn().getPiece().getTeam().getName()){
+				System.out.println("Adding "+aTeam+" to comboBox");
+				opponentCombo.addItem(aTeam);
 			}
+			else System.out.println("Won't add "+aTeam+" to comboBox");
 		}
 	}
 
-	private Piece teamChosen(){
-		String chosenTeam=(String) combo.getSelectedItem();
-		Piece oppTeam=null;
-		for (int i = 0; i < noOfOpponents+1; i++) {
-			if (chosenTeam.contains(Board.getInstance()
-					.getTeamName(i))){
-				oppTeam = Board.getInstance().getPiece(i);
-			}
-		}
-		return oppTeam;
+	private String teamChosen(){
+		return (String) opponentCombo.getSelectedItem();
 	}
+
 	@Override
 	public void action(Event e, Object o, Object p) {
-		if (e == Event.ShowBet) {
-			currentPanel=betButtons;
+		if (e == Event.TimeOver) {
+			System.out.println("BP: TimeOver");
+			Board.getInstance().getTurn().getTurnType().missionDone();
+		}if (e == Event.MakeBet) {
+			System.out.println("BP: MakeABet");
+			currentPanel=startButtons;
 			setPanel();
 			startMissionButton.setVisible(false);
-		} else if (e == Event.MakeBet) {
-			startMissionButton.setVisible(true);
-			currentPanel=betButtons;
+		}
+		//Checked
+		if (e == Event.UpdateBet) {
+			System.out.println("BP: UpdateBet");
+			currentPanel=startButtons;
 			setPanel();
+			startMissionButton.setVisible(true);
+		//Checked	
 		} else if (e == Event.StartMission) {
+			System.out.println("BP: StartMission");
 			currentPanel=missionButtons;
 			setPanel();
-		} else if (e == Event.TimeOver) {
-			System.out.println("ButtonPanel: Notice Event TimeOver");
-
-			if (Challenge.isChallengeActive() == true) {
-				currentPanel=betButtons;
-				setPanel();
-			} else if (Challenge.ChallengeEnded) {
-				currentPanel=betButtons;
-				setPanel();
-				Challenge.ChallengeEnded = false;
-			} else {
-				currentPanel=successButtons;
-				setPanel();
-			}
+		} else if (e == Event.GetChallengeScore) {
+			System.out.println("BP: GetChallengeScore");
+			currentPanel=setScore;
+			setPanel();
+		} else if (e == Event.MissionOver) {
+			System.out.println("BP: NormalTurnDone");
+					currentPanel=successButtons;
+					setPanel();
 		} else if (e == Event.TimeTick) {
+			//System.out.println("BP: TimeTick");
 			String time = (String) o;
 			timer.setText(time);
 		} else if (e == Event.IsChallenge) {
-			System.out.println("ButtonPanel: Challenge event made it here.");
+			System.out.println("BP: IsChallenge");
 			updateChallengeCombo();
 			currentPanel=challengePanel;
 			setPanel();
@@ -207,38 +228,48 @@ ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == startMissionButton) {
-			if (Challenge.isChallengeActive() != true) {
-				TileContainerPanel.setBetable(true);
-				Board.getInstance().getActivePiece()
-				.setBet(TileContainerPanel.getTemporaryBet());
-				for (TilePanel panel : TileContainerPanel.getTilePanels()) {
-					panel.notBetable();
-				}
+			if(Board.getInstance().getTurn().getTurnType()==null){	//If NormalTurn is to be initiated
+				Board.getInstance().initNormalTurn();//TileContainerPanel.getTemporaryBet());
 			}
-			Board.getInstance().startMission();
+			
+			//WHAT DOES THIS DO?
+			TileContainerPanel.setBetable(true);
+			for (TilePanel panel : TileContainerPanel.getTilePanels()) {
+				panel.notBetable();
+			}
+			Board.getInstance().getTurn().startMission();
 		} 
 		else if (e.getSource()==challengeButton){
-			Piece oppteam= teamChosen();
-			currentPanel=betButtons;
+			String opp=teamChosen();
+			Board.getInstance().getTurn().setTempOpp(opp);
+			Board.getInstance().getTurn().setTurnType();
+			currentPanel=startButtons;
 			setPanel();
-			Board.getInstance().startChallenge(oppteam);
-
 		}
-		else if (e.getSource() == doneButton) {
-			System.out.println("ButtonPanel: Done button pressed.");
-			if (Challenge.isChallengeActive() == true) {
-				Challenge.chaMission.stopTimer();
-			} else {
-				Board.getInstance().getMission().stopTimer();
+		else if (e.getSource()==setScoreButton){
+			int score=(Integer)scoreCombo.getSelectedItem();
+			Board.getInstance().getTurn().getTurnType().setScore(score);
+			if(Board.getInstance().getTurn().isTurnOver()){
+				Board.getInstance().newTurn();
 			}
+			else
+			currentPanel=startButtons;
+			setPanel();
+		}
+		else if (e.getSource() == doneButton) {		//mission shall end
+			System.out.println("ButtonPanel: Done button pressed.");
+			Board.getInstance().stopMission();
+		} 
+		else if (e.getSource() == yesButton) {	//turn shall end
+			Board.getInstance().getTurn().finishTurn(true);
+			Board.getInstance().newTurn();
+			//Board.getInstance().newTurn();
+		} 
+		else if (e.getSource() == noButton) {		//turn shall end
+			Board.getInstance().getTurn().finishTurn(false);
+			Board.getInstance().newTurn();
 
-		} else if (e.getSource() == yesButton) {
-			Board.getInstance().getMission().missionDone(true);
-			Board.getInstance().changeActivePiece();
-
-		} else if (e.getSource() == noButton) {
-			Board.getInstance().getMission().missionDone(false);
-			Board.getInstance().changeActivePiece();
+			//Board.getInstance().newTurn();
 
 		}
 	}

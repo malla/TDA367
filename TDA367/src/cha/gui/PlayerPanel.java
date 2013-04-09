@@ -34,7 +34,6 @@ public class PlayerPanel extends JPanel implements IEventHandler {
 	@Override
 	public void action(Event e, Object o, Object p) {
 		if (e == Event.NextPlayer) {
-//			Board.getInstance().changeActivePiece();
 			// Ändrar så att det står vems tur det är.
 			playerJLabel.setText("Active team: "
 					+ Board.getInstance().getActivePiece().getTeam().getName());
@@ -44,7 +43,7 @@ public class PlayerPanel extends JPanel implements IEventHandler {
 			// Uppdatera GUI
 			this.repaint();
 			
-		} else if (e == Event.CreateBoard) {
+		} else if (e == Event.NewTurn) {
 			playerJLabel.setText("Team: "
 					+ Board.getInstance().getActivePiece().getTeam().getName()
 					+ "'s turn ");

@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 
 import cha.domain.Categories.Category;
 import cha.domain.Board;
-import cha.domain.Challenge;
 import cha.domain.Mission;
 import cha.event.EventBus;
 import cha.event.Event;
@@ -45,7 +44,7 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 		this.setSize(600, 400);
 
 		textArea = new JTextArea();
-		textArea.setFont(new Font("DejaVu Sans", Font.PLAIN, 18));
+		textArea.setFont(Board.getInstance().fontTextPanel);
 		textArea.setSize(500, 300);
 		textArea.setEditable(false);
 
@@ -78,6 +77,9 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 
 	@Override
 	public void action(Event e, Object o, Object p) {
+		if (e == Event.MakeBet) {
+			textArea.setText("Make A Bet!");
+		} 
 		if (e == Event.StartMission) {
 			Mission mission = (Mission) o;
 			cardPanel.setMaximumSize(new Dimension(50, 50));
@@ -110,36 +112,26 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 			paintCard(mission);
 			String title = mission.getTitle();
 			header.setText("" + title);
-			header.setFont(new Font("DejaVu Sans", Font.BOLD, 30));
+			header.setFont(Board.getInstance().fontTextPanel);
 			northPanel.add(header, BorderLayout.NORTH);
-
-		} else if (e == Event.MakeBet) {
-			if (!(Board.getInstance().getTile(
-					Board.getInstance().getActivePiece().getPosition())
-					.isChallenge())) {
-				int bet = (Integer) o;
-				textArea.setText("Bet: " + bet);
-			}
-
-		} else if (e == Event.ShowBet) {
-			textArea.setText("Make bet!");
-		} else if (e == Event.TimeOver) {
-			System.out.println("TextPanel: Notice Event TimeOver");
-
+		}
+		//Checked	
+		else if (e == Event.UpdateBet) {
+			textArea.setText("Your bet has been updated!");
+		} 
+		//
+		else if (e == Event.MissionOver) {
 			this.remove(cardPanel);
 			this.add(textArea);
+			textArea.setText("Was the mission successful?");
 			this.repaint();
-			if (Challenge.isChallengeActive() == true) {
-				textArea.setText("Challenging team has done their best! \nOpponents turn!");
-				Board.getInstance().getChallenge().setScore(ChallengePanel.pointsEarned());
-
-			} else {
-				textArea.setText("Was the mission completed successfully?");
-			}
-		} else if (e == Event.MissionOver) {
-
-			p2.remove(header);
-		}
+		} 
+		else if (e==Event.GetChallengeScore) {
+			this.remove(cardPanel);
+			this.add(textArea);
+			textArea.setText("Enter your score below!");
+			this.repaint();
+		} 
 	}
 
 	private void paintCard(Mission mission) {
@@ -191,10 +183,8 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == mf.buttonPanel.nextButton){
-			Mission mission = Board.getInstance().getMission();
+			Mission mission = Board.getInstance().getTurn().getTurnType().getMission();
 			paintCard(mission);
-
 		}
-
 	}
 }

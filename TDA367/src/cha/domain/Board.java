@@ -1,6 +1,8 @@
+
 package cha.domain;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,41 +12,27 @@ import cha.event.EventBus;
 
 public class Board {
 
+	public Font fontTextPanel =new Font("Comic Sans MS", Font.PLAIN, 18);
+	public Font fontSmall =new Font("Comic Sans MS", Font.PLAIN, 12);
+
 	private static final int MIN_TILES = 0;
-	private static final int MAX_TILES = 48;
-	/**
-	 * Array with all pieces.
-	 */
+	private static final int MAX_TILES = 43;
 	private static Piece[] pieces;
 	public int numberOfPieces = 0;
-	private static ArrayList<String> teamNames = new ArrayList<String>();
-
-	/**
-	 * Index of the active piece.
-	 */
+	private ArrayList<String> teamNames = new ArrayList<String>();
 	private int activePiece;
-	private Challenge currentChallenge;
-
-	/**
-	 * The current mission
-	 */
-	private Mission currentMission;
-	// public static boolean isChallenge;
-
+	private Turn turn;
 	private final Color[] pieceColorList = new Color[] { Color.WHITE,
 			Color.GREEN, Color.YELLOW, Color.BLACK, Color.RED, Color.BLUE,
 			Color.ORANGE, Color.CYAN };
-
 	private ArrayList<Category> categoryList = new ArrayList<Category>();
 	private ArrayList<Color> availableColorList = new ArrayList<Color>();
 	private ArrayList<Tile> tileList = new ArrayList<Tile>();
-
 	private Random random = new Random();
-
 	private static Board instance = null;
+	private boolean isNewGame;
 
 	// Singleton-pattern
-
 	public static Board getInstance() {
 		if (instance == null) {
 			instance = new Board();
@@ -56,24 +44,20 @@ public class Board {
 		Board board = Board.getInstance();
 		board.init(numPiece);
 		EventBus.getInstance().publish(Event.CreateBoard, Board.getInstance().getTileList(), null);
-		EventBus.getInstance().publish(Event.ShowBet,
-				Board.getInstance().getActivePiece(), null);
+		board.newTurn();
 	}
 
 	// Constructor
 	private Board() {
-
 		this.categoryList.add(Category.SAMECLASS);
 		this.categoryList.add(Category.BODYTOBODY);
 		this.categoryList.add(Category.WORDJUMBLE);
 		this.categoryList.add(Category.BACKWARDS);
 	}
 
-	public void init(int numPiece) {
-
-		// Add a new set of tiles
-		tileList.clear();
-		// setChallenge(false);
+	private void init(int numPiece) {
+		isNewGame=true;
+		tileList.clear();		// Add a new set of tiles
 		for (int i = 0; i < 43; i++) {
 			if (i % 5 == 0 && i != 0) {
 				tileList.add(new Tile(categoryList.get(random
@@ -102,7 +86,6 @@ public class Board {
 			pieces[i] = new Piece(team, i);
 		}
 		activePiece = 0;
-		currentMission = null;
 	}
 
 	// Methods
@@ -115,15 +98,15 @@ public class Board {
 	}
 
 	public Piece getActivePiece() {
-		return getPiece(activePiece);
+		if (turn == null) 
+			throw new BoardNotInitializedException();
+		return this.turn.getPiece();
 	}
 
-	// Kallas bara nï¿½r nytt spel initieras.
+	// Kallas bara när nytt spel initieras.
 	public void setActivePiece(int activePiece) {
-		if (activePiece < 0 || activePiece >= pieces.length)
-			throw new IllegalArgumentException(
-			"activePiece must be in the legal range");
 		this.activePiece = activePiece;
+
 	}
 
 	public Piece getPiece(int index) {
@@ -139,9 +122,19 @@ public class Board {
 	public int getActivePieceNumber() {
 		return activePiece;
 	}
+	
+	public void newTurn(){
+		System.out.println("nu skapas en ny tur");
+		if(!isNewGame)
+		changeActivePiece();
+		isNewGame=false;
+		turn= new Turn(pieces[activePiece]);
+		System.out.println("Board: EVENT NewTurn");
+		EventBus.getInstance().publish(Event.NewTurn, null, null);
+		turn.determinType();
+	}
 
-	public void changeActivePiece() {
-		System.out.println("Board: Team before:" + (activePiece + 1));
+	private void changeActivePiece() {
 		if (pieces == null) {
 			throw new BoardNotInitializedException();
 		}
@@ -149,20 +142,8 @@ public class Board {
 		if (activePiece == (pieces.length)) {
 			activePiece = 0;
 		}
-		System.out.println("Board: Team after:" + (activePiece + 1));
+		System.out.println("Board: EVENT NextPlayer");
 		EventBus.getInstance().publish(Event.NextPlayer, null, null);
-		if (Board.getInstance().isTimeForChallenge()) {
-			System.out.println("PlayerPanel: Challenge ska dra igång enl. boolean!");
-			EventBus.getInstance().publish(Event.IsChallenge, null, null);
-		}
-		else
-			EventBus.getInstance().publish(Event.ShowBet, activePiece, null);
-	}
-
-	public boolean isTimeForChallenge() {
-		return (Board.getInstance().getTile(
-				Board.getInstance().getActivePiece().getPosition())
-				.isChallenge());
 	}
 
 	public Tile getTile(int place) {
@@ -173,32 +154,6 @@ public class Board {
 		}
 	}
 
-	public Mission getMission() {
-		if (Challenge.isChallengeActive() == true) {
-			return Challenge.getMission();
-		} else
-			return currentMission;
-	}
-
-	public void startMission() {
-		if (pieces == null) {
-			throw new BoardNotInitializedException();
-		} 
-		else
-			if (Challenge.isChallengeActive() == true) {
-				getChallenge().startChallenge();
-				EventBus.getInstance().publish(Event.StartMission,
-						Challenge.chaMission, null);
-			} else{
-				(currentMission = new Mission(getActivePiece(), getTile(
-						getActivePiece().getPosition()).getCategory()))
-						.startMission();
-				EventBus.getInstance().publish(Event.StartMission,
-						currentMission, null);
-			}
-	}
-
-
 	public ArrayList<Tile> getTileList() {
 		return tileList;
 	}
@@ -206,21 +161,32 @@ public class Board {
 	public String getTeamName(int teamNumber) {
 		return teamNames.get(teamNumber);
 	}
-	public Challenge getChallenge(){
-		return currentChallenge;
-	}
 
-	public static void setTeamName(String teamName) {
+	public  void setTeamName(String teamName) {
 		teamNames.add(teamName);
-	}
-
-	public void startChallenge(Piece inputOppTeam) {
-		System.out.println("Board: startChallenge har kallats");
-		currentChallenge=new Challenge(Board.getInstance().getActivePiece(), inputOppTeam,
-				getTile(getActivePiece().getPosition()).getCategory());
 	}
 
 	public static void clearBoard() {
 		instance = null;
 	}
+
+	public void stopMission(){
+		turn.getTurnType().missionDone();
+	}
+	public void missionStatus(boolean b){
+		turn.finishTurn(b);
+	}
+	
+	public void initNormalTurn(){
+		turn.setTurnType();
+	}
+	
+	public Turn getTurn(){
+		return turn;
+	}
+
+	public ArrayList<String> getAllNames() {
+		return teamNames;
+	}
+	
 }

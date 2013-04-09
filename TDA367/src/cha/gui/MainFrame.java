@@ -205,6 +205,9 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 		colorList.add(Color.ORANGE);
 		colorList.add(Color.CYAN);
 
+		//Clears the list containing team names.
+		Board.getInstance().getAllNames().clear();
+		
 		for (int i = 0; i < numPiece; i++) {
 
 			String teamName = JOptionPane
@@ -214,9 +217,8 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 				teamName= "Team " + (i+1);
 			}
 
-			Board.setTeamName(teamName);
+			Board.getInstance().setTeamName(teamName);
 		}
-
 		Board.createNewBoard(numPiece);
 
 		showGameGUI();
