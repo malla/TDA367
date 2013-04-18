@@ -35,7 +35,8 @@ public class Main {
  *comboboxen vid challenge visar fel namn.
  *
  *Johan 18 april
- *Cleanup i challenge och mission
+ *Cleanup i challenge och mission 	//DONE
+ *Tar även board 
  *
  *
  */

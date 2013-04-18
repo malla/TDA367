@@ -5,28 +5,18 @@ import cha.event.Event;
 import cha.event.EventBus;
 
 public class Challenge extends TurnType {
-	// private final Piece challenger;
-	public Piece opponent;
-	// public Category category;
-//	private Mission chaMission;
+	private Piece opponent;
 	private int chaScore;
 	private int oppScore;
-	public String resultString;
-	private static boolean ChallengeActivity;
-	public static boolean ChallengeEnded;
-	private static final int NUMBER_OF_CARDS = 7;
-	private boolean didChallengerWin;
+	private final int NUMBER_OF_CARDS = 7;
 
-	// I ButtonPanel frågas efter motståndare. Denna klass initieras när det valet har gjorts.
-	public Challenge(/* Piece activePiece, */Piece opponent) {// , Category c) {
+	// I ButtonPanel frågas efter motståndare. Denna klass initieras när det
+	// valet har gjorts.
+	public Challenge(Piece opponent) {
 		chaScore = -1;
 		oppScore = -1;
-		// this.challenger = activePiece;
 		this.opponent = opponent;
-		// this.category = c;
-		setChallengeActivity(true);
 		System.out.println("Challenge: Challenge = TRUE");
-		ChallengeEnded = false;
 	}
 
 	/**
@@ -35,17 +25,15 @@ public class Challenge extends TurnType {
 	 * Challenge has been initiated.
 	 */
 	public void startMission(Category category) {
-		ChallengeEnded = false;
 		if (chaScore < 0) {
 			mission = new Mission(category, NUMBER_OF_CARDS);
 			System.out.println("Challenge: EVENT StartMission");
-			EventBus.getInstance().publish(Event.StartMission,
-					mission, null);
+			EventBus.getInstance().publish(Event.StartMission, mission, null);
 		} else {
 			if (oppScore < 0) {
 				mission = new Mission(category, NUMBER_OF_CARDS);
-				EventBus.getInstance().publish(Event.StartMission,
-						mission, null);
+				EventBus.getInstance().publish(Event.StartMission, mission,
+						null);
 			}
 		}
 	}
@@ -56,10 +44,10 @@ public class Challenge extends TurnType {
 	 */
 	public void setScore(int i) {
 		if (chaScore < 0) {
-			System.out.println("chaScore set to "+i);
+			System.out.println("chaScore set to " + i);
 			chaScore = i;
 		} else if (oppScore < 0) {
-			System.out.println("oppScore set to "+i);
+			System.out.println("oppScore set to " + i);
 			oppScore = i;
 			endChallenge();
 		}
@@ -69,50 +57,36 @@ public class Challenge extends TurnType {
 	 * Checks who has won the challenge and calls method to move pieces.
 	 * Opponent wins at draw.
 	 */
-	public void getResult() {
+	private void getResult() {
 		System.out.println("Challenge: chaScore= " + chaScore + ", oppScore= "
 				+ oppScore);
 		if (chaScore > oppScore) {
-		//	didChallengerWin=true;
 			Board.getInstance().missionStatus(true);
 			System.out.println("Moving opponent back");
 			opponent.movePieceBackward();
 		} else {
-		//	didChallengerWin=false;
 			System.out.println("Moving opponent forward");
 			opponent.movePieceForward(oppScore);
 			Board.getInstance().missionStatus(false);
 		}
 	}
 
-	public void endChallenge() {
-		ChallengeEnded = true;
-		setChallengeActivity(false);
+	private void endChallenge() {
 		mission = null;
 		System.out.println("Challenge = FALSE");
 		getResult();
 	}
 
-
-
-	public static void setChallengeActivity(boolean b) {
-		ChallengeActivity = b;
-	}
-
-	public static boolean isChallengeActive() {
-		return ChallengeActivity;
-	}
-
 	public void missionDone() {
 		System.out.println("Challenge: missionDone()");
 		mission.stopMission();
-		if(chaScore==-1||oppScore==-1){
+		if (chaScore == -1 || oppScore == -1) {
 			System.out.println("Challenge: Published GetChallengeScore");
-		EventBus.getInstance().publish(Event.GetChallengeScore, null, null);
+			EventBus.getInstance().publish(Event.GetChallengeScore, null, null);
 		}
 	}
-	
-	public int getChaScore(){
+
+	public int getChaScore() {
 		return chaScore;
 	}
 }
