@@ -1,19 +1,14 @@
 package cha.domain;
 
-import cha.domain.Categories.Category;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import java.util.ArrayList;
-
 public class Deque {
 
-	public ArrayList<Card> cards = new ArrayList<Card>();
-
-	static String[] wordsss = { "abdomen", "abducts", "abiding", "ability",
+	private static String[] wordsss = { "abdomen", "abducts", "abiding", "ability",
 			"abolish", "aborted", "absence", "absinth", "absorbs", "absurds",
 			"abusers", "abusing", "abusive", "acacias", "academy", "accents",
 			"accepts", "acclaim", "accords", "account", "accused", "accuser",
@@ -45,15 +40,15 @@ public class Deque {
 			"knights", "players", "knowing", "release", "reports", "present",
 			"scented", "preview" };
 
-	static ArrayList<String> words = new ArrayList<String>(
+	private static ArrayList<String> words = new ArrayList<String>(
 			Arrays.asList(wordsss));
 
-	static String[] alphabet = { "a", "b", "c", "d", "e", "f", "g", "h", "i",
+	private static String[] alphabet = { "a", "b", "c", "d", "e", "f", "g", "h", "i",
 			"j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
 			"w", "x", "y", "z", "å", "ä", "ö" };
-	static String[] bodyParts = { "Forehead", "Shoulder", "Knee", "Hand",
+	private static String[] bodyParts = { "Forehead", "Shoulder", "Knee", "Hand",
 			"Bottom", "Elbow", "Foot", "Stomach", "Chin", "Nose", "Thigh" };
-	static String[][] sameClasses = {
+	private static String[][] sameClasses = {
 			{ "Vilka gör inte datorer", "Elektrolux", "Husqvarna", "IKEA",
 					"OBH Nordica", "Babyliss", "Bang&Olufsen", "Philips",
 					"Bosch", "Asus", "Acer", "HP", "Toshiba", "dell", "LG" },
@@ -148,7 +143,7 @@ public class Deque {
 			{ "Which names start with the letter L?", "Lisa", "Lennart",
 					"Love", "Linnea", "Linus", "Loke", "Liv", "Ludvig",
 					"Josef", "Jonna", "Jens", "Johan", "Julius", "Jimmy" } };
-	static ArrayList<String[]> categories = new ArrayList<String[]>(
+	private static ArrayList<String[]> categories = new ArrayList<String[]>(
 			Arrays.asList(sameClasses));
 
 	public Deque() {

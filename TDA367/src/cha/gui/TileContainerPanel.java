@@ -6,10 +6,12 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
+
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
+
 import cha.domain.Board;
-import cha.domain.Categories.Category;
+import cha.domain.Category;
 import cha.domain.Piece;
 import cha.domain.Tile;
 import cha.event.Event;

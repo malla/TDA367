@@ -1,7 +1,6 @@
 
 package cha.domain;
 
-import cha.domain.Categories.Category;
 import cha.event.Event;
 import cha.event.EventBus;
 
@@ -45,7 +44,7 @@ public class Turn {
 		if(tempBet==0){
 			if(tempOpp!=null){
 				Piece oppPiece=null;
-				for (int i = 0; i < Board.getInstance().numberOfPieces; i++) {
+				for (int i = 0; i < Board.getInstance().getNumberOfPieces(); i++) {
 					if (tempOpp.contains(Board.getInstance()
 							.getTeamName(i))){
 						oppPiece = Board.getInstance().getPiece(i);

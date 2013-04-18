@@ -1,14 +1,13 @@
 package cha.domain;
 
-import cha.domain.Categories.Category;
 
 public class Tile {
 	
 	/**
 	 * @uml.property  name="type"
 	 */
-	Category type;
-	boolean challenge;
+	private Category type;
+	private boolean challenge;
 	
 	public Tile(Category c, boolean challenge){
 		this.type = c;

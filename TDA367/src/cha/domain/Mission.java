@@ -1,7 +1,6 @@
 package cha.domain;
 
 import java.util.List;
-import cha.domain.Categories.Category;
 
 public class Mission{
 	private CountDown timer;

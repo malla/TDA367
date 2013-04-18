@@ -14,7 +14,6 @@ import cha.event.Event;
 public class CountDown implements ActionListener{
 	private Timer timer;
 	private int count;
-	boolean now;
 
 	public CountDown(){
 		count = 30;

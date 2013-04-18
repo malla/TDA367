@@ -6,7 +6,7 @@ import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import cha.domain.Categories.Category;
+import cha.domain.Category;
 
 @SuppressWarnings("serial")
 public class StartTilePanel extends TilePanel {

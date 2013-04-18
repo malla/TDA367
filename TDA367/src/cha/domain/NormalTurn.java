@@ -1,6 +1,5 @@
 package cha.domain;
 
-import cha.domain.Categories.Category;
 import cha.event.Event;
 import cha.event.EventBus;
 
@@ -30,8 +29,5 @@ public class NormalTurn extends TurnType{
 	}
 
 	@Override
-	public void setScore(int i) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void setScore(int i) {	}
 }

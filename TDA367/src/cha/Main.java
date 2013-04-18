@@ -36,7 +36,8 @@ public class Main {
  *
  *Johan 18 april
  *Cleanup i challenge och mission 	//DONE
- *Tar även board 
+ *Tar även board 	//DONE
+ *Gick igenom resten av domain och tog bort oanvänd kod, ändra visibility och tog bort static
  *
  *
  */
