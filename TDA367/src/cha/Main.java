@@ -34,6 +34,8 @@ public class Main {
  *Malla 6e april:
  *comboboxen vid challenge visar fel namn.
  *
+ *Johan 18 april
+ *Cleanup i challenge och mission
  *
  *
  */
