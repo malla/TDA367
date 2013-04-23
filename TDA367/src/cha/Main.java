@@ -34,6 +34,10 @@ public class Main {
  *Malla 6e april:
  *comboboxen vid challenge visar fel namn.
  *
+ *Johan 18 april
+ *Cleanup i challenge och mission 	//DONE
+ *Tar även board 	//DONE
+ *Gick igenom resten av domain och tog bort oanvänd kod, ändra visibility och tog bort static
  *
  *
  */

@@ -1,8 +1,10 @@
 package projekt;
 
 import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
-import cha.domain.Categories.Category;
+
+import cha.domain.Category;
 import cha.domain.Tile;
 
 public class TestTile {

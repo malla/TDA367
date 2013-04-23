@@ -1,10 +1,12 @@
 package projekt;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Categories;
+
 import cha.domain.Board;
-import cha.domain.Categories;
 import cha.domain.Challenge;
 import cha.domain.Mission;
 import cha.domain.Piece;

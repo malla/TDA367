@@ -1,25 +1,23 @@
 package cha.gui;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-
-import javax.swing.BorderFactory;
-import javax.swing.JTextArea;
-import javax.swing.JLabel;
-
-import cha.domain.Categories.Category;
-import cha.domain.Board;
-import cha.domain.Mission;
-import cha.event.EventBus;
-import cha.event.Event;
-import cha.event.IEventHandler;
-
-import java.awt.FlowLayout;
-import java.awt.Dimension;
 import java.awt.Color;
-import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
+import cha.domain.Board;
+import cha.domain.Category;
+import cha.domain.Mission;
+import cha.event.Event;
+import cha.event.EventBus;
+import cha.event.IEventHandler;
 
 @SuppressWarnings("serial")
 public class TextPanel extends JPanel implements IEventHandler, ActionListener {

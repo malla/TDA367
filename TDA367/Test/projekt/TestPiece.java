@@ -1,10 +1,11 @@
 package projekt;
 
+import static org.junit.Assert.assertTrue;
+
 import java.awt.Color;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 import cha.domain.Piece;
 import cha.domain.Team;
 

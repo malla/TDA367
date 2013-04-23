@@ -1,6 +1,5 @@
 package cha.domain;
 
-import cha.domain.Categories.Category;
 
 public abstract class TurnType {
 	

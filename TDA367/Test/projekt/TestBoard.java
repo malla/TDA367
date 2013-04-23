@@ -1,11 +1,12 @@
 package projekt;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import cha.domain.Board;
-import cha.domain.Categories.Category;
+import cha.domain.Category;
 import cha.domain.Tile;
 
 public class TestBoard {

@@ -1,24 +1,20 @@
-
 package cha.domain;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Random;
-
-import cha.domain.Categories.Category;
 import cha.event.Event;
 import cha.event.EventBus;
 
 public class Board {
 
-	public Font fontTextPanel =new Font("Comic Sans MS", Font.PLAIN, 18);
-	public Font fontSmall =new Font("Comic Sans MS", Font.PLAIN, 12);
-
-	private static final int MIN_TILES = 0;
-	private static final int MAX_TILES = 43;
-	private static Piece[] pieces;
-	public int numberOfPieces = 0;
+	public Font fontTextPanel = new Font("Comic Sans MS", Font.PLAIN, 18);
+	public Font fontSmall = new Font("Comic Sans MS", Font.PLAIN, 12);
+	private int numberOfPieces = 0;
+	private final int MIN_TILES = 0;
+	private final int MAX_TILES = 43;
+	private Piece[] pieces;
 	private ArrayList<String> teamNames = new ArrayList<String>();
 	private int activePiece;
 	private Turn turn;
@@ -29,8 +25,9 @@ public class Board {
 	private ArrayList<Color> availableColorList = new ArrayList<Color>();
 	private ArrayList<Tile> tileList = new ArrayList<Tile>();
 	private Random random = new Random();
-	private static Board instance = null;
 	private boolean isNewGame;
+	
+	private static Board instance = null;
 
 	// Singleton-pattern
 	public static Board getInstance() {
@@ -40,10 +37,11 @@ public class Board {
 		return instance;
 	}
 
-	public static void createNewBoard(int numPiece ) {
+	public static void createNewBoard(int numPiece) {
 		Board board = Board.getInstance();
 		board.init(numPiece);
-		EventBus.getInstance().publish(Event.CreateBoard, Board.getInstance().getTileList(), null);
+		EventBus.getInstance().publish(Event.CreateBoard,
+				Board.getInstance().getTileList(), null);
 		board.newTurn();
 	}
 
@@ -56,8 +54,8 @@ public class Board {
 	}
 
 	private void init(int numPiece) {
-		isNewGame=true;
-		tileList.clear();		// Add a new set of tiles
+		isNewGame = true;
+		tileList.clear(); // Add a new set of tiles
 		for (int i = 0; i < 43; i++) {
 			if (i % 5 == 0 && i != 0) {
 				tileList.add(new Tile(categoryList.get(random
@@ -98,7 +96,7 @@ public class Board {
 	}
 
 	public Piece getActivePiece() {
-		if (turn == null) 
+		if (turn == null)
 			throw new BoardNotInitializedException();
 		return this.turn.getPiece();
 	}
@@ -114,21 +112,17 @@ public class Board {
 			throw new BoardNotInitializedException();
 		} else if (index < 0 || index >= pieces.length) {
 			throw new IllegalArgumentException(
-			"activePiece must be in the legal range");
+					"activePiece must be in the legal range");
 		}
 		return pieces[index];
 	}
 
-	public int getActivePieceNumber() {
-		return activePiece;
-	}
-	
-	public void newTurn(){
+	public void newTurn() {
 		System.out.println("nu skapas en ny tur");
-		if(!isNewGame)
-		changeActivePiece();
-		isNewGame=false;
-		turn= new Turn(pieces[activePiece]);
+		if (!isNewGame)
+			changeActivePiece();
+		isNewGame = false;
+		turn = new Turn(pieces[activePiece]);
 		System.out.println("Board: EVENT NewTurn");
 		EventBus.getInstance().publish(Event.NewTurn, null, null);
 		turn.determinType();
@@ -154,7 +148,7 @@ public class Board {
 		}
 	}
 
-	public ArrayList<Tile> getTileList() {
+	private ArrayList<Tile> getTileList() {
 		return tileList;
 	}
 
@@ -162,7 +156,7 @@ public class Board {
 		return teamNames.get(teamNumber);
 	}
 
-	public  void setTeamName(String teamName) {
+	public void setTeamName(String teamName) {
 		teamNames.add(teamName);
 	}
 
@@ -170,23 +164,23 @@ public class Board {
 		instance = null;
 	}
 
-	public void stopMission(){
+	public void stopMission() {
 		turn.getTurnType().missionDone();
 	}
-	public void missionStatus(boolean b){
+
+	public void missionStatus(boolean b) {
 		turn.finishTurn(b);
 	}
-	
-	public void initNormalTurn(){
+
+	public void initNormalTurn() {
 		turn.setTurnType();
 	}
-	
-	public Turn getTurn(){
+
+	public Turn getTurn() {
 		return turn;
 	}
 
 	public ArrayList<String> getAllNames() {
 		return teamNames;
 	}
-	
 }
