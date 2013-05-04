@@ -39,5 +39,7 @@ public class Main {
  *Tar även board 	//DONE
  *Gick igenom resten av domain och tog bort oanvänd kod, ändra visibility och tog bort static
  *
+ *Bella 4 maj
+ *Går igenom gui och tar bort onödig kod samt printlines
  *
  */
