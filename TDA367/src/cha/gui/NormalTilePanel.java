@@ -9,6 +9,9 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class NormalTilePanel extends TilePanel {
 	
+	/**
+	 * Creates all of the regular tiles on the board
+	 */
 	public NormalTilePanel(Color color, int position){
 		this.position = position;		
 		this.setBackground(color);

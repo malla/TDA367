@@ -29,6 +29,8 @@ public class Main {
  *	Nytt spel				//DONE
  *	Rules knappar			//DONE	
  *
+ *Vi har väldigt lite kommentarer 
+ *
  *Malla 6e april:
  *comboboxen vid challenge visar fel namn.
  *
@@ -38,6 +40,6 @@ public class Main {
  *Gick igenom resten av domain och tog bort oanvänd kod, ändra visibility och tog bort static
  *
  *Bella 4 maj
- *Går igenom gui och tar bort onödig kod samt printlines
+ *Går igenom gui och tar bort onödig kod samt printlines //DONE
  *
  */

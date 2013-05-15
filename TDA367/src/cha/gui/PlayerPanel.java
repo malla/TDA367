@@ -34,13 +34,13 @@ public class PlayerPanel extends JPanel implements IEventHandler {
 	@Override
 	public void action(Event e, Object o, Object p) {
 		if (e == Event.NextPlayer) {
-			// Ändrar så att det står vems tur det är.
+			//Changes to say which teams turn it is
 			playerJLabel.setText("Active team: "
 					+ Board.getInstance().getActivePiece().getTeam().getName());
-			// Ändrar så att aktivt lags färg visas med.
+			// Changes so that the active teams color is shown
 			panelColor.setBackground(Board.getInstance().getActivePiece()
 					.getTeam().getColor());
-			// Uppdatera GUI
+			// Update GUI
 			this.repaint();
 			
 		} else if (e == Event.NewTurn) {
