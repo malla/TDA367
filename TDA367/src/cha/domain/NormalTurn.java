@@ -14,6 +14,7 @@ public class NormalTurn extends TurnType{
 		bet = new Bet(newBet);
 	}
 
+	@Override
 	public void startMission(Category category) {
 		mission = new Mission(category, bet.getBetValue());
 		System.out.println("NormalTurn: EVENT StartMission");
@@ -22,6 +23,7 @@ public class NormalTurn extends TurnType{
 				mission, null);
 	}
 
+	@Override
 	public void missionDone() {
 		mission.stopMission();
 		EventBus.getInstance().publish(Event.MissionOver, null, null);

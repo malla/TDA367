@@ -14,8 +14,8 @@ public class TestBoard {
 	@Before
 	public void setUp(){
 		Board.clearBoard();
-		Board.setTeamName("1");
-		Board.setTeamName("2");
+		Board.getInstance().setTeamName("1");
+		Board.getInstance().setTeamName("2");
 		Board.createNewBoard(2);
 	}
 
@@ -37,9 +37,9 @@ public class TestBoard {
 	@Test
 	public void testInit(){
 		Board b = Board.getInstance();
-		Board.setTeamName("3");
+		Board.getInstance().setTeamName("3");
 		Board.createNewBoard(3);
-		assertTrue(b.getMission() == null && b.getActivePieceNumber() == 0 && b.getNumberOfPieces() == 3);
+		assertTrue(b.getTurn().getTurnType().getMission() == null && b.getActivePieceNumber() == 0 && b.getNumberOfPieces() == 3);
 		assertTrue(b.getTileList().size() == 43);
 		int i = 0;
 		for(Tile t : b.getTileList()){

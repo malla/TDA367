@@ -8,8 +8,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import cha.domain.Board;
-import cha.event.Event;
-import cha.event.EventBus;
 
 @SuppressWarnings("serial")
 public class TilePanel extends JPanel {
@@ -29,6 +27,7 @@ public class TilePanel extends JPanel {
 		this.setLayout(new BorderLayout(0, 0));
 
 		this.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mousePressed(MouseEvent e) {
 				click();
 			}

@@ -23,6 +23,7 @@ public class Challenge extends TurnType {
 	 * making it start. It is called from the Challenge constructor when a
 	 * Challenge has been initiated.
 	 */
+	@Override
 	public void startMission(Category category) {
 		if (chaScore < 0) {
 			mission = new Mission(category, NUMBER_OF_CARDS);
@@ -41,6 +42,7 @@ public class Challenge extends TurnType {
 	 * This method sets the opponent and the challengers scores. When creating a
 	 * Challenge, both values are set to 11.
 	 */
+	@Override
 	public void setScore(int i) {
 		if (chaScore < 0) {
 			System.out.println("chaScore set to " + i);
@@ -76,6 +78,7 @@ public class Challenge extends TurnType {
 		getResult();
 	}
 
+	@Override
 	public void missionDone() {
 		System.out.println("Challenge: missionDone()");
 		mission.stopMission();
