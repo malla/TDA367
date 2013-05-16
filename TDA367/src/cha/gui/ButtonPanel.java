@@ -29,7 +29,7 @@ ActionListener {
 	private JButton doneButton;
 	private JButton setScoreButton;
 	private JLabel timer;
-	private TextPanel tp;
+	private TextPanel textp;
 
 	private JPanel startButtons;
 	private JPanel missionButtons;
@@ -49,7 +49,7 @@ ActionListener {
 
 	public ButtonPanel(TextPanel panel) {
 		EventBus.getInstance().register(this);
-		this.tp = panel;
+		this.textp = panel;
 		this.setPreferredSize(new Dimension(500, 50));
 
 
@@ -69,7 +69,7 @@ ActionListener {
 		challengePanel.add(opponentCombo);
 		opponentCombo.setVisible(true);
 		
-		scoreCombo=new JComboBox<Integer>();//{1,2,3,4};
+		scoreCombo=new JComboBox<Integer>();
 		int[] bets={0,1,2,3,4,5,6,7};
 		for(int i:bets)
 			scoreCombo.addItem(bets[i]);
@@ -90,7 +90,7 @@ ActionListener {
 		startMissionButton.addActionListener(this);
 		yesButton.addActionListener(this);
 		noButton.addActionListener(this);
-		nextButton.addActionListener(tp);
+		nextButton.addActionListener(textp);
 		doneButton.addActionListener(this);
 		challengeButton.addActionListener(this);	
 		setScoreButton.addActionListener(this);		
@@ -170,12 +170,10 @@ ActionListener {
 		allTeams=new String[noOfOpponents];
 		for(int i=0; i<=noOfOpponents; i++){
 			String aTeam=Board.getInstance().getTeamName(i);
-			System.out.println("Active teams name:"+ Board.getInstance().getTurn().getPiece().getTeam().getName());
 			if(aTeam!=Board.getInstance().getTurn().getPiece().getTeam().getName()){
-				System.out.println("Adding "+aTeam+" to comboBox");
 				opponentCombo.addItem(aTeam);
 			}
-			else System.out.println("Won't add "+aTeam+" to comboBox");
+			
 		}
 	}
 
@@ -186,39 +184,32 @@ ActionListener {
 	@Override
 	public void action(Event e, Object o, Object p) {
 		if (e == Event.TimeOver) {
-			System.out.println("BP: TimeOver");
 			Board.getInstance().getTurn().getTurnType().missionDone();
 		}if (e == Event.MakeBet) {
-			System.out.println("BP: MakeABet");
-			currentPanel=startButtons;
+						currentPanel=startButtons;
 			setPanel();
 			startMissionButton.setVisible(false);
 		}
-		//Checked
+
 		if (e == Event.UpdateBet) {
-			System.out.println("BP: UpdateBet");
 			currentPanel=startButtons;
 			setPanel();
 			startMissionButton.setVisible(true);
-		//Checked	
+	
 		} else if (e == Event.StartMission) {
-			System.out.println("BP: StartMission");
 			currentPanel=missionButtons;
 			setPanel();
 		} else if (e == Event.GetChallengeScore) {
-			System.out.println("BP: GetChallengeScore");
 			currentPanel=setScore;
 			setPanel();
 		} else if (e == Event.MissionOver) {
-			System.out.println("BP: NormalTurnDone");
-					currentPanel=successButtons;
-					setPanel();
+			currentPanel=successButtons;
+			setPanel();
 		} else if (e == Event.TimeTick) {
-			//System.out.println("BP: TimeTick");
+			
 			String time = (String) o;
 			timer.setText(time);
 		} else if (e == Event.IsChallenge) {
-			System.out.println("BP: IsChallenge");
 			updateChallengeCombo();
 			currentPanel=challengePanel;
 			setPanel();
@@ -228,11 +219,10 @@ ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == startMissionButton) {
-			if(Board.getInstance().getTurn().getTurnType()==null){	//If NormalTurn is to be initiated
-				Board.getInstance().initNormalTurn();//TileContainerPanel.getTemporaryBet());
+			if(Board.getInstance().getTurn().getTurnType()==null){	
+				Board.getInstance().initNormalTurn();
 			}
 			
-			//WHAT DOES THIS DO?
 			TileContainerPanel.setBetable(true);
 			for (TilePanel panel : TileContainerPanel.getTilePanels()) {
 				panel.notBetable();
@@ -257,19 +247,18 @@ ActionListener {
 			setPanel();
 		}
 		else if (e.getSource() == doneButton) {		//mission shall end
-			System.out.println("ButtonPanel: Done button pressed.");
 			Board.getInstance().stopMission();
 		} 
 		else if (e.getSource() == yesButton) {	//turn shall end
 			Board.getInstance().getTurn().finishTurn(true);
 			Board.getInstance().newTurn();
-			//Board.getInstance().newTurn();
+			
 		} 
 		else if (e.getSource() == noButton) {		//turn shall end
 			Board.getInstance().getTurn().finishTurn(false);
 			Board.getInstance().newTurn();
 
-			//Board.getInstance().newTurn();
+			
 
 		}
 	}

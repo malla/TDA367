@@ -10,6 +10,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
+
+/**
+ * Creates the start frame when you first start the game,or when you have ended a game
+ */
 
 @SuppressWarnings("serial")
 public class StartPanel extends JPanel{
@@ -29,10 +34,13 @@ public class StartPanel extends JPanel{
 		JPanel centerPanel = new JPanel();
 
 		Color backgroundPanel = new Color(25,139,202);
+		Color raisedBorder = new Color(17,170,170);
 
 		centerPanel.setBackground(backgroundPanel);
 		centerPanel.setLayout(new GridLayout(2,0));
-		centerPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		BevelBorder raised = (BevelBorder) BorderFactory.createBevelBorder(BevelBorder.RAISED, raisedBorder, raisedBorder);
+        BevelBorder lowered = (BevelBorder) BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.blue, Color.BLUE);
+		centerPanel.setBorder(BorderFactory.createCompoundBorder(raised, lowered));
 
 		Font startFont = new Font("Serif", Font.PLAIN, 70);
 		textLabel = new JLabel("Challenge Accepted");

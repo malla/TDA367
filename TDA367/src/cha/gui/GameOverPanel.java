@@ -16,9 +16,11 @@ import cha.domain.Team;
 @SuppressWarnings("serial")
 public class GameOverPanel extends JPanel {
 	
+	//Winning teams labels
 	private JLabel teamColorIcon;
 	private JLabel teamLabel;
 
+	//Creates the game over panel
 	public GameOverPanel() {
 		setBackground(Color.WHITE);
 		

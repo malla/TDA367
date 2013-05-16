@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 public class GoalTilePanel extends TilePanel {
 	private static final int GOAL_POSITION = 43;
 
+	//Creates the goal tile
 	public GoalTilePanel(){
 		this.position = GOAL_POSITION;		
 		setBackground(Color.WHITE);

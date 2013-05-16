@@ -183,7 +183,6 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 					return;
 				numPiece = Integer.parseInt(reply);
 				if (numPiece >= MIN_PLAYERS && numPiece <= MAX_PLAYERS) {
-					System.out.println("Players accepted: " + numPiece);
 					break;
 				}
 			} catch (NumberFormatException e) {

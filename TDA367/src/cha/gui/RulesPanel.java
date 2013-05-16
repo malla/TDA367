@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Creates the rules panel on the main frame when that button is pressed
+ */
 @SuppressWarnings("serial")
 public class RulesPanel extends JPanel {
 
