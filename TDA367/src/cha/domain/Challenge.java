@@ -15,7 +15,6 @@ public class Challenge extends TurnType {
 		chaScore = -1;
 		oppScore = -1;
 		this.opponent = opponent;
-		System.out.println("Challenge: Challenge = TRUE");
 	}
 
 	/**
@@ -40,15 +39,13 @@ public class Challenge extends TurnType {
 
 	/**
 	 * This method sets the opponent and the challengers scores. When creating a
-	 * Challenge, both values are set to 11.
+	 * Challenge, both values are set to -1.
 	 */
 	@Override
 	public void setScore(int i) {
 		if (chaScore < 0) {
-			System.out.println("chaScore set to " + i);
 			chaScore = i;
 		} else if (oppScore < 0) {
-			System.out.println("oppScore set to " + i);
 			oppScore = i;
 			endChallenge();
 		}
@@ -59,14 +56,10 @@ public class Challenge extends TurnType {
 	 * Opponent wins at draw.
 	 */
 	private void getResult() {
-		System.out.println("Challenge: chaScore= " + chaScore + ", oppScore= "
-				+ oppScore);
 		if (chaScore > oppScore) {
 			Board.getInstance().missionStatus(true);
-			System.out.println("Moving opponent back");
 			opponent.movePieceBackward();
 		} else {
-			System.out.println("Moving opponent forward");
 			opponent.movePieceForward(oppScore);
 			Board.getInstance().missionStatus(false);
 		}
@@ -74,7 +67,6 @@ public class Challenge extends TurnType {
 
 	private void endChallenge() {
 		mission = null;
-		System.out.println("Challenge = FALSE");
 		getResult();
 	}
 
@@ -90,5 +82,8 @@ public class Challenge extends TurnType {
 
 	public int getChaScore() {
 		return chaScore;
+	}
+	public int getOppScore() {
+		return oppScore;
 	}
 }
