@@ -42,7 +42,7 @@ public class TurnTest implements IEventHandler{
 
 	@Test
 	public void testStartMission() {
-		//testHow?
+		//calls for method that is tested in NormalTurnTest and ChallengeTest
 	}
 
 	@Test

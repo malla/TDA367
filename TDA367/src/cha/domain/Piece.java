@@ -6,14 +6,12 @@ import cha.event.EventBus;
 public class Piece {
 	private final int FAILED_MISSION_PENALTY = 2;
 	private int position;
-	private Bet bet;
 	private Team team;
 	private static final int GOAL_TILE = 43;
 	private int index;
 
 	public Piece(Team team, int index) {
 		this.team = team;
-		bet = new Bet(0);
 		this.index = index;
 	}
 
@@ -45,10 +43,6 @@ public class Piece {
 		return this.team;
 	}
 
-	public Bet getBet() {
-		return bet;
-	}
-
 	public int getIndex(){
 		return index;
 	}
@@ -63,6 +57,6 @@ public class Piece {
 
 	@Override
 	public String toString() {
-		return "Piece [position = " + position + ", bet = " + bet.getBetValue() + "]";
+		return "Piece [position = " + position + "]";
 	}
 }

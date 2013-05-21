@@ -13,9 +13,6 @@ public class PieceTest {
 	Piece p;
 	Piece p1;
 	Piece p2;
-	int pBet;
-	int p1Bet;
-	int p2Bet;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -27,14 +24,7 @@ public class PieceTest {
 		p = Board.getInstance().getPiece(0);
 		p1 = Board.getInstance().getPiece(1);
 		p2 = Board.getInstance().getPiece(2);
-		pBet=p.getBet().getBetValue();
-		p1Bet=p1.getBet().getBetValue();
-		p2Bet=p2.getBet().getBetValue();
-	}
 
-	@Test 
-	public void testPiece() {
-		assertTrue(pBet+p1Bet+p2Bet==0);
 	}
 
 	@Test
@@ -73,13 +63,6 @@ public class PieceTest {
 	}
 
 	@Test
-	public void testGetBet() {
-		assertTrue(p.getBet().getBetValue()==0);
-		assertTrue(p1.getBet().getBetValue()==0);
-		assertTrue(p2.getBet().getBetValue()==0);
-	}
-
-	@Test
 	public void testGetIndex() {
 		assertTrue(p.getIndex()==0);
 		assertTrue(p1.getIndex()==1);
@@ -95,6 +78,6 @@ public class PieceTest {
 
 	@Test
 	public void testToString() {
-		assertTrue(p.toString().equals("Piece [position = 0, bet = 0]"));
+		assertTrue(p.toString().equals("Piece [position = 0]"));
 	}
 }
