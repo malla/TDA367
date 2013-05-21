@@ -10,7 +10,7 @@ import org.junit.Test;
 
 /**Tests the Turn class
  * @author Malla
- *Not sure how to test DeterminType or testStartMission
+ *Not sure how to test DeterminType or StartMission
  */
 public class TurnTest implements IEventHandler{
 	Team team;
