@@ -21,11 +21,5 @@ public class Tile {
 	
 	public boolean isChallenge(){
 		return challenge;
-	}
-	
-	@Override
-	public String toString() {
-		return type.toString();
-	}
-	
+	}	
 }
