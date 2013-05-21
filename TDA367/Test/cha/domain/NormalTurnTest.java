@@ -4,7 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-
+//Done
+/**
+ * @author Malla
+ *
+ */
 public class NormalTurnTest {
 	private Piece p;
 	private NormalTurn nt;
