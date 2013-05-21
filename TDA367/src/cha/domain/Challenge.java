@@ -26,7 +26,6 @@ public class Challenge extends TurnType {
 	public void startMission(Category category) {
 		if (chaScore < 0) {
 			mission = new Mission(category, NUMBER_OF_CARDS);
-			System.out.println("Challenge: EVENT StartMission");
 			EventBus.getInstance().publish(Event.StartMission, mission, null);
 		} else {
 			if (oppScore < 0) {
@@ -72,10 +71,8 @@ public class Challenge extends TurnType {
 
 	@Override
 	public void missionDone() {
-		System.out.println("Challenge: missionDone()");
 		mission.stopMission();
 		if (chaScore == -1 || oppScore == -1) {
-			System.out.println("Challenge: Published GetChallengeScore");
 			EventBus.getInstance().publish(Event.GetChallengeScore, null, null);
 		}
 	}

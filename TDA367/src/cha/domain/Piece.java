@@ -36,7 +36,6 @@ public class Piece {
 			setPosition(0);
 		} else {
 			position = position - FAILED_MISSION_PENALTY;
-			System.out.println("did it");
 		}
 		EventBus.getInstance().publish(Event.NewPosition, getPosition(), this.getIndex());
 	}

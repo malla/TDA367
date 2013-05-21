@@ -134,7 +134,6 @@ public class Board {
 		if (activePiece == (pieces.length)) {
 			activePiece = 0;
 		}
-		System.out.println("Board: EVENT NextPlayer");
 		EventBus.getInstance().publish(Event.NextPlayer, null, null);
 	}
 

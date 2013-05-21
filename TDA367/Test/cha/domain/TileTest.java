@@ -21,11 +21,6 @@ public class TileTest {
 	}
 
 	@Test
-	public void testTile() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testGetCategory() {
 		Category c1=t.getCategory();
 		Category c2=tChallenge.getCategory();
