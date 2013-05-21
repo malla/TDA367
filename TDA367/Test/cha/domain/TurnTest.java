@@ -7,10 +7,10 @@ import java.awt.Color;
 import org.junit.Before;
 import org.junit.Test;
 
-//DONE
+
 /**Tests the Turn class
  * @author Malla
- *
+ *Not sure how to test DeterminType or testStartMission
  */
 public class TurnTest implements IEventHandler{
 	Team team;

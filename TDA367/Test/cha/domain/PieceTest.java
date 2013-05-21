@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-
-/**
+//DONE
+/**Tests Piece
  * @author Malla
  *
  */
@@ -97,5 +97,4 @@ public class PieceTest {
 	public void testToString() {
 		assertTrue(p.toString().equals("Piece [position = 0, bet = 0]"));
 	}
-
 }
