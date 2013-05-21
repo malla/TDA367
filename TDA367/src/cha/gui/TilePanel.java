@@ -61,16 +61,15 @@ public class TilePanel extends JPanel {
 				Board.getInstance().getTurn().setTempBet(position-piecePos);
 				this.setBorder(loweredBorder);
 				this.repaint();
-				makeBet(piecePos);
+//				makeBet(piecePos);
 			}
 		}
 	}
 
-	public void makeBet(int piecePos) {
-		int bet = this.position - piecePos;
-
-		Board.getInstance().getTurn().setSteps(bet);
-
-	}
+//	public void makeBet(int piecePos) {
+//		int bet = this.position - piecePos;
+//		Board.getInstance().getTurn().setSteps(bet);
+//
+//	}
 }
 
