@@ -19,13 +19,13 @@ public class Turn {
 	private boolean isTurnOver;
 
 
-	public Turn(Piece p){
+	public Turn(Piece newPiece){
 		isTurnOver=false;
-		this.piece = p;
-		tempBet=0;
-		tempOpp=null;
-		category=Board.getInstance().getTile(piece.getPosition()).getCategory();
-		steps=0;
+		this.piece = newPiece;
+		tempBet = 0;
+		tempOpp = null;
+		category = Board.getInstance().getTile(piece.getPosition()).getCategory();
+		steps = 0;
 	}
 
 	public Piece getPiece(){
@@ -73,8 +73,8 @@ public class Turn {
 	public int getSteps(){
 		return steps;
 	}
-	public void setTempOpp(String s){
-		tempOpp=s;
+	public void setTempOpp(String newTempOpp){
+		tempOpp = newTempOpp;
 	}
 	public String getTempOpp(){
 		return tempOpp;

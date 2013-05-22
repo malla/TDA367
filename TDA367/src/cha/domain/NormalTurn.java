@@ -16,8 +16,6 @@ public class NormalTurn extends TurnType{
 
 	public void startMission(Category category) {
 		mission = new Mission(category, bet.getBetValue());
-		System.out.println("NormalTurn: EVENT StartMission");
-
 		EventBus.getInstance().publish(Event.StartMission,
 				mission, null);
 	}
