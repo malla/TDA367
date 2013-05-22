@@ -118,12 +118,10 @@ public class Board {
 	}
 
 	public void newTurn() {
-		System.out.println("nu skapas en ny tur");
 		if (!isNewGame)
 			changeActivePiece();
 		isNewGame = false;
 		turn = new Turn(pieces[activePiece]);
-		System.out.println("Board: EVENT NewTurn");
 		EventBus.getInstance().publish(Event.NewTurn, null, null);
 		turn.determinType();
 	}
@@ -136,7 +134,6 @@ public class Board {
 		if (activePiece == (pieces.length)) {
 			activePiece = 0;
 		}
-		System.out.println("Board: EVENT NextPlayer");
 		EventBus.getInstance().publish(Event.NextPlayer, null, null);
 	}
 

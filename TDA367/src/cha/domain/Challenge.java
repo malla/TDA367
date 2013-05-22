@@ -57,14 +57,11 @@ public class Challenge extends TurnType {
 	 * Opponent wins at draw.
 	 */
 	private void getResult() {
-		System.out.println("Challenge: chaScore= " + chaScore + ", oppScore= "
-				+ oppScore);
+		
 		if (chaScore > oppScore) {
 			Board.getInstance().missionStatus(true);
-			System.out.println("Moving opponent back");
 			opponent.movePieceBackward();
 		} else {
-			System.out.println("Moving opponent forward");
 			opponent.movePieceForward(oppScore);
 			Board.getInstance().missionStatus(false);
 		}
@@ -72,15 +69,12 @@ public class Challenge extends TurnType {
 
 	private void endChallenge() {
 		mission = null;
-		System.out.println("Challenge = FALSE");
 		getResult();
 	}
 
 	public void missionDone() {
-		System.out.println("Challenge: missionDone()");
 		mission.stopMission();
 		if (chaScore == -1 || oppScore == -1) {
-			System.out.println("Challenge: Published GetChallengeScore");
 			EventBus.getInstance().publish(Event.GetChallengeScore, null, null);
 		}
 	}

@@ -29,7 +29,6 @@ public class Mission{
 	}
 
 	public void stopMission() {
-		System.out.println("Mission:Timer should stop now");
 		timer.stopTimer();
 	}
 
@@ -52,6 +51,7 @@ public class Mission{
 		return title;
 	}
 
+	
 	private void setMissionActivity(boolean b) {
 		if(b==false)		
 			System.out.println("Mission: Mission FALSE");

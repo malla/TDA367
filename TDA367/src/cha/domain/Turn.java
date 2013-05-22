@@ -7,7 +7,7 @@ import cha.event.EventBus;
 public class Turn {
 
 	private final Piece piece;
-	private TurnType tt=null;
+	private TurnType tt = null;
 	private Category c;
 	private int steps;
 	private int tempBet;
@@ -72,14 +72,13 @@ public class Turn {
 		return tt;
 	}
 
-	public void setSteps(int i){
-		steps=i;
+	public void setSteps(int steps){
+		this.steps=steps;
 	}
 
 	public void finishTurn(boolean b){
 		movePiece(b);
 		isTurnOver=true;
-		//Board.getInstance().newTurn();
 	}
 	
 	public boolean isTurnOver(){
@@ -88,14 +87,12 @@ public class Turn {
 	
 	private void movePiece(boolean b){
 		if(b && tt instanceof Challenge){
-			System.out.println("finishTurn: move challenger forward");
 			piece.movePieceForward(((Challenge)tt).getChaScore());
 		}
 		else if (b){
-			System.out.println("finishTurn: move  forward");
-			piece.movePieceForward(steps);}
+			piece.movePieceForward(steps);
+		}
 		else {
-			System.out.println("finishTurn: move backward");
 			piece.movePieceBackward();
 		}	
 	}

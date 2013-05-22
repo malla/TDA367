@@ -34,12 +34,13 @@ public class StartPanel extends JPanel{
 		JPanel centerPanel = new JPanel();
 
 		Color backgroundPanel = new Color(25,139,202);
-		Color raisedBorder = new Color(17,170,170);
+		Color raisedBorder = new Color(53,120,120);
+		Color loweredBorder = new Color(30,10,120);
 
 		centerPanel.setBackground(backgroundPanel);
 		centerPanel.setLayout(new GridLayout(2,0));
 		BevelBorder raised = (BevelBorder) BorderFactory.createBevelBorder(BevelBorder.RAISED, raisedBorder, raisedBorder);
-        BevelBorder lowered = (BevelBorder) BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.blue, Color.BLUE);
+        BevelBorder lowered = (BevelBorder) BorderFactory.createBevelBorder(BevelBorder.LOWERED, loweredBorder, loweredBorder);
 		centerPanel.setBorder(BorderFactory.createCompoundBorder(raised, lowered));
 
 		Font startFont = new Font("Serif", Font.PLAIN, 70);
