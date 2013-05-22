@@ -50,7 +50,6 @@ public class BoardTest {
 		} catch (IllegalArgumentException e) {
 			assertTrue(true);
 		}
-
 	}
 
 	@Test

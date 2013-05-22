@@ -54,9 +54,11 @@ public class PieceTest {
 		String t=p.getTeam().getName();
 		String tComp=Board.getInstance().getTeamName(0);
 		assertTrue(t.equals(tComp));
+		
 		t=p1.getTeam().getName();
 		tComp=Board.getInstance().getTeamName(1);
 		assertTrue(t.equals(tComp));
+		
 		t=p2.getTeam().getName();
 		tComp=Board.getInstance().getTeamName(2);
 		assertTrue(t.equals(tComp));
