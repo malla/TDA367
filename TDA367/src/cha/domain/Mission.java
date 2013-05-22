@@ -49,17 +49,6 @@ public class Mission{
 		}
 		return title;
 	}
-<<<<<<< HEAD
-
-	
-	private void setMissionActivity(boolean b) {
-		if(b==false)		
-			System.out.println("Mission: Mission FALSE");
-		else if(b==true)		
-			System.out.println("Mission: Mission TRUE");
-	}
-=======
->>>>>>> 24b943cf6691a355a0970e7f7e6b41a2bfe75311
 	
 	@Override
 	public String toString() {
