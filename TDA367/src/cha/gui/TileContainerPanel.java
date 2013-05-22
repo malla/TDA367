@@ -177,6 +177,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		return tilePanels;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public void action(Event e, Object o, Object p) {
 		if (e == Event.CreateBoard) {

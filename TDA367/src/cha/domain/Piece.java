@@ -6,18 +6,18 @@ import cha.event.EventBus;
 public class Piece {
 	private final int FAILED_MISSION_PENALTY = 2;
 	private int position;
-	private Bet bet;
 	private Team team;
 	private static final int GOAL_TILE = 43;
 	private int index;
 
 	public Piece(Team team, int index) {
 		this.team = team;
-		bet = new Bet(0);
 		this.index = index;
 	}
 
-	public void movePieceForward(int bet) {
+	public void movePieceForward(int bet) throws IllegalArgumentException{
+		if(bet<0)
+			throw new IllegalArgumentException();
 		EventBus.getInstance().publish(Event.OldPosition, getPosition(), this.getIndex());
 		if (position + bet >= GOAL_TILE) {
 			setPosition(GOAL_TILE);
@@ -43,21 +43,9 @@ public class Piece {
 		return this.team;
 	}
 
-	public Bet getBet() {
-		return bet;
-	}
-
 	public int getIndex(){
 		return index;
 	}
-	
-	/*public void setBet(int newBet) {
-		if (newBet < 0) {
-			throw new IllegalArgumentException();
-		}
-		bet = new Bet(newBet);
-		EventBus.getInstance().publish(Event.MakeBet, newBet, null);
-	}*/
 
 	public int getPosition() {
 		return this.position;
@@ -69,6 +57,6 @@ public class Piece {
 
 	@Override
 	public String toString() {
-		return "Piece [position = " + position + ", bet = " + bet + "]";
+		return "Piece [position = " + position + "]";
 	}
 }

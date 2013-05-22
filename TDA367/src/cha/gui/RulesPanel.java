@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class RulesPanel extends JPanel {
 
-	public JButton backButton, continueButton;
+	public JButton newGameButton, continueButton;
 	private JLabel textField;
 	private JLabel title;
 	public static String newline = System.getProperty("line.separator");
@@ -45,9 +45,9 @@ public class RulesPanel extends JPanel {
 		c.gridx = 2;
 		c.anchor = GridBagConstraints.NORTHEAST;
 
-		backButton = new JButton("Back");
-		backButton.addActionListener(mf);
-		this.add(backButton, c);
+		newGameButton = new JButton("Start A New Game");
+		newGameButton.addActionListener(mf);
+		this.add(newGameButton, c);
 
 		c.anchor = GridBagConstraints.CENTER;
 		c.fill = GridBagConstraints.BOTH;

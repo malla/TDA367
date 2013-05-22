@@ -13,7 +13,6 @@ public class Mission{
 		this.timer = new CountDown();
 		this.category = category;
 		this.cards = deque.getCards(this.category, numberOfCards);
-		setMissionActivity(true);
 	}
 
 	public Card nextCurrentCard() {
@@ -50,6 +49,7 @@ public class Mission{
 		}
 		return title;
 	}
+<<<<<<< HEAD
 
 	
 	private void setMissionActivity(boolean b) {
@@ -58,10 +58,11 @@ public class Mission{
 		else if(b==true)		
 			System.out.println("Mission: Mission TRUE");
 	}
+=======
+>>>>>>> 24b943cf6691a355a0970e7f7e6b41a2bfe75311
 	
 	@Override
 	public String toString() {
-		return "Mission [cards=" + cards + ", timer=" + timer /*+ ", piece="
-		+ piece*/ + "]";
+		return "Mission [cards=" + cards + ", timer=" + timer  + "]";
 	}
 }

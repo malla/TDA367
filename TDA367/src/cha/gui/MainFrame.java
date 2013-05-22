@@ -155,7 +155,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 			startGame();
 		}else if (e.getSource() == rulesPanel.continueButton) {
 			showGameGUI();
-		}else if (e.getSource() == rulesPanel.backButton){
+		}else if (e.getSource() == rulesPanel.newGameButton){
 			showStartPanel();
 		}
 	}

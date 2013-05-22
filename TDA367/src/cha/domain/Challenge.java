@@ -15,7 +15,6 @@ public class Challenge extends TurnType {
 		chaScore = -1;
 		oppScore = -1;
 		this.opponent = opponent;
-		System.out.println("Challenge: Challenge = TRUE");
 	}
 
 	/**
@@ -23,10 +22,10 @@ public class Challenge extends TurnType {
 	 * making it start. It is called from the Challenge constructor when a
 	 * Challenge has been initiated.
 	 */
+	@Override
 	public void startMission(Category category) {
 		if (chaScore < 0) {
 			mission = new Mission(category, NUMBER_OF_CARDS);
-			System.out.println("Challenge: EVENT StartMission");
 			EventBus.getInstance().publish(Event.StartMission, mission, null);
 		} else {
 			if (oppScore < 0) {
@@ -39,14 +38,13 @@ public class Challenge extends TurnType {
 
 	/**
 	 * This method sets the opponent and the challengers scores. When creating a
-	 * Challenge, both values are set to 11.
+	 * Challenge, both values are set to -1.
 	 */
+	@Override
 	public void setScore(int i) {
 		if (chaScore < 0) {
-			System.out.println("chaScore set to " + i);
 			chaScore = i;
 		} else if (oppScore < 0) {
-			System.out.println("oppScore set to " + i);
 			oppScore = i;
 			endChallenge();
 		}
@@ -57,7 +55,10 @@ public class Challenge extends TurnType {
 	 * Opponent wins at draw.
 	 */
 	private void getResult() {
+<<<<<<< HEAD
 		
+=======
+>>>>>>> 24b943cf6691a355a0970e7f7e6b41a2bfe75311
 		if (chaScore > oppScore) {
 			Board.getInstance().missionStatus(true);
 			opponent.movePieceBackward();
@@ -72,6 +73,7 @@ public class Challenge extends TurnType {
 		getResult();
 	}
 
+	@Override
 	public void missionDone() {
 		mission.stopMission();
 		if (chaScore == -1 || oppScore == -1) {
@@ -81,5 +83,8 @@ public class Challenge extends TurnType {
 
 	public int getChaScore() {
 		return chaScore;
+	}
+	public int getOppScore() {
+		return oppScore;
 	}
 }
