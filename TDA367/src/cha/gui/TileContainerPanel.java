@@ -106,8 +106,6 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		for (PiecePanel piece : piecePanels) {
 			tilePanels[0].addPiecePanel(piece);
 		}
-
-		Board.getInstance().setActivePiece(0);
 	}
 
 	// Methods

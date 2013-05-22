@@ -16,6 +16,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	TeamTest.class,
 	TileTest.class,
 	TurnTest.class,
-	projekt.TestBoard.class,
+	cha.domain.BoardTest.class,
 })
 public class TestSuiteRunner {}

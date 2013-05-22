@@ -83,19 +83,17 @@ public class Turn {
 	public TurnType getTurnType(){
 		return tt;
 	}
-<<<<<<< HEAD
+
 
 	public void setSteps(int steps){
 		this.steps=steps;
 	}
 
-=======
 	
 	/**
 	 * @param b to be true if player has successfully managed his NormalTurn
 	 * or has won the Challenge.
 	 */
->>>>>>> 24b943cf6691a355a0970e7f7e6b41a2bfe75311
 	public void finishTurn(boolean b){
 		movePiece(b);
 		isTurnOver=true;
