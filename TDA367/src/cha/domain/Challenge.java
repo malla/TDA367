@@ -55,6 +55,10 @@ public class Challenge extends TurnType {
 	 * Opponent wins at draw.
 	 */
 	private void getResult() {
+<<<<<<< HEAD
+		
+=======
+>>>>>>> 24b943cf6691a355a0970e7f7e6b41a2bfe75311
 		if (chaScore > oppScore) {
 			Board.getInstance().missionStatus(true);
 			opponent.movePieceBackward();

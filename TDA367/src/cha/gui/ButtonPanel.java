@@ -18,6 +18,9 @@ import cha.event.EventBus;
 import cha.event.Event;
 import cha.event.IEventHandler;
 
+/**
+ * Creates the buttons to be added 
+ */
 @SuppressWarnings("serial")
 public class ButtonPanel extends JPanel implements IEventHandler,
 ActionListener {
@@ -98,8 +101,8 @@ ActionListener {
 		startButtons.add(startMissionButton);
 		missionButtons.add(nextButton, BorderLayout.WEST);
 		missionButtons.add(doneButton, BorderLayout.CENTER);
-		successButtons.add(noButton);
-		successButtons.add(yesButton);
+		successButtons.add(yesButton, BorderLayout.WEST);
+		successButtons.add(noButton, BorderLayout.EAST);
 		challengePanel.add(challengeButton);
 		setScore.add(setScoreButton);
 		//Set visibility
