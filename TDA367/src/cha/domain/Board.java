@@ -38,6 +38,9 @@ public class Board {
 	}
 
 	public static void createNewBoard(int numPiece) {
+		if (numPiece <= 0) {
+			throw new IllegalArgumentException();
+		}
 		Board board = Board.getInstance();
 		board.init(numPiece);
 		EventBus.getInstance().publish(Event.CreateBoard,

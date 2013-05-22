@@ -48,7 +48,9 @@ public class Mission{
 			title = "Word jumble!";
 		}
 		return title;
+
 	}
+
 	
 	@Override
 	public String toString() {

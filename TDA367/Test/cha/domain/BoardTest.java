@@ -49,7 +49,6 @@ public class BoardTest {
 			assertTrue(false);
 		} catch (IllegalArgumentException e) {
 			assertTrue(true);
-
 		}
 
 	}
@@ -66,6 +65,13 @@ public class BoardTest {
 		Piece p = b.getPiece(1);
 		Piece t = b.getPiece(1);
 		assertTrue(p.equals(t));
+		try{
+			b.getPiece(10);
+			assertTrue(false);
+		}
+		catch(IllegalArgumentException e){
+			assertTrue(true);
+		}
 	}
 
 	@Test
@@ -103,16 +109,10 @@ public class BoardTest {
 	 */
 	@Test
 	public void testClearBoard() {
-		Board b = Board.getInstance();
-		Tile oldTile = b.getTile(4);
-		b.clearBoard();
-		assertTrue(b.getTile(4).hashCode() != oldTile.hashCode());
-	}
-
-	@Test
-	public void testStopMission() {
-		Board b = Board.getInstance();
-
+		// Board b = Board.getInstance();
+		// Tile oldTile = b.getTile(4);
+		// b.clearBoard();
+		// assertTrue(b.getTile(4).hashCode() != oldTile.hashCode());
 	}
 
 	@Test
@@ -120,12 +120,6 @@ public class BoardTest {
 		Board b = Board.getInstance();
 		b.missionStatus(false);
 		assertTrue(b.getTurn().isTurnOver() == true);
-	}
-
-	@Test
-	public void testInitNormalTurn() {
-		Board b = Board.getInstance();
-
 	}
 
 	@Test
