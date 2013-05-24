@@ -42,4 +42,10 @@ public class Main {
  *Bella 4 maj
  *Går igenom gui och tar bort onödig kod samt printlines //DONE
  *
+ * Bella - SDD inklusive STAN och DesignModel
+ * Johan - UseCase, Classdiagram och UseCaseMap
+ * Malla - RAD 
+ *
+ * RAD, UseCases och UseCaseMap (Kolla hur många useCases som behövs)
+ *
  */

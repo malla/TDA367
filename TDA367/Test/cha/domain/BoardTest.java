@@ -28,6 +28,12 @@ public class BoardTest {
 		Tile t = b.getTile(1);
 		Tile f = b.getTile(1);
 		assertTrue(t == f);
+		try {
+			b.getTile(-5);
+			assertTrue(false);
+		} catch (IllegalArgumentException e) {
+			assertTrue(true);
+		}
 	}
 
 	@Test
@@ -71,6 +77,13 @@ public class BoardTest {
 		catch(IllegalArgumentException e){
 			assertTrue(true);
 		}
+		try{
+			b.getPiece(-4);
+			assertTrue(false);
+		}
+		catch(IllegalArgumentException e){
+			assertTrue(true);
+		}
 	}
 
 	@Test
@@ -100,18 +113,6 @@ public class BoardTest {
 		b.setTeamName("3");
 		Board.createNewBoard(3);
 		assertTrue(b.getTeamName(2).equals("3"));
-	}
-
-	/*
-	 * Not able to test since as soon as you call getInstance you create a new
-	 * board
-	 */
-	@Test
-	public void testClearBoard() {
-		// Board b = Board.getInstance();
-		// Tile oldTile = b.getTile(4);
-		// b.clearBoard();
-		// assertTrue(b.getTile(4).hashCode() != oldTile.hashCode());
 	}
 
 	@Test

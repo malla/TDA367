@@ -1,0 +1,3 @@
+Bella - SDD inklusive STAN och DesignModel
+
+RAD, UseCases och UseCaseMap (Kolla hur många useCases som behövs)

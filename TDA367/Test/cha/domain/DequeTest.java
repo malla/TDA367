@@ -58,9 +58,7 @@ public class DequeTest {
 		List<Card> cards = deque.getCards(Category.BODYTOBODY, testedInt);
 		int cardAmount = cards.size();
 		assertTrue(cardAmount==testedInt);
-		for(int j=0;j<cardAmount;j++){
-			System.out.println(cards.get(j));
-		}
+	
 	}
 
 	@Test
@@ -70,9 +68,6 @@ public class DequeTest {
 		List<Card> cards = deque.getCards(Category.SAMECLASS, testedInt);
 		int cardAmount = cards.size();
 		assertTrue(cardAmount==3);
-		for(int j=0;j<cardAmount;j++){
-			System.out.println(cards.get(j));
-		}
 	}
 
 	@Test
@@ -82,9 +77,7 @@ public class DequeTest {
 		List<Card> cards = deque.getCards(Category.WORDJUMBLE, testedInt);
 		int cardAmount = cards.size();
 		assertTrue(cardAmount==2);
-		for(int j=0;j<cardAmount;j++){
-			System.out.println(cards.get(j));
-		}
+
 	}
 }
 

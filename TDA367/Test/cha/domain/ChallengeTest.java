@@ -60,10 +60,8 @@ public class ChallengeTest {
 	@Test
 	public void testGetResultApWin(){
 		int opPos = op.getPosition();
-		System.out.println("op="+opPos);
 		c.setScore(3);
 		c.setScore(1);
-		System.out.println("op="+op.getPosition());
 		assertTrue(op.getPosition() == opPos - 2);
 	}
 	
@@ -73,10 +71,8 @@ public class ChallengeTest {
 	@Test
 	public void testGetResultOppWin(){
 		int opPos = op.getPosition();
-		System.out.println("op="+opPos);
 		c.setScore(1);
 		c.setScore(2);
-		System.out.println("op="+op.getPosition());
 		assertTrue(op.getPosition() == opPos + 2);
 	}
 	
@@ -86,10 +82,8 @@ public class ChallengeTest {
 	@Test
 	public void testGetResultDraw(){
 		int opPos = op.getPosition();
-		System.out.println("op="+opPos);
 		c.setScore(2);
 		c.setScore(2);
-		System.out.println("op="+op.getPosition());
 		assertTrue(op.getPosition() == opPos + 2);
 	}
 
