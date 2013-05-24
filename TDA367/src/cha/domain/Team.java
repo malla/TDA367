@@ -5,13 +5,13 @@ import java.awt.Color;
 public class Team {
 
 	private String name;	
-	private Color color;
+	private Color teamColor;
 	
 	// Constructor
 	
 	public Team(String name, Color color) {
 		this.name = name;
-		this.color = color;
+		this.teamColor = color;
 	}
 	
 	// Methods
@@ -20,11 +20,11 @@ public class Team {
 	}
 
 	public Color getColor() {
-		return color;
+		return teamColor;
 	}
 
 	public void setColor(Color color) {
-		this.color = color;
+		this.teamColor = color;
 	}
 	
 	

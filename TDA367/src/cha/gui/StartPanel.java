@@ -21,11 +21,8 @@ public class StartPanel extends JPanel{
 
 	JButton newGameButton;
 	JButton rulesButton;
-	MainFrame mf;
 	
 	public StartPanel(MainFrame mf) {
-		this.mf = mf;
-
 		setBackground(Color.BLUE);
 
 		JPanel buttonPanel = new JPanel();
@@ -64,6 +61,5 @@ public class StartPanel extends JPanel{
 		centerPanel.add(textPanel);
 		centerPanel.add(buttonPanel);
 		this.add(centerPanel, BorderLayout.CENTER);
-
 	}
 }

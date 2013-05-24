@@ -38,6 +38,9 @@ public class Board {
 	}
 
 	public static void createNewBoard(int numPiece) {
+		if (numPiece <= 0) {
+			throw new IllegalArgumentException();
+		}
 		Board board = Board.getInstance();
 		board.init(numPiece);
 		EventBus.getInstance().publish(Event.CreateBoard,
@@ -101,12 +104,6 @@ public class Board {
 		return this.turn.getPiece();
 	}
 
-	// Kallas bara när nytt spel initieras.
-	public void setActivePiece(int activePiece) {
-		this.activePiece = activePiece;
-
-	}
-
 	public Piece getPiece(int index) {
 		if (pieces == null) {
 			throw new BoardNotInitializedException();
@@ -165,8 +162,8 @@ public class Board {
 		turn.getTurnType().missionDone();
 	}
 
-	public void missionStatus(boolean b) {
-		turn.finishTurn(b);
+	public void missionStatus(boolean status) {
+		turn.finishTurn(status);
 	}
 
 	public void initNormalTurn() {

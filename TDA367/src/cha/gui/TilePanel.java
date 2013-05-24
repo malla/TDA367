@@ -14,9 +14,9 @@ public class TilePanel extends JPanel {
 
 	JPanel panel;
 	int position;
-	BevelBorder loweredBorder = new BevelBorder(BevelBorder.LOWERED, null,
+	private BevelBorder loweredBorder = new BevelBorder(BevelBorder.LOWERED, null,
 			null, null, null);
-	BevelBorder raisedBorder = new BevelBorder(BevelBorder.RAISED, null, null,
+	private BevelBorder raisedBorder = new BevelBorder(BevelBorder.RAISED, null, null,
 			null, null);
 
 	public TilePanel() {
@@ -55,21 +55,15 @@ public class TilePanel extends JPanel {
 		int piecePos = Board.getInstance().getTurn().getPiece().getPosition();
 
 		// Om betable är falsk, om
-		if (!TileContainerPanel.getBetable()) {		//Kollar om man får man beta nu
-			if (position > piecePos && position < piecePos + 8) { //Kollar om klickad Tile är giltig
+		//Kollar om man får man satsa nu
+		if (!TileContainerPanel.getBetable()) {
+			//Kollar om klickad Tile är giltig
+			if (position > piecePos && position < piecePos + 8) {
 				//
 				Board.getInstance().getTurn().setTempBet(position-piecePos);
 				this.setBorder(loweredBorder);
 				this.repaint();
-//				makeBet(piecePos);
 			}
 		}
 	}
-
-//	public void makeBet(int piecePos) {
-//		int bet = this.position - piecePos;
-//		Board.getInstance().getTurn().setSteps(bet);
-//
-//	}
 }
-

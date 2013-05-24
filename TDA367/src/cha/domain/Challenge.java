@@ -41,11 +41,11 @@ public class Challenge extends TurnType {
 	 * Challenge, both values are set to -1.
 	 */
 	@Override
-	public void setScore(int i) {
+	public void setScore(int score) {
 		if (chaScore < 0) {
-			chaScore = i;
+			chaScore = score;
 		} else if (oppScore < 0) {
-			oppScore = i;
+			oppScore = score;
 			endChallenge();
 		}
 	}
@@ -55,6 +55,7 @@ public class Challenge extends TurnType {
 	 * Opponent wins at draw.
 	 */
 	private void getResult() {
+
 		if (chaScore > oppScore) {
 			Board.getInstance().missionStatus(true);
 			opponent.movePieceBackward();

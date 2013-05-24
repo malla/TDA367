@@ -9,8 +9,8 @@ public class Tile {
 	private Category type;
 	private boolean challenge;
 	
-	public Tile(Category c, boolean challenge){
-		this.type = c;
+	public Tile(Category category, boolean challenge){
+		this.type = category;
 		this.challenge = challenge;
 	}
 	

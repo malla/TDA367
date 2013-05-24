@@ -11,21 +11,21 @@ import cha.event.EventBus;
 public class Turn {
 
 	private final Piece piece;
-	private TurnType tt = null;
-	private Category c;
+	private TurnType turnType = null;
+	private Category category;
 	private int steps;
 	private int tempBet;
 	private String tempOpp;
 	private boolean isTurnOver;
 
 
-	public Turn(Piece p){
+	public Turn(Piece newPiece){
 		isTurnOver=false;
-		this.piece = p;
-		tempBet=0;
-		tempOpp=null;
-		c=Board.getInstance().getTile(piece.getPosition()).getCategory();
-		steps=0;
+		this.piece = newPiece;
+		tempBet = 0;
+		tempOpp = null;
+		category = Board.getInstance().getTile(piece.getPosition()).getCategory();
+		steps = 0;
 	}
 
 	public Piece getPiece(){
@@ -33,7 +33,7 @@ public class Turn {
 	}
 
 	public void startMission(){
-		tt.startMission(c);
+		turnType.startMission(category);
 	}
 
 	public void determinType(){
@@ -54,17 +54,17 @@ public class Turn {
 						oppPiece = Board.getInstance().getPiece(i);
 					}
 				}
-				tt=new Challenge(oppPiece);
+				turnType=new Challenge(oppPiece);
 			}
 		}
 		else{
 			steps=tempBet;
-			tt=new NormalTurn(steps);
+			turnType=new NormalTurn(steps);
 		}
 	}
 
-	public void setTempBet(int tb){
-		tempBet=tb;
+	public void setTempBet(int newBet){
+		tempBet=newBet;
 		EventBus.getInstance().publish(Event.UpdateBet, null, null);	//Publicerar att Tile clickats
 	}
 	public int getBet(){
@@ -73,17 +73,21 @@ public class Turn {
 	public int getSteps(){
 		return steps;
 	}
-	public void setTempOpp(String s){
-		tempOpp=s;
+	public void setTempOpp(String newTempOpp){
+		tempOpp = newTempOpp;
 	}
 	public String getTempOpp(){
 		return tempOpp;
 	}
 
 	public TurnType getTurnType(){
-		return tt;
+		return turnType;
 	}
-	
+
+	public void setSteps(int steps){
+		this.steps=steps;
+	}
+
 	/**
 	 * @param b to be true if player has successfully managed his NormalTurn
 	 * or has won the Challenge.
@@ -98,14 +102,13 @@ public class Turn {
 		return isTurnOver;
 	}
 	
-
 	/**
 	 * @param b if true, player moves forward
 	 * if false, player move backwards
 	 */
 	private void movePiece(boolean b){
-		if(b && tt instanceof Challenge){
-			piece.movePieceForward(((Challenge)tt).getChaScore());
+		if(b && turnType instanceof Challenge){
+			piece.movePieceForward(((Challenge)turnType).getChaScore());
 		}
 		else if (b){
 			piece.movePieceForward(steps);
@@ -115,6 +118,3 @@ public class Turn {
 		}	
 	}
 }
-
-
-

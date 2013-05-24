@@ -7,6 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ 
 	BetTest.class, 
+	BoardTest.class,
 	CardTest.class, 
 	ChallengeTest.class,
 	DequeTest.class,
@@ -15,7 +16,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	PieceTest.class,
 	TeamTest.class,
 	TileTest.class,
-	TurnTest.class,
-	projekt.TestBoard.class,
+	TurnTest.class
 })
 public class TestSuiteRunner {}
