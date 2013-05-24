@@ -169,7 +169,7 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 	}
 
 
-	public void startGame() {
+	private void startGame() {
 		String reply = null;
 		int numPiece;
 		while (true) {
