@@ -38,6 +38,9 @@ public class PieceTest {
 	    }catch(Exception IllegalArgumentException) {
 	      assertTrue(true);
 	    }
+	    p.setPosition(42);
+	    p.movePieceForward(6);
+	    assertTrue(p.getPosition() == 43);
 	}
 
 	@Test

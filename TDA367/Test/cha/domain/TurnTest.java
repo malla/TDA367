@@ -54,19 +54,22 @@ public class TurnTest implements IEventHandler{
 	}
 
 	/**Tests
-	 * setTurnType()
+	 * setTurnType()¨
+	 * setSteps()
 	 * getSteps()
 	 * getTurnType()
 	 */
 	@Test
 	public void testSetTurnType() {
-		int steps=t.getSteps();
+		int steps = t.getSteps();
 		assertTrue(steps == 0);
 		t.setTempBet(4);
 		t.setTurnType();
 		steps=t.getSteps();
 		assertTrue(steps == 4);
 		assertTrue(t.getTurnType() instanceof NormalTurn);
+		t.setSteps(3);
+		assertTrue(t.getSteps() == 3);
 	}
 	
 	/**Tests

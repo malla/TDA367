@@ -79,5 +79,19 @@ public class DequeTest {
 		assertTrue(cardAmount==2);
 
 	}
+	@Test
+	public void testGetCards() {
+		Deque deque = new Deque();
+		int testedInt = 4;
+		Category c = null;
+		try{
+			deque.getCards(c, testedInt);
+		}
+		catch(IllegalArgumentException e){
+			assertTrue(true);
+		}
+
+	}
+	
 }
 

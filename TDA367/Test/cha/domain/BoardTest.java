@@ -13,10 +13,12 @@ import cha.domain.Piece;
 import cha.domain.Tile;
 
 public class BoardTest {
-
+	private Board b; 
+	
 	@Before
 	public void setUp() {
 		Board.clearBoard();
+		b = Board.getInstance();
 		Board.getInstance().setTeamName("1");
 		Board.getInstance().setTeamName("2");
 		Board.createNewBoard(2);
@@ -24,62 +26,65 @@ public class BoardTest {
 
 	@Test
 	public void testGetTile() {
-		Board b = Board.getInstance();
 		Tile t = b.getTile(1);
 		Tile f = b.getTile(1);
 		assertTrue(t == f);
 		try {
 			b.getTile(-5);
-			assertTrue(false);
 		} catch (IllegalArgumentException e) {
 			assertTrue(true);
 		}
 	}
+	
+	@Test
+	public void testCreateNewBoard() {
+		try{
+			Board.createNewBoard(0);
+		}
+		catch (IllegalArgumentException e){
+			assertTrue(true);
+		}
+		
+	}
 
 	@Test
 	public void testBoard() {
-		Board b = Board.getInstance();
 		Category c = b.getTile(1).getCategory();
 		assertTrue(c != null);
 	}
 
 	@Test
 	public void testInit() {
-		Board b = Board.getInstance();
 		b.setTeamName("3");
 		Board.createNewBoard(3);
 		assertTrue(b.getNumberOfPieces() == 3
 				&& b.getActivePiece() == b.getTurn().getPiece());
 		try {
 			b.getTile(44);
-			assertTrue(false);
-		} catch (IllegalArgumentException e) {
+		}
+		catch (IllegalArgumentException e) {
 			assertTrue(true);
 		}
 	}
 
 	@Test
 	public void testGetNumberOfPieces() {
-		Board b = Board.getInstance();
 		assertTrue(b.getNumberOfPieces() == 2);
 	}
 
 	@Test
 	public void testGetPiece() {
-		Board b = Board.getInstance();
 		Piece p = b.getPiece(1);
 		Piece t = b.getPiece(1);
 		assertTrue(p.equals(t));
 		try{
 			b.getPiece(10);
-			assertTrue(false);
 		}
 		catch(IllegalArgumentException e){
 			assertTrue(true);
 		}
 		try{
 			b.getPiece(-4);
-			assertTrue(false);
 		}
 		catch(IllegalArgumentException e){
 			assertTrue(true);
@@ -88,7 +93,6 @@ public class BoardTest {
 
 	@Test
 	public void testGetActivePiece() {
-		Board b = Board.getInstance();
 		Piece p = b.getActivePiece();
 		Piece t = b.getActivePiece();
 		assertTrue(p.equals(t) && p.getIndex() == 0);
@@ -96,20 +100,17 @@ public class BoardTest {
 
 	@Test
 	public void testNewTurn() {
-		Board b = Board.getInstance();
 		b.newTurn();
 		assertTrue(b.getActivePiece().getIndex() == 1);
 	}
 
 	@Test
 	public void testGetTeamName() {
-		Board b = Board.getInstance();
 		assertTrue(b.getTeamName(0).equals("1"));
 	}
 
 	@Test
 	public void testSetTeamName() {
-		Board b = Board.getInstance();
 		b.setTeamName("3");
 		Board.createNewBoard(3);
 		assertTrue(b.getTeamName(2).equals("3"));
@@ -117,21 +118,18 @@ public class BoardTest {
 
 	@Test
 	public void testMissionStatus() {
-		Board b = Board.getInstance();
 		b.missionStatus(false);
 		assertTrue(b.getTurn().isTurnOver() == true);
 	}
 
 	@Test
 	public void testGetTurn() {
-		Board b = Board.getInstance();
 		assertTrue(b.getTurn().getPiece().equals(b.getActivePiece()));
 
 	}
 
 	@Test
 	public void testGetAllNames() {
-		Board b = Board.getInstance();
 		ArrayList<String> allNames = b.getAllNames();
 		assertTrue(allNames.size() == 2);
 	}
