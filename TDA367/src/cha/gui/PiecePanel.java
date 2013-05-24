@@ -10,8 +10,8 @@ import cha.domain.Piece;
 @SuppressWarnings("serial")
 public class PiecePanel extends JPanel {
 	
-	public final Color color;
-	public final Dimension size = new Dimension(12,12);
+	private final Color color;
+	private final Dimension size = new Dimension(12,12);
 	
 	public PiecePanel(Piece piece, Color c){
 		setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -30,5 +30,4 @@ public class PiecePanel extends JPanel {
 		this.setMaximumSize(size);
 		this.setVisible(true);
 	}
-	
 }

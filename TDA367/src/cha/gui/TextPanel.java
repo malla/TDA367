@@ -37,7 +37,7 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 		this.mf=mf;
 	}
 
-	public void initialize() {
+	private void initialize() {
 		setLayout(new BorderLayout(0, 0));
 		this.setSize(600, 400);
 

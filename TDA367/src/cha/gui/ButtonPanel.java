@@ -42,13 +42,10 @@ ActionListener {
 	private JPanel setScore;
 
 	//challengePanel items.
-	int noOfOpponents;
-	String[] allTeams;
-	JComboBox<String> opponentCombo;
-	JComboBox<Integer> scoreCombo;
-	JButton startChallenge;
-	JButton challengeButton;
-	JLabel label;
+	private int noOfOpponents;
+	private JComboBox<String> opponentCombo;
+	private JComboBox<Integer> scoreCombo;
+	private JButton challengeButton;
 
 	public ButtonPanel(TextPanel panel) {
 		EventBus.getInstance().register(this);
@@ -170,7 +167,6 @@ ActionListener {
 	private void updateChallengeCombo(){
 		opponentCombo.removeAllItems();
 		noOfOpponents=Board.getInstance().getNumberOfPieces()-1;
-		allTeams=new String[noOfOpponents];
 		for(int i=0; i<=noOfOpponents; i++){
 			String aTeam=Board.getInstance().getTeamName(i);
 			if(aTeam!=Board.getInstance().getTurn().getPiece().getTeam().getName()){

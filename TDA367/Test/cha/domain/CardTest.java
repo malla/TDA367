@@ -28,5 +28,4 @@ public class CardTest {
 		String[] s=c.getString();
 		assertTrue(s.equals(strings));
 	}
-
 }

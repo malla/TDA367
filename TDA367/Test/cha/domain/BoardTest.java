@@ -102,18 +102,6 @@ public class BoardTest {
 		assertTrue(b.getTeamName(2).equals("3"));
 	}
 
-	/*
-	 * Not able to test since as soon as you call getInstance you create a new
-	 * board
-	 */
-	@Test
-	public void testClearBoard() {
-		// Board b = Board.getInstance();
-		// Tile oldTile = b.getTile(4);
-		// b.clearBoard();
-		// assertTrue(b.getTile(4).hashCode() != oldTile.hashCode());
-	}
-
 	@Test
 	public void testMissionStatus() {
 		Board b = Board.getInstance();

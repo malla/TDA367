@@ -91,7 +91,7 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 
 	// Create new game, update all GUI to match current game
 
-	public void newGame(ArrayList<Tile> tiles) {
+	private void newGame(ArrayList<Tile> tiles) {
 
 		setTiles(tiles);
 

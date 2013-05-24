@@ -13,10 +13,10 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class RulesPanel extends JPanel {
 
-	public JButton newGameButton, continueButton;
+	public JButton newGameButton; 
+	public JButton continueButton;
 	private JLabel textField;
 	private JLabel title;
-	public static String newline = System.getProperty("line.separator");
 	private MainFrame mf;
 
 	public RulesPanel(MainFrame mainF) {
