@@ -30,9 +30,7 @@ public class NormalTurnTest {
 		}
 		catch (Exception IllegalArgumentException) {
 		      assertTrue(true);
-		}
-		p.
-		
+		}		
 	}
 
 	
