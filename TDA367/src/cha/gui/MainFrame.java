@@ -166,6 +166,10 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 			gameOverPanel.setWinnerTeam((Team) o);
 			showGameOverPanel();
 		}
+		else if (e == Event.CreateBoard) {
+			gameOverPanel.setVisible(false);
+			textPanel.setVisible(true);
+		} 
 	}
 
 

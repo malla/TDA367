@@ -121,7 +121,7 @@ public class Deque {
 					"Pernilla", "Hedvig", "Berit", "Signe" },
 			{ "Which are kitchen appliances", "Stove", "Mixer", "Frigde",
 					"Microwave", "Fryingpan", "Oven", "Pot", "Tv", "Sofa",
-					"Blanket", "Remote", "Painting", "Chair" },
+					"Blanket", "Remote", "Painting", "Chair", "Bed" },
 			{ "Which are desserts?", "Spunge cake", "Macaroon", "Icecream",
 					"Tapioca pudding", "Cranberry pie",
 					"Chocolate chip cookies", "Shortcake", "Apple pie",

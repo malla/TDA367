@@ -76,7 +76,7 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 	@Override
 	public void action(Event e, Object o, Object p) {
 		if (e == Event.MakeBet) {
-			textArea.setText("Make A Bet!");
+			textArea.setText("     Make A Bet!");
 		} 
 		if (e == Event.StartMission) {
 			Mission mission = (Mission) o;
@@ -115,19 +115,24 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 		}
 		//Checked	
 		else if (e == Event.UpdateBet) {
-			textArea.setText("Your bet has been updated!");
+			textArea.setText("     Your bet has been updated!");
 		} 
 		//
 		else if (e == Event.MissionOver) {
 			this.remove(cardPanel);
 			this.add(textArea);
-			textArea.setText("Was the mission successful?");
+			textArea.setText("     Was the mission successful?");
 			this.repaint();
 		} 
 		else if (e==Event.GetChallengeScore) {
 			this.remove(cardPanel);
 			this.add(textArea);
-			textArea.setText("Enter your score below!");
+			textArea.setText("     Enter your score below!");
+			this.repaint();
+		} 
+		else if (e==Event.IsChallenge) {
+			this.add(textArea);
+			textArea.setText("     Choose your opponent!");
 			this.repaint();
 		} 
 	}

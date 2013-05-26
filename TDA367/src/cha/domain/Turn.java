@@ -24,7 +24,13 @@ public class Turn {
 		this.piece = newPiece;
 		tempBet = 0;
 		tempOpp = null;
-		category = Board.getInstance().getTile(piece.getPosition()).getCategory();
+		try {
+			category = Board.getInstance().getTile(piece.getPosition()).getCategory();
+		}
+		catch (IllegalArgumentException e){
+			if(piece.getPosition()!=43)
+			System.out.println(""+e);
+			}
 		steps = 0;
 	}
 
