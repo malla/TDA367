@@ -48,7 +48,9 @@ public class Piece {
 	}
 
 	public int getPosition() {
-		return this.position;
+		if (this.position==GOAL_TILE)
+			return GOAL_TILE-1;
+		else return this.position;
 	}
 
 	public void setPosition(int position) {

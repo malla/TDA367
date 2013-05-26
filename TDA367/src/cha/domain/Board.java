@@ -135,7 +135,7 @@ public class Board {
 	}
 
 	public Tile getTile(int place) {
-		if (place < MIN_TILES || place > MAX_TILES) {
+		if (place < MIN_TILES || place > MAX_TILES+1) {
 			throw new IllegalArgumentException();
 		} else {
 			return tileList.get(place);
