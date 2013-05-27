@@ -9,6 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import cha.domain.Board;
 
+/**
+ * Parent class of many of the other tile panels.
+ */
 @SuppressWarnings("serial")
 public class TilePanel extends JPanel {
 
@@ -34,10 +37,16 @@ public class TilePanel extends JPanel {
 		});
 	}
 
+	/**Graphically adds pieces to the tile in question.
+	 * @param piece the piece which is to be added
+	 */
 	public void addPiecePanel(PiecePanel piece) {
 		panel.add(piece);
 	}
 
+	/**Graphically removes pieces to the tile in question.
+	 * @param piece the piece which is to be removed
+	 */
 	public void removePiece(PiecePanel piece) {
 		panel.remove(piece);
 		this.repaint();
@@ -51,6 +60,9 @@ public class TilePanel extends JPanel {
 		this.setBorder(loweredBorder);
 	}
 
+	/**
+	 * What happens when a tile is clicked
+	 */
 	private void click() {
 		int piecePos = Board.getInstance().getTurn().getPiece().getPosition();
 

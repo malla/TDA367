@@ -13,6 +13,10 @@ public class PiecePanel extends JPanel {
 	private final Color color;
 	private final Dimension size = new Dimension(12,12);
 	
+	/** Creates the graphical epresenttion of a piece
+	 * @param piece
+	 * @param c is the category
+	 */
 	public PiecePanel(Piece piece, Color c){
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		FlowLayout flowLayout = (FlowLayout) getLayout();

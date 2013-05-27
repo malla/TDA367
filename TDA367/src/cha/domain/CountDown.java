@@ -21,6 +21,9 @@ public class CountDown implements ActionListener{
 		timer.start();
 	}
 
+	/**
+	 * Counts down and updates the GUI
+	 */
 	private void ticktock(){
 		EventBus.getInstance().publish(Event.TimeTick, Integer.toString(count), null);
 		--count;
@@ -34,6 +37,9 @@ public class CountDown implements ActionListener{
 		ticktock();
 	}
 	
+	/**
+	 * Stops the timer and lets the GUI know.
+	 */
 	private void timeUp(){
 		timer.stop();
 		EventBus.getInstance().publish(Event.TimeOver, null, null);

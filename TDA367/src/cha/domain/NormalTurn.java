@@ -7,6 +7,9 @@ public class NormalTurn extends TurnType{
 
 	private Bet bet;
 	
+	/**Creates a new turn
+	 * @param newBet, the bet that the active team has set
+	 */
 	public NormalTurn(int newBet) {
 		if (newBet < 0) {
 			throw new IllegalArgumentException();
@@ -14,6 +17,9 @@ public class NormalTurn extends TurnType{
 		bet = new Bet(newBet);
 	}
 
+	/**
+	 * Starts the Mission
+	 */
 	public void startMission(Category category) {
 		mission = new Mission(category, bet.getBetValue());
 		EventBus.getInstance().publish(Event.StartMission,

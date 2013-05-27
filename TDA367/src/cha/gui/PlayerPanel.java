@@ -18,6 +18,9 @@ public class PlayerPanel extends JPanel implements IEventHandler {
 	private JLabel playerJLabel;
 	private JPanel panelColor;
 
+	/**Creates the panel which announces whos turn it is.
+	 * 
+	 */
 	public PlayerPanel() {
 		EventBus.getInstance().register(this);
 

@@ -150,6 +150,11 @@ public class Deque {
 
 	}
 
+	/** Gets the cards needed for a mission
+	 * @param c the category of the cards that should be returned.
+	 * @param bet the bet made. Important in some cases as it decides how many cards are to be returned.
+	 * @return a list of cards.
+	 */
 	public List<Card> getCards(Category c, int bet) {
 		if (c == Category.BODYTOBODY) {
 			return getBodyToBody(bet);
@@ -164,7 +169,9 @@ public class Deque {
 		}
 	}
 
-	// Returns a pile of cards from Word Jumble category.
+	/* 
+	 * Returns a pile of cards from Word Jumble category.
+	 */
 	private List<Card> getWordJumble(int i) {
 		List<Card> allCards = new ArrayList<Card>();
 		String word = randomWord();
@@ -172,7 +179,10 @@ public class Deque {
 		allCards.add(getJumbleCorrectCard(word));
 		return allCards;
 	}
-
+	
+	/*
+	 * Help method for JumbleCard
+	 */
 	private Card getJumbleCard(String word, int bet) {
 		while (word.length() < 14) {
 			word = word + Deque.alphabet[randomNumber(alphabet.length)];
@@ -193,7 +203,10 @@ public class Deque {
 		return new Card(info);
 
 	}
-
+	
+	/*
+	 * Help method for JumbleCard
+	 */
 	private Card getJumbleCorrectCard(String word) {
 
 		String[] info = new String[] { "One possible word: " + word };
@@ -212,6 +225,9 @@ public class Deque {
 		return allCards;
 	}
 
+	/*
+	 * Help method for SameClass
+	 */
 	private Card getClassMixCard(int i) {
 		String[] info = new String[] { (categories.get(i))[1],
 				(categories.get(i))[2], (categories.get(i))[3],
@@ -225,6 +241,9 @@ public class Deque {
 		return new Card(info);
 	}
 
+	/*
+	 * Help method for SameClass, randomly jumbles the order of the words.
+	 */
 	private void jumbleWords(String[] A) {
 		Random rand = new Random(System.currentTimeMillis());
 		String temp;
@@ -236,11 +255,17 @@ public class Deque {
 		}
 	}
 
+	/*
+	 * Help method for SameClass
+	 */
 	private Card getClassQuestionCard(int i) {
 		String[] info = new String[] { (categories.get(i))[0] };
 		return new Card(info);
 	}
 
+	/*
+	 * Help method for SameClass
+	 */
 	private Card getClassCorrectCard(int i) {
 		String[] info = new String[] { (categories.get(i))[1],
 				(categories.get(i))[2], (categories.get(i))[3],
@@ -250,7 +275,9 @@ public class Deque {
 		return new Card(info);
 	}
 
-	// Returns a pile of cards from Backwards category.
+	/*
+	 *  Returns a pile of cards from Backwards category.
+	 */
 	private List<Card> getBackwards(int bet) {
 		List<Card> allCards = new ArrayList<Card>();
 		for (int j = 0; j < bet; j++) {
@@ -262,6 +289,9 @@ public class Deque {
 		return allCards;
 	}
 
+	/*
+	 * Help method for BackWards
+	 */
 	private Card getBackwardsCard(String word) {
 		StringBuilder backwards = new StringBuilder();
 		ArrayList<Character> oldChars = new ArrayList<Character>();
@@ -277,7 +307,9 @@ public class Deque {
 		return new Card(info);
 	}
 
-	// Returns a pile of cards from Body To Body category.
+	/*
+	 *  Returns a pile of cards from Body To Body category.
+	 */
 	private List<Card> getBodyToBody(int bet) {
 		List<Card> allCards = new ArrayList<Card>();
 		for (int j = 0; j < bet; j++) {
@@ -286,6 +318,9 @@ public class Deque {
 		return allCards;
 	}
 
+	/*
+	 * Help method for BodyToBody
+	 */
 	private Card getBodyCard() {
 		String temp = bodyParts[randomNumber(bodyParts.length)];
 		String temp1 = bodyParts[randomNumber(bodyParts.length)];

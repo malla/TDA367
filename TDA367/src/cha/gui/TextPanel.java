@@ -113,11 +113,9 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 			header.setFont(Board.getInstance().fontTextPanel);
 			northPanel.add(header, BorderLayout.NORTH);
 		}
-		//Checked	
 		else if (e == Event.UpdateBet) {
 			textArea.setText("     Your bet has been updated!");
 		} 
-		//
 		else if (e == Event.MissionOver) {
 			this.remove(cardPanel);
 			this.add(textArea);
@@ -137,6 +135,9 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 		} 
 	}
 
+	/** Paints the card in the textpanel.
+	 * @param mission is the mission to which the card isa part of
+	 */
 	private void paintCard(Mission mission) {
 		String[] cardtext = mission.nextCurrentCard().getString();
 		int words = cardtext.length;

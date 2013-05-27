@@ -13,9 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
 /**
- * Creates the start frame when you first start the game,or when you have ended a game
+ * Creates the start view when you first start the game.
  */
-
 @SuppressWarnings("serial")
 public class StartPanel extends JPanel{
 

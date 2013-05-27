@@ -15,6 +15,12 @@ public class Piece {
 		this.index = index;
 	}
 
+	/**Moves the piece forward
+	 * @param bet the amounts of steps to move forward
+	 * @throws IllegalArgumentException is thrown if the parameter is smaller than 0.
+	 * Checks if  piece ends up on Goal Tile.
+	 * Informs the GUI.
+	 */
 	public void movePieceForward(int bet) throws IllegalArgumentException{
 		if(bet<0)
 			throw new IllegalArgumentException();
@@ -28,6 +34,9 @@ public class Piece {
 		EventBus.getInstance().publish(Event.NewPosition, getPosition(), this.getIndex());
 	}
 
+	/**Moves the piece backwards 2 steps.
+	 * Informs the GUI.
+	 */
 	public void movePieceBackward() {
 		EventBus.getInstance().publish(Event.OldPosition, getPosition(), this.getIndex());
 		if (getPosition() < 2) {
@@ -47,6 +56,9 @@ public class Piece {
 		return index;
 	}
 
+	/**
+	 * @return the position of the piece on the board
+	 */
 	public int getPosition() {
 		if (this.position==GOAL_TILE)
 			return GOAL_TILE-1;

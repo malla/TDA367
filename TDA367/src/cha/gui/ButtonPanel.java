@@ -146,6 +146,10 @@ ActionListener {
 		temp.setFont(Board.getInstance().fontSmall);
 		return temp;
 	}
+	
+	/*
+	 * Makes the panels look pretty.
+	 */
 	private JPanel prettyPanel(){
 		JPanel temp= new JPanel();
 		temp.setPreferredSize(new Dimension(400, 40));
@@ -163,7 +167,9 @@ ActionListener {
 		challengePanel.setVisible(false);
 		currentPanel.setVisible(true);
 	}
-
+	/*
+	 * updates the names of all possible opposing teams.
+	 */
 	private void updateChallengeCombo(){
 		opponentCombo.removeAllItems();
 		noOfOpponents=Board.getInstance().getNumberOfPieces()-1;

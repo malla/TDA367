@@ -110,6 +110,11 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 
 	// Methods
 
+	/**
+	 * Removes ll tiles and replaces with new ones.
+	 * This is only called once a new game has been initialized.
+	 * @param tiles 
+	 */
 	private void setTiles(ArrayList<Tile> tiles) {
 		northPanel.removeAll();
 		eastPanel.removeAll();
@@ -209,6 +214,11 @@ public class TileContainerPanel extends JPanel implements IEventHandler {
 		betable = i;
 	}
 
+	/**
+	 * Updates the board in such a way that all tiles that are clickable, 
+	 * for the team having the next turn, will be raised, and all other tiles will be lowered.
+	 * 
+	 */
 	private void showBet() {
 		int pos = Board.getInstance().getActivePiece().getPosition();
 

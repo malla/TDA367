@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 
 import cha.domain.Category;
 
+/** 
+ * Creates the starting tile 
+ */
 @SuppressWarnings("serial")
 public class StartTilePanel extends TilePanel {
 	

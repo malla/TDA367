@@ -19,6 +19,9 @@ public class Turn {
 	private boolean isTurnOver;
 
 
+	/**Creates a new Turn for the next tam.
+	 * @param newPiece the piece of the active team. 
+	 */
 	public Turn(Piece newPiece){
 		isTurnOver=false;
 		this.piece = newPiece;
@@ -42,6 +45,10 @@ public class Turn {
 		turnType.startMission(category);
 	}
 
+	/**
+	 * Determines if it should a normal turn or a challenge turn. 
+	 * It does this based on the position of th piece of the team.
+	 */
 	public void determinType(){
 		if(Board.getInstance().getTile(piece.getPosition())
 				.isChallenge()){
@@ -50,6 +57,9 @@ public class Turn {
 			EventBus.getInstance().publish(Event.MakeBet, null, null);
 	}
 
+	/**
+	 * Sets the turn type of the turn.
+	 */
 	public void setTurnType(){
 		if(tempBet==0){
 			if(tempOpp!=null){
@@ -99,6 +109,11 @@ public class Turn {
 	 * or has won the Challenge.
 	 */
 
+	/**
+	 * 
+	 * @param b boolean claiming success od the turn of the active piece.
+	 * Initiates move of the piece accordingly
+	 */
 	public void finishTurn(boolean b){
 		movePiece(b);
 		isTurnOver=true;

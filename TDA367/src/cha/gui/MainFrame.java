@@ -173,6 +173,10 @@ public class MainFrame extends JFrame implements ActionListener, IEventHandler {
 	}
 
 
+	/**
+	 * Asks the players how many teams will be competing
+	 * and what their names will be.
+	 */
 	private void startGame() {
 		String reply = null;
 		int numPiece;

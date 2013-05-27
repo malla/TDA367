@@ -9,12 +9,20 @@ public class Mission{
 	private List<Card> cards;
 	private Card currentCard;
 
+	/** Creates a new Mission
+	 * @param category the category of the mission to be
+	 * @param numberOfCards 
+	 */
 	public Mission(Category category, int numberOfCards) {
 		this.timer = new CountDown();
 		this.category = category;
 		this.cards = deque.getCards(this.category, numberOfCards);
 	}
 
+	/**
+	 * Called from the GUI, gets the next card available in the mission.
+	 * @returns the next card.
+	 */
 	public Card nextCurrentCard() {
 		if (!cards.isEmpty()) {
 			currentCard = cards.get(0);
@@ -35,7 +43,9 @@ public class Mission{
 		return category;
 	}
 
-	/** Returns the title of the Mission as a String */
+	/** 
+	 * Returns the title of the Mission, depending on the category, as a String 
+	 */
 	public String getTitle() {
 		String title;
 		if (category == Category.BACKWARDS) {
