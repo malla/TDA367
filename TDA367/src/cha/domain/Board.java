@@ -37,6 +37,9 @@ public class Board {
 		return instance;
 	}
 
+	/**Creates a new board
+	 * @param numPiece the amount of participating teams.
+	 */
 	public static void createNewBoard(int numPiece) {
 		if (numPiece <= 0) {
 			throw new IllegalArgumentException();
@@ -56,6 +59,10 @@ public class Board {
 		this.categoryList.add(Category.BACKWARDS);
 	}
 
+	/*Initiates and updates the variables in the Board 
+	 * regarding pieces and teams, colors and tiles
+	 * @param numPiece amount of teams participating in new game
+	 */
 	private void init(int numPiece) {
 		isNewGame = true;
 		tileList.clear(); // Add a new set of tiles
@@ -91,6 +98,9 @@ public class Board {
 
 	// Methods
 
+	/**
+	 * @return number of pieces (teams) in the game.
+	 */
 	public int getNumberOfPieces() {
 		if (pieces == null) {
 			throw new BoardNotInitializedException();
@@ -104,6 +114,10 @@ public class Board {
 		return this.turn.getPiece();
 	}
 
+	/**
+	 * @param index is the index in the pieces array which holds the piece we want to retrieve.
+	 * @return piece.
+	 */
 	public Piece getPiece(int index) {
 		if (pieces == null) {
 			throw new BoardNotInitializedException();
@@ -114,6 +128,9 @@ public class Board {
 		return pieces[index];
 	}
 
+	/**
+	 * Initiates a new turn
+	 */
 	public void newTurn() {
 		if (!isNewGame)
 			changeActivePiece();
@@ -134,6 +151,10 @@ public class Board {
 		EventBus.getInstance().publish(Event.NextPlayer, null, null);
 	}
 
+	/**
+	 * @param place i the index of the tile that we want
+	 * @return a Tile object
+	 */
 	public Tile getTile(int place) {
 		if (place < MIN_TILES || place > MAX_TILES+1) {
 			throw new IllegalArgumentException();
@@ -154,6 +175,9 @@ public class Board {
 		teamNames.add(teamName);
 	}
 
+	/**
+	 * Sets the single instance of the class Board to null.
+	 */
 	public static void clearBoard() {
 		instance = null;
 	}
@@ -162,11 +186,18 @@ public class Board {
 		turn.getTurnType().missionDone();
 	}
 
+	/**
+	 * @param status is true if the mission was accomplished succesfully
+	 */
 	public void missionStatus(boolean status) {
 		turn.finishTurn(status);
 	}
 
-	public void initNormalTurn() {
+	/**
+	 * Initializes the decision of wheather the turn is
+	 * supposed to be a NormalTurn or a ChallengeTurn.
+	 */
+	public void initTurn() {
 		turn.setTurnType();
 	}
 

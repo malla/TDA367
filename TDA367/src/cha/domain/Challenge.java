@@ -9,8 +9,10 @@ public class Challenge extends TurnType {
 	private int oppScore;
 	private final int NUMBER_OF_CARDS = 7;
 
-	// I ButtonPanel frågas efter motståndare. Denna klass initieras när det
-	// valet har gjorts.
+	
+	/** Sets up and prepares for a Challenge
+	 * @param opponent is the piece of the opposing team
+	 */
 	public Challenge(Piece opponent) {
 		chaScore = -1;
 		oppScore = -1;
@@ -18,9 +20,10 @@ public class Challenge extends TurnType {
 	}
 
 	/**
-	 * This method starts the Challenge, only by creating the first mission and
-	 * making it start. It is called from the Challenge constructor when a
-	 * Challenge has been initiated.
+	 * Starts the Challenge, only by creating the first mission and
+	 * making it start. It is called via the abstract class Turn when
+	 * the 'Start Mission button is pressed in the GUI.
+	 * @param category is the 'invisible' category of the challenge tile.
 	 */
 	@Override
 	public void startMission(Category category) {
@@ -37,8 +40,9 @@ public class Challenge extends TurnType {
 	}
 
 	/**
-	 * This method sets the opponent and the challengers scores. When creating a
-	 * Challenge, both values are set to -1.
+	 * Sets the opponent and the challengers scores. When creating a Challenge, both
+	 * values are set to -1, this is how the method knows which score to change
+	 * @param score is the int value of the mission success
 	 */
 	@Override
 	public void setScore(int score) {

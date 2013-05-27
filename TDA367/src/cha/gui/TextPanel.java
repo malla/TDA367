@@ -76,7 +76,7 @@ public class TextPanel extends JPanel implements IEventHandler, ActionListener {
 	@Override
 	public void action(Event e, Object o, Object p) {
 		if (e == Event.MakeBet) {
-			textArea.setText("     Make A Bet!");
+			textArea.setText("     Make A Bet by clicking one of the 7 tiles in front of your piece!");
 		} 
 		if (e == Event.StartMission) {
 			Mission mission = (Mission) o;

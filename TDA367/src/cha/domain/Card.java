@@ -7,6 +7,9 @@ public class Card {
 	
 	private String [] assignment;
 	
+	/** Gathers an array of strings into a Card
+	 * @param cardString is the array of Strings
+	 */
 	public Card(String[] cardString){
 		assignment = cardString;
 	}
@@ -17,7 +20,9 @@ public class Card {
 		return "Card [a1=" + asString + "]";
 	}
 	
-	/**Returns the array within the Card**/
+	/**
+	 * Returns the array within the Card
+	 **/
 	public String[] getString(){
 		return assignment;
 	}

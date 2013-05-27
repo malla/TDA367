@@ -219,7 +219,7 @@ ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == startMissionButton) {
 			if(Board.getInstance().getTurn().getTurnType()==null){	
-				Board.getInstance().initNormalTurn();
+				Board.getInstance().initTurn();
 			}
 			
 			TileContainerPanel.setBetable(true);
